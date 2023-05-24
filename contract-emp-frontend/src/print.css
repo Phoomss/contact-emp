@@ -1,0 +1,10 @@
+@media print {
+  /* Hide everything except the data grid */
+  body * {
+    visibility: hidden;
+  }
+
+  .MuiDataGrid-root {
+    visibility: visible;
+  }
+}
