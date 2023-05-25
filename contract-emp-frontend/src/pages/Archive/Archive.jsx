@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import UserService from "../services/UserService";
+import UserService from "../../services/UserService";
 import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
-import ArchiveDataGrid from "component/ArchiveDataGrid";
+import ArchiveDataGrid from "component/DataGrid/ArchiveDataGrid";
 
 function Archive() {
   const navigate = useNavigate();

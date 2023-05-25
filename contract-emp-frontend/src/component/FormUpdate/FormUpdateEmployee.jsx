@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Box, TextField, Button, Typography, InputLabel } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
-import EmployeeService from "../services/EmployeeService";
-import Header from "./Header";
-import FlexBetween from "./FlexBetween";
+import EmployeeService from "../../services/EmployeeService";
+import Header from "../Header";
+import FlexBetween from "../FlexBetween";
 
 const UpdateEmployees = () => {
   const navigate = useNavigate();

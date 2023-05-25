@@ -11,13 +11,13 @@ import {
     Grid,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import EmployeeService from "../services/EmployeeService";
-import ContractService from "../services/ContractService";
-import Header from "./Header";
-import FlexBetween from "./FlexBetween";
+import EmployeeService from "../../services/EmployeeService";
+import ContractService from "../../services/ContractService";
+import Header from "../Header";
+import FlexBetween from "../FlexBetween";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import ArchiveService from "services/ArchiveService";
-import CompanyService from "../services/CompanyService";
+import CompanyService from "../../services/CompanyService";
 import swal from "sweetalert";
 
 const CreateEmployees = () => {

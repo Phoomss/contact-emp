@@ -44,6 +44,7 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
         position: "static",
         background: "none",
         boxShadow: "none",
+        r:"1rem"
       }}
     >
       <Toolbar sx={{ justifyContent: "space-between" }}>
@@ -126,6 +127,7 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
               open={isOpen}
               onClose={handleClose}
               anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+              
             >
               <MenuItem onClick={handleLogout}>ล็อกเอาท์</MenuItem>
             </Menu>

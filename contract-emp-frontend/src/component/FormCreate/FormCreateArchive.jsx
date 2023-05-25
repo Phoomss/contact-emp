@@ -9,9 +9,9 @@ import {
  MenuItem,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import CompanyService from "../services/CompanyService";
-import Header from "./Header";
-import FlexBetween from "./FlexBetween";
+import CompanyService from "../../services/CompanyService";
+import Header from "../Header";
+import FlexBetween from "../FlexBetween";
 import ContractService from "services/ContractService";
 import EmployeeService from "services/EmployeeService";
 import ArchiveService from "services/ArchiveService";

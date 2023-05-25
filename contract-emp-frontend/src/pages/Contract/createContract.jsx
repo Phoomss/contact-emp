@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import UserService from "../services/UserService";
+import UserService from "../../services/UserService";
 import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
-import ContractDataGrid from "component/ContractDataGrid";
+import FormCreateContract from "component/FormCreate/FormCreateContract";
 
-function Contract() {
+function Contracts() {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,9 +22,9 @@ function Contract() {
 
   return (
     <Box>
-      <ContractDataGrid />
+      <FormCreateContract />
     </Box>
   );
 }
 
-export default Contract;
+export default Contracts;

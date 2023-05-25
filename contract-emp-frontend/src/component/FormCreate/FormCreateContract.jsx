@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Box, TextField, Button, Typography, Select, MenuItem, InputLabel, Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import ContractService from "../services/ContractService";
-import CompanyService from "../services/CompanyService";
-import Header from "./Header";
-import FlexBetween from "./FlexBetween";
+import ContractService from "../../services/ContractService";
+import CompanyService from "../../services/CompanyService";
+import Header from "../Header";
+import FlexBetween from "../FlexBetween";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 

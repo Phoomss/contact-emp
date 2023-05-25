@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import UserService from '../services/UserService';
+import UserService from '../../services/UserService';
 import { useNavigate } from 'react-router-dom';
 import { Box } from '@mui/material';
-import FormCreateEmployee from 'component/FormCreateEmployee'
+import FormUpdateEmployee from 'component/FormUpdate/FormUpdateEmployee'
 
 function Employees() {
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ function Employees() {
 
   return (
     <Box>
-      <FormCreateEmployee/>
+      <FormUpdateEmployee/>
     </Box>
   );
 }

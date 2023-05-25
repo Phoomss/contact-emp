@@ -3,21 +3,21 @@ import { Box, useTheme, Button } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { DeleteOutline, CreateOutlined } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-import EmployeeService from "../services/EmployeeService";
-import Header from "./Header";
-import FlexBetween from "./FlexBetween";
+import Header from "../Header";
+import FlexBetween from "../FlexBetween";
 import swal from 'sweetalert'
+import UserService from "services/UserService";
 
-const Employees = () => {
+const Users = () => {
   const theme = useTheme();
   const navigate = useNavigate();
-  const [employees, setEmployees] = useState([]);
+  const [users, setUsers] = useState([]);
   const [selectionModel, setSelectionModel] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await EmployeeService.getEmployees();
-      setEmployees(response.data);
+      const response = await UserService.getUserInfo();
+      setUsers(response.data);
     };
     fetchData();
   }, []);
@@ -44,10 +44,10 @@ const Employees = () => {
       if (willDelete) {
         await Promise.all(
           selectionModel.map(async (id) => {
-            await EmployeeService.deleteEmployee(id);
+            await UserService.deleteEmployee(id);
           })
         );
-        setEmployees(employees.filter((employee) => !selectionModel.includes(employee.id)));
+        setUsers(users.filter((user) => !selectionModel.includes(user.id)));
         setSelectionModel([]);
         swal("ลบลูกจ้างที่คุณเลือกเรียบร้อย!", { icon: "success" });
       }
@@ -56,11 +56,11 @@ const Employees = () => {
   
 
   const handleRowClick = (params) => {
-    navigate(`/updateemployee/${params.id}`);
+    navigate(`/update-user/${params.id}`);
   };
 
   const createClick = () => {
-    navigate(`/createemployee`)
+    navigate(`/create-user`)
   }
 
   const columns = [
@@ -83,37 +83,18 @@ const Employees = () => {
       },
     },
     {
-      field: "surname",
-      headerName: "นามสกุล",
-     
-    },
-    {
-      field: "number",
-      headerName: "หมายเลขประจำตัว",
-      
-    },
-    {
       field: "telephone",
       headerName: "เบอร์โทรศัพท์",
      
     },
     {
-        field: "department1",
-        headerName: "สังกัดกอง",
+        field: "role",
+        headerName: "สถานะ",
         
     },
     {
-        field: "department2",
-        headerName: "สังกัดฝ่าย",
-    },    
-    {
-        field: "company",
+        field: "company_id",
         headerName: "ชื่อบริษัท",
-        
-    },
-    {
-        field: "note",
-        headerName: "หมายเหตุ",
         
     },
   ];
@@ -127,7 +108,7 @@ const Employees = () => {
   return (
     <Box m="1.5rem 2.5rem">
   <FlexBetween>
-    <Header title="ลูกจ้างจ้างเหมาบริการ" />
+    <Header title="ผู้ใช้งาน" />
     <Box>
       <FlexBetween gap="1rem">
         <Button
@@ -163,7 +144,7 @@ const Employees = () => {
   <Box height="calc(100vh - 200px)"  sx={{ mt: "1.5rem" }}>
     <DataGrid
       sx={{color: theme.palette.grey[1000]}}
-      rows={employees}
+      rows={users}
       columns={columns}
       getRowId={getRowId}
       checkboxSelection
@@ -184,4 +165,4 @@ const Employees = () => {
   );
 };
 
-export default Employees
+export default Users

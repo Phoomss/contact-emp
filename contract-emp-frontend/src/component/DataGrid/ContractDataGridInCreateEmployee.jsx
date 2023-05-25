@@ -1,19 +1,24 @@
 import { React, useState, useEffect } from "react";
-import { Box, useTheme, Button } from "@mui/material";
+import { Box, useTheme, Button, Modal, Typography } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { DeleteOutline, CreateOutlined } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-import ContractService from "../services/ContractService";
-import CompanyService from "../services/CompanyService";
-import Header from "./Header";
-import FlexBetween from "./FlexBetween";
+import ContractService from "../../services/ContractService";
+import CompanyService from "../../services/CompanyService";
+import ArchiveService from "../../services/ArchiveService";
+import ModalCreateContract from "../ModalCreateContract";
+import Header from "../Header";
+import FlexBetween from "../FlexBetween";
 import swal from "sweetalert";
+import CreateContractsModal from "../ModalCreateContract";
 
 const Contracts = () => {
   const theme = useTheme();
   const navigate = useNavigate();
+  const [openModal, setOpenModal] = useState(false);
   const [contracts, setContracts] = useState([]);
   const [companies, setCompanies] = useState([]);
+  const [archives, setArchives] = useState([]);
   const [selectionModel, setSelectionModel] = useState([]);
 
   useEffect(() => {
@@ -22,9 +27,19 @@ const Contracts = () => {
       setContracts(responseContract.data);
       const responseCompany = await CompanyService.getCompanies();
       setCompanies(responseCompany.data);
+      const responseArchive = await ArchiveService.getArchives();
+      setArchives(responseArchive.data);
     };
     fetchData();
   }, []);
+
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
 
   const getRowId = (row) => row.id;
 
@@ -66,10 +81,6 @@ const Contracts = () => {
     navigate(`/updatecontract/${params.id}`);
   };
 
-  const createClick = () => {
-    navigate(`/createcontract`);
-  };
-
   const columns = [
     {
       field: "id",
@@ -92,6 +103,28 @@ const Contracts = () => {
       headerName: "วันที่สิ้นสุด",
     },
     {
+      field: "department1",
+      headerName: "สังกัดกอง",
+      valueGetter: (params) => {
+        const archive = archives.find(
+          (archive) => archive.contract_id === params.row.id
+        );
+        return archive ? archive.department1 : "";
+      },
+    },
+
+    {
+      field: "department2",
+      headerName: "สังกัดฝ่าย",
+      valueGetter: (params) => {
+        const archive = archives.find(
+          (archive) => archive.contract_id === params.row.id
+        );
+        return archive ? archive.department2 : "";
+      },
+    },
+
+    {
       field: "company_id",
       headerName: "ชื่อบริษัท",
       valueGetter: (params) => {
@@ -100,6 +133,10 @@ const Contracts = () => {
         );
         return company ? company.name : "";
       },
+    },
+    {
+      field: "note",
+      headerName: "หมายเหตุ",
     },
   ];
 
@@ -123,7 +160,7 @@ const Contracts = () => {
                 fontWeight: "bold",
                 padding: "10px 20px",
               }}
-              onClick={createClick}
+              onClick={handleOpenModal}
             >
               <CreateOutlined sx={{ mr: "10px" }} />
               เพิ่มสัญญาจ้าง
@@ -156,12 +193,13 @@ const Contracts = () => {
           pageSize={pageSize}
           onPageSizeChange={handlePageSizeChange}
           selectionModel={selectionModel}
-          onSelectionModelChange={handleSelectionModelChange}
+          onSelectionModelChange={handleSelectionModelChange} // added closing parentheses
           components={{
             Toolbar: GridToolbar,
           }}
         />
       </Box>
+      <CreateContractsModal open={openModal} onClose={handleCloseModal} />
     </Box>
   );
 };

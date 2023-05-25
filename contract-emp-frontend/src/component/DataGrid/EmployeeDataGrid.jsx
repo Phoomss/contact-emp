@@ -1,23 +1,23 @@
 import { React, useState, useEffect } from "react";
-import { Box, useTheme, Button, InputBase, IconButton } from "@mui/material";
+import { Box, useTheme, Button } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import { DownloadOutlined, DeleteOutline, CreateOutlined, FilterList } from "@mui/icons-material";
+import { DeleteOutline, CreateOutlined } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-import CompanyService from "../services/CompanyService";
-import Header from "./Header";
-import FlexBetween from "./FlexBetween";
+import EmployeeService from "../../services/EmployeeService";
+import Header from "../Header";
+import FlexBetween from "../FlexBetween";
 import swal from 'sweetalert'
 
-const Companies = () => {
+const Employees = () => {
   const theme = useTheme();
   const navigate = useNavigate();
-  const [companies, setCompanies] = useState([]);
+  const [employees, setEmployees] = useState([]);
   const [selectionModel, setSelectionModel] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await CompanyService.getCompanies();
-      setCompanies(response.data);
+      const response = await EmployeeService.getEmployees();
+      setEmployees(response.data);
     };
     fetchData();
   }, []);
@@ -30,13 +30,13 @@ const Companies = () => {
 
   const handleDeleteButtonClick = async () => {
     if (selectionModel.length === 0) {
-      swal("Please select at least one company to delete.", { icon: "warning" });
+      swal("กรุณาเลือกลูกจ้างอย่างน้อยหนึ่งคนเพื่อลบ.", { icon: "warning" });
       return;
     }
   
     swal({
-      title: "Are you sure?",
-      text: "Once deleted, you will not be able to recover the selected companies!",
+      title: "แน่ใจหรือไม่?",
+      text: "เมื่อลบแล้ว, ลูกจ้างที่คุณเลือกไว้จะถูกลบหายไป!",
       icon: "warning",
       buttons: true,
       dangerMode: true,
@@ -44,25 +44,23 @@ const Companies = () => {
       if (willDelete) {
         await Promise.all(
           selectionModel.map(async (id) => {
-            await CompanyService.deleteCompany(id);
+            await EmployeeService.deleteEmployee(id);
           })
         );
-        setCompanies(companies.filter((company) => !selectionModel.includes(company.id)));
+        setEmployees(employees.filter((employee) => !selectionModel.includes(employee.id)));
         setSelectionModel([]);
-        swal("The selected companies have been deleted successfully!", { icon: "success" });
+        swal("ลบลูกจ้างที่คุณเลือกเรียบร้อย!", { icon: "success" });
       }
     });
   };
   
 
   const handleRowClick = (params) => {
-    if (params.field !== "delete") {
-      navigate(`/updatecompany/${params.id}`);
-    }
+    navigate(`/updateemployee/${params.id}`);
   };
 
   const createClick = () => {
-    navigate(`/createcompany`)
+    navigate(`/createemployee`)
   }
 
   const columns = [
@@ -72,8 +70,8 @@ const Companies = () => {
     },
     {
       field: "name",
-      headerName: "Name",
-      flex: 0.5,
+      headerName: "ชื่อ",
+      
       renderCell: (params) => {
         return (
           <Box
@@ -85,14 +83,38 @@ const Companies = () => {
       },
     },
     {
-      field: "address",
-      headerName: "Address",
-      flex: 1,
+      field: "surname",
+      headerName: "นามสกุล",
+     
+    },
+    {
+      field: "number",
+      headerName: "หมายเลขประจำตัว",
+      
     },
     {
       field: "telephone",
-      headerName: "Phone Number",
-      flex: 0.5,
+      headerName: "เบอร์โทรศัพท์",
+     
+    },
+    {
+        field: "department1",
+        headerName: "สังกัดกอง",
+        
+    },
+    {
+        field: "department2",
+        headerName: "สังกัดฝ่าย",
+    },    
+    {
+        field: "company",
+        headerName: "ชื่อบริษัท",
+        
+    },
+    {
+        field: "note",
+        headerName: "หมายเหตุ",
+        
     },
   ];
 
@@ -103,32 +125,15 @@ const Companies = () => {
   };
 
   return (
-    <Box ml="2.5rem" mr="2.5rem">
+    <Box m="1.5rem 2.5rem">
   <FlexBetween>
-    <Header title="COMPANY DASHBOARD" />
-  </FlexBetween>
-  <FlexBetween>
-    <Box sx={{width: "380px"}}>
-      <FlexBetween
-        width="auto"
-        backgroundColor={theme.palette.background.alt}
-        borderRadius="9px"
-        gap="3rem"
-        p="0.1rem 1.5rem"
-        display="flex"
-      >
-        <InputBase placeholder="Filter"/>
-        <IconButton>
-          <FilterList />
-        </IconButton>
-      </FlexBetween>
-    </Box>
+    <Header title="ลูกจ้างจ้างเหมาบริการ" />
     <Box>
       <FlexBetween gap="1rem">
         <Button
           sx={{
-            backgroundColor: theme.palette.secondary.light,
-            color: theme.palette.background.alt,
+            backgroundColor: theme.palette.blue[300],
+            color: theme.palette.neutral.font,
             fontSize: "14px",
             fontWeight: "bold",
             padding: "10px 20px",
@@ -136,27 +141,13 @@ const Companies = () => {
           onClick = {createClick}
         >
           <CreateOutlined sx={{ mr: "10px" }} />
-          Create
-        </Button>
-
-        <Button
-          sx={{
-            backgroundColor: theme.palette.secondary.light,
-            color: theme.palette.background.alt,
-            fontSize: "14px",
-            fontWeight: "bold",
-            padding: "10px 20px",
-          }}
-          
-        >
-          <DownloadOutlined sx={{ mr: "10px" }} />
-          Export
+          เพิ่มลูกจ้าง
         </Button>
         
         <Button
           sx={{
             backgroundColor: theme.palette.secondary.light,
-            color: theme.palette.background.alt,
+            color: theme.palette.neutral.font,
             fontSize: "14px",
             fontWeight: "bold",
             padding: "10px 20px",
@@ -164,14 +155,15 @@ const Companies = () => {
           onClick = {handleDeleteButtonClick}
         >
           <DeleteOutline sx={{ mr: "10px" }} />
-          Delete
+          ลบลูกจ้าง
         </Button>
       </FlexBetween>
-    </Box>
+      </Box>
   </FlexBetween>
-  <Box height="calc(100vh - 200px)" sx={{ mt: "1.5rem" }}>
+  <Box height="calc(100vh - 200px)"  sx={{ mt: "1.5rem" }}>
     <DataGrid
-      rows={companies}
+      sx={{color: theme.palette.grey[1000]}}
+      rows={employees}
       columns={columns}
       getRowId={getRowId}
       checkboxSelection
@@ -192,4 +184,4 @@ const Companies = () => {
   );
 };
 
-export default Companies
+export default Employees

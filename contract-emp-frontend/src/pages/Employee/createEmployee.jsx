@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
-import UserService from '../services/UserService';
+import UserService from '../../services/UserService';
 import { useNavigate } from 'react-router-dom';
 import { Box } from '@mui/material';
-import CompanyDataGrid from 'component/CompanyDataGrid'
+import FormCreateEmployee from 'component/FormCreate/FormCreateEmployee'
 
-function Company() {
+function Employees() {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,9 +23,9 @@ function Company() {
 
   return (
     <Box>
-      <CompanyDataGrid/>
+      <FormCreateEmployee/>
     </Box>
   );
 }
 
-export default Company;
+export default Employees;

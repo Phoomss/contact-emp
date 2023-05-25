@@ -3,33 +3,25 @@ import { Box, useTheme, Button } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { DeleteOutline, CreateOutlined } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-import ArchiveService from "../services/ArchiveService";
-import CompanyService from "../services/CompanyService";
-import EmployeeService from "../services/EmployeeService";
-import ContractService from "../services/ContractService";
-import Header from "./Header";
-import FlexBetween from "./FlexBetween";
+import ContractService from "../../services/ContractService";
+import CompanyService from "../../services/CompanyService";
+import Header from "../Header";
+import FlexBetween from "../FlexBetween";
 import swal from "sweetalert";
 
-const Archives = () => {
+const Contracts = () => {
   const theme = useTheme();
   const navigate = useNavigate();
-  const [archives, setArchives] = useState([]);
-  const [companies, setCompanies] = useState([]);
   const [contracts, setContracts] = useState([]);
-  const [employees, setEmployees] = useState([]);
+  const [companies, setCompanies] = useState([]);
   const [selectionModel, setSelectionModel] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const responseArchive = await ArchiveService.getArchives();
-      setArchives(responseArchive.data);
-      const responseCompany = await CompanyService.getCompanies();
-      setCompanies(responseCompany.data);
       const responseContract = await ContractService.getContracts();
       setContracts(responseContract.data);
-      const responseEmployee = await EmployeeService.getEmployees();
-      setEmployees(responseEmployee.data);
+      const responseCompany = await CompanyService.getCompanies();
+      setCompanies(responseCompany.data);
     };
     fetchData();
   }, []);
@@ -56,11 +48,11 @@ const Archives = () => {
       if (willDelete) {
         await Promise.all(
           selectionModel.map(async (id) => {
-            await ArchiveService.deleteArchive(id);
+            await ContractService.deleteContract(id);
           })
         );
-        setArchives(
-          archives.filter((archive) => !selectionModel.includes(archive.id))
+        setContracts(
+          contracts.filter((contract) => !selectionModel.includes(contract.id))
         );
         setSelectionModel([]);
         swal("สัญญาที่คุณเลือกไว้ถูกลบเรียบร้อย!", {
@@ -71,95 +63,42 @@ const Archives = () => {
   };
 
   const handleRowClick = (params) => {
-    navigate(`/updatearchive/${params.id}`);
+    navigate(`/updatecontract/${params.id}`);
   };
 
   const createClick = () => {
-    navigate(`/createarchive`);
+    navigate(`/createcontract`);
   };
 
   const columns = [
     {
       field: "id",
       headerName: "ID",
+    },
+    {
+      field: "number",
+      headerName: "เลขที่สัญญา",
+
       renderCell: (params) => {
         return <Box sx={{ cursor: "pointer" }}>{params.value}</Box>;
       },
     },
     {
-      field: "contract_id",
-      headerName: "เลขที่สัญญา",
-      valueGetter: (params) => {
-        const contract = contracts.find(
-          (contract) => contract.id === params.value
-        );
-        return contract ? contract.number : "";
-      },
-    },
-    {
       field: "start_date",
       headerName: "วันที่เริ่ม",
-      valueGetter: (params) => {
-        const contract = contracts.find(
-          (contract) => contract.id === params.row.contract_id
-        );
-        return contract ? contract.start_date : "";
-      },
     },
-
     {
       field: "end_date",
-      headerName: "วันที่เริ่ม",
-      valueGetter: (params) => {
-        const contract = contracts.find(
-          (contract) => contract.id === params.row.contract_id
-        );
-        return contract ? contract.end_date : "";
-      },
-    },
-
-    {
-      field: "employee_name",
-      headerName: "ชื่อ",
-      valueGetter: (params) => {
-        const employee = employees.find(
-          (employee) => employee.id === params.row.employee_id
-        );
-        return employee ? employee.name : "";
-      },
-    },
-    {
-      field: "employee_surname",
-      headerName: "นามสกุล",
-      valueGetter: (params) => {
-        const employee = employees.find(
-          (employee) => employee.id === params.row.employee_id
-        );
-        return employee ? employee.surname : "";
-      },
-    },
-    {
-      field: "department1",
-      headerName: "สังกัดกอง",
-    },
-    {
-      field: "department2",
-      headerName: "สังกัดฝ่าย",
+      headerName: "วันที่สิ้นสุด",
     },
     {
       field: "company_id",
       headerName: "ชื่อบริษัท",
       valueGetter: (params) => {
-        const contract = contracts.find(
-          (contract) => contract.id === params.row.id
+        const company = companies.find(
+          (company) => company.id === params.value
         );
-        if (contract) {
-          const company = companies.find(
-            (company) => company.id === contract.company_id
-          );
-          return company ? company.name : "";
-        }
-        return "";
+        return company ? company.name : "";
       },
     },
   ];
@@ -208,7 +147,7 @@ const Archives = () => {
       </FlexBetween>
       <Box height="calc(100vh - 200px)" sx={{ mt: "1.5rem" }}>
         <DataGrid
-          rows={archives}
+          rows={contracts}
           columns={columns}
           getRowId={getRowId}
           checkboxSelection
@@ -227,4 +166,4 @@ const Archives = () => {
   );
 };
 
-export default Archives;
+export default Contracts;

@@ -1,21 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, TextField, Button, Typography } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import CompanyService from "../services/CompanyService";
-import Header from "./Header";
-import FlexBetween from "./FlexBetween";
+import { useNavigate, useParams } from "react-router-dom";
+import CompanyService from "../../services/CompanyService";
+import Header from "../Header";
+import FlexBetween from "../FlexBetween";
 
-const CreateCompanies = () => {
+const UpdateCompanies = () => {
   const navigate = useNavigate();
+  const { id } = useParams();
   const [error, setError] = useState('');
   const [companyName, setCompanyName] = useState("");
   const [companyAddress, setCompanyAddress] = useState("");
   const [companyPhone, setCompanyPhone] = useState("");
 
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await CompanyService.getCompanyById(id);
+        if (response.status === 200) {
+          setCompanyName(response.data[0].name);
+          setCompanyAddress(response.data[0].address);
+          setCompanyPhone(response.data[0].telephone);
+        }
+      } catch (error) {
+        console.error('Error:', error.response);
+        setError(error.response.data.message);
+      }
+    }
+    fetchData();
+  }, [id]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!companyName || !companyAddress || !companyPhone) {
+      alert("Please fill in all required fields.");
+      return;
+    }
     try {
-      const response = await CompanyService.postCompany({
+      const response = await CompanyService.updateCompany(id, {
         name: companyName,
         address: companyAddress,
         telephone: companyPhone,
@@ -24,31 +46,33 @@ const CreateCompanies = () => {
         navigate("/company");
       }
     } catch (error) {
-        console.error("Error:", error.response);
-        setError(error.response.data.message);
+      console.error('Error:', error.response);
+      setError(error.response.data.message);
     }
   };
   
-  const handleCancleClick = () => {
+  
+  const handleCancelClick = () => {
     navigate("/company");
   };
 
   return (
     <Box m="1.5rem 2.5rem">
       <FlexBetween>
-        <Header title="CREATE COMPANY" subtitle="Create new company" />
+        <Header title="UPDATE COMPANY" subtitle="Update company details" />
       </FlexBetween>
       <Box sx={{ mt: "1.5rem" }}>
         <form onSubmit={handleSubmit}>
           <TextField
+            required
             fullWidth
             margin="normal"
             label="Company Name"
             value={companyName}
             onChange={(e) => setCompanyName(e.target.value)}
-            helperText=""
           />
           <TextField
+            required
             fullWidth
             margin="normal"
             label="Company Address"
@@ -56,6 +80,7 @@ const CreateCompanies = () => {
             onChange={(e) => setCompanyAddress(e.target.value)}
           />
           <TextField
+            required
             fullWidth
             margin="normal"
             label="Company Phone"
@@ -64,12 +89,12 @@ const CreateCompanies = () => {
           />
           <Box sx={{ mt: "1.5rem" }}>
             <Button type="submit" variant="contained">
-              Create
+              Update
             </Button>
             <Button
               sx={{ ml: "10px" }}
               variant="outlined"
-              onClick={handleCancleClick}
+              onClick={handleCancelClick}
             >
               Cancel
             </Button>
@@ -82,7 +107,7 @@ const CreateCompanies = () => {
         </form>
       </Box>
     </Box>
-  );
-};
+  )
+}
 
-export default CreateCompanies;
+export default UpdateCompanies

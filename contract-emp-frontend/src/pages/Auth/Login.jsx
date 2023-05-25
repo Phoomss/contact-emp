@@ -13,12 +13,13 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import UserService from '../services/UserService';
+import UserService from '../../services/UserService';
 import swal from 'sweetalert'
 
 
 
-function SignIn() {
+
+const Login = () => {
   const [formData, setFormData] = useState({ login: '', password: '' });
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -28,13 +29,21 @@ function SignIn() {
     UserService.postUserLogin(formData)
       .then((response) => {
         console.log(response)
-        localStorage.setItem('token', response.data.token);
-        navigate('/dashboard')
+        if (response.data.token) {
+          localStorage.setItem('token', response.data.token);
+          swal(`Welcome`,
+          "",
+            'success')
+          navigate('/dashboard');
+        } else {
+          setError('Invalid credentials');
+          swal("ไม่พบบัญชีของคุณ", "", "error");
+        }
       })
       .catch((error) => {
         console.error('Error:', error.response);
         setError(error.response.data.message);
-        swal("Login or password is incorrect" ,"", "error")
+        swal("Login or password is incorrect", "", "error")
       });
   };
 
@@ -100,17 +109,17 @@ function SignIn() {
               </Typography>
             )}
             <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-              Sign In
+              เข้าสู่ระบบ
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
+                <Link href="/forgot-password" variant="body2">
+                  ลืมรหัผ่าน
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                <Link href="/" variant="body2">
+                  {"คุณต้องการสมัครสมาชิกหรือไม่ ? สมัครสมาชิก"}
                 </Link>
               </Grid>
             </Grid>
@@ -121,4 +130,4 @@ function SignIn() {
   );
 }
 
-export default SignIn;
+export default Login
