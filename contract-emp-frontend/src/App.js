@@ -14,7 +14,7 @@ import UpdateArchive from './pages/Archive/updateArchive'
 import Employee from './pages/Employee/Employee'
 import CreateEmployee from 'pages/Employee/createEmployee';
 import UpdateEmployee from 'pages/Employee/updateEmployee';
-import User from './pages/UserInfo'
+
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import { createTheme } from '@mui/material/styles';
 import { useSelector } from 'react-redux';
@@ -25,6 +25,9 @@ import Register from 'pages/Auth/Register';
 import ForgotPassword from 'pages/Auth/ForgotPassword';
 import CreateUser from 'pages/CreateUser';
 import UpdateUser from 'pages/UpdateUser';
+import UserAll from 'pages/UserAll';
+import UserInfo from 'pages/UserInfo';
+
 
 function App() {
   const mode = useSelector((state) => state.global.mode);
@@ -52,9 +55,10 @@ function App() {
             <Route path="/employee" element={<Employee />} />
             <Route path="/createemployee" element={<CreateEmployee/>}/>
             <Route path="/updateemployee/:id" element={<UpdateEmployee/>}/>
-            <Route path="/userinfo" element={<User />} />
+            <Route path="/userinfo" element={<UserInfo />} />
             <Route path="/createuser" element={<CreateUser />} />
             <Route path="/updateuser/:id" element={<UpdateUser />} />
+            <Route path='/userAll' element={<UserAll/>}/>
           </Route>
         </Routes>
       </ThemeProvider>

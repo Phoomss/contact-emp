@@ -46,9 +46,9 @@ const navItems = [
       icon: <ArchiveOutlined />,
     },*/
    {
-      text:"Dashboard",
-      thaitext:"แดชบอร์ด",
-      icon: <DashboardIcon/>
+      text: "Dashboard",
+      thaitext: "แดชบอร์ด",
+      icon: <DashboardIcon />
    },
    {
       text: "Contract",
@@ -70,7 +70,7 @@ const navItems = [
    //   icon: null,
    // },
    {
-      text: "User",
+      text: "UserAll",
       thaitext: "ข้อมูลผู้ใช้งาน",
       icon: <PersonOutlineOutlined />,
    },
@@ -246,7 +246,7 @@ const Sidebar = ({
                               color: theme.palette.blue[300],
                               fontSize: "25px ",
                            }}
-                           onClick={()=>{navigate("/userinfo")}}
+                           onClick={() => { navigate("/userinfo") }}
                         />
                      </Button>
                   </FlexBetween>

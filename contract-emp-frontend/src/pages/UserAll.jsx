@@ -6,7 +6,8 @@ import { Button, Box } from '@mui/material';
 import FlexBetween from 'component/FlexBetween';
 import { useTheme } from '@mui/material';
 import { DownloadOutlined } from '@mui/icons-material';
-import Users from '../component/DataGrid/UserInfoDataGrid';
+import UserAllData from 'component/AllUserAndEmployee/UserAllData';
+
 
 function UserAll() {
   const navigate = useNavigate();
@@ -29,6 +30,7 @@ function UserAll() {
 
   return (
     <Box m="1.5rem 2.5rem">
+    <UserAllData/>
     </Box>
   );
 }

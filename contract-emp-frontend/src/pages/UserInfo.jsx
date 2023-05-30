@@ -6,9 +6,9 @@ import { Button, Box } from '@mui/material';
 import FlexBetween from 'component/FlexBetween';
 import { useTheme } from '@mui/material';
 import { DownloadOutlined } from '@mui/icons-material';
-import Users from '../component/DataGrid/UserInfoDataGrid';
+import UserInfoDataGrid from '../component/DataGrid/UserInfoDataGrid';
 
-function User() {
+function UserInfo() {
   const navigate = useNavigate();
   const theme = useTheme()
 
@@ -29,9 +29,9 @@ function User() {
 
   return (
     <Box m="1.5rem 2.5rem">
-        <Users/>
+        <UserInfoDataGrid/>
     </Box>
   );
 }
 
-export default User;
+export default UserInfo;

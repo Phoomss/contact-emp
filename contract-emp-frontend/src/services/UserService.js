@@ -1,7 +1,7 @@
 import http from './http-common';
 
 const getUserInfo = () => {
-  
+
   const token = localStorage.getItem("token")
   http.defaults.headers.common['Authorization'] = token;
 
@@ -17,10 +17,15 @@ const postUserLogin = (credentials) => {
     });
 };
 
+const getAlluser = () => {
+  return http.get('/user')
+}
+
 
 const UserService = {
   getUserInfo,
   postUserLogin,
+  getAlluser,
 };
 
 export default UserService;
