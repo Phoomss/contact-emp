@@ -119,6 +119,7 @@ const loginUser = async (req, res) => {
   res.json({ message: "Welcome Back!", token: jwtToken })
 }
 
+// UserInfo singel user
 const getInfoUser = async (req, res) => {
   try {
     let includeCompany = true;

@@ -246,16 +246,9 @@ const Sidebar = ({
                               color: theme.palette.blue[300],
                               fontSize: "25px ",
                            }}
+                           onClick={()=>{navigate("/userinfo")}}
                         />
                      </Button>
-                     <Menu
-                        anchorEl={anchorEl}
-                        open={isOpen}
-                        onClose={handleClose}
-                        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-                     >
-                        <MenuItem onClick={handleLogout}>ล็อกเอาท์</MenuItem>
-                     </Menu>
                   </FlexBetween>
                </Box>
             </Drawer>

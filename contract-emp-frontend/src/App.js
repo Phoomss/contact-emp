@@ -14,7 +14,7 @@ import UpdateArchive from './pages/Archive/updateArchive'
 import Employee from './pages/Employee/Employee'
 import CreateEmployee from 'pages/Employee/createEmployee';
 import UpdateEmployee from 'pages/Employee/updateEmployee';
-import User from './pages/User'
+import User from './pages/UserInfo'
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import { createTheme } from '@mui/material/styles';
 import { useSelector } from 'react-redux';
@@ -52,7 +52,7 @@ function App() {
             <Route path="/employee" element={<Employee />} />
             <Route path="/createemployee" element={<CreateEmployee/>}/>
             <Route path="/updateemployee/:id" element={<UpdateEmployee/>}/>
-            <Route path="/user" element={<User />} />
+            <Route path="/userinfo" element={<User />} />
             <Route path="/createuser" element={<CreateUser />} />
             <Route path="/updateuser/:id" element={<UpdateUser />} />
           </Route>

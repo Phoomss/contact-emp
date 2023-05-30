@@ -1,141 +1,91 @@
-import React from 'react'
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
 
-const theme = createTheme();
 const Register = () => {
-    const [name, setName] = useState('');
-    const [surname, setSurname] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [role, setRole] = useState('');
-    const [companyId, setCompanyId] = useState('');
-    const [message, setMessage] = useState('');
+  const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [role, setRole] = useState("");
+  const [companyID, setCompanyID] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-    
-        const response = await fetch('/register', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            name,
-            surname,
-            email,
-            password,
-            role,
-            company_id: companyId,
-          }),
-        });
-    
-        const data = await response.json();
-        setMessage(data.message);
-      };
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    setErrorMessage("");
+    setSuccessMessage("");
 
-    return (
-        <ThemeProvider theme={theme}>
-            <Container component="main" maxWidth="xs">
-                <CssBaseline />
-                <Box
-                    sx={{
-                        marginTop: 8,
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                    }}
-                >
-                    <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-                        <LockOutlinedIcon />
-                    </Avatar>
-                    <Typography component="h1" variant="h5">
-                        Sign up
-                    </Typography>
-                    <Box
-                        component="form"
-                        noValidate
-                        // onSubmit={handleSubmit}
-                        sx={{ mt: 3 }}
-                    >
-                        <Grid container spacing={2}>
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    autoComplete="given-name"
-                                    name="firstName"
-                                    required
-                                    fullWidth
-                                    id="firstName"
-                                    label="First Name"
-                                    autoFocus
-                                />
-                            </Grid>
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    required
-                                    fullWidth
-                                    id="lastName"
-                                    label="Last Name"
-                                    name="lastName"
-                                    autoComplete="family-name"
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <TextField
-                                    required
-                                    fullWidth
-                                    id="email"
-                                    label="Email Address"
-                                    name="email"
-                                    autoComplete="email"
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <TextField
-                                    required
-                                    fullWidth
-                                    name="password"
-                                    label="Password"
-                                    type="password"
-                                    id="password"
-                                    autoComplete="new-password"
-                                />
-                            </Grid>
-                        </Grid>
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
-                        >
-                            สมัครสมาชิก
-                        </Button>
-                        <Grid container justifyContent="flex-end">
-                            <Grid item>
-                                <Link href="/login" variant="body2">
-                                    มีบัญชีอยู่แล้ว? เข้าสู่ระบบ
-                                </Link>
-                            </Grid>
-                        </Grid>
-                    </Box>
-                </Box>
+    try {
+      const response = await axios.post("/user/register", {
+        name,
+        surname,
+        email,
+        password,
+        role,
+        company_id: companyID,
+      });
 
-            </Container>
-        </ThemeProvider>
-    );
-}
+      const data = response.data;
 
-export default Register
+      if (data.error) {
+        setErrorMessage(data.error);
+      } else {
+        setSuccessMessage(data.message);
+      }
+    } catch (error) {
+      console.error(error);
+      setErrorMessage("An error occurred during registration.");
+    }
+  };
+
+  return (
+    <div>
+      <h1>Register</h1>
+      <form onSubmit={handleRegister}>
+        <label>
+          Name:
+          <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+        </label>
+        <br />
+        <label>
+          Surname:
+          <input type="text" value={surname} onChange={(e) => setSurname(e.target.value)} />
+        </label>
+        <br />
+        <label>
+          Email:
+          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        </label>
+        <br />
+        <label>
+          Password:
+          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        </label>
+        <br />
+        <label>
+          Role:
+          <select value={role} onChange={(e) => setRole(e.target.value)}>
+            <option value="">Select a role</option>
+            <option value="admin">Admin</option>
+            <option value="card">Card</option>
+            <option value="company">Company</option>
+          </select>
+        </label>
+        <br />
+        {role === "card" && (
+          <label>
+            Company ID:
+            <input type="text" value={companyID} onChange={(e) => setCompanyID(e.target.value)} />
+          </label>
+        )}
+        <br />
+        <button type="submit">Register</button>
+      </form>
+      {errorMessage && <p>Error: {errorMessage}</p>}
+      {successMessage && <p>{successMessage}</p>}
+    </div>
+  );
+};
+
+export default Register;

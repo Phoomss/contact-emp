@@ -100,7 +100,7 @@ This API endpoint returns a list of all employees belonging to the authenticated
 
 * **URL:**
 
-  `/archives`
+  `/archive`
 
 * **Headers:**
 

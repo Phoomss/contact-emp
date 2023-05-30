@@ -3,7 +3,7 @@ import React from 'react'
 function footer() {
   return (
     <div>
-      &copy; Phurich S.
+      {/* &copy; Phurich S. */}
       
     </div>
   )

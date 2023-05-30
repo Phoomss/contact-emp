@@ -3,7 +3,7 @@ import { Box, useMediaQuery } from "@mui/material";
 import { Outlet } from "react-router-dom";
 import Navbar from "../component/Navbar";
 import CompanySidebar from "component/CompanySidebar";
-import CardSidebar from "component/CardSidebar";
+import CardSidebar from "component/MenuSidebar";
 import UserService from "services/UserService";
 import Footer from "../component/Footer";
 

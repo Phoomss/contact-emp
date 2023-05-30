@@ -6,7 +6,7 @@ import { Button, Box } from '@mui/material';
 import FlexBetween from 'component/FlexBetween';
 import { useTheme } from '@mui/material';
 import { DownloadOutlined } from '@mui/icons-material';
-import Users from '../component/DataGrid/UserDataGrid';
+import Users from '../component/DataGrid/UserInfoDataGrid';
 
 function User() {
   const navigate = useNavigate();

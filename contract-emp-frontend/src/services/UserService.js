@@ -20,7 +20,7 @@ const postUserLogin = (credentials) => {
 
 const UserService = {
   getUserInfo,
-  postUserLogin
+  postUserLogin,
 };
 
 export default UserService;
