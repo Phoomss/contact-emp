@@ -21,8 +21,6 @@ import { useSelector } from 'react-redux';
 import { themeSettings } from './theme';
 import { useMemo } from 'react';
 import MainLayout from './layouts/MainLayout';
-import Register from 'pages/Auth/Register';
-import ForgotPassword from 'pages/Auth/ForgotPassword';
 import CreateUser from 'pages/CreateUser';
 import UpdateUser from 'pages/UpdateUser';
 import UserAll from 'pages/UserAll';
@@ -38,9 +36,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Routes>
-          <Route path="/" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/" element={<Login />} />
           <Route element={<MainLayout />}>
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/company" element={<Company />} />
