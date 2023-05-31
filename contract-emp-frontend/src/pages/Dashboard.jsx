@@ -8,16 +8,14 @@ import { useNavigate } from "react-router-dom";
 import EmployeeService from "../services/EmployeeService";
 import FlexBetween from "../component/FlexBetween";
 import swal from 'sweetalert'
+import ShowDashBoard from "component/Dashboard/ShowDashBoard";
 
 const Dashboard = () => {
 
   return (
-    <Box>
-      <Header title="DASHBOARD" subtitle="See your list of dashboard." />
       <Box m="1.5rem 2.5rem">
+        <ShowDashBoard/>
       </Box>
-
-    </Box>
   );
 }
 
