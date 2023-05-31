@@ -14,7 +14,7 @@ const UpdateEmployees = () => {
   const [employeeNumber, setEmployeeNumber] = useState("");
   const [employeePhone, setEmployeePhone] = useState("");
   const [employeeNote, setEmployeeNote] = useState("");
-  
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -36,7 +36,7 @@ const UpdateEmployees = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!employeeName || !employeeSurname || !employeeNumber || !employeePhone ) {
+    if (!employeeName || !employeeSurname || !employeeNumber || !employeePhone) {
       alert("Please fill in all required fields.");
       return;
     }
@@ -56,8 +56,8 @@ const UpdateEmployees = () => {
       setError(error.response.data.message);
     }
   };
-  
-  
+
+
   const handleCancelClick = () => {
     navigate("/employee");
   };
@@ -69,7 +69,7 @@ const UpdateEmployees = () => {
       </FlexBetween>
       <Box sx={{ mt: "1.5rem" }}>
         <form onSubmit={handleSubmit}>
-        <InputLabel>ชื่อ: </InputLabel>
+          <InputLabel>ชื่อ: </InputLabel>
           <TextField
             required
             fullWidth
@@ -101,7 +101,7 @@ const UpdateEmployees = () => {
             value={employeePhone}
             onChange={(e) => setEmployeePhone(e.target.value)}
           />
-          
+
           <InputLabel>หมายเหตุ: </InputLabel>
           <TextField
             fullWidth

@@ -187,7 +187,7 @@ const CreateEmployees = () => {
                     <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} mt="1.5rem" >
                         <Grid item xs={12}>
                             <InputLabel>เลขที่สัญญา</InputLabel>
-                            <Box sx={{mb:"18px"}}><div></div></Box>
+                            <Box sx={{ mb: "18px" }}><div></div></Box>
                             <Select
                                 fullWidth
                                 margin="normal"

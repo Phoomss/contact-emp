@@ -59,9 +59,9 @@ const UserAllData = () => {
     //   };
 
 
-    //   const handleRowClick = (params) => {
-    //     navigate(`/updateemployee/${params.id}`);
-    //   };
+      const handleRowClick = (params) => {
+        navigate(`/updateuser/${params.id}`);
+      };
 
     //   const createClick = () => {
     //     navigate(`/createemployee`)
@@ -176,7 +176,7 @@ const UserAllData = () => {
                     columns={columns}
                     getRowId={getRowId}
                     checkboxSelection
-                    // onRowClick={handleRowClick}
+                    onRowClick={handleRowClick}
                     rowsPerPageOptions={[10, 25, 50]}
                     pageSize={pageSize}
                     onPageSizeChange={handlePageSizeChange}

@@ -111,18 +111,6 @@ const Login = () => {
             <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
               เข้าสู่ระบบ
             </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="/forgot-password" variant="body2">
-                  ลืมรหัผ่าน
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="/" variant="body2">
-                  {"คุณต้องการสมัครสมาชิกหรือไม่ ? สมัครสมาชิก"}
-                </Link>
-              </Grid>
-            </Grid>
           </Box>
         </Box>
       </Container>

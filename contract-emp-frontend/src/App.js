@@ -21,9 +21,9 @@ import { useSelector } from 'react-redux';
 import { themeSettings } from './theme';
 import { useMemo } from 'react';
 import MainLayout from './layouts/MainLayout';
-import CreateUser from 'pages/CreateUser';
-import UpdateUser from 'pages/UpdateUser';
-import UserAll from 'pages/UserAll';
+import CreateUser from 'pages/User/CreateUser';
+import UpdateUser from 'pages/User/UpdateUser';
+import UserAll from 'pages/User/UserAll';
 import UserInfo from 'pages/UserInfo';
 
 

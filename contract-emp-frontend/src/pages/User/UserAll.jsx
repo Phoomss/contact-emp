@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react';
-import UserService from '../services/UserService';
+import UserService from '../../services/UserService';
 import { useNavigate } from 'react-router-dom';
 import { Button, Box } from '@mui/material';
 
-import FlexBetween from 'component/FlexBetween';
 import { useTheme } from '@mui/material';
-import { DownloadOutlined } from '@mui/icons-material';
 import UserAllData from 'component/AllUserAndEmployee/UserAllData';
 
 
@@ -16,7 +14,7 @@ function UserAll() {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (!token) {
-      navigate('/login');
+      navigate('/');
     } else {
       UserService.getUserInfo()
         .then(() => {

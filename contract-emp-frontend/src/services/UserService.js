@@ -21,11 +21,23 @@ const getAlluser = () => {
   return http.get('/user')
 }
 
+const updataUser = (id, updataData) => {
+  return http.put(`/user/${id.toString()}`, updataData)
+}
+
+const getUserById = (id) => {
+  return http.get(`/user/search/?id=${id}`.then(response => {
+    return response;
+  }))
+}
+
 
 const UserService = {
   getUserInfo,
   postUserLogin,
   getAlluser,
+  updataUser,
+  getUserById,
 };
 
 export default UserService;
