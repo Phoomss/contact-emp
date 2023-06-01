@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import UserService from 'services/UserService';
+import swal from 'sweetalert';
 
 const UserAllData = () => {
 
@@ -32,40 +33,40 @@ const UserAllData = () => {
         setSelectionModel(newSelection);
     };
 
-    // const handleDeleteButtonClick = async () => {
-    //     if (selectionModel.length === 0) {
-    //       swal("กรุณาเลือกลูกจ้างอย่างน้อยหนึ่งคนเพื่อลบ.", { icon: "warning" });
-    //       return;
-    //     }
+    const handleDeleteButtonClick = async () => {
+        if (selectionModel.length === 0) {
+            swal("กรุณาเลือกลูกจ้างอย่างน้อยหนึ่งคนเพื่อลบ.", { icon: "warning" });
+            return;
+        }
 
-    //     swal({
-    //       title: "แน่ใจหรือไม่?",
-    //       text: "เมื่อลบแล้ว, ลูกจ้างที่คุณเลือกไว้จะถูกลบหายไป!",
-    //       icon: "warning",
-    //       buttons: true,
-    //       dangerMode: true,
-    //     }).then(async (willDelete) => {
-    //       if (willDelete) {
-    //         await Promise.all(
-    //           selectionModel.map(async (id) => {
-    //             await EmployeeService.deleteEmployee(id);
-    //           })
-    //         );
-    //         setAllUsers(employees.filter((employee) => !selectionModel.includes(employee.id)));
-    //         setSelectionModel([]);
-    //         swal("ลบลูกจ้างที่คุณเลือกเรียบร้อย!", { icon: "success" });
-    //       }
-    //     });
-    //   };
+        swal({
+            title: "แน่ใจหรือไม่?",
+            text: "เมื่อลบแล้ว, ลูกจ้างที่คุณเลือกไว้จะถูกลบหายไป!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then(async (willDelete) => {
+            if (willDelete) {
+                await Promise.all(
+                    selectionModel.map(async (id) => {
+                        await UserService.deleteUser(id);
+                    })
+                );
+                setAllUsers(Allusers.filter((user) => !selectionModel.includes(user.id)));
+                setSelectionModel([]);
+                swal("ลบลูกจ้างที่คุณเลือกเรียบร้อย!", { icon: "success" });
+            }
+        });
+    };
 
 
-      const handleRowClick = (params) => {
+    const handleRowClick = (params) => {
         navigate(`/updateuser/${params.id}`);
-      };
+    };
 
-      const createClick = () => {
+    const createClick = () => {
         navigate(`/createuser`)
-      }
+    }
 
     const columns = [
         {
@@ -109,14 +110,14 @@ const UserAllData = () => {
             field: "company",
             headerName: "ชื่อบริษัท",
             renderCell: (params) => {
-              if (params.value && params.value.name) {
-                return (
-                  <Box sx={{ cursor: "pointer" }}>
-                    {params.value.name}
-                  </Box>
-                );
-              }
-              return null; // หรือจะแสดงข้อความเปล่าๆ หรือ Element อื่นๆ ตามที่ต้องการ
+                if (params.value && params.value.name) {
+                    return (
+                        <Box sx={{ cursor: "pointer" }}>
+                            {params.value.name}
+                        </Box>
+                    );
+                }
+                return null; // หรือจะแสดงข้อความเปล่าๆ หรือ Element อื่นๆ ตามที่ต้องการ
             },
 
         },
@@ -147,7 +148,7 @@ const UserAllData = () => {
                                 fontWeight: "bold",
                                 padding: "10px 20px",
                             }}
-                        onClick={createClick}
+                            onClick={createClick}
                         >
                             <CreateOutlined sx={{ mr: "10px" }} />
                             เพิ่มข้อมูลผู้ใข้งาน
@@ -161,7 +162,7 @@ const UserAllData = () => {
                                 fontWeight: "bold",
                                 padding: "10px 20px",
                             }}
-                        // onClick={handleDeleteButtonClick}
+                            onClick={handleDeleteButtonClick}
                         >
                             <DeleteOutline sx={{ mr: "10px" }} />
                             ลบข้อมูลผู้ใช้งาน

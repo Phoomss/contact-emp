@@ -48,6 +48,10 @@ const getUserById = async (id) => {
   }
 }
 
+const deleteUser = (id) => {
+  return http.delete(`/user/${id}`)
+}
+
 
 
 const UserService = {
@@ -56,7 +60,8 @@ const UserService = {
   postRegister,
   getAlluser,
   updataUser,
-  getUserById
+  getUserById,
+  deleteUser
 };
 
 export default UserService;
