@@ -25,11 +25,16 @@ const updataUser = (id, updataData) => {
   return http.put(`/user/${id.toString()}`, updataData)
 }
 
-const getUserById = (id) => {
-  return http.get(`/user/search/?id=${id}`.then(response => {
+const getUserById = async (id) => {
+  try {
+    const response = await http.get(`/user/search/?id=${id}`);
     return response;
-  }))
+  } catch (error) {
+    console.error('Error', error);
+    throw error;
+  }
 }
+
 
 
 const UserService = {
@@ -37,7 +42,7 @@ const UserService = {
   postUserLogin,
   getAlluser,
   updataUser,
-  getUserById,
+  getUserById
 };
 
 export default UserService;

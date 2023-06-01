@@ -410,7 +410,7 @@ This API endpoint retrieves a list of users that match the query parameters. Onl
 
 * **Method:**
 
-    `POST`
+    `GET`
 
 * **URL:**
 

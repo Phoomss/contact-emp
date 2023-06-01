@@ -20,22 +20,27 @@ const FormUpdateUser = () => {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await UserService.getUserById(id)
-                if (response.status === 200) {
-                    setUserName(response.data[0].name)
-                    setUserSurName(response.data[0].surname)
-                    setUserTelePhone(response.data[0].telephone)
-                    setUserEmail(response.data[0].email)
-                    setUseName(response.data[0].username)
-                    setUserPassword(response.data[0].password)
+                const response = await UserService.getUserById(id);
+                if (response && response.status === 200) {
+                    const userData = response.data[0];
+                    setUserName(userData.name);
+                    setUserSurName(userData.surname);
+                    setUserTelePhone(userData.telephone);
+                    setUserEmail(userData.email);
+                    setUseName(userData.username);
+                    setUserPassword(userData.password);
+                } else {
+                    setError('Failed to fetch user data.');
                 }
             } catch (error) {
-                console.error('Error', error.response)
-                setError(error.response.data.message)
+                console.error('Error', error);
+                setError('An error occurred while fetching user data.');
             }
         }
-        fetchData()
-    }, [id])
+
+        fetchData();
+    }, [id]);
+
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -79,7 +84,7 @@ const FormUpdateUser = () => {
                                 fullWidth
                                 margin="normal"
                                 value={userName}
-                                onChange={(e) => setUseName(e.target.value)}
+                                onChange={(e) => setUserName(e.target.value)}
                             />
                         </Grid>
 
@@ -147,7 +152,7 @@ const FormUpdateUser = () => {
 
                     <Box sx={{ mt: "1.5rem" }}>
                         <Button type="submit" variant="contained">
-                            แก้ไขพนักงาน
+                            อัพเดทข้อมูลผุ้ใช้งาน
                         </Button>
                         <Button
                             sx={{ ml: "10px" }}

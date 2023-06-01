@@ -111,7 +111,7 @@ const UpdateEmployees = () => {
           />
           <Box sx={{ mt: "1.5rem" }}>
             <Button type="submit" variant="contained">
-              แก้ไขพนักงาน
+              อัพเดทข้อมูลพนักงาน
             </Button>
             <Button
               sx={{ ml: "10px" }}
