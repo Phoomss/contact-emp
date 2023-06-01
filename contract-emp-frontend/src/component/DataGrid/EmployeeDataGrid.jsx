@@ -127,7 +127,7 @@ const Employees = () => {
           <Box>
             <Button
               variant="contained"
-              color="primary"
+              color="secondary"
               startIcon={<CreateOutlined />}
               onClick={() => handleEditButtonClick(params.id)}
             >
