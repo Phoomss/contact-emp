@@ -63,9 +63,9 @@ const UserAllData = () => {
         navigate(`/updateuser/${params.id}`);
       };
 
-    //   const createClick = () => {
-    //     navigate(`/createemployee`)
-    //   }
+      const createClick = () => {
+        navigate(`/createuser`)
+      }
 
     const columns = [
         {
@@ -147,7 +147,7 @@ const UserAllData = () => {
                                 fontWeight: "bold",
                                 padding: "10px 20px",
                             }}
-                        // onClick={createClick}
+                        onClick={createClick}
                         >
                             <CreateOutlined sx={{ mr: "10px" }} />
                             เพิ่มข้อมูลผู้ใข้งาน

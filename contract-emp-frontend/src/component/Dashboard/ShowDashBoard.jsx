@@ -1,17 +1,16 @@
-import React from 'react'
+import React ,{useEffect,useState} from 'react'
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import { Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
 import EmployeeService from 'services/EmployeeService';
 import CompanyService from 'services/CompanyService';
-import { useEffect } from 'react';
 import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
 import ApartmentIcon from '@mui/icons-material/Apartment';
-import { hover } from '@testing-library/user-event/dist/hover';
+import PersonIcon from '@mui/icons-material/Person';
+import GavelIcon from '@mui/icons-material/Gavel';
 import ContractService from 'services/ContractService';
 import UserService from 'services/UserService';
 
@@ -95,7 +94,7 @@ const ShowDashBoard = () => {
 
                 <Grid item xs={8}>
                     <Item onClick={() => { navigate("/contract") }}  sx={{ boxShadow: 3 }}>
-                        <SupervisedUserCircleIcon sx={{ fontSize: 40 }}/>
+                        <GavelIcon sx={{ fontSize: 40 }}/>
                         <Typography variant="h3" >
                             จำนวนสัญญาจ้าง
                         </Typography>
@@ -107,7 +106,7 @@ const ShowDashBoard = () => {
 
                 <Grid item xs={8}>
                     <Item onClick={() => { navigate("/userall") }} sx={{ boxShadow: 3 }}>
-                    <ApartmentIcon sx={{ fontSize: 40 }}/>
+                    <PersonIcon sx={{ fontSize: 40 }}/>
                         <Typography variant="h3" >
                             จำนวนผู้ใช้งาน
                         </Typography>

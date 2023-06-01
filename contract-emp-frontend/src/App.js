@@ -25,6 +25,7 @@ import CreateUser from 'pages/User/CreateUser';
 import UpdateUser from 'pages/User/UpdateUser';
 import UserAll from 'pages/User/UserAll';
 import UserInfo from 'pages/UserInfo';
+// import ArchiveDetails from 'pages/Archive/ArchiveDetails';
 
 
 function App() {
@@ -40,21 +41,27 @@ function App() {
           <Route element={<MainLayout />}>
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/company" element={<Company />} />
-            <Route path="/createcompany" element={<CreateCompany/>}/>
-            <Route path="/updatecompany/:id" element={<UpdateCompany/>}/>
+            <Route path="/createcompany" element={<CreateCompany />} />
+            <Route path="/updatecompany/:id" element={<UpdateCompany />} />
+        
             <Route path="/contract" element={<Contract />} />
             <Route path="/createcontract" element={<CreateContract />} />
             <Route path="/updatecontract/:id" element={<UpdateContract />} />
+
             <Route path="/archive" element={<Archive />} />
+            {/* <Route path='/archive/:id' element={<ArchiveDetails/>}/> */}
             <Route path="/createarchive" element={<CreateArchive />} />
             <Route path="/updatearchive/:id" element={<UpdateArchive />} />
+
             <Route path="/employee" element={<Employee />} />
-            <Route path="/createemployee" element={<CreateEmployee/>}/>
-            <Route path="/updateemployee/:id" element={<UpdateEmployee/>}/>
+            <Route path="/createemployee" element={<CreateEmployee />} />
+            <Route path="/updateemployee/:id" element={<UpdateEmployee />} />
+
             <Route path="/userinfo" element={<UserInfo />} />
+            <Route path='/userAll' element={<UserAll />} />
             <Route path="/createuser" element={<CreateUser />} />
             <Route path="/updateuser/:id" element={<UpdateUser />} />
-            <Route path='/userAll' element={<UserAll/>}/>
+
           </Route>
         </Routes>
       </ThemeProvider>

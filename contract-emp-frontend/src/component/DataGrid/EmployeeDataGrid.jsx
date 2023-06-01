@@ -56,13 +56,16 @@ const Employees = () => {
   
 
   const handleRowClick = (params) => {
-    navigate(`/updateemployee/${params.id}`);
+    // navigate(`/archive/${params.id}`);
   };
 
   const createClick = () => {
     navigate(`/createemployee`)
   }
 
+  const handleEditButtonClick = (id) => {
+    navigate(`/updateemployee/${id}`);
+  };
   const columns = [
     {
       field: "id",
@@ -116,6 +119,25 @@ const Employees = () => {
         headerName: "หมายเหตุ",
         
     },
+    {
+      field: "Functions",
+      headerName: "แก้ไขข้อมูล",
+      renderCell: (params) => {
+        return (
+          <Box>
+            <Button
+              variant="contained"
+              color="primary"
+              startIcon={<CreateOutlined />}
+              onClick={() => handleEditButtonClick(params.id)}
+            >
+              แก้ไข
+            </Button>
+          </Box>
+        );
+      },
+    },
+    
   ];
 
   const [pageSize, setPageSize] = useState(10);

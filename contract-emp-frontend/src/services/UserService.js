@@ -17,6 +17,19 @@ const postUserLogin = (credentials) => {
     });
 };
 
+const postRegister = (createuserData, callback) => {
+  http.post('user/register', createuserData)
+    .then(response => {
+      callback(null, response);
+    })
+    .catch(error => {
+      // จัดการเมื่อเกิด error ที่ต้องการ
+      console.error(error);
+      callback(error, null);
+    });
+};
+
+
 const getAlluser = () => {
   return http.get('/user')
 }
@@ -40,6 +53,7 @@ const getUserById = async (id) => {
 const UserService = {
   getUserInfo,
   postUserLogin,
+  postRegister,
   getAlluser,
   updataUser,
   getUserById
