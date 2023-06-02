@@ -1,12 +1,7 @@
-import React from 'react'
+import React from "react";
 
 function footer() {
-  return (
-    <div>
-      {/* &copy; Phurich S. */}
-      
-    </div>
-  )
+  return <div>{/* &copy; Phurich S. */}</div>;
 }
 
-export default footer
+export default footer;

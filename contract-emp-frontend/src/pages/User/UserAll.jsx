@@ -1,25 +1,22 @@
-import React, { useEffect } from 'react';
-import UserService from '../../services/UserService';
-import { useNavigate } from 'react-router-dom';
-import { Button, Box } from '@mui/material';
+import React, { useEffect } from "react";
+import UserService from "../../services/UserService";
+import { useNavigate } from "react-router-dom";
+import { Button, Box } from "@mui/material";
 
-import { useTheme } from '@mui/material';
-import UserAllData from 'component/AllUserAndEmployee/UserAllData';
-
+import { useTheme } from "@mui/material";
+import UserAllData from "component/AllUserAndEmployee/UserAllData";
 
 function UserAll() {
   const navigate = useNavigate();
-  const theme = useTheme()
+  const theme = useTheme();
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     if (!token) {
-      navigate('/');
+      navigate("/");
     } else {
       UserService.getUserInfo()
-        .then(() => {
-          
-        })
+        .then(() => {})
         .catch((error) => {
           console.error(error);
         });
@@ -28,7 +25,7 @@ function UserAll() {
 
   return (
     <Box m="1.5rem 2.5rem">
-    <UserAllData/>
+      <UserAllData />
     </Box>
   );
 }

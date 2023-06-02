@@ -4,7 +4,7 @@ const { Box } = require("@mui/material");
 const FlexBetween = styled(Box)({
   display: "flex",
   justifyContent: "space-between",
-  alignItems: "center"
-})
+  alignItems: "center",
+});
 
-export default FlexBetween
+export default FlexBetween;

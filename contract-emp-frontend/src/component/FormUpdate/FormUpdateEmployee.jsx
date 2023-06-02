@@ -8,7 +8,7 @@ import FlexBetween from "../FlexBetween";
 const UpdateEmployees = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [employeeName, setEmployeeName] = useState("");
   const [employeeSurname, setEmployeeSurname] = useState("");
   const [employeeNumber, setEmployeeNumber] = useState("");
@@ -27,7 +27,7 @@ const UpdateEmployees = () => {
           setEmployeeNote(response.data[0].note);
         }
       } catch (error) {
-        console.error('Error:', error.response);
+        console.error("Error:", error.response);
         setError(error.response.data.message);
       }
     }
@@ -36,7 +36,12 @@ const UpdateEmployees = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!employeeName || !employeeSurname || !employeeNumber || !employeePhone) {
+    if (
+      !employeeName ||
+      !employeeSurname ||
+      !employeeNumber ||
+      !employeePhone
+    ) {
       alert("Please fill in all required fields.");
       return;
     }
@@ -46,17 +51,16 @@ const UpdateEmployees = () => {
         surname: employeeSurname,
         number: employeeNumber,
         telephone: employeePhone,
-        note: employeeNote
+        note: employeeNote,
       });
       if (response.status === 200) {
         navigate("/employee");
       }
     } catch (error) {
-      console.error('Error:', error.response);
+      console.error("Error:", error.response);
       setError(error.response.data.message);
     }
   };
-
 
   const handleCancelClick = () => {
     navigate("/employee");
@@ -129,7 +133,7 @@ const UpdateEmployees = () => {
         </form>
       </Box>
     </Box>
-  )
-}
+  );
+};
 
-export default UpdateEmployees
+export default UpdateEmployees;

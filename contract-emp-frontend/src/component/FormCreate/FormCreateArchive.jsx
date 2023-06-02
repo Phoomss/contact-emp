@@ -30,7 +30,7 @@ const CreateArchive = () => {
   const [companyName, setCompanyName] = useState("");
   const [contractId, setContractId] = useState("");
   const [employeeId, setEmployeeId] = useState("");
-  const [employees, setEmployees] = useState([])
+  const [employees, setEmployees] = useState([]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -60,8 +60,8 @@ const CreateArchive = () => {
     const fetchData = async () => {
       const responseContract = await ContractService.getContracts();
       setContractList(responseContract.data);
-      const responseEmployees = await EmployeeService.getEmployees()
-      setEmployees(responseEmployees.data)
+      const responseEmployees = await EmployeeService.getEmployees();
+      setEmployees(responseEmployees.data);
 
       const lastEmployeeId = Math.max(
         ...responseEmployees.data.map((employee) => employee.id)
@@ -105,7 +105,7 @@ const CreateArchive = () => {
       </FlexBetween>
       <Box sx={{ mt: "1.5rem" }}>
         <form onSubmit={handleSubmit}>
-        <InputLabel>Employee</InputLabel>
+          <InputLabel>Employee</InputLabel>
           <Select
             fullWidth
             margin="normal"

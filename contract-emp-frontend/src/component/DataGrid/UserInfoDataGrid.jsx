@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import UserService from 'services/UserService';
+import React, { useEffect, useState } from "react";
+import UserService from "services/UserService";
 
 const UserDataGrid = () => {
   const [userInfo, setUserInfo] = useState(null);
@@ -15,7 +15,7 @@ const UserDataGrid = () => {
       const data = response.data;
       setUserInfo(data);
     } catch (error) {
-      console.error('Error fetching user info:', error);
+      console.error("Error fetching user info:", error);
     }
   };
 

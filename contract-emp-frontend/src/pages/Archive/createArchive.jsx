@@ -2,11 +2,10 @@ import React, { useEffect } from "react";
 import UserService from "../../services/UserService";
 import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
-import FormCreateArchive from 'component/FormCreate/FormCreateArchive'
-
+import FormCreateArchive from "component/FormCreate/FormCreateArchive";
 
 const CreateArchive = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -19,12 +18,12 @@ const CreateArchive = () => {
           console.error(error);
         });
     }
-  }, [navigate])
+  }, [navigate]);
   return (
     <Box>
-      <FormCreateArchive/>
+      <FormCreateArchive />
     </Box>
-  )
-}
+  );
+};
 
-export default CreateArchive
+export default CreateArchive;

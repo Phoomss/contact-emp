@@ -32,10 +32,10 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const isOpen = Boolean(anchorEl);
   const handleClick = (event) => setAnchorEl(event.currentTarget);
-  const handleClose = () => setAnchorEl(null)
+  const handleClose = () => setAnchorEl(null);
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    navigate('/');
+    localStorage.removeItem("token");
+    navigate("/");
   };
 
   return (
@@ -44,7 +44,7 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
         position: "static",
         background: "none",
         boxShadow: "none",
-        r:"1rem"
+        r: "1rem",
       }}
     >
       <Toolbar sx={{ justifyContent: "space-between" }}>
@@ -127,7 +127,6 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
               open={isOpen}
               onClose={handleClose}
               anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-              
             >
               <MenuItem onClick={handleLogout}>ล็อกเอาท์</MenuItem>
             </Menu>

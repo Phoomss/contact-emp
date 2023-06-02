@@ -1,32 +1,30 @@
 import { React, useState, useEffect } from "react";
-import UserService from '../services/UserService';
+import UserService from "../services/UserService";
 import { Box, useTheme, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import ShowDashBoard from "component/Dashboard/ShowDashBoard";
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const theme = useTheme()
+  const theme = useTheme();
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     if (!token) {
-      navigate('/');
+      navigate("/");
     } else {
       UserService.getUserInfo()
-        .then(() => {
-          
-        })
+        .then(() => {})
         .catch((error) => {
           console.error(error);
         });
     }
   }, [navigate]);
   return (
-      <Box m="1.5rem 2.5rem">
-        <ShowDashBoard/> :
-      </Box>
+    <Box m="1.5rem 2.5rem">
+      <ShowDashBoard /> :
+    </Box>
   );
-}
+};
 
-export default Dashboard
+export default Dashboard;

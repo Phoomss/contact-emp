@@ -1,26 +1,24 @@
-import React, { useEffect } from 'react';
-import UserService from '../services/UserService';
-import { useNavigate } from 'react-router-dom';
-import { Button, Box } from '@mui/material';
+import React, { useEffect } from "react";
+import UserService from "../services/UserService";
+import { useNavigate } from "react-router-dom";
+import { Button, Box } from "@mui/material";
 
-import FlexBetween from 'component/FlexBetween';
-import { useTheme } from '@mui/material';
-import { DownloadOutlined } from '@mui/icons-material';
-import UserInfoDataGrid from '../component/DataGrid/UserInfoDataGrid';
+import FlexBetween from "component/FlexBetween";
+import { useTheme } from "@mui/material";
+import { DownloadOutlined } from "@mui/icons-material";
+import UserInfoDataGrid from "../component/DataGrid/UserInfoDataGrid";
 
 function UserInfo() {
   const navigate = useNavigate();
-  const theme = useTheme()
+  const theme = useTheme();
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     if (!token) {
-      navigate('/login');
+      navigate("/");
     } else {
       UserService.getUserInfo()
-        .then(() => {
-          
-        })
+        .then(() => {})
         .catch((error) => {
           console.error(error);
         });
@@ -29,7 +27,7 @@ function UserInfo() {
 
   return (
     <Box m="1.5rem 2.5rem">
-        <UserInfoDataGrid/>
+      <UserInfoDataGrid />
     </Box>
   );
 }

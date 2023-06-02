@@ -90,7 +90,6 @@ const Employees = () => {
     {
       field: "telephone",
       headerName: "เบอร์โทรศัพท์",
-      
     },
     // {
     //   field: "department1",
@@ -170,7 +169,7 @@ const Employees = () => {
           </FlexBetween>
         </Box>
       </FlexBetween>
-      <Box height="calc(100vh - 200px)"  sx={{ mt: "1.5rem" }}>
+      <Box height="calc(100vh - 200px)" sx={{ mt: "1.5rem" }}>
         <DataGrid
           sx={{ color: theme.palette.grey[1000] }}
           rows={employees}

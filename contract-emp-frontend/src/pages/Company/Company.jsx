@@ -1,20 +1,19 @@
-import React, { useEffect } from 'react';
-import UserService from '../../services/UserService';
-import { useNavigate } from 'react-router-dom';
-import { Box } from '@mui/material';
-import CompanyDataGrid from 'component/DataGrid/CompanyDataGrid'
+import React, { useEffect } from "react";
+import UserService from "../../services/UserService";
+import { useNavigate } from "react-router-dom";
+import { Box } from "@mui/material";
+import CompanyDataGrid from "component/DataGrid/CompanyDataGrid";
 
 function Company() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     if (!token) {
-      navigate('/login');
+      navigate("/login");
     } else {
       UserService.getUserInfo()
-        .then(() => {
-        })
+        .then(() => {})
         .catch((error) => {
           console.error(error);
         });
@@ -23,7 +22,7 @@ function Company() {
 
   return (
     <Box>
-      <CompanyDataGrid/>
+      <CompanyDataGrid />
     </Box>
   );
 }

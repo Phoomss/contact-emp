@@ -1,12 +1,17 @@
 import { React, useState, useEffect } from "react";
 import { Box, useTheme, Button, InputBase, IconButton } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import { DownloadOutlined, DeleteOutline, CreateOutlined, FilterList } from "@mui/icons-material";
+import {
+  DownloadOutlined,
+  DeleteOutline,
+  CreateOutlined,
+  FilterList,
+} from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import CompanyService from "../../services/CompanyService";
 import Header from "../Header";
 import FlexBetween from "../FlexBetween";
-import swal from 'sweetalert'
+import swal from "sweetalert";
 
 const Companies = () => {
   const theme = useTheme();
@@ -30,7 +35,9 @@ const Companies = () => {
 
   const handleDeleteButtonClick = async () => {
     if (selectionModel.length === 0) {
-      swal("Please select at least one company to delete.", { icon: "warning" });
+      swal("Please select at least one company to delete.", {
+        icon: "warning",
+      });
       return;
     }
 
@@ -47,13 +54,16 @@ const Companies = () => {
             await CompanyService.deleteCompany(id);
           })
         );
-        setCompanies(companies.filter((company) => !selectionModel.includes(company.id)));
+        setCompanies(
+          companies.filter((company) => !selectionModel.includes(company.id))
+        );
         setSelectionModel([]);
-        swal("The selected companies have been deleted successfully!", { icon: "success" });
+        swal("The selected companies have been deleted successfully!", {
+          icon: "success",
+        });
       }
     });
   };
-
 
   const handleRowClick = (params) => {
     if (params.field !== "delete") {
@@ -62,8 +72,8 @@ const Companies = () => {
   };
 
   const createClick = () => {
-    navigate(`/createcompany`)
-  }
+    navigate(`/createcompany`);
+  };
 
   const columns = [
     {
@@ -75,13 +85,7 @@ const Companies = () => {
       headerName: "Name",
       flex: 0.5,
       renderCell: (params) => {
-        return (
-          <Box
-            sx={{ cursor: "pointer" }}
-          >
-            {params.value}
-          </Box>
-        );
+        return <Box sx={{ cursor: "pointer" }}>{params.value}</Box>;
       },
     },
     {
@@ -147,7 +151,6 @@ const Companies = () => {
                 fontWeight: "bold",
                 padding: "10px 20px",
               }}
-
             >
               <DownloadOutlined sx={{ mr: "10px" }} />
               Export
@@ -187,9 +190,7 @@ const Companies = () => {
         />
       </Box>
     </Box>
-
-
   );
 };
 
-export default Companies
+export default Companies;

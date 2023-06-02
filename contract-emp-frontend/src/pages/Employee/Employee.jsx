@@ -1,21 +1,20 @@
-import React, { useEffect } from 'react';
-import UserService from '../../services/UserService';
-import { useNavigate } from 'react-router-dom';
-import { Box } from '@mui/material';
-import EmployeeDataGrid from 'component/DataGrid/EmployeeDataGrid'
-import ArchiveDataGrid from 'component/DataGrid/ArchiveDataGrid';
+import React, { useEffect } from "react";
+import UserService from "../../services/UserService";
+import { useNavigate } from "react-router-dom";
+import { Box } from "@mui/material";
+import EmployeeDataGrid from "component/DataGrid/EmployeeDataGrid";
+import ArchiveDataGrid from "component/DataGrid/ArchiveDataGrid";
 
 function Employee() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     if (!token) {
-      navigate('/login');
+      navigate("/");
     } else {
       UserService.getUserInfo()
-        .then(() => {
-        })
+        .then(() => {})
         .catch((error) => {
           console.error(error);
         });
@@ -25,7 +24,7 @@ function Employee() {
   return (
     <Box>
       <EmployeeDataGrid />
-       <br />
+      <br />
       <ArchiveDataGrid />
     </Box>
   );

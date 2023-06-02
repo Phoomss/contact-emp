@@ -24,7 +24,7 @@ const MainLayout = () => {
     isNonMobile: isNonMobile,
     drawerWidth: "250px",
     isSidebarOpen: isSideBarOpen,
-    setIsSideBarOpen: setIsSideBarOpen
+    setIsSideBarOpen: setIsSideBarOpen,
   };
 
   if (userInfo && userInfo.role === "company") {
@@ -51,6 +51,6 @@ const MainLayout = () => {
       </Box>
     </Box>
   );
-}  
+};
 
 export default MainLayout;

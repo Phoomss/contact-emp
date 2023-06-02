@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Box, TextField, Button, Typography, Select, MenuItem, InputLabel, Grid } from "@mui/material";
+import {
+  Box,
+  TextField,
+  Button,
+  Typography,
+  Select,
+  MenuItem,
+  InputLabel,
+  Grid,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import ContractService from "../../services/ContractService";
 import CompanyService from "../../services/CompanyService";
@@ -37,7 +46,7 @@ const CreateContracts = () => {
         number: contractNumber,
         start_date: contractStartDate,
         end_date: contractEndDate,
-        company_id: contractCompanyId
+        company_id: contractCompanyId,
       });
       if (response.status === 200) {
         navigate("/contract");
@@ -67,14 +76,22 @@ const CreateContracts = () => {
             onChange={(e) => setContractNumber(e.target.value)}
             helperText=""
           />
-          <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+          <Grid
+            container
+            rowSpacing={1}
+            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+          >
             <Grid item xs={6}>
               <InputLabel>วันเริ่ม: </InputLabel>
               <TextField
                 fullWidth
                 margin="normal"
                 type="date"
-                value={contractStartDate ? contractStartDate.toISOString().substr(0, 10) : ""}
+                value={
+                  contractStartDate
+                    ? contractStartDate.toISOString().substr(0, 10)
+                    : ""
+                }
                 onChange={(e) => setContractStartDate(new Date(e.target.value))}
               />
             </Grid>
@@ -85,13 +102,19 @@ const CreateContracts = () => {
                 fullWidth
                 margin="normal"
                 type="date"
-                value={contractEndDate ? contractEndDate.toISOString().substr(0, 10) : ""}
+                value={
+                  contractEndDate
+                    ? contractEndDate.toISOString().substr(0, 10)
+                    : ""
+                }
                 onChange={(e) => setContractEndDate(new Date(e.target.value))}
               />
             </Grid>
           </Grid>
           <InputLabel>ชื่อบริษัท: </InputLabel>
-          <Box sx={{mb:"18px"}}><div></div></Box>
+          <Box sx={{ mb: "18px" }}>
+            <div></div>
+          </Box>
           <Select
             fullWidth
             margin="normal"

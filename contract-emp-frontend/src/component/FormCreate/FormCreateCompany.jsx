@@ -7,7 +7,7 @@ import FlexBetween from "../FlexBetween";
 
 const CreateCompanies = () => {
   const navigate = useNavigate();
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [companyName, setCompanyName] = useState("");
   const [companyAddress, setCompanyAddress] = useState("");
   const [companyPhone, setCompanyPhone] = useState("");
@@ -24,11 +24,11 @@ const CreateCompanies = () => {
         navigate("/company");
       }
     } catch (error) {
-        console.error("Error:", error.response);
-        setError(error.response.data.message);
+      console.error("Error:", error.response);
+      setError(error.response.data.message);
     }
   };
-  
+
   const handleCancleClick = () => {
     navigate("/company");
   };

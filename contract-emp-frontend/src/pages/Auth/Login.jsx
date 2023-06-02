@@ -1,49 +1,44 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import UserService from '../../services/UserService';
-import swal from 'sweetalert'
-
-
-
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import UserService from "../../services/UserService";
+import swal from "sweetalert";
 
 const Login = () => {
-  const [formData, setFormData] = useState({ login: '', password: '' });
-  const [error, setError] = useState('');
+  const [formData, setFormData] = useState({ login: "", password: "" });
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     UserService.postUserLogin(formData)
       .then((response) => {
-        console.log(response)
+        console.log(response);
         if (response.data.token) {
-          localStorage.setItem('token', response.data.token);
-          swal(`Welcome`,
-          "",
-            'success')
-          navigate('/dashboard');
+          localStorage.setItem("token", response.data.token);
+          swal(`Welcome`, "", "success");
+          navigate("/dashboard");
         } else {
-          setError('Invalid credentials');
+          setError("Invalid credentials");
           swal("ไม่พบบัญชีของคุณ", "", "error");
         }
       })
       .catch((error) => {
-        console.error('Error:', error.response);
+        console.error("Error:", error.response);
         setError(error.response.data.message);
-        swal("Login or password is incorrect", "", "error")
+        swal("Login or password is incorrect", "", "error");
       });
   };
 
@@ -63,18 +58,23 @@ const Login = () => {
         <Box
           sx={{
             marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
+            noValidate
+            sx={{ mt: 1 }}
+          >
             <TextField
               margin="normal"
               required
@@ -108,7 +108,12 @@ const Login = () => {
                 {error}
               </Typography>
             )}
-            <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
               เข้าสู่ระบบ
             </Button>
           </Box>
@@ -116,6 +121,6 @@ const Login = () => {
       </Container>
     </ThemeProvider>
   );
-}
+};
 
-export default Login
+export default Login;
