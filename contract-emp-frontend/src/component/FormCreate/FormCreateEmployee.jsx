@@ -129,22 +129,12 @@ const CreateEmployees = () => {
             <Box >
                 <form onSubmit={handleSubmit}>
                     <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} mt="1.5rem" >
-                        <Grid item xs={6}>
+                        <Grid item xs={12}>
                             <InputLabel>เลขประจำตัว*: </InputLabel>
                             <TextField
                                 margin="normal"
                                 value={employeeNumber}
                                 onChange={(e) => setEmployeeNumber(e.target.value)}
-                                sx={{ width: "100%" }}
-                            />
-                        </Grid>
-
-                        <Grid item xs={6}>
-                            <InputLabel>เบอร์โทรศัพท์*: </InputLabel>
-                            <TextField
-                                margin="normal"
-                                value={employeePhone}
-                                onChange={(e) => setEmployeePhone(e.target.value)}
                                 sx={{ width: "100%" }}
                             />
                         </Grid>
@@ -173,6 +163,18 @@ const CreateEmployees = () => {
                     </Grid>
 
                     <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} mt="1.5rem" >
+                    <Grid item xs={12}>
+                            <InputLabel>เบอร์โทรศัพท์*: </InputLabel>
+                            <TextField
+                                margin="normal"
+                                value={employeePhone}
+                                onChange={(e) => setEmployeePhone(e.target.value)}
+                                sx={{ width: "100%" }}
+                            />
+                        </Grid>
+                    </Grid>
+
+                    <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} mt="1.5rem" >
                         <Grid item xs={12}>
                             <InputLabel>หมายเหตุ: </InputLabel>
                             <TextField
@@ -184,7 +186,7 @@ const CreateEmployees = () => {
                         </Grid>
                     </Grid>
 
-                    <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} mt="1.5rem" >
+                    {/* <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} mt="1.5rem" >
                         <Grid item xs={12}>
                             <InputLabel>เลขที่สัญญา</InputLabel>
                             <Box sx={{ mb: "18px" }}><div></div></Box>
@@ -258,7 +260,7 @@ const CreateEmployees = () => {
                                 onChange={(e) => setRemark(e.target.value)}
                             />
                         </Grid>
-                    </Grid>
+                    </Grid> */}
 
 
 

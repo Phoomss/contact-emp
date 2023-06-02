@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import EmployeeService from "../../services/EmployeeService";
 import Header from "../Header";
 import FlexBetween from "../FlexBetween";
-import swal from 'sweetalert'
+import swal from "sweetalert";
 
 const Employees = () => {
   const theme = useTheme();
@@ -33,7 +33,7 @@ const Employees = () => {
       swal("กรุณาเลือกลูกจ้างอย่างน้อยหนึ่งคนเพื่อลบ.", { icon: "warning" });
       return;
     }
-  
+
     swal({
       title: "แน่ใจหรือไม่?",
       text: "เมื่อลบแล้ว, ลูกจ้างที่คุณเลือกไว้จะถูกลบหายไป!",
@@ -47,21 +47,22 @@ const Employees = () => {
             await EmployeeService.deleteEmployee(id);
           })
         );
-        setEmployees(employees.filter((employee) => !selectionModel.includes(employee.id)));
+        setEmployees(
+          employees.filter((employee) => !selectionModel.includes(employee.id))
+        );
         setSelectionModel([]);
         swal("ลบลูกจ้างที่คุณเลือกเรียบร้อย!", { icon: "success" });
       }
     });
   };
-  
 
   const handleRowClick = (params) => {
     // navigate(`/archive/${params.id}`);
   };
 
   const createClick = () => {
-    navigate(`/createemployee`)
-  }
+    navigate(`/createemployee`);
+  };
 
   const handleEditButtonClick = (id) => {
     navigate(`/updateemployee/${id}`);
@@ -74,50 +75,38 @@ const Employees = () => {
     {
       field: "name",
       headerName: "ชื่อ",
-      
       renderCell: (params) => {
-        return (
-          <Box
-            sx={{ cursor: "pointer" }}
-          >
-            {params.value}
-          </Box>
-        );
+        return <Box sx={{ cursor: "pointer" }}>{params.value}</Box>;
       },
     },
     {
       field: "surname",
       headerName: "นามสกุล",
-     
     },
     {
       field: "number",
       headerName: "หมายเลขประจำตัว",
-      
     },
     {
       field: "telephone",
       headerName: "เบอร์โทรศัพท์",
-     
+      
     },
+    // {
+    //   field: "department1",
+    //   headerName: "สังกัดกอง",
+    // },
+    // {
+    //   field: "department2",
+    //   headerName: "สังกัดฝ่าย",
+    // },
+    // {
+    //   field: "company",
+    //   headerName: "ชื่อบริษัท",
+    // },
     {
-        field: "department1",
-        headerName: "สังกัดกอง",
-        
-    },
-    {
-        field: "department2",
-        headerName: "สังกัดฝ่าย",
-    },    
-    {
-        field: "company",
-        headerName: "ชื่อบริษัท",
-        
-    },
-    {
-        field: "note",
-        headerName: "หมายเหตุ",
-        
+      field: "note",
+      headerName: "หมายเหตุ",
     },
     {
       field: "Functions",
@@ -137,73 +126,70 @@ const Employees = () => {
         );
       },
     },
-    
   ];
 
   const [pageSize, setPageSize] = useState(10);
 
   const handlePageSizeChange = (params) => {
-  setPageSize(params.pageSize);
+    setPageSize(params.pageSize);
   };
 
   return (
     <Box m="1.5rem 2.5rem">
-  <FlexBetween>
-    <Header title="ลูกจ้างจ้างเหมาบริการ" />
-    <Box>
-      <FlexBetween gap="1rem">
-        <Button
-          sx={{
-            backgroundColor: theme.palette.blue[300],
-            color: theme.palette.neutral.font,
-            fontSize: "14px",
-            fontWeight: "bold",
-            padding: "10px 20px",
-          }}
-          onClick = {createClick}
-        >
-          <CreateOutlined sx={{ mr: "10px" }} />
-          เพิ่มลูกจ้าง
-        </Button>
-        
-        <Button
-          sx={{
-            backgroundColor: theme.palette.secondary.light,
-            color: theme.palette.neutral.font,
-            fontSize: "14px",
-            fontWeight: "bold",
-            padding: "10px 20px",
-          }}
-          onClick = {handleDeleteButtonClick}
-        >
-          <DeleteOutline sx={{ mr: "10px" }} />
-          ลบลูกจ้าง
-        </Button>
+      <FlexBetween>
+        <Header title="ลูกจ้างจ้างเหมาบริการ" />
+        <Box>
+          <FlexBetween gap="1rem">
+            <Button
+              sx={{
+                backgroundColor: theme.palette.blue[300],
+                color: theme.palette.neutral.font,
+                fontSize: "14px",
+                fontWeight: "bold",
+                padding: "10px 20px",
+              }}
+              onClick={createClick}
+            >
+              <CreateOutlined sx={{ mr: "10px" }} />
+              เพิ่มลูกจ้าง
+            </Button>
+
+            <Button
+              sx={{
+                backgroundColor: theme.palette.secondary.light,
+                color: theme.palette.neutral.font,
+                fontSize: "14px",
+                fontWeight: "bold",
+                padding: "10px 20px",
+              }}
+              onClick={handleDeleteButtonClick}
+            >
+              <DeleteOutline sx={{ mr: "10px" }} />
+              ลบลูกจ้าง
+            </Button>
+          </FlexBetween>
+        </Box>
       </FlexBetween>
+      <Box height="calc(100vh - 200px)"  sx={{ mt: "1.5rem" }}>
+        <DataGrid
+          sx={{ color: theme.palette.grey[1000] }}
+          rows={employees}
+          columns={columns}
+          getRowId={getRowId}
+          checkboxSelection
+          onRowClick={handleRowClick}
+          rowsPerPageOptions={[10, 25, 50]}
+          pageSize={pageSize}
+          onPageSizeChange={handlePageSizeChange}
+          selectionModel={selectionModel}
+          onSelectionModelChange={handleSelectionModelChange}
+          components={{
+            Toolbar: GridToolbar,
+          }}
+        />
       </Box>
-  </FlexBetween>
-  <Box height="calc(100vh - 200px)"  sx={{ mt: "1.5rem" }}>
-    <DataGrid
-      sx={{color: theme.palette.grey[1000]}}
-      rows={employees}
-      columns={columns}
-      getRowId={getRowId}
-      checkboxSelection
-      onRowClick={handleRowClick}
-      rowsPerPageOptions={[10, 25, 50]}
-      pageSize={pageSize}
-      onPageSizeChange={handlePageSizeChange}
-      selectionModel={selectionModel}
-      onSelectionModelChange={handleSelectionModelChange}
-      components={{
-        Toolbar: GridToolbar,
-      }}
-    />
-  </Box>
-</Box>
-
-
+    </Box>
   );
 };
 
-export default Employees
+export default Employees;

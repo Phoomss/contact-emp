@@ -10,7 +10,7 @@ function Archive() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
-      navigate("/login");
+      navigate("/");
     } else {
       UserService.getUserInfo()
         .then(() => {})
