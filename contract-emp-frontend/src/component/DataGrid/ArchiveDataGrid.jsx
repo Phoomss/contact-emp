@@ -70,12 +70,12 @@ const Archives = () => {
     });
   };
 
-  const handleRowClick = (params) => {
-    navigate(`/updatearchive/${params.id}`);
-  };
-
   const createClick = () => {
     navigate(`/createarchive`);
+  };
+
+  const handleEditButtonClick = (id) => {
+    navigate(`/updatearchive/${id}`);
   };
 
   const columns = [
@@ -162,6 +162,24 @@ const Archives = () => {
         return "";
       },
     },
+    {
+      field: "Functions",
+      headerName: "แก้ไขข้อมูล",
+      renderCell: (params) => {
+        return (
+          <Box>
+            <Button
+              variant="contained"
+              color="secondary"
+              startIcon={<CreateOutlined />}
+              onClick={() => handleEditButtonClick(params.id)}
+            >
+              แก้ไข
+            </Button>
+          </Box>
+        );
+      },
+    },
   ];
 
   const [pageSize, setPageSize] = useState(10);
@@ -212,7 +230,7 @@ const Archives = () => {
           columns={columns}
           getRowId={getRowId}
           checkboxSelection
-          onRowClick={handleRowClick}
+          // onRowClick={handleRowClick}
           rowsPerPageOptions={[10, 25, 50]}
           pageSize={pageSize}
           onPageSizeChange={handlePageSizeChange}

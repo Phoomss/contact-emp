@@ -22,7 +22,7 @@ const ShowDashBoard = () => {
     const [contractCount, setContractCount] = useState(0);
     const [userCount, setUserCount] = useState(0);
 
-    const fetchEmaplyeeCount = async ()=>{
+    const fetchEmployeeCount = async ()=>{
         try {
             const res = await EmployeeService.getEmployees()
             setEmployeeCount (res.data.length)
@@ -60,7 +60,7 @@ const ShowDashBoard = () => {
 
     useEffect(()=>{
         fetchCompanyCount()
-        fetchEmaplyeeCount()
+        fetchEmployeeCount()
         fetchUserCount()
         fetchContractCount()
     },[])
