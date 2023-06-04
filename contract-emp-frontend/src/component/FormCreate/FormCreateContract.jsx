@@ -111,6 +111,7 @@ const CreateContracts = () => {
               />
             </Grid>
           </Grid>
+
           <InputLabel>ชื่อบริษัท: </InputLabel>
           <Box sx={{ mb: "18px" }}>
             <div></div>
@@ -127,6 +128,7 @@ const CreateContracts = () => {
               </MenuItem>
             ))}
           </Select>
+          
           <Box sx={{ mt: "1.5rem" }}>
             <Button type="submit" variant="contained">
               Create
