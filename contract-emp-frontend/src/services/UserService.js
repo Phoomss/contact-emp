@@ -6,6 +6,7 @@ const getUserInfo = () => {
 
   return http.get("/user/info");
 };
+
 const postUserLogin = (credentials) => {
   return http.post("/user/login", credentials).then((response) => {
     const token = response.data.token;
@@ -14,17 +15,8 @@ const postUserLogin = (credentials) => {
   });
 };
 
-const postRegister = (createuserData, callback) => {
-  http
-    .post("user/register", createuserData)
-    .then((response) => {
-      callback(null, response);
-    })
-    .catch((error) => {
-      // จัดการเมื่อเกิด error ที่ต้องการ
-      console.error(error);
-      callback(error, null);
-    });
+const postRegister = (userData) => {
+  return http.post("/user/register",userData)
 };
 
 const getAlluser = () => {

@@ -1,90 +1,105 @@
-const db = require('../models')
-const jwt = require("jsonwebtoken")
-const bcrypt = require("bcrypt")
+const db = require("../models");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
-const User = db.user
-const Company = db.company
+const User = db.user;
+const Company = db.company;
 
 const createAdminUser = async (req, res) => {
   const { name, surname, email, password } = req.body;
 
   // Check if an admin user already exists
-  const adminUser = await User.findOne({ where: { role: 'admin' } });
+  const adminUser = await User.findOne({ where: { role: "admin" } });
 
   if (adminUser) {
-    return res.json({ message: 'Admin user already exists' });
+    return res.json({ message: "Admin user already exists" });
   }
 
   // Hash the password
   const hashedPassword = await bcrypt.hash(password, saltRounds);
 
   // Create the admin user
-  const newAdminUser = new User({ name, surname, email, password: hashedPassword, role: 'admin' });
+  const newAdminUser = new User({
+    name,
+    surname,
+    email,
+    password: hashedPassword,
+    role: "admin",
+  });
 
   try {
     await newAdminUser.save();
-    return res.json({ message: 'Admin user created successfully' });
+    return res.json({ message: "Admin user created successfully" });
   } catch (err) {
     console.log(err);
-    return res.json({ message: 'Error creating admin user' });
+    return res.json({ message: "Error creating admin user" });
   }
 };
 
 // Register
 const registerUser = async (req, res) => {
   const { name, surname, email, password, role, company_id } = req.body;
-  const alreadyExistsUser = await User.findOne({ where: { email } }).catch(
-    (err) => {
-      console.log("Error: ", err);
+
+  try {
+    const alreadyExistsUser = await User.findOne({ where: { email } });
+
+    if (alreadyExistsUser) {
+      return res.json({ message: "Email already exists!" });
     }
-  );
 
-  if (alreadyExistsUser) {
-    return res.json({ message: "Email already exists!" });
-  }
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-  const hashedPassword = await bcrypt.hash(password, saltRounds);
-
-  if (req.user.role === "company") {
-    // company users can't create other users
-    return res.json({ message: "Company users can't create other users!" });
-  }
-
-  if (req.user.role === "admin") {
-    // admin users can create any kind of user
-    const newUser = new User({ name, surname, email, role, password: hashedPassword, company_id });
-    const savedUser = await newUser.save().catch((err) => {
-      console.log("Error: ", err);
-      res.json({ error: "Cannot register user at the moment!" });
-    });
-
-    if (savedUser) {
-      res.json({ message: "User created successfully!" });
+    if (req.user.role === "company") {
+      return res.json({ message: "Company users can't create other users!" });
     }
-  } else if (req.user.role === "card") {
-    // card users can only create company users
-    if (role === "company") {
-      const newUser = new User({ name, surname, email, role, password: hashedPassword, company_id });
-      const savedUser = await newUser.save().catch((err) => {
-        console.log("Error: ", err);
-        res.json({ error: "Cannot register user at the moment!" });
+
+    if (req.user.role === "admin") {
+      const newUser = new User({
+        name,
+        surname,
+        email,
+        role,
+        password: hashedPassword,
+        company_id,
       });
+      const savedUser = await newUser.save();
 
       if (savedUser) {
-        res.json({ message: "User created successfully!" });
+        return res.json({ message: "User created successfully!" });
       }
-    } else {
-      return res.json({ message: "Card users can't create users with role 'card' or 'admin'!" });
+    } else if (req.user.role === "card") {
+      if (role === "company") {
+        const newUser = new User({
+          name,
+          surname,
+          email,
+          role,
+          password: hashedPassword,
+          company_id,
+        });
+        const savedUser = await newUser.save();
+
+        if (savedUser) {
+          return res.json({ message: "User created successfully!" });
+        }
+      } else {
+        return res.json({
+          message: "Card users can't create users with role 'card' or 'admin'!",
+        });
+      }
     }
+  } catch (error) {
+    console.log("Error:", error);
+    return res.json({ error: "Cannot register user at the moment!" });
   }
 };
 
 // login
 const loginUser = async (req, res) => {
-  console.log(req.body)
-  const { login, password } = req.body
-  console.log(login, password)
+  console.log(req.body);
+  const { login, password } = req.body;
+  console.log(login, password);
   let whereClause;
 
   if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(login)) {
@@ -94,51 +109,54 @@ const loginUser = async (req, res) => {
   }
 
   const userWithIdentifier = await User.findOne({
-    where: whereClause
+    where: whereClause,
   }).catch((err) => {
-    console.log("Error: ", err)
-  })
+    console.log("Error: ", err);
+  });
 
   if (!userWithIdentifier)
-    return res.json({ message: "Username or email not found!" })
+    return res.json({ message: "Username or email not found!" });
 
-  const passwordMatch = await bcrypt.compare(password, userWithIdentifier.password);
+  const passwordMatch = await bcrypt.compare(
+    password,
+    userWithIdentifier.password
+  );
 
-  if (!passwordMatch)
-    return res.json({ message: "Password does not match!" })
+  if (!passwordMatch) return res.json({ message: "Password does not match!" });
 
-  const jwtToken = jwt.sign({
-    id: userWithIdentifier.id,
-    email: userWithIdentifier.email,
-    username: userWithIdentifier.username,
-    password: userWithIdentifier.password,
-    role: userWithIdentifier.role,
-  },
-    process.env.JWT_SECRET)
+  const jwtToken = jwt.sign(
+    {
+      id: userWithIdentifier.id,
+      email: userWithIdentifier.email,
+      username: userWithIdentifier.username,
+      password: userWithIdentifier.password,
+      role: userWithIdentifier.role,
+    },
+    process.env.JWT_SECRET
+  );
 
-  res.json({ message: "Welcome Back!", token: jwtToken })
-}
+  res.json({ message: "Welcome Back!", token: jwtToken });
+};
 
 // UserInfo singel user
 const getInfoUser = async (req, res) => {
   try {
     let includeCompany = true;
-    if (req.user.role === 'card' || req.user.role === 'admin') {
+    if (req.user.role === "card" || req.user.role === "admin") {
       includeCompany = false;
     }
 
     const user = await User.findOne({
       where: { id: req.user.id },
-      include: includeCompany ? { model: Company, as: 'company' } : undefined,
+      include: includeCompany ? { model: Company, as: "company" } : undefined,
     });
 
     return res.json(user);
   } catch (error) {
     console.log(error);
-    return res.status(500).json({ message: 'Internal server error' });
+    return res.status(500).json({ message: "Internal server error" });
   }
 };
-
 
 const getAllUsers = async (req, res) => {
   if (req.user.role !== "admin" && req.user.role !== "card") {
@@ -148,11 +166,11 @@ const getAllUsers = async (req, res) => {
   const users = await User.findAll({
     include: {
       model: Company,
-      as: 'company'
-    }
-  })
-  res.status(200).send(users)
-}
+      as: "company",
+    },
+  });
+  res.status(200).send(users);
+};
 
 const getUserWithAllParams = async (req, res) => {
   if (req.user.role !== "admin" && req.user.role !== "card") {
@@ -185,17 +203,18 @@ const getUserWithAllParams = async (req, res) => {
     where: whereClause,
     include: {
       model: Company,
-      as: 'company',
-    }
+      as: "company",
+    },
   });
 
   if (users.length === 0) {
-    return res.status(404).json({ message: "No users found with the given parameters" });
+    return res
+      .status(404)
+      .json({ message: "No users found with the given parameters" });
   }
 
   return res.json(users);
 };
-
 
 const updateUser = async (req, res) => {
   const { name, surname, telephone, username, password } = req.body;
@@ -203,7 +222,9 @@ const updateUser = async (req, res) => {
 
   if (req.user.role === "card" || req.user.role === "admin") {
     if (!req.params.id) {
-      return res.status(405).json({ message: "Update user needs to provide an id" });
+      return res
+        .status(405)
+        .json({ message: "Update user needs to provide an id" });
     }
     user = await User.findOne({ where: { id: req.params.id } });
   } else if (req.user.role === "company") {
@@ -269,5 +290,5 @@ module.exports = {
   getAllUsers,
   getUserWithAllParams,
   updateUser,
-  deleteUser
-}
+  deleteUser,
+};
