@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Button,
@@ -20,47 +20,48 @@ const FormCreateUser = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
-  const [companyId, setCompanyId] = useState("");
-  const [createUser, setCreateUser] = useState({})
-  const [userId, setUserId] = useState(0)
+  const [company, setCompany] = useState("");
+  const [createUser, setCreateUser] = useState({});
+  const [userId, setUserId] = useState(0);
   const [companies, setCompanies] = useState([]);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
-  const navigate = useNavigate()
-  // const [telephone,setTelePhone] = useState("")
-  // const [username,setUserName] = useState("")
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!name || !surname || !email || !password || !role) {
+      swal("กรุณากรอกข้อมูล", "", "warning");
+      return;
+    }
     try {
       const response = await UserService.postRegister({
         name: name,
         surname: surname,
-        // telephone: telephone,
-        // username: username,
         email: email,
         password: password,
         role: role,
-        company_Id: companyId, // แนบ company_Id ในข้อมูลที่ส่ง
+        company: company,
       });
-      if (response && response.data) { // เพิ่มเงื่อนไขการตรวจสอบ response.data
-        swal("เพิ่มผู้ใช้งานสำเร็จ", "success");
-        console.log(response.data);
-        setCreateUser(response.data.data);
-        setUserId(response.data.data);
+
+      if (response && response.status === 201) {
+        swal("เพิ่มผู้ใช้งานสำเร็จ", "", "success");
+        setCreateUser(response.data);
+        setUserId(response.data.id);
 
         // ดึงขื่อบริษัทมาแสดง
-        const responseCompanies = await CompanyService.getCompanies()
+        const responseCompanies = await CompanyService.getCompanies();
         if (responseCompanies && responseCompanies.data) {
-          setCompanies(responseCompanies.data)
+          setCompanies(responseCompanies.data);
         }
         navigate("/userall");
-      }else{
-        setError("Can not created")
+      } else {
+        setError("ไม่สามารถสร้างผู้ใช้งานได้");
       }
+     console.log(response.data) 
     } catch (error) {
       console.error("Error:", error.response);
-      setError(error.response?.data?.message); // ปรับเปลี่ยนเพื่อให้ดึงข้อความผิดพลาดจาก response.data.message ถ้ามี
+      setError(error.response?.data?.message);
     }
   };
 
@@ -79,9 +80,8 @@ const FormCreateUser = () => {
     fetchCompanies();
   }, []);
 
-
   const handleCancelClick = () => {
-    navigate("/userall")
+    navigate("/userall");
   };
 
   return (
@@ -107,24 +107,6 @@ const FormCreateUser = () => {
                 fullWidth
               />
             </Grid>
-            {/* <Grid item xs={6}>
-              <InputLabel>telephone:</InputLabel>
-              <TextField
-                value={telephone}
-                type="text"
-                onChange={(e) => setTelePhone(e.target.value)}
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <InputLabel>username:</InputLabel>
-              <TextField
-                value={username}
-                type="text"
-                onChange={(e) => setUserName(e.target.value)}
-                fullWidth
-              />
-            </Grid> */}
             <Grid item xs={6}>
               <InputLabel>Email:</InputLabel>
               <TextField
@@ -157,12 +139,18 @@ const FormCreateUser = () => {
             </Grid>
             {role === "card" && (
               <Grid item xs={6}>
-                <InputLabel>Company ID:</InputLabel>
-                <Select value={companyId} onChange={(e) => setCompanyId(e.target.value)} fullWidth>
-                <MenuItem value="">Select Company</MenuItem>
-                {companies.map((company)=>(
-                  <MenuItem key={company.id} value={company.id}>{company.name}</MenuItem>
-                ))}
+                <InputLabel>Company:</InputLabel>
+                <Select
+                  value={company}
+                  onChange={(e) => setCompany(e.target.value)}
+                  fullWidth
+                >
+                  <MenuItem value="">Select Company</MenuItem>
+                  {companies.map((company) => (
+                    <MenuItem key={company.id} value={company}>
+                      {company.name}
+                    </MenuItem>
+                  ))}
                 </Select>
               </Grid>
             )}
