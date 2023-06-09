@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Button,
@@ -12,49 +12,73 @@ import {
 import UserService from "services/UserService";
 import swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
+import CompanyService from "services/CompanyService";
 
 const FormCreateUser = () => {
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
   const [email, setEmail] = useState("");
-  const [telephone, setTelePhone] = useState("");
-  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
-  const [companyId, setCompanyId] = useState("");
+  const [company, setCompany] = useState("");
+  const [createUser, setCreateUser] = useState({});
+  const [userId, setUserId] = useState(0);
+  const [companies, setCompanies] = useState([]);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
-  const [createuser, setCreateUser] = useState({});
-  const [userId, setUserId] = useState(0);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!name || !surname || !email || !password || !role) {
+      swal("กรุณากรอกข้อมูล", "", "warning");
+      return;
+    }
     try {
       const response = await UserService.postRegister({
-        name,
-        surname,
-        telephone,
-        username,
-        email,
-        password,
-        role,
-        company_id: companyId,
+        name: name,
+        surname: surname,
+        email: email,
+        password: password,
+        role: role,
+        company: company,
       });
-      if (response.status === 200) {
-        swal("เพิ่มลูกจ้างสำเร็จ!", "success");
-        console.log(response.data);
-        setCreateUser(response.data.data);
-        setUserId(response.data.data.id);
+
+      if (response && response.status === 201) {
+        swal("เพิ่มผู้ใช้งานสำเร็จ", "", "success");
+        setCreateUser(response.data);
+        setUserId(response.data.id);
+
+        // ดึงขื่อบริษัทมาแสดง
+        const responseCompanies = await CompanyService.getCompanies();
+        if (responseCompanies && responseCompanies.data) {
+          setCompanies(responseCompanies.data);
+        }
         navigate("/userall");
-      }else{
-        setMessage(response.data.error || "Something went wrong!");
+      } else {
+        setError("ไม่สามารถสร้างผู้ใช้งานได้");
       }
+     console.log(response.data) 
     } catch (error) {
       console.error("Error:", error.response);
-      setError(error.response.data.message);
+      setError(error.response?.data?.message);
     }
   };
+
+  useEffect(() => {
+    const fetchCompanies = async () => {
+      try {
+        const response = await CompanyService.getCompanies();
+        if (response && response.data) {
+          setCompanies(response.data);
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+
+    fetchCompanies();
+  }, []);
 
   const handleCancelClick = () => {
     navigate("/userall");
@@ -69,6 +93,7 @@ const FormCreateUser = () => {
               <InputLabel>Name:</InputLabel>
               <TextField
                 value={name}
+                type="text"
                 onChange={(e) => setName(e.target.value)}
                 fullWidth
               />
@@ -77,23 +102,8 @@ const FormCreateUser = () => {
               <InputLabel>Surname:</InputLabel>
               <TextField
                 value={surname}
+                type="text"
                 onChange={(e) => setSurname(e.target.value)}
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <InputLabel>เบอร์โทรศัพท์:</InputLabel>
-              <TextField
-                value={telephone}
-                onChange={(e) => setTelePhone(e.target.value)}
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <InputLabel>ยูสเซอร์เนม:</InputLabel>
-              <TextField
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
                 fullWidth
               />
             </Grid>
@@ -123,19 +133,25 @@ const FormCreateUser = () => {
                 fullWidth
               >
                 <MenuItem value="">Select Role</MenuItem>
-                <MenuItem value="admin">Admin</MenuItem>
                 <MenuItem value="card">Card</MenuItem>
                 <MenuItem value="company">Company</MenuItem>
               </Select>
             </Grid>
             {role === "card" && (
               <Grid item xs={6}>
-                <InputLabel>Company ID:</InputLabel>
-                <TextField
-                  value={companyId}
-                  onChange={(e) => setCompanyId(e.target.value)}
+                <InputLabel>Company:</InputLabel>
+                <Select
+                  value={company}
+                  onChange={(e) => setCompany(e.target.value)}
                   fullWidth
-                />
+                >
+                  <MenuItem value="">Select Company</MenuItem>
+                  {companies.map((company) => (
+                    <MenuItem key={company.id} value={company}>
+                      {company.name}
+                    </MenuItem>
+                  ))}
+                </Select>
               </Grid>
             )}
             <Grid item xs={12}>
@@ -158,10 +174,7 @@ const FormCreateUser = () => {
           </Typography>
         )}
         {error && (
-          <Typography
-            variant="body1"
-            sx={{ marginTop: "1rem", color: "error" }}
-          >
+          <Typography variant="body1" sx={{ marginTop: "1rem", color: "error" }}>
             {error}
           </Typography>
         )}

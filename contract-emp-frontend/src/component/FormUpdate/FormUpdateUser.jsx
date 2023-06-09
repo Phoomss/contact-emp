@@ -88,13 +88,8 @@ const FormUpdateUser = () => {
       </FlexBetween>
       <Box sx={{ mt: "1.5rem" }}>
         <form onSubmit={handleSubmit}>
-          <Grid
-            container
-            rowSpacing={1}
-            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-            mt="1.5rem"
-          >
-            <Grid item xs={6}>
+          <Grid container spacing={2}>
+               <Grid item xs={6}>
               <InputLabel>ชื่อ: </InputLabel>
               <TextField
                 required
@@ -115,15 +110,8 @@ const FormUpdateUser = () => {
                 onChange={(e) => setUserSurName(e.target.value)}
               />
             </Grid>
-          </Grid>
 
-          <Grid
-            container
-            rowSpacing={1}
-            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-            mt="1.5rem"
-          >
-            <Grid item xs={6}>
+             <Grid item xs={6}>
               <InputLabel>เบอร์โทรศัพท์: </InputLabel>
               <TextField
                 required
@@ -144,15 +132,8 @@ const FormUpdateUser = () => {
                 onChange={(e) => setUseName(e.target.value)}
               />
             </Grid>
-          </Grid>
 
-          <Grid
-            container
-            rowSpacing={1}
-            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-            mt="1.5rem"
-          >
-            <Grid item xs={6}>
+                <Grid item xs={6}>
               <InputLabel>อีเมล: </InputLabel>
               <TextField
                 required
