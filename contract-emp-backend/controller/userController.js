@@ -66,7 +66,12 @@ const registerUser = async (req, res) => {
       const savedUser = await newUser.save();
 
       if (savedUser) {
-        return res.json({ message: "User created successfully!" });
+        console.log(savedUser.dataValues);
+        return res.status(201)
+        .json({
+          message: "User created successfully!",
+          data: savedUser.dataValues,
+        });
       }
     } else if (req.user.role === "card") {
       if (role === "company") {
@@ -81,7 +86,11 @@ const registerUser = async (req, res) => {
         const savedUser = await newUser.save();
 
         if (savedUser) {
-          return res.json({ message: "User created successfully!" });
+          console.log(savedUser.dataValues);
+          return res.status(201).json({
+            message: "User created successfully!",
+            data: savedUser.dataValues,
+          });
         }
       } else {
         return res.json({
@@ -89,6 +98,7 @@ const registerUser = async (req, res) => {
         });
       }
     }
+    console.log(req.body);
   } catch (error) {
     console.log("Error:", error);
     return res.json({ error: "Cannot register user at the moment!" });

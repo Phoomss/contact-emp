@@ -16,17 +16,8 @@ const postUserLogin = (credentials) => {
 };
 
 const postRegister = (userData) => {
-  return http.post("/user/register",userData)
+  return http.post("/user/register", userData);
 };
-// const postRegister = async (userData) => {
-//   try {
-//     const response = await axios.post('/user/register', userData);
-//     return response.data;
-//   } catch (error) {
-//     console.log('Error:', error);
-//     throw new Error('Failed to register user');
-//   }
-// };
 
 const getAlluser = () => {
   return http.get("/user");

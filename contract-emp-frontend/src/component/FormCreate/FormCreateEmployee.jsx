@@ -27,10 +27,6 @@ const CreateEmployees = () => {
   const [employeePhone, setEmployeePhone] = useState("");
   const [employeeNote, setEmployeeNote] = useState("");
   const [createdEmp, setCreatedEmp] = useState({});
-  const [contractList, setContractList] = useState([]);
-  const [companyId, setCompanyId] = useState("");
-  const [companyName, setCompanyName] = useState("");
-  const [contractId, setContractId] = useState("");
   const [employeeId, setEmployeeId] = useState(0);
 
   const handleSubmit = async (e) => {
@@ -55,14 +51,6 @@ const CreateEmployees = () => {
       setError(error.response.data.message);
     }
   };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const responseContract = await ContractService.getContracts();
-      setContractList(responseContract.data);
-    };
-    fetchData();
-  }, []);
 
   const handleCancleClick = () => {
     navigate("/employee");
