@@ -101,11 +101,29 @@ const FormCrateUser = () => {
               />
             </Grid>
             <Grid item xs={6}>
+              <InputLabel>TelePhone:</InputLabel>
+              <TextField
+                value={telephone}
+                type="text"
+                onChange={(e) => setTelePhone(e.target.value)}
+                fullWidth
+              />
+            </Grid>
+            <Grid item xs={6}>
               <InputLabel>Email:</InputLabel>
               <TextField
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                fullWidth
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <InputLabel>Username:</InputLabel>
+              <TextField
+                type="text"
+                value={username}
+                onChange={(e) => setUserName(e.target.value)}
                 fullWidth
               />
             </Grid>
