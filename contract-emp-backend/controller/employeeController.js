@@ -4,7 +4,7 @@ const Employee = db.employee;
 const Contract = db.contract;
 
 const createEmployee = async (req, res) => {
- const { name, surname, number, telephone, note } = req.body;
+ const { name, surname, emp_no, telephone, note } = req.body;
 
  if (!name) {
   return res.status(400).json({ message: "Please fill out the name field" });
@@ -14,8 +14,8 @@ const createEmployee = async (req, res) => {
   return res.status(400).json({ message: "Please fill out the surname field" });
  }
 
- if (!number) {
-  return res.status(400).json({ message: "Please fill out the number field" });
+ if (!emp_no) {
+  return res.status(400).json({ message: "Please fill out the emp_no field" });
  }
 
  if (!telephone) {
@@ -34,7 +34,7 @@ const createEmployee = async (req, res) => {
  }
 
  const alreadyExistsEmployee = await Employee.findOne({
-  where: { number },
+  where: { emp_no },
  }).catch((err) => {
   console.log("Error: ", err);
  });
@@ -42,19 +42,19 @@ const createEmployee = async (req, res) => {
  if (alreadyExistsEmployee) {
   return res.status(402).json({ message: "Employee already exists!" });
  }
- if (isNaN(number)) {
-  return res.status(404).json({ message: "Number should be a number!" });
+ if (isNaN(emp_no)) {
+  return res.status(404).json({ message: "emp_no should be a emp_no!" });
  }
  if (isNaN(telephone)) {
   return res
    .status(405)
-   .json({ message: "Telephone number should be a number!" });
+   .json({ message: "Telephone emp_no should be a emp_no!" });
  }
 
  const newEmployee = new Employee({
   name,
   surname,
-  number,
+  emp_no,
   telephone,
   note,
   createby,
@@ -94,7 +94,7 @@ const getEmployeeWithAllParams = async (req, res) => {
   whereClause.createby = req.user.company_id;
  }
 
- const { id, name, surname, number, telephone, note } = req.query;
+ const { id, name, surname, emp_no, telephone, note } = req.query;
 
  if (id) {
   whereClause.id = id;
@@ -105,8 +105,8 @@ const getEmployeeWithAllParams = async (req, res) => {
  if (surname) {
   whereClause.surname = surname;
  }
- if (number) {
-  whereClause.number = number;
+ if (emp_no) {
+  whereClause.emp_no = emp_no;
  }
  if (telephone) {
   whereClause.telephone = telephone;
@@ -132,7 +132,7 @@ const getEmployeeWithAllParams = async (req, res) => {
 };
 
 const updateEmployee = async (req, res) => {
- const { name, surname, number, telephone, note } = req.body;
+ const { name, surname, emp_no, telephone, note } = req.body;
 
  const employee = await Employee.findOne({ where: { id: req.params.id } });
 
@@ -147,11 +147,11 @@ const updateEmployee = async (req, res) => {
  employee.name = name || employee.name;
  employee.surname = surname || employee.surname;
 
- if (number) {
-  if (isNaN(number)) {
-   return res.status(403).json({ message: "Number should be a number!" });
+ if (emp_no) {
+  if (isNaN(emp_no)) {
+   return res.status(403).json({ message: "emp_no should be a emp_no!" });
   }
-  employee.number = number || employee.number;
+  employee.emp_no = emp_no || employee.emp_no;
  }
 
  if (telephone) {
