@@ -7,6 +7,7 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  Grid,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import CompanyService from "../../services/CompanyService";
@@ -24,6 +25,7 @@ const CreateArchive = () => {
   const [endDate, setEndDate] = useState("");
   const [department1, setDepartment1] = useState("");
   const [department2, setDepartment2] = useState("");
+  const [department3, setDepartment3] = useState("");
   const [remark, setRemark] = useState("");
   const [contractList, setContractList] = useState([]);
   const [companyId, setCompanyId] = useState("");
@@ -39,12 +41,14 @@ const CreateArchive = () => {
       console.log("contract_id:", contractId);
       console.log("department1:", department1);
       console.log("department2:", department2);
+      console.log("department3:", department3);
       console.log("remark:", remark);
       const response = await ArchiveService.postArchive({
         employee_id: employeeId,
         contract_id: contractId,
         department1: department1,
         department2: department2,
+        department3: department3,
         remark: remark,
       });
       if (response.status === 200) {
@@ -105,68 +109,107 @@ const CreateArchive = () => {
       </FlexBetween>
       <Box sx={{ mt: "1.5rem" }}>
         <form onSubmit={handleSubmit}>
-          <InputLabel>Employee</InputLabel>
-          <Select
-            fullWidth
-            margin="normal"
-            value={employeeId}
-            onChange={(event) => setEmployeeId(event.target.value)}
+          <Grid
+            container
+            rowSpacing={1}
+            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
           >
-            {employees && employees.length > 0 ? (
-              employees.map((employee) => (
-                <MenuItem key={employee.id} value={employee.id}>
-                  {employee.name}
-                </MenuItem>
-              ))
-            ) : (
-              <MenuItem disabled>No employees found</MenuItem>
-            )}
-          </Select>
-          <InputLabel>เลขที่สัญญา</InputLabel>
-          <Select
-            fullWidth
-            margin="normal"
-            value={contractNumber}
-            onChange={handleContractSelect}
-          >
-            {contractList && contractList.length > 0 ? (
-              contractList.map((contract) => (
-                <MenuItem key={contract.id} value={contract.number}>
-                  {contract.number}
-                </MenuItem>
-              ))
-            ) : (
-              <MenuItem disabled>No contracts found</MenuItem>
-            )}
-          </Select>
-          <InputLabel>วันเริ่ม</InputLabel>
-          <TextField fullWidth margin="normal" value={startDate} />
-          <InputLabel>วันสิ้นสุด</InputLabel>
+            <Grid item xs={12}>
+              <InputLabel>Employee</InputLabel>
+              <Select
+                fullWidth
+                margin="normal"
+                value={employeeId}
+                onChange={(event) => setEmployeeId(event.target.value)}
+              >
+                {employees && employees.length > 0 ? (
+                  employees.map((employee) => (
+                    <MenuItem key={employee.id} value={employee.id}>
+                      {employee.name}
+                    </MenuItem>
+                  ))
+                ) : (
+                  <MenuItem disabled>No employees found</MenuItem>
+                )}
+              </Select>
+            </Grid>
 
-          <TextField fullWidth margin="normal" value={endDate} />
-          <InputLabel>ชื่อบริษัท</InputLabel>
-          <TextField fullWidth margin="normal" value={companyName} />
-          <TextField
-            fullWidth
-            margin="normal"
-            label="Department 1"
-            value={department1}
-            onChange={(e) => setDepartment1(e.target.value)}
-          />
-          <TextField
-            fullWidth
-            margin="normal"
-            label="Department 2"
-            value={department2}
-            onChange={(e) => setDepartment2(e.target.value)}
-          />
-          <TextField
-            fullWidth
-            margin="normal"
-            label="Remark"
-            value={remark}
-            onChange={(e) => setRemark(e.target.value)}
-          />
+            <Grid item xs={12}>
+              <InputLabel>เลขที่สัญญา</InputLabel>
+              <Select
+                fullWidth
+                margin="normal"
+                value={contractNumber}
+                onChange={handleContractSelect}
+              >
+                {contractList && contractList.length > 0 ? (
+                  contractList.map((contract) => (
+                    <MenuItem key={contract.id} value={contract.number}>
+                      {contract.number}
+                    </MenuItem>
+                  ))
+                ) : (
+                  <MenuItem disabled>No contracts found</MenuItem>
+                )}
+              </Select>
+            </Grid>
+
+            <Grid item xs={6}>
+              <InputLabel>วันเริ่ม</InputLabel>
+              <TextField fullWidth margin="normal" value={startDate} />
+            </Grid>
+
+            <Grid item xs={6}>
+              <InputLabel>วันสิ้นสุด</InputLabel>
+              <TextField fullWidth margin="normal" value={endDate} />
+            </Grid>
+
+            <Grid item xs={12}>
+              <InputLabel>ชื่อบริษัท</InputLabel>
+              <TextField fullWidth margin="normal" value={companyName} />
+            </Grid>
+
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                margin="normal"
+                label="Department 1"
+                value={department1}
+                onChange={(e) => setDepartment1(e.target.value)}
+              />
+            </Grid>
+
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                margin="normal"
+                label="Department 2"
+                value={department2}
+                onChange={(e) => setDepartment2(e.target.value)}
+              />
+            </Grid>
+
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                margin="normal"
+                label="Department 3"
+                value={department3}
+                onChange={(e) => setDepartment3(e.target.value)}
+              />
+            </Grid>
+
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                margin="normal"
+                label="Remark"
+                value={remark}
+                onChange={(e) => setRemark(e.target.value)}
+              />
+            </Grid>
+          </Grid>
+
           <Box sx={{ mt: "1.5rem" }}>
             <Button type="submit" variant="contained" onClick={handleSubmit}>
               Create

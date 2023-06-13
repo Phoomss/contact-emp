@@ -71,19 +71,30 @@ const FormUpdateContract = () => {
       </FlexBetween>
       <Box sx={{ mt: "1.5rem" }}>
         <form onSubmit={handleSubmit}>
-          <InputLabel>เลขที่สัญญา: </InputLabel>
-          <TextField
-            fullWidth
-            margin="normal"
-            value={contractNumber}
-            onChange={(e) => setContractNumber(e.target.value)}
-            helperText=""
-          />
-          <Grid
-            container
+          <Grid container
             rowSpacing={1}
-            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-          >
+            columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+            <Grid item xs={12}>
+              <InputLabel>เลขที่สัญญา: </InputLabel>
+              <TextField
+                fullWidth
+                margin="normal"
+                value={contractNumber}
+                onChange={(e) => setContractNumber(e.target.value)}
+                helperText=""
+              />
+            </Grid>
+
+            <Grid item xs={12}>
+              <InputLabel>ชื่อบริษัท: </InputLabel>
+              <TextField
+                fullWidth
+                margin="normal"
+                value={companyId}
+                onChange={(e) => setCompanyId(e.target.value)}
+                helperText=""
+              />
+            </Grid>
             <Grid item xs={6}>
               <InputLabel>วันเริ่ม: </InputLabel>
               <TextField
@@ -105,16 +116,18 @@ const FormUpdateContract = () => {
                 onChange={(e) => setEnd_Date(new Date(e.target.value))}
               />
             </Grid>
-          </Grid>
-          <InputLabel>ชื่อบริษัท: </InputLabel>
-          <TextField
-            fullWidth
-            margin="normal"
-            value={companyId}
-            onChange={(e) => setCompanyId(e.target.value)}
-            helperText=""
-          />
 
+            <Grid item xs={12}>
+              <InputLabel>หมายเหตุ: </InputLabel>
+              <TextField
+                fullWidth
+                margin="normal"
+                // value={contractNumber}
+                // onChange={(e) => setContractNumber(e.target.value)}
+                helperText=""
+              />
+            </Grid>
+          </Grid>
 
           <Box sx={{ mt: "1.5rem" }}>
             <Button type="submit" variant="contained">

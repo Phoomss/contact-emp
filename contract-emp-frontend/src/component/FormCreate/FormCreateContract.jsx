@@ -68,19 +68,41 @@ const CreateContracts = () => {
       </FlexBetween>
       <Box sx={{ mt: "1.5rem" }}>
         <form onSubmit={handleSubmit}>
-          <InputLabel>เลขที่สัญญา: </InputLabel>
-          <TextField
-            fullWidth
-            margin="normal"
-            value={contractNumber}
-            onChange={(e) => setContractNumber(e.target.value)}
-            helperText=""
-          />
           <Grid
             container
+            spacing={2}
             rowSpacing={1}
-            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-          >
+            columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+            <Grid item xs={12}>
+              <InputLabel>เลขที่สัญญา: </InputLabel>
+              <TextField
+                fullWidth
+                margin="normal"
+                value={contractNumber}
+                onChange={(e) => setContractNumber(e.target.value)}
+                helperText=""
+              />
+            </Grid>
+
+            <Grid item xs={12}>
+              <InputLabel>ชื่อบริษัท: </InputLabel>
+              <Box sx={{ mb: "18px" }}>
+                <div></div>
+              </Box>
+              <Select
+                fullWidth
+                margin="normal"
+                value={contractCompanyId}
+                onChange={(e) => setContractCompanyId(e.target.value)}
+              >
+                {companies.map((company) => (
+                  <MenuItem key={company.id} value={company.id}>
+                    {company.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </Grid>
+
             <Grid item xs={6}>
               <InputLabel>วันเริ่ม: </InputLabel>
               <TextField
@@ -110,25 +132,19 @@ const CreateContracts = () => {
                 onChange={(e) => setContractEndDate(new Date(e.target.value))}
               />
             </Grid>
+
+            <Grid item xs={12}>
+              <InputLabel>หมายเหตุ: </InputLabel>
+              <TextField
+                fullWidth
+                margin="normal"
+                // value={contractNumber}
+                // onChange={(e) => setContractNumber(e.target.value)}
+                helperText=""
+              />
+            </Grid>
           </Grid>
 
-          <InputLabel>ชื่อบริษัท: </InputLabel>
-          <Box sx={{ mb: "18px" }}>
-            <div></div>
-          </Box>
-          <Select
-            fullWidth
-            margin="normal"
-            value={contractCompanyId}
-            onChange={(e) => setContractCompanyId(e.target.value)}
-          >
-            {companies.map((company) => (
-              <MenuItem key={company.id} value={company.id}>
-                {company.name}
-              </MenuItem>
-            ))}
-          </Select>
-          
           <Box sx={{ mt: "1.5rem" }}>
             <Button type="submit" variant="contained">
               Create

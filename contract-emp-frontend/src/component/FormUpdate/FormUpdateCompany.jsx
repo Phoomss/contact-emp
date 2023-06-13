@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box, TextField, Button, Typography } from "@mui/material";
+import { Box, TextField, Button, Typography, InputLabel } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 import CompanyService from "../../services/CompanyService";
 import Header from "../Header";
@@ -62,27 +62,27 @@ const UpdateCompanies = () => {
       </FlexBetween>
       <Box sx={{ mt: "1.5rem" }}>
         <form onSubmit={handleSubmit}>
+          <InputLabel>Company Name: </InputLabel>
           <TextField
             required
             fullWidth
             margin="normal"
-            label="Company Name"
             value={companyName}
             onChange={(e) => setCompanyName(e.target.value)}
           />
+          <InputLabel>Company Address: </InputLabel>
           <TextField
             required
             fullWidth
             margin="normal"
-            label="Company Address"
             value={companyAddress}
             onChange={(e) => setCompanyAddress(e.target.value)}
           />
+          <InputLabel>Company Phone: </InputLabel>
           <TextField
             required
             fullWidth
             margin="normal"
-            label="Company Phone"
             value={companyPhone}
             onChange={(e) => setCompanyPhone(e.target.value)}
           />
