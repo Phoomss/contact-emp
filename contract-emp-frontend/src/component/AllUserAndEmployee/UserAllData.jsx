@@ -1,4 +1,5 @@
 import { CreateOutlined, DeleteOutline } from "@mui/icons-material";
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import { Box, Button, useTheme } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import FlexBetween from "component/FlexBetween";
@@ -135,8 +136,7 @@ const UserAllData = () => {
               }}
               onClick={createClick}
             >
-              <CreateOutlined sx={{ mr: "10px" }} />
-              เพิ่มข้อมูลผู้ใข้งาน
+              <PersonAddIcon/>
             </Button>
 
             <Button
@@ -149,8 +149,7 @@ const UserAllData = () => {
               }}
               onClick={handleDeleteButtonClick}
             >
-              <DeleteOutline sx={{ mr: "10px" }} />
-              ลบข้อมูลผู้ใช้งาน
+              <DeleteOutline />
             </Button>
           </FlexBetween>
         </Box>

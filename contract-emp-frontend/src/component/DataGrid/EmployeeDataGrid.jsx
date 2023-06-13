@@ -2,6 +2,7 @@ import { React, useState, useEffect } from "react";
 import { Box, useTheme, Button } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { DeleteOutline, CreateOutlined } from "@mui/icons-material";
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import { useNavigate } from "react-router-dom";
 import EmployeeService from "../../services/EmployeeService";
 import Header from "../Header";
@@ -149,8 +150,7 @@ const Employees = () => {
               }}
               onClick={createClick}
             >
-              <CreateOutlined sx={{ mr: "10px" }} />
-              เพิ่มลูกจ้าง
+             <PersonAddIcon/>
             </Button>
 
             <Button
@@ -163,8 +163,7 @@ const Employees = () => {
               }}
               onClick={handleDeleteButtonClick}
             >
-              <DeleteOutline sx={{ mr: "10px" }} />
-              ลบลูกจ้าง
+              <DeleteOutline />            
             </Button>
           </FlexBetween>
         </Box>

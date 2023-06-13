@@ -7,6 +7,7 @@ import {
   CreateOutlined,
   FilterList,
 } from "@mui/icons-material";
+import AddBusinessIcon from '@mui/icons-material/AddBusiness';
 import { useNavigate } from "react-router-dom";
 import CompanyService from "../../services/CompanyService";
 import Header from "../Header";
@@ -109,24 +110,7 @@ const Companies = () => {
   return (
     <Box ml="2.5rem" mr="2.5rem">
       <FlexBetween>
-        <Header title="COMPANY DASHBOARD" />
-      </FlexBetween>
-      <FlexBetween>
-        <Box sx={{ width: "380px" }}>
-          <FlexBetween
-            width="auto"
-            backgroundColor={theme.palette.background.alt}
-            borderRadius="9px"
-            gap="3rem"
-            p="0.1rem 1.5rem"
-            display="flex"
-          >
-            <InputBase placeholder="Filter" />
-            <IconButton>
-              <FilterList />
-            </IconButton>
-          </FlexBetween>
-        </Box>
+        <Header title="บริษัท" />
         <Box>
           <FlexBetween gap="1rem">
             <Button
@@ -139,23 +123,8 @@ const Companies = () => {
               }}
               onClick={createClick}
             >
-              <CreateOutlined sx={{ mr: "10px" }} />
-              Create
+              <AddBusinessIcon />
             </Button>
-
-            <Button
-              sx={{
-                backgroundColor: theme.palette.secondary.light,
-                color: theme.palette.background.alt,
-                fontSize: "14px",
-                fontWeight: "bold",
-                padding: "10px 20px",
-              }}
-            >
-              <DownloadOutlined sx={{ mr: "10px" }} />
-              Export
-            </Button>
-
             <Button
               sx={{
                 backgroundColor: theme.palette.secondary.light,
@@ -166,8 +135,7 @@ const Companies = () => {
               }}
               onClick={handleDeleteButtonClick}
             >
-              <DeleteOutline sx={{ mr: "10px" }} />
-              Delete
+              <DeleteOutline />
             </Button>
           </FlexBetween>
         </Box>

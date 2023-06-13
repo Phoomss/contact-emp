@@ -204,8 +204,7 @@ const Archives = () => {
               }}
               onClick={createClick}
             >
-              <CreateOutlined sx={{ mr: "10px" }} />
-              เพิ่มสัญญาจ้าง
+              <CreateOutlined />
             </Button>
 
             <Button
@@ -218,8 +217,7 @@ const Archives = () => {
               }}
               onClick={handleDeleteButtonClick}
             >
-              <DeleteOutline sx={{ mr: "10px" }} />
-              ลบสัญญาจ้าง
+              <DeleteOutline />
             </Button>
           </FlexBetween>
         </Box>

@@ -125,8 +125,7 @@ const Contracts = () => {
               }}
               onClick={createClick}
             >
-              <CreateOutlined sx={{ mr: "10px" }} />
-              เพิ่มสัญญาจ้าง
+              <CreateOutlined />
             </Button>
 
             <Button
@@ -139,8 +138,7 @@ const Contracts = () => {
               }}
               onClick={handleDeleteButtonClick}
             >
-              <DeleteOutline sx={{ mr: "10px" }} />
-              ลบสัญญาจ้าง
+              <DeleteOutline />
             </Button>
           </FlexBetween>
         </Box>
