@@ -39,7 +39,7 @@ const createAdminUser = async (req, res) => {
 
 // Register
 const registerUser = async (req, res) => {
-  const { name, surname, email, password, role, company_id } = req.body;
+  const { name, surname, telephone, email, role, username, password, company_id } = req.body;
 
   try {
     const alreadyExistsUser = await User.findOne({ where: { email } });
@@ -58,8 +58,10 @@ const registerUser = async (req, res) => {
       const newUser = new User({
         name,
         surname,
+        telephone,
         email,
         role,
+        username,
         password: hashedPassword,
         company_id,
       });
@@ -68,18 +70,20 @@ const registerUser = async (req, res) => {
       if (savedUser) {
         console.log(savedUser.dataValues);
         return res.status(201)
-        .json({
-          message: "User created successfully!",
-          data: savedUser.dataValues,
-        });
+          .json({
+            message: "User created successfully!",
+            data: savedUser.dataValues,
+          });
       }
     } else if (req.user.role === "card") {
       if (role === "company") {
         const newUser = new User({
           name,
           surname,
+          telephone,
           email,
           role,
+          username,
           password: hashedPassword,
           company_id,
         });

@@ -1,6 +1,7 @@
 const db = require("../models");
 
 const Employee = db.employee;
+const Contract = db.contract;
 
 const createEmployee = async (req, res) => {
  const { name, surname, number, telephone, note } = req.body;
@@ -114,7 +115,13 @@ const getEmployeeWithAllParams = async (req, res) => {
   whereClause.note = note;
  }
 
- const employees = await Employee.findAll({ where: whereClause });
+ const employees = await Employee.findAll({ 
+  where: whereClause,
+  include: {
+    model: Contract,
+    // as: "contract",
+  } 
+});
  if (employees.length === 0) {
   return res
    .status(404)

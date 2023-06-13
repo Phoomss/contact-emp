@@ -2,6 +2,7 @@ const db = require("../models");
 
 const Company = db.company;
 const User = db.user;
+const Contract = db.contract;
 
 const createCompany = async (req, res) => {
   if (req.user.role !== "admin" && req.user.role !== "card") {
@@ -76,7 +77,12 @@ const getInfoCompany = async (req, res) => {
       return res.status(401).json({ message: "Unauthorized" });
     }
   
-    const companies = await Company.findAll({});
+    const companies = await Company.findAll({
+      include: {
+        model: Contract,
+        as: "contract",
+      }
+    });
     return res.status(200).send(companies);
   };
   
