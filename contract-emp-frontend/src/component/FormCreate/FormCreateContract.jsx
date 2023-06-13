@@ -64,7 +64,7 @@ const CreateContracts = () => {
   return (
     <Box m="1.5rem 2.5rem">
       <FlexBetween>
-        <Header title="CREATE CONTRACT" subtitle="Create new contract" />
+        <Header title="เพิ่มสัญญาจ้าง"/>
       </FlexBetween>
       <Box sx={{ mt: "1.5rem" }}>
         <form onSubmit={handleSubmit}>

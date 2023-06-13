@@ -58,7 +58,7 @@ const UpdateCompanies = () => {
   return (
     <Box m="1.5rem 2.5rem">
       <FlexBetween>
-        <Header title="UPDATE COMPANY" subtitle="Update company details" />
+        <Header title="แก้ไข บริษัท"/>
       </FlexBetween>
       <Box sx={{ mt: "1.5rem" }}>
         <form onSubmit={handleSubmit}>

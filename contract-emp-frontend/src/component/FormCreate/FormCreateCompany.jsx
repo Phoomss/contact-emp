@@ -36,7 +36,7 @@ const CreateCompanies = () => {
   return (
     <Box m="1.5rem 2.5rem">
       <FlexBetween>
-        <Header title="CREATE COMPANY" subtitle="Create new company" />
+        <Header title="เพิ่มบริษัท"/>
       </FlexBetween>
       <Box sx={{ mt: "1.5rem" }}>
         <form onSubmit={handleSubmit}>

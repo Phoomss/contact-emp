@@ -105,7 +105,7 @@ const CreateArchive = () => {
   return (
     <Box m="1.5rem 2.5rem">
       <FlexBetween>
-        <Header title="CREATE ARCHIVE" subtitle="Create new archive" />
+        <Header title="เพิ่มการทำงาน" />
       </FlexBetween>
       <Box sx={{ mt: "1.5rem" }}>
         <form onSubmit={handleSubmit}>

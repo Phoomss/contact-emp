@@ -13,6 +13,8 @@ import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import UserService from "services/UserService";
 import CompanyService from "services/CompanyService";
+import FlexBetween from "component/FlexBetween";
+import Header from "component/Header";
 
 const FormCrateUser = () => {
   const navigate = useNavigate();
@@ -79,6 +81,9 @@ const FormCrateUser = () => {
 
   return (
     <Box>
+      <FlexBetween>
+        <Header title="เพิ่มผู้ใช้งาน" />
+      </FlexBetween>
       <Box>
         <form onSubmit={handleSubmit}>
           <Grid container spacing={2}>
@@ -149,21 +154,21 @@ const FormCrateUser = () => {
               </Select>
             </Grid>
             {/* {role === "card" && ( */}
-              <Grid item xs={6}>
-                <InputLabel>Company:</InputLabel>
-                <Select
-                  value={company_id}
-                  onChange={(e) => setCompany_id(e.target.value)}
-                  fullWidth
-                >
-                  <MenuItem value="">Select Company</MenuItem>
-                  {companies.map((company) => (
-                    <MenuItem key={company.id} value={company.id}>
-                      {company.name}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </Grid>
+            <Grid item xs={6}>
+              <InputLabel>Company:</InputLabel>
+              <Select
+                value={company_id}
+                onChange={(e) => setCompany_id(e.target.value)}
+                fullWidth
+              >
+                <MenuItem value="">Select Company</MenuItem>
+                {companies.map((company) => (
+                  <MenuItem key={company.id} value={company.id}>
+                    {company.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </Grid>
             {/* )} */}
             <Grid item xs={12}>
               <Button type="submit" variant="contained">
