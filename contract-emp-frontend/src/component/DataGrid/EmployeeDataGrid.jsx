@@ -57,10 +57,6 @@ const Employees = () => {
     });
   };
 
-  const handleRowClick = (params) => {
-    // navigate(`/archive/${params.id}`);
-  };
-
   const createClick = () => {
     navigate(`/createemployee`);
   };
@@ -175,7 +171,6 @@ const Employees = () => {
           columns={columns}
           getRowId={getRowId}
           checkboxSelection
-          onRowClick={handleRowClick}
           rowsPerPageOptions={[10, 25, 50]}
           pageSize={pageSize}
           onPageSizeChange={handlePageSizeChange}

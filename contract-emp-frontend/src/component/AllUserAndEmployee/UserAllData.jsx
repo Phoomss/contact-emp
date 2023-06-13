@@ -61,12 +61,12 @@ const UserAllData = () => {
     });
   };
 
-  const handleRowClick = (params) => {
-    navigate(`/updateuser/${params.id}`);
-  };
-
   const createClick = () => {
     navigate(`/createuser`);
+  };
+
+  const handleEditButtonClick = (id) => {
+    navigate(`/updateuser/${id}`);
   };
 
   const columns = [
@@ -111,6 +111,24 @@ const UserAllData = () => {
     {
       field: "username",
       headerName: "ยูสเซอร์เมน",
+    },
+    {
+      field: "Functions",
+      headerName: "แก้ไขข้อมูล",
+      renderCell: (params) => {
+        return (
+          <Box>
+            <Button
+              variant="contained"
+              color="secondary"
+              startIcon={<CreateOutlined />}
+              onClick={() => handleEditButtonClick(params.id)}
+            >
+              แก้ไข
+            </Button>
+          </Box>
+        );
+      },
     },
   ];
 
@@ -161,7 +179,6 @@ const UserAllData = () => {
           columns={columns}
           getRowId={getRowId}
           checkboxSelection
-          onRowClick={handleRowClick}
           rowsPerPageOptions={[10, 25, 50]}
           pageSize={pageSize}
           onPageSizeChange={handlePageSizeChange}

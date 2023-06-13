@@ -66,14 +66,12 @@ const Companies = () => {
     });
   };
 
-  const handleRowClick = (params) => {
-    if (params.field !== "delete") {
-      navigate(`/updatecompany/${params.id}`);
-    }
-  };
-
   const createClick = () => {
     navigate(`/createcompany`);
+  };
+
+  const handleEditButtonClick = (id) => {
+    navigate(`/updatecompany/${id}`);
   };
 
   const columns = [
@@ -98,6 +96,24 @@ const Companies = () => {
       field: "telephone",
       headerName: "Phone Number",
       flex: 0.5,
+    },
+    {
+      field: "Functions",
+      headerName: "แก้ไขข้อมูล",
+      renderCell: (params) => {
+        return (
+          <Box>
+            <Button
+              variant="contained"
+              color="secondary"
+              startIcon={<CreateOutlined />}
+              onClick={() => handleEditButtonClick(params.id)}
+            >
+              แก้ไข
+            </Button>
+          </Box>
+        );
+      },
     },
   ];
 
@@ -146,7 +162,6 @@ const Companies = () => {
           columns={columns}
           getRowId={getRowId}
           checkboxSelection
-          onRowClick={handleRowClick}
           rowsPerPageOptions={[10, 25, 50]}
           pageSize={pageSize}
           onPageSizeChange={handlePageSizeChange}

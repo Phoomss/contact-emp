@@ -62,12 +62,12 @@ const Contracts = () => {
     });
   };
 
-  const handleRowClick = (params) => {
-    navigate(`/updatecontract/${params.id}`);
-  };
-
   const createClick = () => {
     navigate(`/createcontract`);
+  };
+
+  const handleEditButtonClick = (id) => {
+    navigate(`/updatecontract/${id}`);
   };
 
   const columns = [
@@ -99,6 +99,24 @@ const Contracts = () => {
           (company) => company.id === params.value
         );
         return company ? company.name : "";
+      },
+    },
+    {
+      field: "Functions",
+      headerName: "แก้ไขข้อมูล",
+      renderCell: (params) => {
+        return (
+          <Box>
+            <Button
+              variant="contained"
+              color="secondary"
+              startIcon={<CreateOutlined />}
+              onClick={() => handleEditButtonClick(params.id)}
+            >
+              แก้ไข
+            </Button>
+          </Box>
+        );
       },
     },
   ];
@@ -149,7 +167,6 @@ const Contracts = () => {
           columns={columns}
           getRowId={getRowId}
           checkboxSelection
-          onRowClick={handleRowClick}
           rowsPerPageOptions={[10, 25, 50]}
           pageSize={pageSize}
           onPageSizeChange={handlePageSizeChange}
