@@ -123,7 +123,7 @@ const FormUpdateUser = () => {
             </Grid>
 
             <Grid item xs={6}>
-              <InputLabel>ยูสเซอร์เมน: </InputLabel>
+              <InputLabel>ชื่อผู้ใช้: </InputLabel>
               <TextField
                 required
                 fullWidth

@@ -88,7 +88,7 @@ const FormCrateUser = () => {
         <form onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={6}>
-              <InputLabel>Name:</InputLabel>
+              <InputLabel>ชื่อ:</InputLabel>
               <TextField
                 value={name}
                 type="text"
@@ -97,7 +97,7 @@ const FormCrateUser = () => {
               />
             </Grid>
             <Grid item xs={6}>
-              <InputLabel>Surname:</InputLabel>
+              <InputLabel>นามสกุล:</InputLabel>
               <TextField
                 value={surname}
                 type="text"
@@ -106,7 +106,7 @@ const FormCrateUser = () => {
               />
             </Grid>
             <Grid item xs={6}>
-              <InputLabel>TelePhone:</InputLabel>
+              <InputLabel>เบอร์โทรศัพท์:</InputLabel>
               <TextField
                 value={telephone}
                 type="text"
@@ -115,7 +115,7 @@ const FormCrateUser = () => {
               />
             </Grid>
             <Grid item xs={6}>
-              <InputLabel>Email:</InputLabel>
+              <InputLabel>อีเมล:</InputLabel>
               <TextField
                 type="email"
                 value={email}
@@ -124,7 +124,7 @@ const FormCrateUser = () => {
               />
             </Grid>
             <Grid item xs={6}>
-              <InputLabel>Username:</InputLabel>
+              <InputLabel>ชื่อผู้ใช้:</InputLabel>
               <TextField
                 type="text"
                 value={username}
@@ -133,7 +133,7 @@ const FormCrateUser = () => {
               />
             </Grid>
             <Grid item xs={6}>
-              <InputLabel>Password:</InputLabel>
+              <InputLabel>รหัสผ่าน:</InputLabel>
               <TextField
                 type="password"
                 value={password}
@@ -142,7 +142,7 @@ const FormCrateUser = () => {
               />
             </Grid>
             <Grid item xs={6}>
-              <InputLabel>Role:</InputLabel>
+              <InputLabel>สถานะ:</InputLabel>
               <Select
                 value={role}
                 onChange={(e) => setRole(e.target.value)}
