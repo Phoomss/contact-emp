@@ -3,6 +3,7 @@ import { Box, useTheme, Button } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { DeleteOutline, CreateOutlined } from "@mui/icons-material";
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 import { useNavigate } from "react-router-dom";
 import EmployeeService from "../../services/EmployeeService";
 import Header from "../Header";
@@ -64,6 +65,10 @@ const Employees = () => {
   const handleEditButtonClick = (id) => {
     navigate(`/updateemployee/${id}`);
   };
+
+  const handleArchiveViewClick = (id) => {
+    navigate(`/archive/search/${id}`);
+  };
   const columns = [
     {
       field: "id",
@@ -121,6 +126,25 @@ const Employees = () => {
           </Box>
         );
       },
+    },
+    {
+      field: "Archive",
+      headerName: "ดูการทำงาน",
+      renderCell: (params) => {
+        return (
+          <Box>
+            <Button
+              variant="contained"
+              color="secondary"
+              startIcon={<RemoveRedEyeOutlinedIcon />}
+              onClick={() => handleArchiveViewClick(params.id)}
+            >
+              ดูการทำงาน
+            </Button>
+          </Box>
+        );
+      },
+      flex: 0.5,
     },
   ];
 
