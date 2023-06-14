@@ -16,6 +16,7 @@ import FlexBetween from "../FlexBetween";
 import ContractService from "services/ContractService";
 import EmployeeService from "services/EmployeeService";
 import ArchiveService from "services/ArchiveService";
+import Autocomplete from "@mui/material/Autocomplete";
 
 const CreateArchive = () => {
   const navigate = useNavigate();
@@ -27,12 +28,21 @@ const CreateArchive = () => {
   const [department2, setDepartment2] = useState("");
   const [department3, setDepartment3] = useState("");
   const [remark, setRemark] = useState("");
+
   const [contractList, setContractList] = useState([]);
   const [companyId, setCompanyId] = useState("");
   const [companyName, setCompanyName] = useState("");
   const [contractId, setContractId] = useState("");
+  const [searchContract, setSearchContract] = useState("");
+  const [contractOptions, setContractOptions] = useState([]);
+  const [selectedContract, setSelectedContract] = useState(null);
+
+
   const [employeeId, setEmployeeId] = useState("");
   const [employees, setEmployees] = useState([]);
+  const [searchEmployee, setSearchEmployee] = useState("");
+  const [employeeOptions, setEmployeeOptions] = useState([]);
+  const [selectedEmployee, setSelectedEmployee] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -79,6 +89,15 @@ const CreateArchive = () => {
     navigate("/employee");
   };
 
+  // search emp 
+  const handleSearchEmployee = (event) => {
+    setSearchEmployee(event.target.value);
+    const filteredEmployees = employees.filter((employee) =>
+      employee.name.toLowerCase().includes(event.target.value.toLowerCase())
+    );
+    setEmployeeOptions(filteredEmployees.map((employee) => employee.name));
+  };
+
   const handleContractSelect = async (event) => {
     const selectedContract = contractList.find(
       (contract) => contract.number === event.target.value
@@ -94,7 +113,7 @@ const CreateArchive = () => {
         selectedContract.company_id
       );
       const index = selectedContract.company_id;
-      setCompanyName(Companyresponse.data[index - 1].name); // update the state with the name
+      setCompanyName(Companyresponse.data[index - 1].name);
     } catch (error) {
       console.error("Error:", error.response);
       setError(error.response.data.message);
@@ -116,22 +135,17 @@ const CreateArchive = () => {
           >
             <Grid item xs={12}>
               <InputLabel>Employee</InputLabel>
-              <Select
+              <Autocomplete
                 fullWidth
                 margin="normal"
-                value={employeeId}
-                onChange={(event) => setEmployeeId(event.target.value)}
-              >
-                {employees && employees.length > 0 ? (
-                  employees.map((employee) => (
-                    <MenuItem key={employee.id} value={employee.id}>
-                      {employee.name}
-                    </MenuItem>
-                  ))
-                ) : (
-                  <MenuItem disabled>No employees found</MenuItem>
+                options={employeeOptions}
+                value={selectedEmployee}
+                onChange={(event, value) => setSelectedEmployee(value)}
+                onInputChange={handleSearchEmployee}
+                renderInput={(params) => (
+                  <TextField {...params} label="Search Employee" />
                 )}
-              </Select>
+              />
             </Grid>
 
             <Grid item xs={12}>

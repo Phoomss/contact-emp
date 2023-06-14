@@ -25,7 +25,7 @@ import CreateUser from "pages/User/CreateUser";
 import UpdateUser from "pages/User/UpdateUser";
 import UserAll from "pages/User/UserAll";
 import UserInfo from "pages/UserInfo";
-// import ArchiveDetails from 'pages/Archive/ArchiveDetails';
+import ArchiveDetails from 'pages/Archive/ArchiveDetails';
 
 function App() {
   const mode = useSelector((state) => state.global.mode);
@@ -48,7 +48,7 @@ function App() {
             <Route path="/updatecontract/:id" element={<UpdateContract />} />
 
             <Route path="/archive" element={<Archive />} />
-            {/* <Route path='/archive/:id' element={<ArchiveDetails/>}/> */}
+            <Route path='/archive/search/:id' element={<ArchiveDetails/>}/>
             <Route path="/createarchive" element={<CreateArchive />} />
             <Route path="/updatearchive/:id" element={<UpdateArchive />} />
 

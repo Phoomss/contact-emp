@@ -150,14 +150,17 @@ const Archives = () => {
       field: "company_id",
       headerName: "ชื่อบริษัท",
       valueGetter: (params) => {
-        const contract = contracts.find(
-          (contract) => contract.id === params.row.id
-        );
-        if (contract) {
-          const company = companies.find(
-            (company) => company.id === contract.company_id
+        const archive = archives.find((archive) => archive.id === params.row.id);
+        if (archive) {
+          const contract = contracts.find(
+            (contract) => contract.id === archive.contract_id
           );
-          return company ? company.name : "";
+          if (contract) {
+            const company = companies.find(
+              (company) => company.id === contract.company_id
+            );
+            return company ? company.name : "";
+          }
         }
         return "";
       },

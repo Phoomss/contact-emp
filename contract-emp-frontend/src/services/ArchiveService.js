@@ -22,11 +22,18 @@ const getArchiveById = (id) => {
   });
 };
 
+const getArchiveByIdEmp = (id) => {
+  return http.get(`/archive/search/?employee_id=${id}`).then((response) => {
+    return response;
+  });
+};
+
 const ArchiveService = {
   getArchives,
   postArchive,
   updateArchive,
   getArchiveById,
+  getArchiveByIdEmp,
   deleteArchive,
 };
 
