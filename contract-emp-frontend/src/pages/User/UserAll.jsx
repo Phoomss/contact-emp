@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Button, Box } from "@mui/material";
 
 import { useTheme } from "@mui/material";
-import UserAllData from "component/AllUserAndEmployee/UserAllData";
+import UserAllData from "component/DataGrid/UserAllData";
 
 function UserAll() {
   const navigate = useNavigate();

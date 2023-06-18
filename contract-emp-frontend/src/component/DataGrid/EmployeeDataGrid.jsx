@@ -2,8 +2,8 @@ import { React, useState, useEffect } from "react";
 import { Box, useTheme, Button } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { DeleteOutline, CreateOutlined } from "@mui/icons-material";
-import PersonAddIcon from '@mui/icons-material/PersonAdd';
-import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import { useNavigate } from "react-router-dom";
 import EmployeeService from "../../services/EmployeeService";
 import Header from "../Header";
@@ -120,9 +120,7 @@ const Employees = () => {
               color="secondary"
               startIcon={<CreateOutlined />}
               onClick={() => handleEditButtonClick(params.id)}
-            >
-              แก้ไข
-            </Button>
+            ></Button>
           </Box>
         );
       },
@@ -138,9 +136,7 @@ const Employees = () => {
               color="secondary"
               startIcon={<RemoveRedEyeOutlinedIcon />}
               onClick={() => handleArchiveViewClick(params.id)}
-            >
-              ดูการทำงาน
-            </Button>
+            ></Button>
           </Box>
         );
       },
@@ -170,7 +166,7 @@ const Employees = () => {
               }}
               onClick={createClick}
             >
-             <PersonAddIcon/>
+              <PersonAddIcon />
             </Button>
 
             <Button
@@ -183,7 +179,7 @@ const Employees = () => {
               }}
               onClick={handleDeleteButtonClick}
             >
-              <DeleteOutline />            
+              <DeleteOutline />
             </Button>
           </FlexBetween>
         </Box>

@@ -11,18 +11,14 @@ import {
   ListItemText,
   Typography,
   useTheme,
-  Menu,
-  MenuItem,
   Button,
 } from "@mui/material";
 import {
   SettingsOutlined,
   ChevronLeft,
   ChevronRightOutlined,
-  HomeOutlined,
   GroupsOutlined,
   DescriptionOutlined,
-  ArchiveOutlined,
   ApartmentOutlined,
   PersonOutlineOutlined,
 } from "@mui/icons-material";
@@ -32,19 +28,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import FlexBetween from "./FlexBetween";
 
 const navItems = [
-  //{
-  //text: "Dashboard",
-  //icon: <HomeOutlined />,
-  //},
-  // {
-  //   text: "Client Facing",
-  //   icon: null,
-  // },
-  /*{
-      text: "Archive",
-      thaitext: "ประวัติ",
-      icon: <ArchiveOutlined />,
-    },*/
   {
     text: "Dashboard",
     thaitext: "แดชบอร์ด",
@@ -65,39 +48,11 @@ const navItems = [
     thaitext: "ข้อมูลลูกจ้างจ้างเหมาบริการ",
     icon: <GroupsOutlined />,
   },
-  // {
-  //   text: "Sales",
-  //   icon: null,
-  // },
   {
     text: "UserAll",
     thaitext: "ข้อมูลผู้ใช้งาน",
     icon: <PersonOutlineOutlined />,
   },
-  // {
-  //   text: "Daily",
-  //   icon: <TodayOutlined />,
-  // },
-  // {
-  //   text: "Monthly",
-  //   icon: <CalendarMonthOutlined />,
-  // },
-  // {
-  //   text: "Breakdown",
-  //   icon: <PieChartOutlined />,
-  // },
-  // {
-  //   text: "Management",
-  //   icon: null,
-  // },
-  // {
-  //   text: "Admin",
-  //   icon: <AdminPanelSettingsOutlined />,
-  // },
-  // {
-  //   text: "Performance",
-  //   icon: <TrendingUpOutlined />,
-  // },
 ];
 
 const Sidebar = ({
@@ -213,30 +168,8 @@ const Sidebar = ({
           <Box position="absolute" bottom="1rem" width="100%">
             <Divider />
             <FlexBetween textTransform="none" gap="1rem" m="1rem 2rem 0 3rem">
-              {/* <Box
-                component="img"
-                alt="profile"
-                src={profileImage}
-                height="40px"
-                width="40px"
-                borderRadius="50%"
-                sx={{ objectFit: "cover" }}
-              /> */}
-
               <Box textAlign="left">
-                <Typography
-                  fontWeight="bold"
-                  fontSize="0.9rem"
-                  sx={{ color: theme.palette.blue[100] }}
-                >
-                  {user.name}
-                </Typography>
-                <Typography
-                  fontSize="0.8rem"
-                  sx={{ color: theme.palette.blue[200] }}
-                >
-                  {user.role}
-                </Typography>
+             
               </Box>
               <Button
                 onClick={handleClick}

@@ -109,7 +109,6 @@ const Companies = () => {
               startIcon={<CreateOutlined />}
               onClick={() => handleEditButtonClick(params.id)}
             >
-              แก้ไข
             </Button>
           </Box>
         );
