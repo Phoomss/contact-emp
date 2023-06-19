@@ -9,12 +9,10 @@ import EmployeeService from "services/EmployeeService";
 import CompanyService from "services/CompanyService";
 import SupervisedUserCircleIcon from "@mui/icons-material/SupervisedUserCircle";
 import ApartmentIcon from "@mui/icons-material/Apartment";
-import PersonIcon from "@mui/icons-material/Person";
-import GavelIcon from "@mui/icons-material/Gavel";
 import ContractService from "services/ContractService";
 import UserService from "services/UserService";
 
-const ShowDashBoard = () => {
+const ShowCompany = () => {
   const navigate = useNavigate();
   const [employeeCount, setEmployeeCount] = useState(0);
   const [companyCount, setCompanyCount] = useState(0);
@@ -92,32 +90,6 @@ const ShowDashBoard = () => {
             <Typography variant="h5">{companyCount}</Typography>
           </Item>
         </Grid>
-
-        <Grid item xs={8}>
-          <Item
-            onClick={() => {
-              navigate("/contract");
-            }}
-            sx={{ boxShadow: 3 }}
-          >
-            <GavelIcon sx={{ fontSize: 40 }} />
-            <Typography variant="h3">จำนวนสัญญาจ้าง</Typography>
-            <Typography variant="h5">{contractCount}</Typography>
-          </Item>
-        </Grid>
-
-        <Grid item xs={8}>
-          <Item
-            onClick={() => {
-              navigate("/userall");
-            }}
-            sx={{ boxShadow: 3 }}
-          >
-            <PersonIcon sx={{ fontSize: 40 }} />
-            <Typography variant="h3">จำนวนผู้ใช้งาน</Typography>
-            <Typography variant="h5">{userCount} คน</Typography>
-          </Item>
-        </Grid>
       </Grid>
     </Box>
   );
@@ -132,4 +104,4 @@ const Item = styled(Paper)(({ theme }) => ({
   cursor: "pointer",
 }));
 
-export default ShowDashBoard;
+export default ShowCompany;

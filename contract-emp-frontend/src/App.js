@@ -26,6 +26,7 @@ import UpdateUser from "pages/User/UpdateUser";
 import UserAll from "pages/User/UserAll";
 import UserInfo from "pages/UserInfo";
 import ArchiveDetails from 'pages/Archive/ArchiveDetails';
+import DashboardCompany from "pages/DashboardCompany";
 
 function App() {
   const mode = useSelector((state) => state.global.mode);
@@ -60,6 +61,7 @@ function App() {
             <Route path="/userAll" element={<UserAll />} />
             <Route path="/createuser" element={<CreateUser />} />
             <Route path="/updateuser/:id" element={<UpdateUser />} />
+            <Route path="/DashboardCompany" element={<DashboardCompany/>}/>
           </Route>
         </Routes>
       </ThemeProvider>

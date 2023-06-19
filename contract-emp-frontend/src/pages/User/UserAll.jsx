@@ -1,14 +1,11 @@
 import React, { useEffect } from "react";
 import UserService from "../../services/UserService";
 import { useNavigate } from "react-router-dom";
-import { Button, Box } from "@mui/material";
-
-import { useTheme } from "@mui/material";
+import { Box } from "@mui/material";
 import UserAllData from "component/DataGrid/UserAllData";
 
 function UserAll() {
   const navigate = useNavigate();
-  const theme = useTheme();
 
   useEffect(() => {
     const token = localStorage.getItem("token");

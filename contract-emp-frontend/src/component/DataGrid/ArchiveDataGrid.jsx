@@ -150,7 +150,9 @@ const Archives = () => {
       field: "company_id",
       headerName: "ชื่อบริษัท",
       valueGetter: (params) => {
-        const archive = archives.find((archive) => archive.id === params.row.id);
+        const archive = archives.find(
+          (archive) => archive.id === params.row.id
+        );
         if (archive) {
           const contract = contracts.find(
             (contract) => contract.id === archive.contract_id
@@ -176,9 +178,7 @@ const Archives = () => {
               color="secondary"
               startIcon={<CreateOutlined />}
               onClick={() => handleEditButtonClick(params.id)}
-            >
-              แก้ไข
-            </Button>
+            ></Button>
           </Box>
         );
       },

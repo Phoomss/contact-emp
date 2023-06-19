@@ -64,7 +64,7 @@ const CreateContracts = () => {
   return (
     <Box m="1.5rem 2.5rem">
       <FlexBetween>
-        <Header title="เพิ่มสัญญาจ้าง"/>
+        <Header title="เพิ่มสัญญาจ้าง" />
       </FlexBetween>
       <Box sx={{ mt: "1.5rem" }}>
         <form onSubmit={handleSubmit}>
@@ -72,7 +72,8 @@ const CreateContracts = () => {
             container
             spacing={2}
             rowSpacing={1}
-            columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+          >
             <Grid item xs={12}>
               <InputLabel>เลขที่สัญญา: </InputLabel>
               <TextField

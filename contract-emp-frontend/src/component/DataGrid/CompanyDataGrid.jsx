@@ -7,7 +7,7 @@ import {
   CreateOutlined,
   FilterList,
 } from "@mui/icons-material";
-import AddBusinessIcon from '@mui/icons-material/AddBusiness';
+import AddBusinessIcon from "@mui/icons-material/AddBusiness";
 import { useNavigate } from "react-router-dom";
 import CompanyService from "../../services/CompanyService";
 import Header from "../Header";
@@ -108,8 +108,7 @@ const Companies = () => {
               color="secondary"
               startIcon={<CreateOutlined />}
               onClick={() => handleEditButtonClick(params.id)}
-            >
-            </Button>
+            ></Button>
           </Box>
         );
       },

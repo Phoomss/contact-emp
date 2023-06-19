@@ -1,12 +1,11 @@
-import { React, useState, useEffect } from "react";
+import { React, useEffect } from "react";
 import UserService from "../services/UserService";
-import { Box, useTheme, Button } from "@mui/material";
+import { Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import ShowDashBoard from "component/Dashboard/ShowDashBoard";
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const theme = useTheme();
 
   useEffect(() => {
     const token = localStorage.getItem("token");

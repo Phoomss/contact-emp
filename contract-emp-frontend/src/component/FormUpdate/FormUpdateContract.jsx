@@ -71,9 +71,11 @@ const FormUpdateContract = () => {
       </FlexBetween>
       <Box sx={{ mt: "1.5rem" }}>
         <form onSubmit={handleSubmit}>
-          <Grid container
+          <Grid
+            container
             rowSpacing={1}
-            columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+          >
             <Grid item xs={12}>
               <InputLabel>เลขที่สัญญา: </InputLabel>
               <TextField

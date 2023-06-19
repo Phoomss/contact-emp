@@ -1,9 +1,12 @@
 import React from "react";
 import {
+  Avatar,
   Box,
   Divider,
   Drawer,
   IconButton,
+  ImageList,
+  ImageListItem,
   List,
   ListItem,
   ListItemButton,
@@ -13,12 +16,12 @@ import {
   useTheme,
 } from "@mui/material";
 import {
-  SettingsOutlined,
   ChevronLeft,
   ChevronRightOutlined,
   GroupsOutlined,
   ApartmentOutlined,
 } from "@mui/icons-material";
+import LogoutIcon from "@mui/icons-material/Logout";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -26,7 +29,7 @@ import FlexBetween from "./FlexBetween";
 
 const navItems = [
   {
-    text: "Dashboard",
+    text: "DashboardCompany",
     thaitext: "แดชบอร์ด",
     icon: <DashboardIcon />,
   },
@@ -58,6 +61,11 @@ const Sidebar = ({
     setActive(pathname.substring(1));
   }, [pathname]);
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/");
+  };
+
   return (
     <Box component="nav">
       {isSidebarOpen && (
@@ -80,10 +88,12 @@ const Sidebar = ({
           <Box width="100%">
             <Box m="1.5rem 2rem 2rem 3rem">
               <FlexBetween color={theme.palette.blue[200]}>
-                <Box display="flex" alignItems="center" gap="0.5rem">
-                  <Typography variant="h4" fontWeight="bold">
-                    ECOMVISION
-                  </Typography>
+                <Box alignItems="center" gap="0.5rem">
+                  <ImageList sx={{ width: 350, height: 100 }}>
+                    <ImageListItem>
+                      <img src="/assets/logo.png" />
+                    </ImageListItem>
+                  </ImageList>
                 </Box>
                 {!isNonMobile && (
                   <IconButton onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
@@ -143,28 +153,30 @@ const Sidebar = ({
             </List>
           </Box>
 
-          <Box position="absolute" bottom="1rem" width="100%">
+          <Box
+            position="absolute"
+            bottom="1rem"
+            width="100%"
+            onClick={handleLogout}
+            sx={{ cursor: "pointer" }}
+          >
             <Divider />
             <FlexBetween textTransform="none" gap="1rem" m="1rem 2rem 0 3rem">
               <Box textAlign="left">
                 <Typography
                   fontWeight="bold"
-                  fontSize="0.9rem"
-                  sx={{ color: theme.palette.secondary[100] }}
+                  fontSize="1rem"
+                  sx={{ color: theme.palette.blue[100] }}
                 >
-                  {user.name}
-                </Typography>
-                <Typography
-                  fontSize="0.8rem"
-                  sx={{ color: theme.palette.secondary[200] }}
-                >
-                  {user.role}
+                  Logout
                 </Typography>
               </Box>
-              <SettingsOutlined
+              <LogoutIcon
                 sx={{
-                  color: theme.palette.secondary[300],
-                  fontSize: "25px ",
+                  color: theme.palette.blue[300],
+                  fontSize: "1rem ",
+                  mt: "0.3rem",
+                  mr: "6rem",
                 }}
               />
             </FlexBetween>

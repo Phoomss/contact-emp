@@ -112,8 +112,7 @@ const Contracts = () => {
               color="secondary"
               startIcon={<CreateOutlined />}
               onClick={() => handleEditButtonClick(params.id)}
-            >
-            </Button>
+            ></Button>
           </Box>
         );
       },

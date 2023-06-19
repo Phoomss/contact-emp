@@ -37,7 +37,6 @@ const CreateArchive = () => {
   const [contractOptions, setContractOptions] = useState([]);
   const [selectedContract, setSelectedContract] = useState(null);
 
-
   const [employeeId, setEmployeeId] = useState("");
   const [employees, setEmployees] = useState([]);
   const [searchEmployee, setSearchEmployee] = useState("");
@@ -89,7 +88,7 @@ const CreateArchive = () => {
     navigate("/employee");
   };
 
-  // search emp 
+  // search emp
   const handleSearchEmployee = (event) => {
     setSearchEmployee(event.target.value);
     const filteredEmployees = employees.filter((employee) =>

@@ -11,10 +11,8 @@ import {
   ListItemText,
   Typography,
   useTheme,
-  Button,
 } from "@mui/material";
 import {
-  SettingsOutlined,
   ChevronLeft,
   ChevronRightOutlined,
   GroupsOutlined,
@@ -22,6 +20,7 @@ import {
   ApartmentOutlined,
   PersonOutlineOutlined,
 } from "@mui/icons-material";
+import LogoutIcon from "@mui/icons-material/Logout";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -77,7 +76,7 @@ const Sidebar = ({
   const handleClose = () => setAnchorEl(null);
   const handleLogout = () => {
     localStorage.removeItem("token");
-    navigate("/login");
+    navigate("/");
   };
 
   return (
@@ -165,31 +164,32 @@ const Sidebar = ({
             </List>
           </Box>
 
-          <Box position="absolute" bottom="1rem" width="100%">
+          <Box
+            position="absolute"
+            bottom="1rem"
+            width="100%"
+            onClick={handleLogout}
+            sx={{ cursor: "pointer" }}
+          >
             <Divider />
             <FlexBetween textTransform="none" gap="1rem" m="1rem 2rem 0 3rem">
               <Box textAlign="left">
-             
+                <Typography
+                  fontWeight="bold"
+                  fontSize="1rem"
+                  sx={{ color: theme.palette.blue[100] }}
+                >
+                  Logout
+                </Typography>
               </Box>
-              <Button
-                onClick={handleClick}
+              <LogoutIcon
                 sx={{
-                  display: "flex",
-
-                  alignItems: "center",
-                  textTransform: "none",
+                  color: theme.palette.blue[300],
+                  fontSize: "1rem ",
+                  mt: "0.3rem",
+                  mr: "6rem",
                 }}
-              >
-                <SettingsOutlined
-                  sx={{
-                    color: theme.palette.blue[300],
-                    fontSize: "25px ",
-                  }}
-                  onClick={() => {
-                    navigate("/userinfo");
-                  }}
-                />
-              </Button>
+              />
             </FlexBetween>
           </Box>
         </Drawer>

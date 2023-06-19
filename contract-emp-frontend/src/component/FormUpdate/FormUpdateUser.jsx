@@ -89,7 +89,7 @@ const FormUpdateUser = () => {
       <Box sx={{ mt: "1.5rem" }}>
         <form onSubmit={handleSubmit}>
           <Grid container spacing={2}>
-               <Grid item xs={6}>
+            <Grid item xs={6}>
               <InputLabel>ชื่อ: </InputLabel>
               <TextField
                 required
@@ -111,7 +111,7 @@ const FormUpdateUser = () => {
               />
             </Grid>
 
-             <Grid item xs={6}>
+            <Grid item xs={6}>
               <InputLabel>เบอร์โทรศัพท์: </InputLabel>
               <TextField
                 required
@@ -133,7 +133,7 @@ const FormUpdateUser = () => {
               />
             </Grid>
 
-                <Grid item xs={6}>
+            <Grid item xs={6}>
               <InputLabel>อีเมล: </InputLabel>
               <TextField
                 required

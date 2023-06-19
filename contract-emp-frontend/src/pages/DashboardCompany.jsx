@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
-import UserService from "../../services/UserService";
-import { useNavigate } from "react-router-dom";
+import { React, useEffect } from "react";
+import UserService from "../services/UserService";
 import { Box } from "@mui/material";
-import FormUpdateArchive from "component/FormUpdate/FormUpdateArchive";
+import { useNavigate } from "react-router-dom";
+import ShowCompany from "component/Dashboard/ShowCompany";
 
-const UpdateArchive = () => {
+const DashboardCompany = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -20,10 +20,10 @@ const UpdateArchive = () => {
     }
   }, [navigate]);
   return (
-    <Box>
-      <FormUpdateArchive />
+    <Box m="1.5rem 2.5rem">
+      <ShowCompany /> :
     </Box>
   );
 };
 
-export default UpdateArchive;
+export default DashboardCompany;

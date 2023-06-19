@@ -1,5 +1,5 @@
 import { CreateOutlined, DeleteOutline } from "@mui/icons-material";
-import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import { Box, Button, useTheme } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import FlexBetween from "component/FlexBetween";
@@ -123,8 +123,7 @@ const UserAllData = () => {
               color="secondary"
               startIcon={<CreateOutlined />}
               onClick={() => handleEditButtonClick(params.id)}
-            >
-            </Button>
+            ></Button>
           </Box>
         );
       },
@@ -153,7 +152,7 @@ const UserAllData = () => {
               }}
               onClick={createClick}
             >
-              <PersonAddIcon/>
+              <PersonAddIcon />
             </Button>
 
             <Button
