@@ -113,7 +113,6 @@ const CreateArchive = () => {
     setCompanyId(value?.company_id || "");
     setContractId(value?.id || "");
     setCompanyName(value?.company.name || "");
-    
   };
   return (
     <Box m="1.5rem 2.5rem">

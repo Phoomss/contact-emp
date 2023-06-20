@@ -110,10 +110,10 @@ const UserAllData = () => {
     },
     {
       field: "username",
-      headerName: "ยูสเซอร์เมน",
+      headerName: "ยูสเซอร์เนม",
     },
     {
-      field: "Functions",
+      field: "Edit",
       headerName: "แก้ไขข้อมูล",
       renderCell: (params) => {
         return (

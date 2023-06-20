@@ -40,7 +40,7 @@ const CreateEmployees = () => {
         note: employeeNote,
       });
       if (response.status === 200) {
-        swal("เพิ่มลูกจ้างสำเร็จ!", "success");
+        swal("เพิ่มลูกจ้างสำเร็จ!","", "success");
         console.log(response.data);
         setCreatedEmp(response.data.data);
         setEmployeeId(response.data.data.id);
