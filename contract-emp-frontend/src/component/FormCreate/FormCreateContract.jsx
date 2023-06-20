@@ -4,8 +4,6 @@ import {
   TextField,
   Button,
   Typography,
-  Select,
-  MenuItem,
   InputLabel,
   Grid,
 } from "@mui/material";
@@ -14,8 +12,8 @@ import ContractService from "../../services/ContractService";
 import CompanyService from "../../services/CompanyService";
 import Header from "../Header";
 import FlexBetween from "../FlexBetween";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Autocomplete from "@mui/material/Autocomplete";
 
 const CreateContracts = () => {
   const navigate = useNavigate();
@@ -23,21 +21,34 @@ const CreateContracts = () => {
   const [contractNumber, setContractNumber] = useState("");
   const [contractStartDate, setContractStartDate] = useState(null);
   const [contractEndDate, setContractEndDate] = useState(null);
+
   const [contractCompanyId, setContractCompanyId] = useState("");
   const [companies, setCompanies] = useState([]);
+  const [searchCompany , setSearchCompany] = useState("")
+  const [companyOption,setCompanyOption] = useState([])
+  const [selectedCompany,setSelectedCompany] = useState(null)
 
-  useEffect(() => {
-    const fetchCompanies = async () => {
-      try {
-        const response = await CompanyService.getCompanies();
-        setCompanies(response.data);
-      } catch (error) {
-        console.error("Error:", error.response);
-        setError(error.response.data.message);
-      }
-    };
-    fetchCompanies();
-  }, []);
+    useEffect(() => {
+      const fetchCompanies = async () => {
+        try {
+          const response = await CompanyService.getCompanies();
+          setCompanies(response.data);
+        } catch (error) {
+          console.error("Error:", error.response);
+          setError(error.response.data.message);
+        }
+      };
+      fetchCompanies();
+    }, []);
+
+  // search company
+  const handleSearchCompany = (event) => {
+    setSearchCompany(event.target.value)
+    const filteredCompanies = companies.filter((company)=>
+      company.name.toLowerCase().includes(event.target.value.toLowerCase())
+    )
+    setCompanyOption(filteredCompanies.map((company)=> company.name))
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -87,21 +98,17 @@ const CreateContracts = () => {
 
             <Grid item xs={12}>
               <InputLabel>ชื่อบริษัท: </InputLabel>
-              <Box sx={{ mb: "18px" }}>
-                <div></div>
-              </Box>
-              <Select
+              <Autocomplete 
                 fullWidth
                 margin="normal"
-                value={contractCompanyId}
-                onChange={(e) => setContractCompanyId(e.target.value)}
-              >
-                {companies.map((company) => (
-                  <MenuItem key={company.id} value={company.id}>
-                    {company.name}
-                  </MenuItem>
-                ))}
-              </Select>
+                options={companyOption}
+                value={selectedCompany}
+                onChange={(event,value)=>setSelectedCompany(value)}
+                onInputChange={handleSearchCompany}
+                renderInput={(params)=>(
+                  <TextField {...params} label="Search Company"/>
+                )}
+              />
             </Grid>
 
             <Grid item xs={6}>
