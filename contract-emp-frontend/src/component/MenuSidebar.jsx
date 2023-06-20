@@ -104,7 +104,7 @@ const Sidebar = ({
             <Box m="1.5rem 2rem 2rem 3rem">
               <FlexBetween color={theme.palette.blue[200]}>
                 <Box display="flex" alignItems="center" gap="0.5rem">
-                <ImageList sx={{ width: 250, height: 65 }}>
+                <ImageList sx={{width: "100%"}}>
                     <ImageListItem>
                       <img src="/assets/logo.png" />
                     </ImageListItem>

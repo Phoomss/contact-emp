@@ -13,6 +13,9 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import UserService from "../../services/UserService";
 import swal from "sweetalert";
+import LoginIcon from '@mui/icons-material/Login';
+import Layout from "component/Layouts/Layout";
+import { Grid } from "react-bootstrap-icons";
 
 const Login = () => {
   const [formData, setFormData] = useState({ login: "", password: "" });
@@ -51,72 +54,65 @@ const Login = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
+      <Layout>
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
           <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
-            sx={{ mt: 1 }}
+            sx={{
+              marginTop: 9,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              marginBottom: 8,
+            }}
           >
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="login"
-              label="Login"
-              name="login"
-              autoComplete="login"
-              autoFocus
-              value={formData.login}
-              onChange={handleInputChange}
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              value={formData.password}
-              onChange={handleInputChange}
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-            {error && (
-              <Typography variant="subtitle2" color="error">
-                {error}
-              </Typography>
-            )}
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
+            <LoginIcon sx={{ width: 30, height: 30 }} />
+            <Typography component="h1" variant="h5">
               เข้าสู่ระบบ
-            </Button>
+            </Typography>
+            <Box
+              component="form"
+              onSubmit={handleSubmit}
+              noValidate
+              sx={{ mt: 1 }}
+            >
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="login"
+                label="ชื่อผู้ใช้งาน"
+                name="login"
+                autoComplete="login"
+                autoFocus
+                value={formData.login}
+                onChange={handleInputChange}
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="รหัสผ่าน"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                value={formData.password}
+                onChange={handleInputChange}
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2, backgroundColor: '#FFCC00' }}
+              >
+                เข้าสู่ระบบ
+              </Button>
+            </Box>
           </Box>
-        </Box>
-      </Container>
+        </Container>
+      </Layout>
+
     </ThemeProvider>
   );
 };
