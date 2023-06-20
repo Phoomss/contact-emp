@@ -24,8 +24,6 @@ function Employee() {
   return (
     <Box>
       <EmployeeDataGrid />
-      <br />
-      <ArchiveDataGrid />
     </Box>
   );
 }
