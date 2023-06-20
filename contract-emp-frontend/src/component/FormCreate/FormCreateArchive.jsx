@@ -97,29 +97,24 @@ const CreateArchive = () => {
     setEmployeeOptions(filteredEmployees.map((employee) => employee.name));
   };
 
-  const handleContractSelect = async (event) => {
-    const selectedContract = contractList.find(
-      (contract) => contract.number === event.target.value
+  // search contract
+  const handleSearchContract = (event) => {
+    setSearchContract(event.target.value);
+    const filteredContracts = contractList.filter((contract) =>
+      contract.number.toLowerCase().includes(event.target.value.toLowerCase())
     );
-    setContractNumber(selectedContract.number);
-    setStartDate(selectedContract.start_date);
-    setEndDate(selectedContract.end_date);
-    setCompanyId(selectedContract.company_id);
-    setContractId(selectedContract.id);
-
-    try {
-      const Companyresponse = await CompanyService.getCompanies(
-        selectedContract.company_id
-      );
-      const index = selectedContract.company_id;
-      setCompanyName(Companyresponse.data[index - 1].name);
-    } catch (error) {
-      console.error("Error:", error.response);
-      setError(error.response.data.message);
-      setCompanyName("N/A");
-    }
+    setContractOptions(filteredContracts);
   };
 
+  const handleContractSelect = (event, value) => {
+    setContractNumber(value?.number || "");
+    setStartDate(value?.start_date || "");
+    setEndDate(value?.end_date || "");
+    setCompanyId(value?.company_id || "");
+    setContractId(value?.id || "");
+    setCompanyName(value?.company.name || "");
+    
+  };
   return (
     <Box m="1.5rem 2.5rem">
       <FlexBetween>
@@ -149,22 +144,18 @@ const CreateArchive = () => {
 
             <Grid item xs={12}>
               <InputLabel>เลขที่สัญญา</InputLabel>
-              <Select
+              <Autocomplete
                 fullWidth
                 margin="normal"
-                value={contractNumber}
+                options={contractOptions}
+                value={selectedContract}
                 onChange={handleContractSelect}
-              >
-                {contractList && contractList.length > 0 ? (
-                  contractList.map((contract) => (
-                    <MenuItem key={contract.id} value={contract.number}>
-                      {contract.number}
-                    </MenuItem>
-                  ))
-                ) : (
-                  <MenuItem disabled>No contracts found</MenuItem>
+                onInputChange={handleSearchContract}
+                getOptionLabel={(option) => option.number}
+                renderInput={(params) => (
+                  <TextField {...params} label="Search Contract" />
                 )}
-              </Select>
+              />
             </Grid>
 
             <Grid item xs={6}>
