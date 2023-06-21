@@ -6,6 +6,8 @@ import {
   Typography,
   InputLabel,
   Grid,
+  Select,
+  MenuItem,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import ContractService from "../../services/ContractService";
@@ -24,31 +26,37 @@ const CreateContracts = () => {
 
   const [contractCompanyId, setContractCompanyId] = useState("");
   const [companies, setCompanies] = useState([]);
-  const [searchCompany , setSearchCompany] = useState("")
-  const [companyOption,setCompanyOption] = useState([])
-  const [selectedCompany,setSelectedCompany] = useState(null)
+  const [searchCompany, setSearchCompany] = useState("")
+  const [companyOption, setCompanyOption] = useState([])
+  const [selectedCompany, setSelectedCompany] = useState(null)
 
-    useEffect(() => {
-      const fetchCompanies = async () => {
-        try {
-          const response = await CompanyService.getCompanies();
-          setCompanies(response.data);
-        } catch (error) {
-          console.error("Error:", error.response);
-          setError(error.response.data.message);
-        }
-      };
-      fetchCompanies();
-    }, []);
+  useEffect(() => {
+    const fetchCompanies = async () => {
+      try {
+        const response = await CompanyService.getCompanies();
+        setCompanies(response.data);
+      } catch (error) {
+        console.error("Error:", error.response);
+        setError(error.response.data.message);
+      }
+    };
+    fetchCompanies();
+  }, []);
 
   // search company
   const handleSearchCompany = (event) => {
-    setSearchCompany(event.target.value)
-    const filteredCompanies = companies.filter((company)=>
+    setSearchCompany(event.target.value);
+    const filteredCompanies = companies.filter((company) =>
       company.name.toLowerCase().includes(event.target.value.toLowerCase())
-    )
-    setCompanyOption(filteredCompanies.map((company)=> company.name))
-  }
+    );
+    setCompanyOption(filteredCompanies.map((company) => company.name));
+  };
+
+  const handleCompanySelect = (event, value) => {
+    setSelectedCompany(value);
+    const selectedCompanyId = companies.find((company) => company.name === value)?.id;
+    setContractCompanyId(selectedCompanyId);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -98,17 +106,30 @@ const CreateContracts = () => {
 
             <Grid item xs={12}>
               <InputLabel>ชื่อบริษัท: </InputLabel>
-              <Autocomplete 
+              <Autocomplete
                 fullWidth
                 margin="normal"
                 options={companyOption}
                 value={selectedCompany}
-                onChange={(event,value)=>setSelectedCompany(value)}
+                onChange={handleCompanySelect}
                 onInputChange={handleSearchCompany}
-                renderInput={(params)=>(
-                  <TextField {...params} label="Search Company"/>
+                renderInput={(params) => (
+                  <TextField {...params} label="Search Company" />
                 )}
               />
+              {/* <InputLabel>ชื่อบริษัท: </InputLabel>
+              <Select
+                fullWidth
+                margin="normal"
+                value={contractCompanyId}
+                onChange={(e) => setContractCompanyId(e.target.value)}
+              >
+                {companies.map((company) => (
+                  <MenuItem key={company.id} value={company.id}>
+                    {company.name}
+                  </MenuItem>
+                ))}
+              </Select> */}
             </Grid>
 
             <Grid item xs={6}>

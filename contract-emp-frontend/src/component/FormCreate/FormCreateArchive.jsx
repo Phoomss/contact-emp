@@ -37,7 +37,7 @@ const CreateArchive = () => {
   const [contractOptions, setContractOptions] = useState([]);
   const [selectedContract, setSelectedContract] = useState(null);
 
-  const [employeeId, setEmployeeId] = useState("");
+  const [employee_id, setEmployee_id] = useState("");
   const [employees, setEmployees] = useState([]);
   const [searchEmployee, setSearchEmployee] = useState("");
   const [employeeOptions, setEmployeeOptions] = useState([]);
@@ -46,14 +46,14 @@ const CreateArchive = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log("employee_id:", employeeId);
+      console.log("employee_id:", employee_id);
       console.log("contract_id:", contractId);
       console.log("department1:", department1);
       console.log("department2:", department2);
       console.log("department3:", department3);
       console.log("remark:", remark);
       const response = await ArchiveService.postArchive({
-        employee_id: employeeId,
+        employee_id: employee_id,
         contract_id: contractId,
         department1: department1,
         department2: department2,
@@ -61,7 +61,7 @@ const CreateArchive = () => {
         remark: remark,
       });
       if (response.status === 200) {
-        navigate("/employee");
+        navigate("/archive");
       }
     } catch (error) {
       console.error("Error:", error.response);
@@ -79,13 +79,13 @@ const CreateArchive = () => {
       const lastEmployeeId = Math.max(
         ...responseEmployees.data.map((employee) => employee.id)
       );
-      setEmployeeId(lastEmployeeId > 0 ? lastEmployeeId : 0);
+      setEmployee_id(lastEmployeeId > 0 ? lastEmployeeId : 0);
     };
     fetchData();
   }, []);
 
   const handleCanClick = () => {
-    navigate("/employee");
+    navigate("/archive");
   };
 
   // search emp
@@ -94,14 +94,18 @@ const CreateArchive = () => {
     const filteredEmployees = employees.filter((employee) =>
       employee.name.toLowerCase().includes(event.target.value.toLowerCase())
     );
-    setEmployeeOptions(filteredEmployees.map((employee) => employee.name));
+    setEmployeeOptions(filteredEmployees);
+  };
+
+  const handleEmployeeSelect = (event, value) => {
+    setEmployee_id(value?.id || "");
   };
 
   // search contract
   const handleSearchContract = (event) => {
     setSearchContract(event.target.value);
     const filteredContracts = contractList.filter((contract) =>
-      contract.number.toLowerCase().includes(event.target.value.toLowerCase())
+      contract.number.toLowerCase().includes(String(event.target.value).toLowerCase())
     );
     setContractOptions(filteredContracts);
   };
@@ -127,18 +131,32 @@ const CreateArchive = () => {
             columnSpacing={{ xs: 1, sm: 2, md: 3 }}
           >
             <Grid item xs={12}>
-              <InputLabel>Employee</InputLabel>
-              <Autocomplete
+            <Autocomplete
                 fullWidth
                 margin="normal"
                 options={employeeOptions}
                 value={selectedEmployee}
-                onChange={(event, value) => setSelectedEmployee(value)}
+                onChange={handleEmployeeSelect}
                 onInputChange={handleSearchEmployee}
-                renderInput={(params) => (
-                  <TextField {...params} label="Search Employee" />
-                )}
+                getOptionLabel={(employee) => employee.name}
+                renderInput={(params) => <TextField {...params} label="Search Employee" />}
               />
+              {/* <Select
+                fullWidth
+                margin="normal"
+                value={employee_id}
+                onChange={(event) => setEmployee_id(event.target.value)}
+              >
+                {employees && employees.length > 0 ? (
+                  employees.map((employee) => (
+                    <MenuItem key={employee.id} value={employee.id}>
+                      {employee.name}
+                    </MenuItem>
+                  ))
+                ) : (
+                  <MenuItem disabled>No employees found</MenuItem>
+                )}
+              </Select> */}
             </Grid>
 
             <Grid item xs={12}>
