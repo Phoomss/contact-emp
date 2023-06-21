@@ -106,14 +106,10 @@ const Sidebar = ({
           }}
         >
           <Box width="100%">
-            <Box m="1.5rem 2rem 2rem 3rem">
+            <Box>
               <FlexBetween color={theme.palette.blue[200]}>
-                <Box display="flex" alignItems="center" gap="0.5rem">
-                <ImageList sx={{width: "100%"}}>
-                    <ImageListItem>
-                      <img src="/assets/logo.png" />
-                    </ImageListItem>
-                  </ImageList>
+                <Box display="flex" alignItems="center" gap="0.5rem" justifyContent="center">
+                  <img src="/assets/logo.png" width={"50%"} />
                 </Box>
                 {!isNonMobile && (
                   <IconButton onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
