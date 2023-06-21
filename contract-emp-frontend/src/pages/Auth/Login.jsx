@@ -104,7 +104,8 @@ const Login = () => {
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2, backgroundColor: '#FFCC00' }}
+                color="warning"
+                sx={{ mt: 3, mb: 2, backgroundColor: '#FFCC00'  }}
               >
                 เข้าสู่ระบบ
               </Button>
