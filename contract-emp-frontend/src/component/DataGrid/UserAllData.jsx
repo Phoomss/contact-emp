@@ -71,10 +71,6 @@ const UserAllData = () => {
 
   const columns = [
     {
-      field: "id",
-      headerName: "ID",
-    },
-    {
       field: "name",
       headerName: "ชื่อ",
 

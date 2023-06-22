@@ -1,13 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -15,7 +11,6 @@ import UserService from "../../services/UserService";
 import swal from "sweetalert";
 import LoginIcon from '@mui/icons-material/Login';
 import Layout from "component/Layouts/Layout";
-import { Grid } from "react-bootstrap-icons";
 
 const Login = () => {
   const [formData, setFormData] = useState({ login: "", password: "" });
@@ -66,10 +61,13 @@ const Login = () => {
               marginBottom: 8,
             }}
           >
-            <LoginIcon sx={{ width: 30, height: 30 }} />
-            <Typography component="h1" variant="h5">
-              เข้าสู่ระบบ
-            </Typography>
+            <Box sx={{ display: 'flex', }}>
+              <LoginIcon sx={{ width: 30, height: 30 }} />
+              <Typography component="h1" variant="h5">
+                เข้าสู่ระบบ
+              </Typography>
+            </Box>
+
             <Box
               component="form"
               onSubmit={handleSubmit}
@@ -105,7 +103,7 @@ const Login = () => {
                 fullWidth
                 variant="contained"
                 color="warning"
-                sx={{ mt: 3, mb: 2, backgroundColor: '#FFCC00'  }}
+                sx={{ mt: 3, mb: 2, backgroundColor: '#FFCC00' }}
               >
                 เข้าสู่ระบบ
               </Button>

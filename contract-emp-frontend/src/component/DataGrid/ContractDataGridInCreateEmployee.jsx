@@ -83,10 +83,6 @@ const Contracts = () => {
 
   const columns = [
     {
-      field: "id",
-      headerName: "ID",
-    },
-    {
       field: "number",
       headerName: "เลขที่สัญญา",
 

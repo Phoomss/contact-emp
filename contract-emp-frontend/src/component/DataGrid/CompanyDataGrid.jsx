@@ -76,10 +76,6 @@ const Companies = () => {
 
   const columns = [
     {
-      field: "id",
-      headerName: "ID",
-    },
-    {
       field: "name",
       headerName: "Name",
       flex: 0.5,

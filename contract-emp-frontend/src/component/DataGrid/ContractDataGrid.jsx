@@ -63,7 +63,7 @@ const Contracts = () => {
   };
 
   const createClick = () => {
-    navigate(`/createcontract`);
+    navigate(`/createcontract`,);
   };
 
   const handleEditButtonClick = (id) => {
@@ -71,10 +71,6 @@ const Contracts = () => {
   };
 
   const columns = [
-    {
-      field: "id",
-      headerName: "ID",
-    },
     {
       field: "number",
       headerName: "เลขที่สัญญา",
@@ -138,6 +134,7 @@ const Contracts = () => {
                 fontSize: "14px",
                 fontWeight: "bold",
                 padding: "10px 20px",
+                alt:"เพิ่มสัญญาจ้าง"
               }}
               onClick={createClick}
             >

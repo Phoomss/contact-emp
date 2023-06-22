@@ -22,6 +22,7 @@ import {
   ApartmentOutlined,
 } from "@mui/icons-material";
 import LogoutIcon from "@mui/icons-material/Logout";
+import ArchiveOutlinedIcon from '@mui/icons-material/ArchiveOutlined';
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -42,6 +43,11 @@ const navItems = [
     text: "Employee",
     thaitext: "ข้อมูลลูกจ้างจ้างเหมาบริการ",
     icon: <GroupsOutlined />,
+  },
+  {
+    text: "Archive",
+    thaitext: "ข้อมูลสัญญาจ้างลูกจ้าง",
+    icon: <ArchiveOutlinedIcon />,
   },
 ];
 
@@ -158,23 +164,23 @@ const Sidebar = ({
           >
             <Divider />
             <FlexBetween textTransform="none" gap="1rem" m="1rem 2rem 0 3rem">
-              <Box textAlign="left">
+              <Box textAlign="left" sx={{ display: "flex" }}>
                 <Typography
                   fontWeight="bold"
                   fontSize="1rem"
                   sx={{ color: theme.palette.blue[100] }}
                 >
-                  Logout
+                  ออกจากระบบ
                 </Typography>
+                <LogoutIcon
+                  sx={{
+                    color: theme.palette.blue[300],
+                    fontSize: "1rem ",
+                    mt: .6,
+                    ml: 1
+                  }}
+                />
               </Box>
-              <LogoutIcon
-                sx={{
-                  color: theme.palette.blue[300],
-                  fontSize: "1rem ",
-                  mt: "0.3rem",
-                  mr: "6rem",
-                }}
-              />
             </FlexBetween>
           </Box>
         </Drawer>

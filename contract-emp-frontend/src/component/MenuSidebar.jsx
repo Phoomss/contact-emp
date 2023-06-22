@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Divider,
@@ -23,8 +23,8 @@ import {
   PersonOutlineOutlined,
 } from "@mui/icons-material";
 import LogoutIcon from "@mui/icons-material/Logout";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import { useEffect, useState } from "react";
+import ArchiveOutlinedIcon from '@mui/icons-material/ArchiveOutlined';
+import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
 import { useLocation, useNavigate } from "react-router-dom";
 import FlexBetween from "./FlexBetween";
 
@@ -32,7 +32,7 @@ const navItems = [
   {
     text: "Dashboard",
     thaitext: "แดชบอร์ด",
-    icon: <DashboardIcon />,
+    icon: <DashboardOutlinedIcon />,
   },
   {
     text: "Contract",
@@ -51,8 +51,8 @@ const navItems = [
   },
   {
     text: "Archive",
-    thaitext: "เพิ่มการทำงานของลูกจ้าง",
-    icon: <GroupsOutlined />,
+    thaitext: "ข้อมูลสัญญาจ้างลูกจ้าง",
+    icon: <ArchiveOutlinedIcon />,
   },
   {
     text: "UserAll",
@@ -178,23 +178,23 @@ const Sidebar = ({
           >
             <Divider />
             <FlexBetween textTransform="none" gap="1rem" m="1rem 2rem 0 3rem">
-              <Box textAlign="left">
+              <Box textAlign="left" sx={{ display: "flex" }}>
                 <Typography
                   fontWeight="bold"
                   fontSize="1rem"
                   sx={{ color: theme.palette.blue[100] }}
                 >
-                  Logout
+                  ออกจากระบบ
                 </Typography>
+                <LogoutIcon
+                  sx={{
+                    color: theme.palette.blue[300],
+                    fontSize: "1rem ",
+                    mt: .6,
+                    ml: 1
+                  }}
+                />
               </Box>
-              <LogoutIcon
-                sx={{
-                  color: theme.palette.blue[300],
-                  fontSize: "1rem ",
-                  mt: "0.3rem",
-                  mr: "6rem",
-                }}
-              />
             </FlexBetween>
           </Box>
         </Drawer>

@@ -24,6 +24,9 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
   const isOpen = Boolean(anchorEl);
   const handleClick = (event) => setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
+  const handleUserinfo=()=>{
+    navigate("/userinfo")
+  }
   const handleLogout = () => {
     localStorage.removeItem("token");
     navigate("/");
@@ -84,7 +87,8 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
               onClose={handleClose}
               anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
             >
-              <MenuItem onClick={handleLogout}>ล็อกเอาท์</MenuItem>
+              <MenuItem onClick={handleUserinfo}>ข้อมูลส่วนตัว</MenuItem>
+              <MenuItem onClick={handleLogout}>ออกจากระบบ</MenuItem>
             </Menu>
           </FlexBetween>
         </FlexBetween>

@@ -70,10 +70,7 @@ const Employees = () => {
     navigate(`/archive/search/${id}`);
   };
   const columns = [
-    {
-      field: "id",
-      headerName: "ID",
-    },
+
     {
       field: "name",
       headerName: "ชื่อ",

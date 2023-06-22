@@ -80,13 +80,6 @@ const Archives = () => {
 
   const columns = [
     {
-      field: "id",
-      headerName: "ID",
-      renderCell: (params) => {
-        return <Box sx={{ cursor: "pointer" }}>{params.value}</Box>;
-      },
-    },
-    {
       field: "contract_id",
       headerName: "เลขที่สัญญา",
       valueGetter: (params) => {
@@ -117,35 +110,6 @@ const Archives = () => {
         return contract ? contract.end_date : "";
       },
     },
-
-    {
-      field: "employee_name",
-      headerName: "ชื่อ",
-      valueGetter: (params) => {
-        const employee = employees.find(
-          (employee) => employee.id === params.row.employee_id
-        );
-        return employee ? employee.name : "";
-      },
-    },
-    {
-      field: "employee_surname",
-      headerName: "นามสกุล",
-      valueGetter: (params) => {
-        const employee = employees.find(
-          (employee) => employee.id === params.row.employee_id
-        );
-        return employee ? employee.surname : "";
-      },
-    },
-    {
-      field: "department1",
-      headerName: "สังกัดกอง",
-    },
-    {
-      field: "department2",
-      headerName: "สังกัดฝ่าย",
-    },
     {
       field: "company_id",
       headerName: "ชื่อบริษัท",
@@ -166,6 +130,14 @@ const Archives = () => {
         }
         return "";
       },
+    },
+    {
+      field: "department1",
+      headerName: "สังกัดกอง",
+    },
+    {
+      field: "department2",
+      headerName: "สังกัดฝ่าย",
     },
     {
       field: "Functions",

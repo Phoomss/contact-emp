@@ -87,13 +87,6 @@ const ArchiveInfo = () => {
 
   const columns = [
     {
-      field: "id",
-      headerName: "ID",
-      renderCell: (params) => {
-        return <Box sx={{ cursor: "pointer" }}>{params.value}</Box>;
-      },
-    },
-    {
       field: "contract_id",
       headerName: "เลขที่สัญญา",
       valueGetter: (params) => {
