@@ -12,7 +12,7 @@ const Header = () => {
       <AppBar position="static" sx={{ backgroundColor: '#FFCC00',color: '#154295'}}>
         <Toolbar variant="dense">
           <IconButton edge="start" aria-label="menu" sx={{ mr: 2 }}>
-            <img src="/assets/logo.png" width="75px" alt="Logo" />
+            <img src="/assets/singleLogo.png" width="75px" alt="Logo" />
           </IconButton>
           <Typography variant="h6" color="inherit" component="div">
             ระบบจัดการลูกจ้างจ้างเหมาบริการ การฝ่ายผลิตแห่งประเทศไทย (กฟผ.)

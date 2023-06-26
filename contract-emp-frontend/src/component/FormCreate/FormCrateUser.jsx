@@ -153,7 +153,7 @@ const FormCrateUser = () => {
                 <MenuItem value="company">Company</MenuItem>
               </Select>
             </Grid>
-            {/* {role === "card" && ( */}
+            {role === "company" && (
             <Grid item xs={6}>
               <InputLabel>Company:</InputLabel>
               <Select
@@ -169,7 +169,7 @@ const FormCrateUser = () => {
                 ))}
               </Select>
             </Grid>
-            {/* )} */}
+            )}
             <Grid item xs={12}>
               <Button type="submit" variant="contained">
                 Create

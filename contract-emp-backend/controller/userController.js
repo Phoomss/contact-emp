@@ -76,7 +76,7 @@ const registerUser = async (req, res) => {
           });
       }
     } else if (req.user.role === "card") {
-      if (role === "company") {
+      if (role === "company" && company_id) {
         const newUser = new User({
           name,
           surname,

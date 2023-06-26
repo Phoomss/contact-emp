@@ -62,7 +62,7 @@ const Login = () => {
             }}
           >
             <Box sx={{ display: 'flex', }}>
-              <LoginIcon sx={{ width: 30, height: 30 }} />
+              <LoginIcon sx={{ width: 30, height: 30,marginRight:"25px" }} />
               <Typography component="h1" variant="h5">
                 เข้าสู่ระบบ
               </Typography>
