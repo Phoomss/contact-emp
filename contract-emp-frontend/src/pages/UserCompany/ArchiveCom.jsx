@@ -1,10 +1,10 @@
-import { React, useEffect } from "react";
-import UserService from "../services/UserService";
-import { Box } from "@mui/material";
+import React, { useEffect } from "react";
+import UserService from "../../services/UserService";
 import { useNavigate } from "react-router-dom";
-import ShowCompany from "component/Dashboard/ShowCompany";
+import { Box } from "@mui/material";
+import ArchiveComData from "component/UseCompany/ArchiveComData";
 
-const DashboardCompany = () => {
+function ArchiveCom() {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,11 +19,12 @@ const DashboardCompany = () => {
         });
     }
   }, [navigate]);
+
   return (
     <Box m="1.5rem 2.5rem">
-      <ShowCompany /> :
+      <ArchiveComData />
     </Box>
   );
-};
+}
 
-export default DashboardCompany;
+export default ArchiveCom;

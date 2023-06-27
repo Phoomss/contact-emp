@@ -4,11 +4,6 @@ import UserService from "services/UserService";
 const UserDataGrid = () => {
   const [userInfo, setUserInfo] = useState(null);
 
-  useEffect(() => {
-    // เรียกใช้งาน getUserInfo เมื่อคอมโพเนนต์ถูกโหลด
-    fetchUserInfo();
-  }, []);
-
   const fetchUserInfo = async () => {
     try {
       const response = await UserService.getUserInfo();
@@ -18,6 +13,9 @@ const UserDataGrid = () => {
       console.error("Error fetching user info:", error);
     }
   };
+  useEffect(() => {
+    fetchUserInfo();
+  }, []);
 
   return (
     <div>
@@ -27,6 +25,7 @@ const UserDataGrid = () => {
           <p>Name: {userInfo.name}</p>
           <p>Email: {userInfo.email}</p>
           <p>Role: {userInfo.role}</p>
+          <p>Company: {userInfo.company_id}</p>
         </div>
       ) : (
         <p>Loading...</p>

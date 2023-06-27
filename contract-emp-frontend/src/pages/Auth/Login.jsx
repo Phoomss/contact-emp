@@ -25,7 +25,7 @@ const Login = () => {
         if (response.data.token) {
           localStorage.setItem("token", response.data.token);
           swal(`Welcome`, "", "success");
-          navigate("/company");
+          navigate("/dashboard");
         } else {
           setError("Invalid credentials");
           swal("ไม่พบบัญชีของคุณ", "", "error");

@@ -54,30 +54,10 @@ const registerUser = async (req, res) => {
       return res.json({ message: "Company users can't create other users!" });
     }
 
-    if (req.user.role === "admin") {
-      const newUser = new User({
-        name,
-        surname,
-        telephone,
-        email,
-        role,
-        username,
-        password: hashedPassword,
-        company_id,
-      });
-      const savedUser = await newUser.save();
-
-      if (savedUser) {
-        console.log(savedUser.dataValues);
-        return res.status(201)
-          .json({
-            message: "User created successfully!",
-            data: savedUser.dataValues,
-          });
-      }
-    } else if (req.user.role === "card") {
+    if (req.user.role === "admin" || req.user.role === "card") {
+      let newUser;
       if (role === "company" && company_id) {
-        const newUser = new User({
+        newUser = new User({
           name,
           surname,
           telephone,
@@ -87,27 +67,41 @@ const registerUser = async (req, res) => {
           password: hashedPassword,
           company_id,
         });
-        const savedUser = await newUser.save();
-
-        if (savedUser) {
-          console.log(savedUser.dataValues);
-          return res.status(201).json({
-            message: "User created successfully!",
-            data: savedUser.dataValues,
-          });
-        }
+      } else if (role === "card") {
+        newUser = new User({
+          name,
+          surname,
+          telephone,
+          email,
+          role,
+          username,
+          password: hashedPassword,
+          company_id: null, // กำหนดค่า company_id เป็น null สำหรับ role เป็น "card"
+        });
       } else {
         return res.json({
           message: "Card users can't create users with role 'card' or 'admin'!",
         });
       }
+
+      const savedUser = await newUser.save();
+
+      if (savedUser) {
+        console.log(savedUser.dataValues);
+        return res.status(201).json({
+          message: "User created successfully!",
+          data: savedUser.dataValues,
+        });
+      }
     }
+
     console.log(req.body);
   } catch (error) {
     console.log("Error:", error);
     return res.json({ error: "Cannot register user at the moment!" });
   }
 };
+
 
 // login
 const loginUser = async (req, res) => {

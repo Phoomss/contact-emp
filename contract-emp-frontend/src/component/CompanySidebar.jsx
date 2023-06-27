@@ -35,7 +35,7 @@ const navItems = [
     icon: <DashboardIcon />,
   },
   {
-    text: "Company",
+    text: "CompaniesCom",
     thaitext: "ข้อมูลบริษัท",
     icon: <ApartmentOutlined />,
   },
@@ -45,7 +45,7 @@ const navItems = [
     icon: <GroupsOutlined />,
   },
   {
-    text: "Archive",
+    text: "ArchiveCom",
     thaitext: "ข้อมูลสัญญาจ้างลูกจ้าง",
     icon: <ArchiveOutlinedIcon />,
   },

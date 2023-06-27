@@ -73,7 +73,7 @@ const getInfoCompany = async (req, res) => {
 
 
   const getAllCompanies = async (req, res) => {
-    if (req.user.role !== "admin" && req.user.role !== "card") {
+    if (req.user.role !== "admin" && req.user.role !== "card" && req.user.role !== "company") {
       return res.status(401).json({ message: "Unauthorized" });
     }
   
@@ -88,7 +88,7 @@ const getInfoCompany = async (req, res) => {
   
 
   const getCompanyWithAllParams = async (req, res) => {
-    if (req.user.role !== "admin" && req.user.role !== "card") {
+    if (req.user.role !== "admin" && req.user.role !== "card" ) {
       return res.status(401).json({ message: "Unauthorized" });
     }
   

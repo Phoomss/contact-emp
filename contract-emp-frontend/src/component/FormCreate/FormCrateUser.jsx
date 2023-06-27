@@ -35,7 +35,7 @@ const FormCrateUser = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const responseUser = await UserService.postRegister({
+      const requestData = {
         name: name,
         surname: surname,
         telephone: telephone,
@@ -43,8 +43,11 @@ const FormCrateUser = () => {
         role: role,
         username: username,
         password: password,
-        company_id: company_id,
-      });
+        company_id: role === "card" ? null : company_id, // กำหนดค่า company_id เป็น null เมื่อ role เป็น "card"
+      };
+
+      const responseUser = await UserService.postRegister(requestData);
+      
       if (responseUser.status === 201) {
         swal("เพิ่มผู้ใช้งานสำเร็จ", "", "success");
         console.log(responseUser.data);

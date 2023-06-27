@@ -1,7 +1,7 @@
 import http from "./http-common";
 
 const getArchives = () => {
-  return http.get("/archive/");
+  return http.get("/archive");
 };
 
 const postArchive = (archiveData) => {

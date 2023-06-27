@@ -52,11 +52,10 @@ const getAllArchives = async (req, res) => {
 
 const getArchiveWithAllParams = async (req, res) => {
   const whereClause = {};
+  // ตรวจสอบบทบาทของผู้ใช้งาน
   if (req.user.role === "company") {
-    whereClause['$contract.company_id$'] = req.user.company_id;
-    whereClause['$employee.createby$'] = req.user.company_id;
+    // ไม่มีการกำหนดเงื่อนไขเพิ่มเติมสำหรับบทบาท "company"
   }
-
 
   const { id, employee_id, contract_id, department1, department2, department3, remark, company_id } = req.query;
 
@@ -94,7 +93,7 @@ const getArchiveWithAllParams = async (req, res) => {
   })
 
   if (archives.length === 0) {
-    return res.status(404).json({ message: "No Archives found with the give parameters" });
+    return res.status(404).json({ message: "No Archives found with the given parameters" });
   }
 
   return res.status(200).json(archives)

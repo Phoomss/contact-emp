@@ -26,7 +26,9 @@ import UpdateUser from "pages/User/UpdateUser";
 import UserAll from "pages/User/UserAll";
 import UserInfo from "pages/UserInfo";
 import ArchiveDetails from 'pages/Archive/ArchiveDetails';
-import DashboardCompany from "pages/DashboardCompany";
+import DashboardCompany from "pages/UserCompany/DashboardCompany";
+import ArchiveCom from "pages/UserCompany/ArchiveCom";
+import CompaniesCom from "pages/UserCompany/CompaniesCom";
 
 function App() {
   const mode = useSelector((state) => state.global.mode);
@@ -37,12 +39,16 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route  path="/" element={<Login />} />
           <Route element={<MainLayout />}>
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/DashboardCompany" element={<DashboardCompany/>}/>
+
             <Route path="/company" element={<Company />} />
             <Route path="/createcompany" element={<CreateCompany />} />
             <Route path="/updatecompany/:id" element={<UpdateCompany />} />
+            <Route path="/archivecom" element={<ArchiveCom />} />
+            <Route path="/CompaniesCom" element={<CompaniesCom />} />
 
             <Route path="/contract" element={<Contract />} />
             <Route path="/createcontract" element={<CreateContract />} />
@@ -61,7 +67,7 @@ function App() {
             <Route path="/userAll" element={<UserAll />} />
             <Route path="/createuser" element={<CreateUser />} />
             <Route path="/updateuser/:id" element={<UpdateUser />} />
-            <Route path="/DashboardCompany" element={<DashboardCompany/>}/>
+          
           </Route>
         </Routes>
       </ThemeProvider>
