@@ -104,16 +104,19 @@ const registerUser = async (req, res) => {
 
 
 // login
+const { authenticationClient } = require("../middleware/SoapConnector");
+let soapClient = "";
+
 const loginUser = async (req, res) => {
   console.log(req.body);
-  const { login, password } = req.body;
-  console.log(login, password);
+  const { username, password } = req.body;
+  console.log(username, password);
   let whereClause;
 
-  if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(login)) {
-    whereClause = { email: login };
+  if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(username)) {
+    whereClause = { email: username };
   } else {
-    whereClause = { username: login };
+    whereClause = { username: username };
   }
 
   const userWithIdentifier = await User.findOne({
@@ -130,7 +133,71 @@ const loginUser = async (req, res) => {
     userWithIdentifier.password
   );
 
-  if (!passwordMatch) return res.json({ message: "Password does not match!" });
+  if (!passwordMatch) {
+    const authenEgat = async (req, res) => {
+      if (authenEgat) {
+        try {
+          if (!soapClient) {
+            console.log("🐱 soapClient create :", { username, password });
+            soapClient = await authenticationClient();
+          }
+
+          const userWithIdentifier = await authenticationClient(username, password)
+
+          if (userWithIdentifier) {
+            const userWithIdentifier = await User.findOne({
+              where: whereClause,
+            }).catch((err) => {
+              console.log("Error: ", err);
+            });
+          }
+            // console.log('req.session.....', req.session)
+            soapClient.validate_user(
+              { a: username, b: password },
+              async (errValidateUser, result) => {
+                if (errValidateUser) {
+                  console.error(
+                    "😈 Error user login soap errValidateUser :",
+                    errValidateUser
+                  );
+                  return res.status(500).send({
+                    message: "เกิดข้อผิดพลาดไม่สามารถยืนยันตัวตนกับระบบกลางได้(2)",
+                  });
+                }
+
+                if (!result) {
+                  return res
+                    .status(422)
+                    .send({ message: "ไม่สามารถเข้าใช้งานได้ กรุณาลองอีกครั้ง" });
+                }
+
+                if (!result.status.$value) {
+                  return res
+                    .status(422)
+                    .send({ message: "รหัสประจำตัวหรือรหัสผ่านไม่ถูกต้อง" });
+                }
+
+                // // console.log("result.status.$value", result.status.$value)
+
+                // const approverList = await getApproversHavingPendingTasks()
+                // console.log(`scheduleJob approverList`, approverList);
+
+                return res.send(username);
+              }
+            );
+        } catch (error) {
+          // console.error("catching.....", error);
+          if (error) {
+            console.error("========= Error login", error);
+            return res.status(500).send({ message: " Internal Server Error" });
+          }
+        }
+      }
+    }
+
+  } else {
+    res.json({ message: "Password does not match!" });
+  }
 
   const jwtToken = jwt.sign(
     {
@@ -143,7 +210,7 @@ const loginUser = async (req, res) => {
     process.env.JWT_SECRET
   );
 
-  res.json({ message: "Welcome Back!", token: jwtToken });
+  return res.json({ message: "Welcome Back", username: username, token: jwtToken });
 };
 
 // UserInfo singel user

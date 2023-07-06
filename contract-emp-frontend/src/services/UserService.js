@@ -7,12 +7,8 @@ const getUserInfo = () => {
   return http.get("/user/info");
 };
 
-const postUserLogin = (credentials) => {
-  return http.post("/user/login", credentials).then((response) => {
-    const token = response.data.token;
-    localStorage.setItem("token", token);
-    return response;
-  });
+const postUserLogin = (loginData) => {
+  return http.post(`/user/login`,loginData)
 };
 
 const postRegister = (userData) => {

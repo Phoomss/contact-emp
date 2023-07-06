@@ -31,6 +31,7 @@
     "react-bootstrap-icons": "^1.10.2",
     "react-datepicker": "^4.10.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.45.1",
     "react-pro-sidebar": "^1.0.0",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.8.1",

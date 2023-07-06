@@ -1,0 +1,45 @@
+const loginUser = async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    if (!username || !password) {
+      console.log("🐱 soapClient create :", { username, password });
+      return res.status(400).send({ message: "กรุณากรอกข้อมูลให้ครบถ้วน" });
+    }
+
+    if (!soapClient) {
+      console.log("🐱 soapClient create :", { username, password });
+      soapClient = await authenticationClient();
+    }
+    const user = await authenticationClient(username, password);
+
+    if (user) {
+      const userData = User.findOne ({
+        where: {username:User},
+      }).catch((err) => {
+        console.log("Error: ", err);
+      });
+
+      if (userData) {
+        const jwtToken = jwt.sign(
+          {
+            id: userData.id,
+            email: userData.email,
+            username: userData.username,
+            password: userData.password,
+            role: userData.role,
+          },
+          process.env.JWT_SECRET
+        );
+
+        return res.json({message:"Welcome Back",username:username, token:jwtToken});
+      } else {
+        return res.status(403).send({ message: "ไม่มีสิทธิ์ในการเข้าถึง" });
+      }
+    } else {
+      return res.status(422).send({ message: "ไม่สามารถเข้าใช้งานได้ กรุณาลองอีกครั้ง" });
+    }
+  } catch (error) {
+    console.error("========= Error login", error);
+    return res.status(500).send({ message: " Internal Server Error" });
+  }
+};

@@ -5,11 +5,12 @@ require("./auth/passport")
 
 const app = express()
 
-var corOptions = {
-    origin: '*'
-}
-
-app.use(cors(corOptions))
+var corsOptions = {
+    origin: "*",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  };
+  
+app.use(cors(corsOptions));
 
 app.use(express.json())
 
@@ -20,11 +21,13 @@ const companyRoute = require('./routes/companyRoute')
 const contractRoute = require('./routes/contractRoute')
 const employeeRoute = require('./routes/employeeRoute')
 const userRoute = require('./routes/userRoute')
+const hrRoute = require('./routes/hr.route')
 
 app.use('/archive',(archiveRoute))
 app.use('/company',(companyRoute))
 app.use('/contract',(contractRoute))
 app.use('/employee',(employeeRoute))
+app.use('/emp',hrRoute)
 app.use('/user',(userRoute))
 
 const PORT = process.env.PORT || 8080
