@@ -1,45 +1,43 @@
 const loginUser = async (req, res) => {
-  try {
+    console.log(req.body);
     const { username, password } = req.body;
-    if (!username || !password) {
-      console.log("🐱 soapClient create :", { username, password });
-      return res.status(400).send({ message: "กรุณากรอกข้อมูลให้ครบถ้วน" });
-    }
-
-    if (!soapClient) {
-      console.log("🐱 soapClient create :", { username, password });
-      soapClient = await authenticationClient();
-    }
-    const user = await authenticationClient(username, password);
-
-    if (user) {
-      const userData = User.findOne ({
-        where: {username:User},
-      }).catch((err) => {
-        console.log("Error: ", err);
-      });
-
-      if (userData) {
-        const jwtToken = jwt.sign(
-          {
-            id: userData.id,
-            email: userData.email,
-            username: userData.username,
-            password: userData.password,
-            role: userData.role,
-          },
-          process.env.JWT_SECRET
-        );
-
-        return res.json({message:"Welcome Back",username:username, token:jwtToken});
-      } else {
-        return res.status(403).send({ message: "ไม่มีสิทธิ์ในการเข้าถึง" });
-      }
+    console.log(username, password);
+    let whereClause;
+  
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(username)) {
+      whereClause = { email: username };
     } else {
-      return res.status(422).send({ message: "ไม่สามารถเข้าใช้งานได้ กรุณาลองอีกครั้ง" });
+      whereClause = { username: username };
     }
-  } catch (error) {
-    console.error("========= Error login", error);
-    return res.status(500).send({ message: " Internal Server Error" });
-  }
-};
+  
+    const userWithIdentifier = await User.findOne({
+      where: whereClause,
+    }).catch((err) => {
+      console.log("Error: ", err);
+    });
+  
+    if (!userWithIdentifier)
+      return res.json({ message: "Username or email not found!" });
+  
+    const passwordMatch = await bcrypt.compare(
+      password,
+      userWithIdentifier.password
+    );
+  
+    if (!passwordMatch) {
+      res.json({ message: "Password does not match!" });
+    } 
+  
+    const jwtToken = jwt.sign(
+      {
+        id: userWithIdentifier.id,
+        email: userWithIdentifier.email,
+        username: userWithIdentifier.username,
+        password: userWithIdentifier.password,
+        role: userWithIdentifier.role,
+      },
+      process.env.JWT_SECRET
+    );
+  
+    return res.json({ message: "Welcome Back", username: username, token: jwtToken });
+  };

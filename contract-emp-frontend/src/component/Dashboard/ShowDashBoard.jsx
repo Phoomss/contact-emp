@@ -7,12 +7,13 @@ import { Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import EmployeeService from "services/EmployeeService";
 import CompanyService from "services/CompanyService";
-import SupervisedUserCircleIcon from "@mui/icons-material/SupervisedUserCircle";
+import Description from "@mui/icons-material/Description";
 import ApartmentIcon from "@mui/icons-material/Apartment";
 import PersonIcon from "@mui/icons-material/Person";
-import GavelIcon from "@mui/icons-material/Gavel";
+import BadgeIcon from '@mui/icons-material/Badge';
 import ContractService from "services/ContractService";
 import UserService from "services/UserService";
+import { Container } from "react-bootstrap";
 
 const ShowDashBoard = () => {
   const navigate = useNavigate();
@@ -65,60 +66,91 @@ const ShowDashBoard = () => {
   }, []);
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={2} columns={16}>
-        <Grid item xs={8}>
-          <Item
-            onClick={() => {
-              navigate("/employee");
-            }}
-            sx={{ boxShadow: 3 }}
+    <Box
+      component="main"
+      sx={{
+        flexGrow: 1,
+        py: 8
+      }}
+    >
+      <Container maxWidth="xl">
+        <Grid
+          container
+          spacing={3}
+        >
+          <Grid
+            xs={12}
+            sm={6}
+            lg={3}
           >
-            <SupervisedUserCircleIcon sx={{ fontSize: 40 }} />
-            <Typography variant="h3">จำนวนพนักงาน</Typography>
-            <Typography variant="h5">{employeeCount} คน</Typography>
-          </Item>
-        </Grid>
+            <Item
+              onClick={() => {
+                navigate("/employee");
+              }}
+              sx={{ boxShadow: 3 ,marginRight:2,marginBottom:2,borderRadius:5}}
+              
+            >
+              <Description sx={{ height: '100%',fontSize:'100px' }} />
+              <Typography variant="h3">ข้อมูลสัญญาจ้าง</Typography>
+              <Typography variant="h5">{contractCount} สัญญาจ้าง</Typography>
+            </Item>
+          </Grid>
 
-        <Grid item xs={8}>
-          <Item
-            onClick={() => {
-              navigate("/company");
-            }}
-            sx={{ boxShadow: 3 }}
+          <Grid
+            xs={12}
+            sm={6}
+            lg={3}
           >
-            <ApartmentIcon sx={{ fontSize: 40 }} />
-            <Typography variant="h3">จำนวนบริษัท</Typography>
-            <Typography variant="h5">{companyCount}</Typography>
-          </Item>
-        </Grid>
+            <Item
+              onClick={() => {
+                navigate("/employee");
+              }}
+              sx={{ boxShadow: 3 ,marginRight:2,marginBottom:2,borderRadius:5}}
+              
+            >
+              <ApartmentIcon sx={{ height: '100%',fontSize:'100px' }} />
+              <Typography variant="h3">ข้อมูลบริษัท</Typography>
+              <Typography variant="h5">{companyCount} บริษัท</Typography>
+            </Item>
+          </Grid>
 
-        <Grid item xs={8}>
-          <Item
-            onClick={() => {
-              navigate("/contract");
-            }}
-            sx={{ boxShadow: 3 }}
+          <Grid
+            xs={12}
+            sm={6}
+            lg={3}
           >
-            <GavelIcon sx={{ fontSize: 40 }} />
-            <Typography variant="h3">จำนวนสัญญาจ้าง</Typography>
-            <Typography variant="h5">{contractCount}</Typography>
-          </Item>
-        </Grid>
+            <Item
+              onClick={() => {
+                navigate("/employee");
+              }}
+              sx={{ boxShadow: 3 ,marginRight:2,marginBottom:2,borderRadius:5}}
+              
+            >
+              <BadgeIcon sx={{ height: '100%',fontSize:'100px' }} />
+              <Typography variant="h3">จำนวนพนักงาน</Typography>
+              <Typography variant="h5">{employeeCount} คน</Typography>
+            </Item>
+          </Grid>
 
-        <Grid item xs={8}>
-          <Item
-            onClick={() => {
-              navigate("/userall");
-            }}
-            sx={{ boxShadow: 3 }}
+          <Grid
+            xs={12}
+            sm={6}
+            lg={3}
           >
-            <PersonIcon sx={{ fontSize: 40 }} />
-            <Typography variant="h3">จำนวนผู้ใช้งาน</Typography>
-            <Typography variant="h5">{userCount} คน</Typography>
-          </Item>
+            <Item
+              onClick={() => {
+                navigate("/employee");
+              }}
+              sx={{ boxShadow: 3 ,marginRight:2,marginBottom:2,borderRadius:5}}
+              
+            >
+              <PersonIcon sx={{ height: '100%',fontSize:'100px' }} />
+              <Typography variant="h3">จำนวนผู้ใช้งาน</Typography>
+              <Typography variant="h5">{userCount} คน</Typography>
+            </Item>
+          </Grid>
         </Grid>
-      </Grid>
+      </Container>
     </Box>
   );
 };
