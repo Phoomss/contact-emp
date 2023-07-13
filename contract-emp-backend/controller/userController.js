@@ -147,7 +147,7 @@ const loginUser = async (req, res) => {
         process.env.JWT_SECRET
       );
 
-      return res.json({ message: "Welcome Back", username: username, token: jwtToken });
+      return res.json({ message: "Welcome Back", username: username, token: jwtToken, user: {} });
     } else {
       //egat authen
       if (!username || !password) {
@@ -199,13 +199,14 @@ const loginUser = async (req, res) => {
 
 
           // get hr data from hr api
-          let output = await (getHrData(username)).data.result.data[0].person_code
-          console.log(output.data.result.data[0].person_code);
+          let output = await (getHrData(username))
+          let person = output.data.result.data[0]
+          console.log(person.person_code);
           let userData = {
-            emp_id: output.data.result.data[0].person_code,
-            firstname: output.data.result.data[0].person_thai_thai_firstname,
-            lastname: output.data.result.data[0].person_thai_thai_lastname,
-            position: output.data.result.data[0].person_position,
+            emp_id: person.person_code,
+            firstname: person.person_thai_thai_firstname,
+            lastname: person.person_thai_thai_lastname,
+            position: person.person_position,
           }
           return res.json({
             message: "Welcome Back",
