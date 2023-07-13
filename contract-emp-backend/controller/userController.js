@@ -6,6 +6,9 @@ const saltRounds = 10;
 const User = db.user;
 const Company = db.company;
 
+require('dotenv').config({ path: './config.env' })
+const axios = require("axios");
+
 const createAdminUser = async (req, res) => {
   const { name, surname, email, password } = req.body;
 
@@ -125,31 +128,149 @@ const loginUser = async (req, res) => {
     console.log("Error: ", err);
   });
 
-  if (!userWithIdentifier)
-    return res.json({ message: "Username or email not found!" });
+  if (userWithIdentifier) {
+    // return res.json({ message: "Username or email not found!" });
 
-  const passwordMatch = await bcrypt.compare(
-    password,
-    userWithIdentifier.password
-  );
+    const passwordMatch = await bcrypt.compare(
+      password,
+      userWithIdentifier.password);
 
-  if (!passwordMatch) {
+    if (passwordMatch) {
+      const jwtToken = jwt.sign(
+        {
+          id: userWithIdentifier.id,
+          email: userWithIdentifier.email,
+          username: userWithIdentifier.username,
+          password: userWithIdentifier.password,
+          role: userWithIdentifier.role,
+        },
+        process.env.JWT_SECRET
+      );
+
+      return res.json({ message: "Welcome Back", username: username, token: jwtToken });
+    } else {
+      //egat authen
+      if (!username || !password) {
+        console.log("🐱 soapClient create :", { username, password });
+        return res.status(400).send({ message: "กรุณากรอกข้อมูลให้ครบถ้วน" });
+      }
+      if (!soapClient) {
+        console.log("🐱 soapClient create :", { username, password });
+        soapClient = await authenticationClient();
+      }
+      const user = soapClient;
+
+      soapClient.validate_user(
+        { a: username, b: password },
+        async (errValidateUser, result) => {
+          if (errValidateUser) {
+            console.error(
+              "😈 Error user login soap errValidateUser :",
+              errValidateUser
+            );
+            return res.status(500).send({
+              message: "เกิดข้อผิดพลาดไม่สามารถยืนยันตัวตนกับระบบกลางได้(2)",
+            });
+          }
+
+          if (!result) {
+            return res
+              .status(422)
+              .send({ message: "ไม่สามารถเข้าใช้งานได้ กรุณาลองอีกครั้ง" });
+          }
+
+          if (!result.status.$value) {
+            return res
+              .status(422)
+              .send({ message: "รหัสประจำตัวหรือรหัสผ่านไม่ถูกต้อง" });
+          }
+
+          const jwtToken = jwt.sign(
+            {
+              id: userWithIdentifier.id,
+              email: userWithIdentifier.email,
+              username: userWithIdentifier.username,
+              password: userWithIdentifier.password,
+              role: userWithIdentifier.role,
+            },
+            process.env.JWT_SECRET
+          );
+
+
+
+          // get hr data from hr api
+          let output = await (getHrData(username)).data.result.data[0].person_code
+          console.log(output.data.result.data[0].person_code);
+          let userData = {
+            emp_id: output.data.result.data[0].person_code,
+            firstname: output.data.result.data[0].person_thai_thai_firstname,
+            lastname: output.data.result.data[0].person_thai_thai_lastname,
+            position: output.data.result.data[0].person_position,
+          }
+          return res.json({
+            message: "Welcome Back",
+            username: username,
+            token: jwtToken,
+            user: userData
+          });
+
+          // return res.send(username,toke);
+        }
+      );
+    }
+  } else {
     res.json({ message: "Password does not match!" });
-  } 
+  }
 
-  const jwtToken = jwt.sign(
-    {
-      id: userWithIdentifier.id,
-      email: userWithIdentifier.email,
-      username: userWithIdentifier.username,
-      password: userWithIdentifier.password,
-      role: userWithIdentifier.role,
-    },
-    process.env.JWT_SECRET
-  );
-
-  return res.json({ message: "Welcome Back", username: username, token: jwtToken });
 };
+
+const getHrData = async (empn) => {
+  let empParam = "work_locations,positions"
+  let url = `https://hrapi.egat.co.th/api/v1/persons?filter[PersonCode]=00${empn}&include=${empParam}`;
+  let _token = process.env.HR_API_TOKEN
+  console.log(url)
+  const header = {
+    headers: {
+      Authorization: "Bearer " + _token, //the token is a variable which holds the token
+    },
+  };
+  let result = '';
+  let message = '';
+  let status_code = '';
+
+  await axios.get(url, header)
+    .then(
+      (response) => {
+        // console.log(response.data)
+        message = 'เข้าสู่ระบบ',
+          status_code = 200,
+          result = response.data
+      }
+
+
+    ).catch((e) => console.log(e))
+
+  if (!result.data) {
+    message = 'ข้อมูลของท่านไม่ถูกต้อง',
+      status_code = 422,
+      result = ""
+  }
+  // console.log(result);
+  // data = {
+  //   emp_id: result.data[0].person_code,
+  //   firstname: result.data[0].person_thai_thai_firstname,
+
+  // }
+
+  // return result;
+  let res = {
+    message,
+    status_code,
+    data: { result }
+  }
+  console.log(res);
+  return res;
+}
 
 // UserInfo singel user
 const getInfoUser = async (req, res) => {

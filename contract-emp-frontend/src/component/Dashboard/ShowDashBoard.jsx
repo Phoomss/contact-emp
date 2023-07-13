@@ -14,6 +14,10 @@ import BadgeIcon from '@mui/icons-material/Badge';
 import ContractService from "services/ContractService";
 import UserService from "services/UserService";
 import { Container } from "react-bootstrap";
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import BarChart from "component/Chart/BarChart";
+import DonutChart from "component/Chart/DonutChart";
 
 const ShowDashBoard = () => {
   const navigate = useNavigate();
@@ -70,13 +74,13 @@ const ShowDashBoard = () => {
       component="main"
       sx={{
         flexGrow: 1,
-        py: 8
+     
       }}
     >
       <Container maxWidth="xl">
         <Grid
           container
-          spacing={3}
+          spacing={2}
         >
           <Grid
             xs={12}
@@ -87,10 +91,10 @@ const ShowDashBoard = () => {
               onClick={() => {
                 navigate("/employee");
               }}
-              sx={{ boxShadow: 3 ,marginRight:2,marginBottom:2,borderRadius:5}}
-              
+              sx={{ boxShadow: 3, marginRight: 2, marginBottom: 2, borderRadius: 5 }}
+
             >
-              <Description sx={{ height: '100%',fontSize:'100px' }} />
+              <Description sx={{ height: '100%', fontSize: '70PX'}} />
               <Typography variant="h3">ข้อมูลสัญญาจ้าง</Typography>
               <Typography variant="h5">{contractCount} สัญญาจ้าง</Typography>
             </Item>
@@ -105,10 +109,10 @@ const ShowDashBoard = () => {
               onClick={() => {
                 navigate("/employee");
               }}
-              sx={{ boxShadow: 3 ,marginRight:2,marginBottom:2,borderRadius:5}}
-              
+              sx={{ boxShadow: 3, marginRight: 2, marginBottom: 2, borderRadius: 5 }}
+
             >
-              <ApartmentIcon sx={{ height: '100%',fontSize:'100px' }} />
+              <ApartmentIcon sx={{ height: '100%', fontSize: '70PX' }} />
               <Typography variant="h3">ข้อมูลบริษัท</Typography>
               <Typography variant="h5">{companyCount} บริษัท</Typography>
             </Item>
@@ -123,10 +127,10 @@ const ShowDashBoard = () => {
               onClick={() => {
                 navigate("/employee");
               }}
-              sx={{ boxShadow: 3 ,marginRight:2,marginBottom:2,borderRadius:5}}
-              
+              sx={{ boxShadow: 3, marginRight: 2, marginBottom: 2, borderRadius: 5 }}
+
             >
-              <BadgeIcon sx={{ height: '100%',fontSize:'100px' }} />
+              <BadgeIcon sx={{ height: '100%', fontSize: '70PX' }} />
               <Typography variant="h3">จำนวนพนักงาน</Typography>
               <Typography variant="h5">{employeeCount} คน</Typography>
             </Item>
@@ -141,17 +145,32 @@ const ShowDashBoard = () => {
               onClick={() => {
                 navigate("/employee");
               }}
-              sx={{ boxShadow: 3 ,marginRight:2,marginBottom:2,borderRadius:5}}
-              
+              sx={{ boxShadow: 3, marginRight: 2, marginBottom: 2, borderRadius: 5 }}
+
             >
-              <PersonIcon sx={{ height: '100%',fontSize:'100px' }} />
+              <PersonIcon sx={{ height: '100%', fontSize: '70PX' }} />
               <Typography variant="h3">จำนวนผู้ใช้งาน</Typography>
               <Typography variant="h5">{userCount} คน</Typography>
             </Item>
           </Grid>
+          <Grid container spacing={2}>
+            <Grid item xs={8}>
+              <Card sx={{ height: 60 + 'vh', boxShadow: 3, borderRadius: 5 }}>
+                <CardContent>
+                  <BarChart />
+                </CardContent>
+              </Card>
+            </Grid>
+            <Grid item xs={4}>
+              <Card sx={{ height: 60 + 'vh', boxShadow: 3, borderRadius: 5 }}>
+                <CardContent> <DonutChart /></CardContent>
+              </Card>
+            </Grid>
+          </Grid>
         </Grid>
       </Container>
     </Box>
+
   );
 };
 

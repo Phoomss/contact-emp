@@ -1,43 +1,52 @@
+// login
+const { authenticationClient } = require("../middleware/SoapConnector");
+let soapClient = "";
+
 const loginUser = async (req, res) => {
-    console.log(req.body);
-    const { username, password } = req.body;
-    console.log(username, password);
-    let whereClause;
-  
-    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(username)) {
-      whereClause = { email: username };
-    } else {
-      whereClause = { username: username };
-    }
-  
-    const userWithIdentifier = await User.findOne({
-      where: whereClause,
-    }).catch((err) => {
-      console.log("Error: ", err);
-    });
-  
-    if (!userWithIdentifier)
-      return res.json({ message: "Username or email not found!" });
-  
-    const passwordMatch = await bcrypt.compare(
-      password,
-      userWithIdentifier.password
-    );
-  
-    if (!passwordMatch) {
-      res.json({ message: "Password does not match!" });
-    } 
-  
-    const jwtToken = jwt.sign(
-      {
-        id: userWithIdentifier.id,
-        email: userWithIdentifier.email,
-        username: userWithIdentifier.username,
-        password: userWithIdentifier.password,
-        role: userWithIdentifier.role,
-      },
-      process.env.JWT_SECRET
-    );
-  
-    return res.json({ message: "Welcome Back", username: username, token: jwtToken });
-  };
+  console.log(req.body);
+  const { username, password } = req.body;
+  console.log(username, password);
+  let whereClause;
+
+  if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(username)) {
+    whereClause = { email: username };
+  } else {
+    whereClause = { username: username };
+  }
+
+  const userWithIdentifier = await User.findOne({
+    where: whereClause,
+  }).catch((err) => {
+    console.log("Error: ", err);
+  });
+
+  if (!userWithIdentifier)
+    return res.json({ message: "Username or email not found!" });
+
+  const passwordMatch = await bcrypt.compare(
+    password,
+    userWithIdentifier.password
+  );
+
+  if (!passwordMatch) {
+    res.json({ message: "Password does not match!" });
+  } 
+
+  const jwtToken = jwt.sign(
+    {
+      id: userWithIdentifier.id,
+      email: userWithIdentifier.email,
+      username: userWithIdentifier.username,
+      password: userWithIdentifier.password,
+      role: userWithIdentifier.role,
+    },
+    process.env.JWT_SECRET
+  );
+
+  return res.json({ message: "Welcome Back", username: username, token: jwtToken });
+};
+
+{
+  "username":"594623",
+  "password":"engR*U063557"
+}
