@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
-import UserService from "../services/UserService";
+import UserService from "../../services/UserService";
 import { useNavigate } from "react-router-dom";
 import { Button, Box } from "@mui/material";
 
 import FlexBetween from "component/FlexBetween";
 import { useTheme } from "@mui/material";
 import { DownloadOutlined } from "@mui/icons-material";
-import UserInfoDataGrid from "../component/DataGrid/UserInfoDataGrid";
+import UserInfoDataGrid from "../../component/DataGrid/UserInfoDataGrid";
 
 function UserInfo() {
   const navigate = useNavigate();

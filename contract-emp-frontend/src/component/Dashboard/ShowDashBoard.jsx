@@ -17,7 +17,6 @@ import { Container } from "react-bootstrap";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import BarChart from "component/Chart/BarChart";
-import DonutChart from "component/Chart/DonutChart";
 
 const ShowDashBoard = () => {
   const navigate = useNavigate();
@@ -154,16 +153,11 @@ const ShowDashBoard = () => {
             </Item>
           </Grid>
           <Grid container spacing={2}>
-            <Grid item xs={8}>
+            <Grid item xs={12} >
               <Card sx={{ height: 60 + 'vh', boxShadow: 3, borderRadius: 5 }}>
                 <CardContent>
                   <BarChart />
                 </CardContent>
-              </Card>
-            </Grid>
-            <Grid item xs={4}>
-              <Card sx={{ height: 60 + 'vh', boxShadow: 3, borderRadius: 5 }}>
-                <CardContent> <DonutChart /></CardContent>
               </Card>
             </Grid>
           </Grid>

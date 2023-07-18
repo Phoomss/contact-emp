@@ -24,7 +24,7 @@ import MainLayout from "./layouts/MainLayout";
 import CreateUser from "pages/User/CreateUser";
 import UpdateUser from "pages/User/UpdateUser";
 import UserAll from "pages/User/UserAll";
-import UserInfo from "pages/UserInfo";
+import UserInfo from "pages/User/UserInfo";
 import ArchiveDetails from 'pages/Archive/ArchiveDetails';
 import DashboardCompany from "pages/UserCompany/DashboardCompany";
 import ArchiveCom from "pages/UserCompany/ArchiveCom";
