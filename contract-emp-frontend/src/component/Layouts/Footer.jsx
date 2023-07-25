@@ -10,7 +10,7 @@ const Footer = () => {
       sx={{
         backgroundColor: '#FFCC00',
         p: 1,
-        marginTop: 'calc(12% + 60px)',
+        marginTop: 'calc(8% + 60px)',
         bottom: 0
       }} 
     >

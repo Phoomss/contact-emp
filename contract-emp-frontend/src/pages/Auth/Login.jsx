@@ -19,11 +19,18 @@ const Login = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    // เช็คว่ามีการกรอกข้อมูลครบถ้วนมั้ย
+    if(formData.username === '' || formData.password === ''){
+      setError('กรุณากรอกข้อมูล');
+      swal("กรุณากรอกข้อมูลก่อนเข้าสู่ระบบ", "", "warning");
+      // console.log('Error: Form fields are empty');
+      return;
+    }
     UserService.postUserLogin(formData)
       .then((response) => {
         if (response.data.token) {
           localStorage.setItem("token", response.data.token);
-          swal(`Welcome`, "", "success");
+          swal(`ยินดีต้อนรับเข้าสู่ระบบ`,`${formData.username}`, "success");
           navigate("/dashboard");
         } else {
           setError("Invalid credentials");
