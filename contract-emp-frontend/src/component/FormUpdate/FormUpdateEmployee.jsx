@@ -69,7 +69,7 @@ const UpdateEmployees = () => {
   return (
     <Box m="1.5rem 2.5rem">
       <FlexBetween>
-        <Header title="แก้ไขพนักงาน" />
+        <Header title="แก้ไขข้อมูลลูกจ้าง" />
       </FlexBetween>
       <Box sx={{ mt: "1.5rem" }}>
         <form onSubmit={handleSubmit}>

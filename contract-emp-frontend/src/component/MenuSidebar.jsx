@@ -35,24 +35,24 @@ const navItems = [
     icon: <DashboardOutlinedIcon />,
   },
   {
-    text: "Contract",
-    thaitext: "ข้อมูลสัญญาจ้าง",
-    icon: <DescriptionOutlined />,
-  },
-  {
     text: "Company",
     thaitext: "ข้อมูลบริษัท",
     icon: <ApartmentOutlined />,
   },
   {
-    text: "Employee",
-    thaitext: "ข้อมูลลูกจ้างจ้างเหมาบริการ",
-    icon: <GroupsOutlined />,
+    text: "Contract",
+    thaitext: "ข้อมูลสัญญาจ้าง",
+    icon: <DescriptionOutlined />,
   },
   {
     text: "Archive",
     thaitext: "ข้อมูลสัญญาจ้างลูกจ้าง",
     icon: <ArchiveOutlinedIcon />,
+  },
+  {
+    text: "Employee",
+    thaitext: "ข้อมูลลูกจ้างจ้างเหมาบริการ",
+    icon: <GroupsOutlined />,
   },
   {
     text: "UserAll",

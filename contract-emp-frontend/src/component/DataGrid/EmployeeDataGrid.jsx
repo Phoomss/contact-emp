@@ -70,7 +70,10 @@ const Employees = () => {
     navigate(`/archive/search/${id}`);
   };
   const columns = [
-
+    {
+      field: "number",
+      headerName: "หมายเลขประจำตัว",
+    },
     {
       field: "name",
       headerName: "ชื่อ",
@@ -81,10 +84,6 @@ const Employees = () => {
     {
       field: "surname",
       headerName: "นามสกุล",
-    },
-    {
-      field: "number",
-      headerName: "หมายเลขประจำตัว",
     },
     {
       field: "telephone",

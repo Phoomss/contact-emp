@@ -59,7 +59,7 @@ const CreateEmployees = () => {
   return (
     <Box m="1.5rem 2.5rem">
       <FlexBetween>
-        <Header title="เพิ่มพนักงาน" />
+        <Header title="เพิ่มข้อมูลลูกจ้าง" />
       </FlexBetween>
       <Box>
         <form onSubmit={handleSubmit}>
