@@ -185,7 +185,7 @@ const deleteEmployee = async (req, res) => {
  await employee.destroy();
 
  return res.status(200).json({ message: "Employee deleted successfully" });
-};z
+};
 
 module.exports = {
  createEmployee,

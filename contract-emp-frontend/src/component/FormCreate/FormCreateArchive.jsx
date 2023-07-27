@@ -121,7 +121,7 @@ const CreateArchive = () => {
   return (
     <Box m="1.5rem 2.5rem">
       <FlexBetween>
-        <Header title="เพิ่มสัญญาจ้างลูกจ้าง" />
+        <Header title="เพิ่มสัญญาจ้างลูกจ้างม" />
       </FlexBetween>
       <Box sx={{ mt: "1.5rem" }}>
         <form onSubmit={handleSubmit}>
@@ -131,7 +131,7 @@ const CreateArchive = () => {
             columnSpacing={{ xs: 1, sm: 2, md: 3 }}
           >
             <Grid item xs={12}>
-            <Autocomplete
+              {/* <Autocomplete
                 fullWidth
                 margin="normal"
                 options={employeeOptions}
@@ -140,8 +140,8 @@ const CreateArchive = () => {
                 onInputChange={handleSearchEmployee}
                 getOptionLabel={(employee) => employee.name}
                 renderInput={(params) => <TextField {...params} label="Search Employee" />}
-              />
-              {/* <Select
+              /> */}
+              <Select
                 fullWidth
                 margin="normal"
                 value={employee_id}
@@ -156,7 +156,7 @@ const CreateArchive = () => {
                 ) : (
                   <MenuItem disabled>No employees found</MenuItem>
                 )}
-              </Select> */}
+              </Select>
             </Grid>
 
             <Grid item xs={12}>

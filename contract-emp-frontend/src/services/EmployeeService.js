@@ -20,7 +20,7 @@ const getEmployeeById = (id) => {
   return http.get(`/employee/search/?id=${id}`).then((response) => {
     return response;
   });
-};z
+};
 
 const EmployeeService = {
   getEmployees,

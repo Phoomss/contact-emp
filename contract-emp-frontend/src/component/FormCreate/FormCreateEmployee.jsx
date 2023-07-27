@@ -28,22 +28,45 @@ const CreateEmployees = () => {
   const [employeeNote, setEmployeeNote] = useState("");
   const [createdEmp, setCreatedEmp] = useState({});
   const [employeeId, setEmployeeId] = useState(0);
+  const [autoNumber, setAutoNumber] = useState(0);
 
+  useEffect(() => {
+    // Fetch employees data and find the highest employeeNumber
+    const fetchEmployees = async () => {
+      try {
+        const response = await EmployeeService.getEmployees();
+        const employees = response.data;
+        if (employees.length > 0) {
+          const maxEmployeeNumber = Math.max(
+            ...employees.map((emp) => Number(emp.number))
+          );
+          setAutoNumber(maxEmployeeNumber);
+        }
+      } catch (error) {
+        console.error("Error:", error.response);
+      }
+    };
+
+    fetchEmployees();
+  }, []);
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      const formattedEmployeeNumber = String(autoNumber + 1).padStart(5, '0');
+      setEmployeeNumber(formattedEmployeeNumber)
       const response = await EmployeeService.postEmployee({
         name: employeeName,
         surname: employeeSurname,
-        number: employeeNumber,
+        number: formattedEmployeeNumber,
         telephone: employeePhone,
         note: employeeNote,
       });
       if (response.status === 200) {
-        swal("เพิ่มลูกจ้างสำเร็จ!","", "success");
+        swal("เพิ่มลูกจ้างสำเร็จ!", "", "success");
         console.log(response.data);
         setCreatedEmp(response.data.data);
         setEmployeeId(response.data.data.id);
+        setAutoNumber((prevAutoNumber) => prevAutoNumber + 1);
         navigate("/employee");
       }
     } catch (error) {
@@ -51,6 +74,7 @@ const CreateEmployees = () => {
       setError(error.response.data.message);
     }
   };
+
 
   const handleCancleClick = () => {
     navigate("/employee");
@@ -69,15 +93,15 @@ const CreateEmployees = () => {
             columnSpacing={{ xs: 1, sm: 2, md: 3 }}
             mt="1.5rem"
           >
-            <Grid item xs={12}>
-              <InputLabel>เลขประจำตัว*: </InputLabel>
-              <TextField
-                margin="normal"
-                value={employeeNumber}
-                onChange={(e) => setEmployeeNumber(e.target.value)}
-                sx={{ width: "100%" }}
-              />
-            </Grid>
+           <Grid item xs={12}>
+            <InputLabel>เลขประจำตัว*: </InputLabel>
+            <TextField
+              margin="normal"
+              value={autoNumber} // ให้แสดงค่าเลขประจำตัวจาก state แทน
+              disabled // ตั้งให้ไม่สามารถแก้ไขได้ (disabled) เนื่องจากเป็น auto number
+              sx={{ width: "100%" }}
+            />
+          </Grid>
           </Grid>
 
           <Grid
