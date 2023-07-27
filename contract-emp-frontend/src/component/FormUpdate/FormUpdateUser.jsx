@@ -49,17 +49,7 @@ const FormUpdateUser = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (
-      !userName ||
-      !userSurName ||
-      !userTelePhone ||
-      !userEmail ||
-      !useName ||
-      !userPassword
-    ) {
-      alert("Please fill in all required fields.");
-      return;
-    }
+  
     try {
       const response = await UserService.updataUser(id, {
         name: userName,
@@ -92,7 +82,7 @@ const FormUpdateUser = () => {
             <Grid item xs={6}>
               <InputLabel>ชื่อ: </InputLabel>
               <TextField
-                required
+                
                 fullWidth
                 margin="normal"
                 value={userName}
@@ -103,7 +93,7 @@ const FormUpdateUser = () => {
             <Grid item xs={6}>
               <InputLabel>นามสกุล: </InputLabel>
               <TextField
-                required
+                
                 fullWidth
                 margin="normal"
                 value={userSurName}
@@ -114,7 +104,7 @@ const FormUpdateUser = () => {
             <Grid item xs={6}>
               <InputLabel>เบอร์โทรศัพท์: </InputLabel>
               <TextField
-                required
+                
                 fullWidth
                 margin="normal"
                 value={userTelePhone}
@@ -125,7 +115,7 @@ const FormUpdateUser = () => {
             <Grid item xs={6}>
               <InputLabel>ชื่อผู้ใช้: </InputLabel>
               <TextField
-                required
+                
                 fullWidth
                 margin="normal"
                 value={useName}
@@ -136,7 +126,7 @@ const FormUpdateUser = () => {
             <Grid item xs={6}>
               <InputLabel>อีเมล: </InputLabel>
               <TextField
-                required
+                
                 fullWidth
                 margin="normal"
                 value={userEmail}
@@ -147,7 +137,7 @@ const FormUpdateUser = () => {
             <Grid item xs={6}>
               <InputLabel>รหัสผ่าน: </InputLabel>
               <TextField
-                required
+                
                 fullWidth
                 margin="normal"
                 value={userPassword}
