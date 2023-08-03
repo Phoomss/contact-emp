@@ -29,6 +29,7 @@ const CreateEmployees = () => {
   const [createdEmp, setCreatedEmp] = useState({});
   const [employeeId, setEmployeeId] = useState(0);
   const [autoNumber, setAutoNumber] = useState(0);
+  const [employeeIdCard, setEmployeeIdCard] = useState("");
 
   useEffect(() => {
     // Fetch employees data and find the highest employeeNumber
@@ -38,7 +39,7 @@ const CreateEmployees = () => {
         const employees = response.data;
         if (employees.length > 0) {
           const maxEmployeeNumber = Math.max(
-            ...employees.map((emp) => Number(emp.number))
+            ...employees.map((emp) => Number(emp.e_num))
           );
           setAutoNumber(maxEmployeeNumber);
         }
@@ -49,15 +50,22 @@ const CreateEmployees = () => {
 
     fetchEmployees();
   }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!employeeName || !employeeSurname || !employeeIdCard || !employeePhone) {
+      setError("Please fill in all required fields.");
+      return;
+    }
+
     try {
-      const formattedEmployeeNumber = String(autoNumber + 1).padStart(5, '0');
-      setEmployeeNumber(formattedEmployeeNumber)
+      const formattedEmployeeNumber = String(autoNumber + 1).padStart(5, "0");
+      setEmployeeNumber(formattedEmployeeNumber);
       const response = await EmployeeService.postEmployee({
         name: employeeName,
         surname: employeeSurname,
-        number: formattedEmployeeNumber,
+        e_num: formattedEmployeeNumber,
+        e_IdCard: employeeIdCard,
         telephone: employeePhone,
         note: employeeNote,
       });
@@ -71,10 +79,9 @@ const CreateEmployees = () => {
       }
     } catch (error) {
       console.error("Error:", error.response);
-      setError(error.response.data.message);
+      setError(error.response?.data?.message || "An error occurred.");
     }
   };
-
 
   const handleCancleClick = () => {
     navigate("/employee");
@@ -93,15 +100,15 @@ const CreateEmployees = () => {
             columnSpacing={{ xs: 1, sm: 2, md: 3 }}
             mt="1.5rem"
           >
-           <Grid item xs={12}>
-            <InputLabel>เลขประจำตัว*: </InputLabel>
-            <TextField
-              margin="normal"
-              value={autoNumber} // ให้แสดงค่าเลขประจำตัวจาก state แทน
-              disabled // ตั้งให้ไม่สามารถแก้ไขได้ (disabled) เนื่องจากเป็น auto number
-              sx={{ width: "100%" }}
-            />
-          </Grid>
+            <Grid item xs={12}>
+              <InputLabel>เลขประจำตัว*: </InputLabel>
+              <TextField
+                margin="normal"
+                value={autoNumber}
+                disabled
+                sx={{ width: "100%" }}
+              />
+            </Grid>
           </Grid>
 
           <Grid
@@ -126,6 +133,23 @@ const CreateEmployees = () => {
                 margin="normal"
                 value={employeeSurname}
                 onChange={(e) => setEmployeeSurname(e.target.value)}
+                sx={{ width: "100%" }}
+              />
+            </Grid>
+          </Grid>
+
+          <Grid
+            container
+            rowSpacing={1}
+            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+            mt="1.5rem"
+          >
+            <Grid item xs={12}>
+              <InputLabel>เลขบัตรประชาชน*: </InputLabel>
+              <TextField
+                margin="normal"
+                value={employeeIdCard}
+                onChange={(e) => setEmployeeIdCard(e.target.value)}
                 sx={{ width: "100%" }}
               />
             </Grid>

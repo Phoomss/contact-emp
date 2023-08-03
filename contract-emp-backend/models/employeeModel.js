@@ -8,7 +8,11 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        number: {
+        e_num: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        e_IdCard: {
             type: DataTypes.STRING,
             allowNull: true
         },
