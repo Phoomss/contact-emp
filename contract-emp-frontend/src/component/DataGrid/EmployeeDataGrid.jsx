@@ -73,6 +73,7 @@ const Employees = () => {
     {
       field: "e_num",
       headerName: "หมายเลขประจำตัว",
+      flex: .2
     },
     {
       field: "name",
@@ -89,18 +90,18 @@ const Employees = () => {
       field: "telephone",
       headerName: "เบอร์โทรศัพท์",
     },
-    // {
-    //   field: "department1",
-    //   headerName: "สังกัดกอง",
-    // },
-    // {
-    //   field: "department2",
-    //   headerName: "สังกัดฝ่าย",
-    // },
-    // {
-    //   field: "company",
-    //   headerName: "ชื่อบริษัท",
-    // },
+    {
+      field: "department1",
+      headerName: "สังกัดกอง",
+    },
+    {
+      field: "department2",
+      headerName: "สังกัดฝ่าย",
+    },
+    {
+      field: "company",
+      headerName: "ชื่อบริษัท",
+    },
     {
       field: "note",
       headerName: "หมายเหตุ",
