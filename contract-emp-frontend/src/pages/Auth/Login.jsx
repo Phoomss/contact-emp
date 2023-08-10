@@ -31,7 +31,7 @@ const Login = () => {
         if (response.data.token) {
           localStorage.setItem("token", response.data.token);
           swal(`ยินดีต้อนรับเข้าสู่ระบบ`,`${formData.username}`, "success");
-          navigate("/dashboard");
+          navigate("/employee");
         } else {
           setError("Invalid credentials");
           swal("ไม่พบบัญชีของคุณ", "", "error");
