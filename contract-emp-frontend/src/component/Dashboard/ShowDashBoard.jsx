@@ -17,6 +17,7 @@ import { Container } from "react-bootstrap";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import BarChart from "component/Chart/BarChart";
+import FlexBetween from './../FlexBetween';
 
 const ShowDashBoard = () => {
   const navigate = useNavigate();
@@ -73,7 +74,7 @@ const ShowDashBoard = () => {
       component="main"
       sx={{
         flexGrow: 1,
-     
+
       }}
     >
       <Container maxWidth="xl">
@@ -88,14 +89,38 @@ const ShowDashBoard = () => {
           >
             <Item
               onClick={() => {
-                navigate("/employee");
+                navigate("/contract");
               }}
-              sx={{ boxShadow: 3, marginRight: 2, marginBottom: 2, borderRadius: 5 }}
+              sx={{ boxShadow: 3, marginRight: 2, marginLeft: 2, marginBottom: 2, borderRadius: 5, backgroundColor: "#FFCC00", color: "white" }}
 
             >
-              <Description sx={{ height: '100%', fontSize: '70PX'}} />
-              <Typography variant="h3">ข้อมูลสัญญาจ้าง</Typography>
-              <Typography variant="h5">{contractCount} สัญญาจ้าง</Typography>
+              <FlexBetween>
+                <Typography variant="h3">{contractCount} สัญญาจ้าง</Typography>
+                <Description sx={{ height: '100%', fontSize: '70PX', color: "gray" }} />
+              </FlexBetween>
+              <Typography variant="h5">ข้อมูลสัญญาจ้าง</Typography>
+
+            </Item>
+          </Grid>
+
+          <Grid
+            xs={12}
+            sm={6}
+            lg={3}
+          >
+            <Item
+              onClick={() => {
+                navigate("/company");
+              }}
+              sx={{ boxShadow: 3, marginRight: 2, marginLeft: 2, marginBottom: 2, borderRadius: 5, backgroundColor: "#E4032D", color: "white" }}
+
+            >
+              <FlexBetween>
+                <Typography variant="h3">{companyCount} บริษัท</Typography>
+                <ApartmentIcon sx={{ height: '100%', fontSize: '70PX', color: "gray" }} />
+              </FlexBetween>
+              <Typography variant="h5">ข้อมูลบริษัท</Typography>
+
             </Item>
           </Grid>
 
@@ -108,12 +133,15 @@ const ShowDashBoard = () => {
               onClick={() => {
                 navigate("/employee");
               }}
-              sx={{ boxShadow: 3, marginRight: 2, marginBottom: 2, borderRadius: 5 }}
+              sx={{ boxShadow: 3, marginRight: 2, marginLeft: 2, marginBottom: 2, borderRadius: 5, backgroundColor: "#154295", color: "white" }}
 
             >
-              <ApartmentIcon sx={{ height: '100%', fontSize: '70PX' }} />
-              <Typography variant="h3">ข้อมูลบริษัท</Typography>
-              <Typography variant="h5">{companyCount} บริษัท</Typography>
+              <FlexBetween>
+                <Typography variant="h3">{employeeCount} คน</Typography>
+                <BadgeIcon sx={{ height: '100%', fontSize: '70PX', color: "gray" }} />
+              </FlexBetween>
+              <Typography variant="h5">จำนวนพนักงาน</Typography>
+
             </Item>
           </Grid>
 
@@ -124,43 +152,33 @@ const ShowDashBoard = () => {
           >
             <Item
               onClick={() => {
-                navigate("/employee");
+                navigate("/userall");
               }}
-              sx={{ boxShadow: 3, marginRight: 2, marginBottom: 2, borderRadius: 5 }}
+              sx={{ boxShadow: 3, marginRight: 2, marginBottom: 2, borderRadius: 5, backgroundColor: "#15952C", color: "white" }}
 
             >
-              <BadgeIcon sx={{ height: '100%', fontSize: '70PX' }} />
-              <Typography variant="h3">จำนวนพนักงาน</Typography>
-              <Typography variant="h5">{employeeCount} คน</Typography>
+              <FlexBetween>
+                <Typography variant="h3">{userCount} คน</Typography>
+                <PersonIcon sx={{ height: '100%', fontSize: '70PX', color: "gray" }} />
+              </FlexBetween>
+              <Typography variant="h5">จำนวนผู้ใช้งาน</Typography>
+
             </Item>
           </Grid>
 
-          <Grid
-            xs={12}
-            sm={6}
-            lg={3}
-          >
-            <Item
-              onClick={() => {
-                navigate("/employee");
-              }}
-              sx={{ boxShadow: 3, marginRight: 2, marginBottom: 2, borderRadius: 5 }}
-
-            >
-              <PersonIcon sx={{ height: '100%', fontSize: '70PX' }} />
-              <Typography variant="h3">จำนวนผู้ใช้งาน</Typography>
-              <Typography variant="h5">{userCount} คน</Typography>
-            </Item>
-          </Grid>
-          <Grid container spacing={2}>
-            <Grid item xs={12} >
-              <Card sx={{ height: 60 + 'vh', boxShadow: 3, borderRadius: 5 }}>
+          {/* ส่วนของ chart  */}
+          {/* <Grid container spacing={2}>
+            <Grid item xs={12} sm={12}
+              lg={12} >
+              <Card sx={{ height: '60vh', boxShadow: 3, borderRadius: 5 }}>
                 <CardContent>
                   <BarChart />
                 </CardContent>
               </Card>
             </Grid>
-          </Grid>
+          </Grid> */}
+
+
         </Grid>
       </Container>
     </Box>

@@ -2,6 +2,7 @@ import { React, useState, useEffect } from "react";
 import { Box, useTheme, Button } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { DeleteOutline, CreateOutlined } from "@mui/icons-material";
+import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
 import { useNavigate, useParams } from "react-router-dom";
 import ArchiveService from "services/ArchiveService";
 import CompanyService from "services/CompanyService";
@@ -139,14 +140,6 @@ const ArchiveInfo = () => {
       },
     },
     {
-      field: "department1",
-      headerName: "สังกัดกอง",
-    },
-    {
-      field: "department2",
-      headerName: "สังกัดฝ่าย",
-    },
-    {
       field: "company_id",
       headerName: "ชื่อบริษัท",
       valueGetter: (params) => {
@@ -166,7 +159,17 @@ const ArchiveInfo = () => {
         }
         return "";
       },
+      flex: .2
     },
+    {
+      field: "department1",
+      headerName: "สังกัดกอง",
+    },
+    {
+      field: "department2",
+      headerName: "สังกัดฝ่าย",
+    },
+
     {
       field: "Functions",
       headerName: "แก้ไขข้อมูล",
@@ -195,7 +198,7 @@ const ArchiveInfo = () => {
   return (
     <Box m="1.5rem 2.5rem">
       <FlexBetween>
-        <Header title="ประวัติการทำงาน" />
+        <Header title={`ประวัติการทำงาน `} />
         <Box>
           <FlexBetween gap="1rem">
             <Button
@@ -208,7 +211,7 @@ const ArchiveInfo = () => {
               }}
               onClick={createClick}
             >
-              <CreateOutlined />
+              <AddBoxOutlinedIcon />
             </Button>
 
             <Button

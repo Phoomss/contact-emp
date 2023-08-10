@@ -1,9 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { Box, TextField, Button, Typography, InputLabel } from "@mui/material";
+import {
+  Box,
+  TextField,
+  Button,
+  Typography,
+  InputLabel,
+  useTheme,
+  Select,
+  MenuItem,
+  Grid,
+} from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 import EmployeeService from "../../services/EmployeeService";
 import Header from "../Header";
 import FlexBetween from "../FlexBetween";
+import swal from "sweetalert";
 
 const UpdateEmployees = () => {
   const navigate = useNavigate();
@@ -14,6 +25,7 @@ const UpdateEmployees = () => {
   const [employeeNumber, setEmployeeNumber] = useState("");
   const [employeePhone, setEmployeePhone] = useState("");
   const [employeeNote, setEmployeeNote] = useState("");
+  const [employeeIdCard, setEmployeeIdCard] = useState("");
 
   useEffect(() => {
     async function fetchData() {
@@ -22,9 +34,10 @@ const UpdateEmployees = () => {
         if (response.status === 200) {
           setEmployeeName(response.data[0].name);
           setEmployeeSurname(response.data[0].surname);
-          setEmployeeNumber(response.data[0].number);
+          setEmployeeNumber(response.data[0].e_num);
           setEmployeePhone(response.data[0].telephone);
           setEmployeeNote(response.data[0].note);
+          setEmployeeIdCard(response.data[0].e_IdCard);
         }
       } catch (error) {
         console.error("Error:", error.response);
@@ -36,25 +49,18 @@ const UpdateEmployees = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (
-      !employeeName ||
-      !employeeSurname ||
-      !employeeNumber ||
-      !employeePhone
-    ) {
-      alert("Please fill in all required fields.");
-      return;
-    }
     try {
       const response = await EmployeeService.updateEmployee(id, {
         name: employeeName,
         surname: employeeSurname,
-        number: employeeNumber,
+        e_num: employeeNumber,
+        e_IdCard: employeeIdCard,
         telephone: employeePhone,
         note: employeeNote,
       });
       if (response.status === 200) {
         navigate("/employee");
+        swal(`อัพเดทข้อมูลสำเร็จ`, "", "success");
       }
     } catch (error) {
       console.error("Error:", error.response);
@@ -69,53 +75,108 @@ const UpdateEmployees = () => {
   return (
     <Box m="1.5rem 2.5rem">
       <FlexBetween>
-        <Header title="แก้ไขข้อมูลลูกจ้าง" />
+        <Header title="เพิ่มข้อมูลลูกจ้าง" />
       </FlexBetween>
-      <Box sx={{ mt: "1.5rem" }}>
+      <Box>
         <form onSubmit={handleSubmit}>
-          <InputLabel>ชื่อ: </InputLabel>
-          <TextField
-            required
-            fullWidth
-            margin="normal"
-            value={employeeName}
-            onChange={(e) => setEmployeeName(e.target.value)}
-          />
-          <InputLabel>นามสกุล: </InputLabel>
-          <TextField
-            required
-            fullWidth
-            margin="normal"
-            value={employeeSurname}
-            onChange={(e) => setEmployeeSurname(e.target.value)}
-          />
-          <InputLabel>หมายเลขประจำตัว: </InputLabel>
-          <TextField
-            required
-            fullWidth
-            margin="normal"
-            value={employeeNumber}
-            onChange={(e) => setEmployeeNumber(e.target.value)}
-          />
-          <InputLabel>เบอร์โทรศัพท์: </InputLabel>
-          <TextField
-            required
-            fullWidth
-            margin="normal"
-            value={employeePhone}
-            onChange={(e) => setEmployeePhone(e.target.value)}
-          />
+          <Grid
+            container
+            rowSpacing={1}
+            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+            mt="1.5rem"
+          >
+            <Grid item xs={12}>
+              <InputLabel>เลขประจำตัว*: </InputLabel>
+              <TextField
+                margin="normal"
+                value={employeeNumber}
+                onChange={(e) => setEmployeeNumber(e.target.value)}
+                disabled
+                sx={{ width: "100%" }}
+              />
+            </Grid>
+          </Grid>
 
-          <InputLabel>หมายเหตุ: </InputLabel>
-          <TextField
-            fullWidth
-            margin="normal"
-            value={employeeNote}
-            onChange={(e) => setEmployeeNote(e.target.value)}
-          />
+          <Grid
+            container
+            rowSpacing={1}
+            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+            mt="1.5rem"
+          >
+            <Grid item xs={6}>
+              <InputLabel>ชื่อ (ลูกจ้าง)*: </InputLabel>
+              <TextField
+                margin="normal"
+                value={employeeName}
+                onChange={(e) => setEmployeeName(e.target.value)}
+                sx={{ width: "100%" }}
+              />
+            </Grid>
+
+            <Grid item xs={6}>
+              <InputLabel>นามสกุล (ลูกจ้าง)*: </InputLabel>
+              <TextField
+                margin="normal"
+                value={employeeSurname}
+                onChange={(e) => setEmployeeSurname(e.target.value)}
+                sx={{ width: "100%" }}
+              />
+            </Grid>
+          </Grid>
+
+          <Grid
+            container
+            rowSpacing={1}
+            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+            mt="1.5rem"
+          >
+            <Grid item xs={12}>
+              <InputLabel>เลขบัตรประชาชน (ลูกจ้าง)*: </InputLabel>
+              <TextField
+                margin="normal"
+                value={employeeIdCard}
+                onChange={(e) => setEmployeeIdCard(e.target.value)}
+                sx={{ width: "100%" }}
+              />
+            </Grid>
+          </Grid>
+
+          <Grid
+            container
+            rowSpacing={1}
+            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+            mt="1.5rem"
+          >
+            <Grid item xs={12}>
+              <InputLabel>เบอร์โทรศัพท์ (ลูกจ้าง)*: </InputLabel>
+              <TextField
+                margin="normal"
+                value={employeePhone}
+                onChange={(e) => setEmployeePhone(e.target.value)}
+                sx={{ width: "100%" }}
+              />
+            </Grid>
+          </Grid>
+
+          <Grid
+            container
+            rowSpacing={1}
+            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+            mt="1.5rem"
+          >
+            <Grid item xs={12}>
+              <InputLabel>หมายเหตุ: </InputLabel>
+              <TextField
+                margin="normal"
+                value={employeeNote}
+                onChange={(e) => setEmployeeNote(e.target.value)}
+                sx={{ width: "100%" }}
+              />
+            </Grid>
+          </Grid>
           <Box sx={{ mt: "1.5rem" }}>
-            <Button type="submit" variant="contained">
-              อัพเดทข้อมูลพนักงาน
+            <Button type="submit" variant="contained" onClick={handleSubmit}>
+              อัพเดท
             </Button>
             <Button
               sx={{ ml: "10px" }}

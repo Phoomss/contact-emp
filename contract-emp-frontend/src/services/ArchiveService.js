@@ -28,6 +28,12 @@ const getArchiveByIdEmp = (id) => {
   });
 };
 
+const getArchiveByContract = (id) => {
+  return http.get(`/archive/search/?contract_id=${id}`).then((response) => {
+    return response;
+  });
+};
+
 const ArchiveService = {
   getArchives,
   postArchive,
@@ -35,6 +41,7 @@ const ArchiveService = {
   getArchiveById,
   getArchiveByIdEmp,
   deleteArchive,
+  getArchiveByContract
 };
 
 export default ArchiveService;

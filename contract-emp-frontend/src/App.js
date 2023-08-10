@@ -29,6 +29,7 @@ import ArchiveDetails from 'pages/Archive/ArchiveDetails';
 import DashboardCompany from "pages/UserCompany/DashboardCompany";
 import ArchiveCom from "pages/UserCompany/ArchiveCom";
 import CompaniesCom from "pages/UserCompany/CompaniesCom";
+import Contract_ArIchive_Info from "pages/Archive/Contract_ArIchive_Info";
 
 function App() {
   const mode = useSelector((state) => state.global.mode);
@@ -53,6 +54,7 @@ function App() {
             <Route path="/contract" element={<Contract />} />
             <Route path="/createcontract" element={<CreateContract />} />
             <Route path="/updatecontract/:id" element={<UpdateContract />} />
+            <Route path='/contract/search/:id' element={<Contract_ArIchive_Info/>}/>
 
             <Route path="/archive" element={<Archive />} />
             <Route path='/archive/search/:id' element={<ArchiveDetails/>}/>

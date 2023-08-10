@@ -60,7 +60,7 @@ const FormUpdateArchive = () => {
         remark,
       });
       if (response.status === 200) {
-        navigate("/archive");
+        navigate("/employee");
         swal(`อัพเดทข้อมูลสำเร็จ`, "", "success");
       }
     } catch (error) {
@@ -70,7 +70,7 @@ const FormUpdateArchive = () => {
   };
 
   const handleCancelClick = () => {
-    navigate("/archive");
+    navigate("/employee");
   };
 
   return (

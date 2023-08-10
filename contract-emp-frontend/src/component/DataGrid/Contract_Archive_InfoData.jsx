@@ -1,19 +1,17 @@
 import { React, useState, useEffect } from "react";
 import { Box, useTheme, Button } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import { DeleteOutline, CreateOutlined } from "@mui/icons-material";
-import { useNavigate } from "react-router-dom";
-import ArchiveService from "../../services/ArchiveService";
-import CompanyService from "../../services/CompanyService";
-import EmployeeService from "../../services/EmployeeService";
-import ContractService from "../../services/ContractService";
-import Header from "../Header";
-import FlexBetween from "../FlexBetween";
+import { useNavigate, useParams } from "react-router-dom";
+import ArchiveService from "services/ArchiveService";
+import CompanyService from "services/CompanyService";
+import ContractService from "services/ContractService";
+import EmployeeService from "services/EmployeeService";
 import swal from "sweetalert";
+import FlexBetween from "component/FlexBetween";
+import Header from "component/Header";
 
-const Archives = () => {
-  const theme = useTheme();
-  const navigate = useNavigate();
+const Contract_Archive_InfoData = () => {
+  const { id } = useParams();
   const [archives, setArchives] = useState([]);
   const [companies, setCompanies] = useState([]);
   const [contracts, setContracts] = useState([]);
@@ -22,7 +20,7 @@ const Archives = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const responseArchive = await ArchiveService.getArchives();
+      const responseArchive = await ArchiveService.getArchiveByContract(id);
       setArchives(responseArchive.data);
       const responseCompany = await CompanyService.getCompanies();
       setCompanies(responseCompany.data);
@@ -32,50 +30,17 @@ const Archives = () => {
       setEmployees(responseEmployee.data);
     };
     fetchData();
-  }, []);
+    console.log(fetchData());
+  }, [id]);
+
+  // const filteredArchives = archives.filter(
+  //     (archive) => archive.employee_id === employeeId
+  // );
 
   const getRowId = (row) => row.id;
 
   const handleSelectionModelChange = (newSelection) => {
     setSelectionModel(newSelection);
-  };
-
-  const handleDeleteButtonClick = async () => {
-    if (selectionModel.length === 0) {
-      swal("กรุณาเลือกสัญญาอย่างน้อยหนึ่งสัญญาเพื่อลบ.", { icon: "warning" });
-      return;
-    }
-
-    swal({
-      title: "แน่ใจหรือไม่?",
-      text: "เมื่อลบแล้ว, สัญญาที่คุณเลือกไว้จะถูกลบหายไป!",
-      icon: "warning",
-      buttons: true,
-      dangerMode: true,
-    }).then(async (willDelete) => {
-      if (willDelete) {
-        await Promise.all(
-          selectionModel.map(async (id) => {
-            await ArchiveService.deleteArchive(id);
-          })
-        );
-        setArchives(
-          archives.filter((archive) => !selectionModel.includes(archive.id))
-        );
-        setSelectionModel([]);
-        swal("สัญญาที่คุณเลือกไว้ถูกลบเรียบร้อย!", {
-          icon: "success",
-        });
-      }
-    });
-  };
-
-  const createClick = () => {
-    navigate(`/createarchive`);
-  };
-
-  const handleEditButtonClick = (id) => {
-    navigate(`/updatearchive/${id}`);
   };
 
   const columns = [
@@ -110,6 +75,27 @@ const Archives = () => {
         return contract ? contract.end_date : "";
       },
     },
+
+    {
+      field: "employee_name",
+      headerName: "ชื่อ",
+      valueGetter: (params) => {
+        const employee = employees.find(
+          (employee) => employee.id === params.row.employee_id
+        );
+        return employee ? employee.name : "";
+      },
+    },
+    {
+      field: "employee_surname",
+      headerName: "นามสกุล",
+      valueGetter: (params) => {
+        const employee = employees.find(
+          (employee) => employee.id === params.row.employee_id
+        );
+        return employee ? employee.surname : "";
+      },
+    },
     {
       field: "company_id",
       headerName: "ชื่อบริษัท",
@@ -130,7 +116,7 @@ const Archives = () => {
         }
         return "";
       },
-      flex:.2
+      flex: .2
     },
     {
       field: "department1",
@@ -140,27 +126,9 @@ const Archives = () => {
       field: "department2",
       headerName: "สังกัดฝ่าย",
     },
-    {
-      field: "Functions",
-      headerName: "แก้ไขข้อมูล",
-      renderCell: (params) => {
-        return (
-          <Box>
-            <Button
-              variant="contained"
-              color="secondary"
-              startIcon={<CreateOutlined />}
-              onClick={() => handleEditButtonClick(params.id)}
-            ></Button>
-          </Box>
-        );
-      },
-      flex:.1
-    },
   ];
 
   const [pageSize, setPageSize] = useState(10);
-
   const handlePageSizeChange = (params) => {
     setPageSize(params.pageSize);
   };
@@ -168,36 +136,7 @@ const Archives = () => {
   return (
     <Box m="1.5rem 2.5rem">
       <FlexBetween>
-        <Header title="สัญญาจ้างลูกจ้าง" />
-        <Box>
-          <FlexBetween gap="1rem">
-            <Button
-              sx={{
-                backgroundColor: theme.palette.secondary.light,
-                color: theme.palette.background.alt,
-                fontSize: "14px",
-                fontWeight: "bold",
-                padding: "10px 20px",
-              }}
-              onClick={createClick}
-            >
-              <CreateOutlined />
-            </Button>
-
-            <Button
-              sx={{
-                backgroundColor: theme.palette.secondary.light,
-                color: theme.palette.background.alt,
-                fontSize: "14px",
-                fontWeight: "bold",
-                padding: "10px 20px",
-              }}
-              onClick={handleDeleteButtonClick}
-            >
-              <DeleteOutline />
-            </Button>
-          </FlexBetween>
-        </Box>
+        <Header title="ข้อมูลลูกจ้างที่อยู่ในสัญญา" />
       </FlexBetween>
       <Box height="calc(100vh - 200px)" sx={{ mt: "1.5rem" }}>
         <DataGrid
@@ -220,4 +159,4 @@ const Archives = () => {
   );
 };
 
-export default Archives;
+export default Contract_Archive_InfoData;

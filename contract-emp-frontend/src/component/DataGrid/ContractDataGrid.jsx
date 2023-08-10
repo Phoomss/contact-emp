@@ -5,6 +5,8 @@ import { DeleteOutline, CreateOutlined } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import ContractService from "../../services/ContractService";
 import CompanyService from "../../services/CompanyService";
+import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
+import PageviewOutlinedIcon from '@mui/icons-material/PageviewOutlined';
 import Header from "../Header";
 import FlexBetween from "../FlexBetween";
 import swal from "sweetalert";
@@ -70,6 +72,10 @@ const Contracts = () => {
     navigate(`/updatecontract/${id}`);
   };
 
+  const handleContractArchive = (id) => {
+    navigate(`/contract/search/${id}`);
+  };
+
   const columns = [
     {
       field: "number",
@@ -96,6 +102,7 @@ const Contracts = () => {
         );
         return company ? company.name : "";
       },
+      flex:.2
     },
     {
       field: "Functions",
@@ -112,6 +119,24 @@ const Contracts = () => {
           </Box>
         );
       },
+      flex:.1
+    },
+    {
+      field: "View",
+      headerName: "ดูจำนวนลูกจ้างในสัญญาจ้าง",
+      renderCell: (params) => {
+        return (
+          <Box>
+            <Button
+              variant="contained"
+              color="secondary"
+              startIcon={<PageviewOutlinedIcon />}
+              onClick={() => handleContractArchive(params.id)}
+            ></Button>
+          </Box>
+        );
+      },
+      flex:.1
     },
   ];
 
@@ -138,7 +163,7 @@ const Contracts = () => {
               }}
               onClick={createClick}
             >
-              <CreateOutlined />
+              <AddBoxOutlinedIcon />
             </Button>
 
             <Button

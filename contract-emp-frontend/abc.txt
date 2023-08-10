@@ -25,3 +25,26 @@
       <Typography variant="h5">{employeeCount} คน</Typography>
     </Item>
   </Grid>
+
+
+
+
+
+  {
+    field: "Functions",
+    headerName: "แก้ไขข้อมูล",
+    renderCell: (params) => {
+      return (
+        <Box>
+          <Button
+            variant="contained"
+            color="secondary"
+            startIcon={<CreateOutlined />}
+            onClick={() => handleEditButtonClick(params.id)}
+          >
+            แก้ไข
+          </Button>
+        </Box>
+      );
+    },
+  },

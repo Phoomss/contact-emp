@@ -85,6 +85,7 @@ const UserAllData = () => {
     {
       field: "telephone",
       headerName: "เบอร์โทรศัพท์",
+      flex:.2
     },
     {
       field: "email",
@@ -123,6 +124,7 @@ const UserAllData = () => {
           </Box>
         );
       },
+      flex:.1
     },
   ];
 

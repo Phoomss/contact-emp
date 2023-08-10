@@ -118,7 +118,7 @@ const CreateEmployees = () => {
             mt="1.5rem"
           >
             <Grid item xs={6}>
-              <InputLabel>ชื่อ*: </InputLabel>
+              <InputLabel>ชื่อ (ลูกจ้าง)*: </InputLabel>
               <TextField
                 margin="normal"
                 value={employeeName}
@@ -128,7 +128,7 @@ const CreateEmployees = () => {
             </Grid>
 
             <Grid item xs={6}>
-              <InputLabel>นามสกุล*: </InputLabel>
+              <InputLabel>นามสกุล (ลูกจ้าง)*: </InputLabel>
               <TextField
                 margin="normal"
                 value={employeeSurname}
@@ -145,7 +145,7 @@ const CreateEmployees = () => {
             mt="1.5rem"
           >
             <Grid item xs={12}>
-              <InputLabel>เลขบัตรประชาชน*: </InputLabel>
+              <InputLabel>เลขบัตรประชาชน (ลูกจ้าง)*: </InputLabel>
               <TextField
                 margin="normal"
                 value={employeeIdCard}
@@ -162,7 +162,7 @@ const CreateEmployees = () => {
             mt="1.5rem"
           >
             <Grid item xs={12}>
-              <InputLabel>เบอร์โทรศัพท์*: </InputLabel>
+              <InputLabel>เบอร์โทรศัพท์ (ลูกจ้าง)*: </InputLabel>
               <TextField
                 margin="normal"
                 value={employeePhone}
@@ -190,14 +190,14 @@ const CreateEmployees = () => {
           </Grid>
           <Box sx={{ mt: "1.5rem" }}>
             <Button type="submit" variant="contained" onClick={handleSubmit}>
-              Create
+              เพิ่มข้อมูล
             </Button>
             <Button
               sx={{ ml: "10px" }}
               variant="outlined"
               onClick={handleCancleClick}
             >
-              Cancel
+              ยกเลิก
             </Button>
           </Box>
           {error && (

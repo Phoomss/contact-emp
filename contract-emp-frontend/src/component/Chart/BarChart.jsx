@@ -1,6 +1,7 @@
 import React from 'react';
 import { Bar } from 'react-chartjs-2';
-import { Chart, BarElement, CategoryScale, LinearScale } from 'chart.js';
+import Chart from 'chart.js/auto';
+import { BarElement, CategoryScale, LinearScale } from 'chart.js';
 
 Chart.register(BarElement, CategoryScale, LinearScale);
 
@@ -33,7 +34,6 @@ const BarChart = () => {
   };
 
   const options = {
-    title: 'Colors',
     maintainAspectRatio: false,
     scales: {
       y: {

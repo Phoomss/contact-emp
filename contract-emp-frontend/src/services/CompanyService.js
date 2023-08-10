@@ -22,12 +22,19 @@ const getCompanyById = (id) => {
   });
 };
 
+const getInfoCompany = ()=>{
+  return http.get(`company/info`).then((response)=>{
+    return response
+  })
+}
+
 const CompanyService = {
   getCompanies,
   postCompany,
   updateCompany,
   getCompanyById,
   deleteCompany,
+  getInfoCompany
 };
 
 export default CompanyService;
