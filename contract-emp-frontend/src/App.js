@@ -49,7 +49,7 @@ function App() {
             <Route path="/createcompany" element={<CreateCompany />} />
             <Route path="/updatecompany/:id" element={<UpdateCompany />} />
             <Route path="/archivecom" element={<ArchiveCom />} />
-            <Route path="/CompaniesCom" element={<CompaniesCom />} />
+            <Route path="/companies-com" element={<CompaniesCom />} />
 
             <Route path="/contract" element={<Contract />} />
             <Route path="/createcontract" element={<CreateContract />} />

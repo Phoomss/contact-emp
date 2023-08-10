@@ -6,18 +6,13 @@ import Grid from "@mui/material/Grid";
 import { Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import EmployeeService from "services/EmployeeService";
-import CompanyService from "services/CompanyService";
-import SupervisedUserCircleIcon from "@mui/icons-material/SupervisedUserCircle";
-import ApartmentIcon from "@mui/icons-material/Apartment";
-import ContractService from "services/ContractService";
-import UserService from "services/UserService";
+import BadgeIcon from '@mui/icons-material/Badge';
+import { Container } from "react-bootstrap";
+import FlexBetween from './../FlexBetween';
 
 const ShowCompany = () => {
   const navigate = useNavigate();
   const [employeeCount, setEmployeeCount] = useState(0);
-  const [companyCount, setCompanyCount] = useState(0);
-  const [contractCount, setContractCount] = useState(0);
-  const [userCount, setUserCount] = useState(0);
 
   const fetchEmployeeCount = async () => {
     try {
@@ -28,69 +23,45 @@ const ShowCompany = () => {
     }
   };
 
-  const fetchCompanyCount = async () => {
-    try {
-      const res = await CompanyService.getCompanies();
-      setCompanyCount(res.data.length);
-    } catch (error) {
-      console.error("fail count company :", error);
-    }
-  };
-
-  const fetchContractCount = async () => {
-    try {
-      const res = await ContractService.getContracts();
-      setContractCount(res.data.length);
-    } catch (error) {
-      console.error("fail count contract :", error);
-    }
-  };
-
-  const fetchUserCount = async () => {
-    try {
-      const res = await UserService.getAlluser();
-      setUserCount(res.data.length);
-    } catch (error) {
-      console.error("fail count user :", error);
-    }
-  };
-
   useEffect(() => {
-    fetchCompanyCount();
     fetchEmployeeCount();
-    fetchUserCount();
-    fetchContractCount();
   }, []);
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={2} columns={16}>
-        <Grid item xs={8}>
-          <Item
-            onClick={() => {
-              navigate("/employee");
-            }}
-            sx={{ boxShadow: 3 }}
-          >
-            <SupervisedUserCircleIcon sx={{ fontSize: 40 }} />
-            <Typography variant="h3">จำนวนพนักงาน</Typography>
-            <Typography variant="h5">{employeeCount} คน</Typography>
-          </Item>
-        </Grid>
+    <Box
+      component="main"
+      sx={{
+        flexGrow: 1,
 
-        <Grid item xs={8}>
-          <Item
-            onClick={() => {
-              navigate("/company");
-            }}
-            sx={{ boxShadow: 3 }}
+      }}
+    >
+      <Container maxWidth="xl">
+        <Grid
+          container
+          spacing={2}
+        >
+          <Grid
+            xs={12}
+            sm={6}
+            lg={3}
           >
-            <ApartmentIcon sx={{ fontSize: 40 }} />
-            <Typography variant="h3">จำนวนบริษัท</Typography>
-            <Typography variant="h5">{companyCount}</Typography>
-          </Item>
+            <Item
+              onClick={() => {
+                navigate("/employee");
+              }}
+              sx={{ boxShadow: 3, marginRight: 2, marginLeft: 2, marginBottom: 2, borderRadius: 5, backgroundColor: "#154295", color: "white" }}
+
+            >
+              <FlexBetween>
+                <Typography variant="h3">{employeeCount} คน</Typography>
+                <BadgeIcon sx={{ height: '100%', fontSize: '70PX', color: "gray" }} />
+              </FlexBetween>
+              <Typography variant="h5">จำนวนพนักงาน</Typography>
+
+            </Item>
+          </Grid>
         </Grid>
-      </Grid>
+      </Container>
     </Box>
   );
 };

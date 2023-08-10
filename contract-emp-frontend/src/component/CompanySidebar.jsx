@@ -35,7 +35,7 @@ const navItems = [
     icon: <DashboardIcon />,
   },
   {
-    text: "CompaniesCom",
+    text: "companies-com",
     thaitext: "ข้อมูลบริษัท",
     icon: <ApartmentOutlined />,
   },

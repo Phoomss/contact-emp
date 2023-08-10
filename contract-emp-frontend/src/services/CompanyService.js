@@ -22,10 +22,9 @@ const getCompanyById = (id) => {
   });
 };
 
-const getInfoCompany = ()=>{
-  return http.get(`company/info`).then((response)=>{
-    return response
-  })
+const getInfoCompany = (token) => {
+  http.defaults.headers.common["Authorization"] = token;
+  return http.get("/company/info");
 }
 
 const CompanyService = {

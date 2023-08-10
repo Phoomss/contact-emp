@@ -1,25 +1,34 @@
 import { React, useState, useEffect } from "react";
 import { Box, useTheme, Button } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import { DeleteOutline, CreateOutlined } from "@mui/icons-material";
-import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
+import {
+  DeleteOutline,
+  CreateOutlined,
+} from "@mui/icons-material";
+import AddBusinessIcon from "@mui/icons-material/AddBusiness";
 import { useNavigate } from "react-router-dom";
-import EmployeeService from "../../services/EmployeeService";
+import CompanyService from "../../services/CompanyService";
 import Header from "../Header";
 import FlexBetween from "../FlexBetween";
 import swal from "sweetalert";
 
-const Employees = () => {
+const CompaniesComData = () => {
   const theme = useTheme();
   const navigate = useNavigate();
-  const [employees, setEmployees] = useState([]);
+  const [companies, setCompanies] = useState([]);
   const [selectionModel, setSelectionModel] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await EmployeeService.getEmployees();
-      setEmployees(response.data);
+      try {
+        const token = localStorage.getItem("token")
+        const response = await CompanyService.getInfoCompany(token);
+
+        const userCompany = response.data
+        setCompanies([userCompany]);
+      } catch (error) {
+        console.error("Error fetching Data Error :", error);
+      }
     };
     fetchData();
   }, []);
@@ -32,13 +41,15 @@ const Employees = () => {
 
   const handleDeleteButtonClick = async () => {
     if (selectionModel.length === 0) {
-      swal("กรุณาเลือกลูกจ้างอย่างน้อยหนึ่งคนเพื่อลบ.", { icon: "warning" });
+      swal("Please select at least one company to delete.", {
+        icon: "warning",
+      });
       return;
     }
 
     swal({
-      title: "แน่ใจหรือไม่?",
-      text: "เมื่อลบแล้ว, ลูกจ้างที่คุณเลือกไว้จะถูกลบหายไป!",
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover the selected companies!",
       icon: "warning",
       buttons: true,
       dangerMode: true,
@@ -46,70 +57,46 @@ const Employees = () => {
       if (willDelete) {
         await Promise.all(
           selectionModel.map(async (id) => {
-            await EmployeeService.deleteEmployee(id);
+            await CompanyService.deleteCompany(id);
           })
         );
-        setEmployees(
-          employees.filter((employee) => !selectionModel.includes(employee.id))
+        setCompanies(
+          companies.filter((company) => !selectionModel.includes(company.id))
         );
         setSelectionModel([]);
-        swal("ลบลูกจ้างที่คุณเลือกเรียบร้อย!", { icon: "success" });
+        swal("The selected companies have been deleted successfully!", {
+          icon: "success",
+        });
       }
     });
   };
 
   const createClick = () => {
-    navigate(`/createemployee`);
+    navigate(`/createcompany`);
   };
 
   const handleEditButtonClick = (id) => {
-    navigate(`/updateemployee/${id}`);
+    navigate(`/updatecompany/${id}`);
   };
 
-  const handleArchiveViewClick = (id) => {
-    navigate(`/archive/search/${id}`);
-  };
   const columns = [
     {
-      field: "e_num",
-      headerName: "หมายเลขประจำตัว",
-      flex: .2
-    },
-    {
       field: "name",
-      headerName: "ชื่อ",
+      headerName: "Name",
+      flex: 0.5,
       renderCell: (params) => {
         return <Box sx={{ cursor: "pointer" }}>{params.value}</Box>;
       },
     },
     {
-      field: "surname",
-      headerName: "นามสกุล",
+      field: "address",
+      headerName: "Address",
+      flex: 1,
     },
     {
       field: "telephone",
-      headerName: "เบอร์โทรศัพท์",
-      flex: .2
-    },
-    // {
-    //   field: "department1",
-    //   headerName: "สังกัดกอง",
-    // },
-    // {
-    //   field: "department2",
-    //   headerName: "สังกัดฝ่าย",
-    // },
-    // {
-    //   field: "company",
-    //   headerName: "ชื่อบริษัท",
-    // },
-    {
-      field: "note",
-      headerName: "หมายเหตุ",
-    },
-    {
-      field: "createby",
-      headerName: "สร้างโดย",
+      headerName: "Phone Number",
+      flex: 0.5,
     },
     {
       field: "Functions",
@@ -126,25 +113,6 @@ const Employees = () => {
           </Box>
         );
       },
-      flex: .2
-    },
-    {
-      field: "Archive",
-      headerName: "ดูการทำงาน",
-      renderCell: (params) => {
-        return (
-          <Box>
-            <Button
-              variant="contained"
-              color="secondary"
-              startIcon={<RemoveRedEyeOutlinedIcon />}
-              onClick={() => handleArchiveViewClick(params.id)}
-            ></Button>
-          </Box>
-        );
-        
-      },
-      flex: .2
     },
   ];
 
@@ -155,28 +123,27 @@ const Employees = () => {
   };
 
   return (
-    <Box m="1.5rem 2.5rem">
+    <Box ml="2.5rem" mr="2.5rem">
       <FlexBetween>
-        <Header title="ลูกจ้างจ้างเหมาบริการ" />
+        <Header title="บริษัท" />
         <Box>
           <FlexBetween gap="1rem">
             <Button
               sx={{
-                backgroundColor: theme.palette.blue[300],
-                color: theme.palette.neutral.font,
+                backgroundColor: theme.palette.secondary.light,
+                color: theme.palette.background.alt,
                 fontSize: "14px",
                 fontWeight: "bold",
                 padding: "10px 20px",
               }}
               onClick={createClick}
             >
-              <PersonAddIcon />
+              <AddBusinessIcon />
             </Button>
-
             <Button
               sx={{
                 backgroundColor: theme.palette.secondary.light,
-                color: theme.palette.neutral.font,
+                color: theme.palette.background.alt,
                 fontSize: "14px",
                 fontWeight: "bold",
                 padding: "10px 20px",
@@ -190,8 +157,7 @@ const Employees = () => {
       </FlexBetween>
       <Box height="calc(100vh - 200px)" sx={{ mt: "1.5rem" }}>
         <DataGrid
-          sx={{ color: theme.palette.grey[1000] }}
-          rows={employees}
+          rows={companies}
           columns={columns}
           getRowId={getRowId}
           checkboxSelection
@@ -209,4 +175,4 @@ const Employees = () => {
   );
 };
 
-export default Employees;
+export default CompaniesComData;

@@ -43,9 +43,9 @@ const createEmployee = async (req, res) => {
     console.log("Error: ", err);
   });
 
-  if (alreadyExistsEmployee) {
-    return res.status(402).json({ message: "Employee already exists!" });
-  }
+  // if (alreadyExistsEmployee) {
+  //   return res.status(402).json({ message: "Employee already exists!" });
+  // }
   if (isNaN(e_num)) {
     return res.status(404).json({ message: "Number should be an e_num!" });
   }
