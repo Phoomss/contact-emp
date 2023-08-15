@@ -99,10 +99,9 @@ const Archives = () => {
         return contract ? contract.start_date : "";
       },
     },
-
     {
       field: "end_date",
-      headerName: "วันที่เริ่ม",
+      headerName: "วันที่สิ้นสุด",
       valueGetter: (params) => {
         const contract = contracts.find(
           (contract) => contract.id === params.row.contract_id
@@ -130,8 +129,31 @@ const Archives = () => {
         }
         return "";
       },
-      flex:.2
+      flex: .2
     },
+    {
+      field: "employee_name",
+      headerName: "ชื่อ-นามสกุล",
+      valueGetter: (params) => {
+        const employee = employees.find(
+          (employee) => employee.id === params.row.employee_id
+        );
+        return employee ? employee.name : "";
+      },
+    },
+    {
+      field: "employee_surname",
+      headerName: "นามสกุล",
+      valueGetter: (params) => {
+        const employee = employees.find(
+          (employee) => employee.id === params.row.employee_id
+        );
+        return employee ? employee.surname : "";
+      },
+    },
+
+  
+   
     {
       field: "department1",
       headerName: "สังกัดกอง",
@@ -155,7 +177,7 @@ const Archives = () => {
           </Box>
         );
       },
-      flex:.1
+      flex: .1
     },
   ];
 
@@ -168,7 +190,7 @@ const Archives = () => {
   return (
     <Box m="1.5rem 2.5rem">
       <FlexBetween>
-        <Header title="สัญญาจ้างลูกจ้าง" />
+        <Header title="ข้อมูลสัญญาจ้าง-ลูกจ้าง" />
         <Box>
           <FlexBetween gap="1rem">
             <Button

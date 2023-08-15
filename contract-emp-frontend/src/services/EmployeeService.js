@@ -17,9 +17,7 @@ const updateEmployee = (id, updateData) => {
 };
 
 const getEmployeeById = (id) => {
-  return http.get(`/employee/search/?id=${id}`).then((response) => {
-    return response;
-  });
+  return http.get(`/employee/search/?id=${id}`)
 };
 
 const EmployeeService = {

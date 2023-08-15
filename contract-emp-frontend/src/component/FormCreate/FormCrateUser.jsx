@@ -175,14 +175,14 @@ const FormCrateUser = () => {
             )}
             <Grid item xs={12}>
               <Button type="submit" variant="contained">
-                Create
+                ยืนยันฃ
               </Button>
               <Button
                 variant="outlined"
                 onClick={handleCancelClick}
                 sx={{ marginLeft: "10px" }}
               >
-                Cancel
+                ยกเลิก
               </Button>
             </Grid>
           </Grid>

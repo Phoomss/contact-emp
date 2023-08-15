@@ -133,7 +133,7 @@ const CreateContracts = () => {
             </Grid>
 
             <Grid item xs={6}>
-              <InputLabel>วันเริ่ม: </InputLabel>
+              <InputLabel>วันที่เริ่ม: </InputLabel>
               <TextField
                 fullWidth
                 margin="normal"
@@ -148,7 +148,7 @@ const CreateContracts = () => {
             </Grid>
 
             <Grid item xs={6}>
-              <InputLabel>วันสิ้นสุด: </InputLabel>
+              <InputLabel>วันที่สิ้นสุด: </InputLabel>
               <TextField
                 fullWidth
                 margin="normal"
@@ -176,14 +176,14 @@ const CreateContracts = () => {
 
           <Box sx={{ mt: "1.5rem" }}>
             <Button type="submit" variant="contained">
-              Create
+              ยืนยัน
             </Button>
             <Button
               sx={{ ml: "10px" }}
               variant="outlined"
               onClick={handleCancleClick}
             >
-              Cancel
+              ยกเลิก
             </Button>
           </Box>
 

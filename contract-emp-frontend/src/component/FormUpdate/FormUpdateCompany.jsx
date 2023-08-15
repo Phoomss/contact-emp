@@ -62,7 +62,7 @@ const UpdateCompanies = () => {
       </FlexBetween>
       <Box sx={{ mt: "1.5rem" }}>
         <form onSubmit={handleSubmit}>
-          <InputLabel>Company Name: </InputLabel>
+          <InputLabel>ชื่อบริษัท: </InputLabel>
           <TextField
             required
             fullWidth
@@ -70,7 +70,7 @@ const UpdateCompanies = () => {
             value={companyName}
             onChange={(e) => setCompanyName(e.target.value)}
           />
-          <InputLabel>Company Address: </InputLabel>
+          <InputLabel>ที่อยู่บริษัท: </InputLabel>
           <TextField
             required
             fullWidth
@@ -78,7 +78,7 @@ const UpdateCompanies = () => {
             value={companyAddress}
             onChange={(e) => setCompanyAddress(e.target.value)}
           />
-          <InputLabel>Company Phone: </InputLabel>
+          <InputLabel>เบอร์โทรบริษัท: </InputLabel>
           <TextField
             required
             fullWidth
@@ -88,14 +88,14 @@ const UpdateCompanies = () => {
           />
           <Box sx={{ mt: "1.5rem" }}>
             <Button type="submit" variant="contained">
-              Update
+              ยืนยัน
             </Button>
             <Button
               sx={{ ml: "10px" }}
               variant="outlined"
               onClick={handleCancelClick}
             >
-              Cancel
+              ยกเลิก
             </Button>
           </Box>
           {error && (

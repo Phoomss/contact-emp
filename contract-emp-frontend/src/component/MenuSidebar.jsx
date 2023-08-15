@@ -50,6 +50,11 @@ const navItems = [
     icon: <GroupsOutlined />,
   },
   {
+    text: "Archive",
+    thaitext: "ข้อมูลสัญญาจ้าง-ลูกจ้าง",
+    icon: <GroupsOutlined />,
+  },
+  {
     text: "UserAll",
     thaitext: "ข้อมูลผู้ใช้งาน",
     icon: <PersonOutlineOutlined />,

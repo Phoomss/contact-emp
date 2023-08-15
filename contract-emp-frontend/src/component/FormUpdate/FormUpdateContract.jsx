@@ -109,7 +109,7 @@ const FormUpdateContract = () => {
             </Grid>
 
             <Grid item xs={6}>
-              <InputLabel>วันสิ้นสุด: </InputLabel>
+              <InputLabel>วันที่สิ้นสุด: </InputLabel>
               <TextField
                 fullWidth
                 margin="normal"
@@ -133,14 +133,14 @@ const FormUpdateContract = () => {
 
           <Box sx={{ mt: "1.5rem" }}>
             <Button type="submit" variant="contained">
-              Create
+              ยืนยัน
             </Button>
             <Button
               sx={{ ml: "10px" }}
               variant="outlined"
               onClick={handleCancelClick}
             >
-              Cancel
+              ยกเลิก
             </Button>
           </Box>
 

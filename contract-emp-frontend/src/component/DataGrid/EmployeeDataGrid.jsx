@@ -130,7 +130,7 @@ const Employees = () => {
     },
     {
       field: "Archive",
-      headerName: "ดูการทำงาน",
+      headerName: "ดูประวัติการทำงาน",
       renderCell: (params) => {
         return (
           <Box>

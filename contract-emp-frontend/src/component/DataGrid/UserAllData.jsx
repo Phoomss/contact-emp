@@ -137,7 +137,7 @@ const UserAllData = () => {
   return (
     <Box m="1.5rem 2.5rem">
       <FlexBetween>
-        <Header title="ผู้ใข้งาน" />
+        <Header title="ข้อมูลผู้ใข้งาน" />
         <Box>
           <FlexBetween gap="1rem">
             <Button

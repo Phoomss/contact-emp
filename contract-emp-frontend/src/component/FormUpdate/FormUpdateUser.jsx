@@ -148,7 +148,7 @@ const FormUpdateUser = () => {
 
           <Box sx={{ mt: "1.5rem" }}>
             <Button type="submit" variant="contained">
-              อัพเดทข้อมูลผุ้ใช้งาน
+              ยืนยัน
             </Button>
             <Button
               sx={{ ml: "10px" }}

@@ -96,7 +96,7 @@ const FormUpdateArchive = () => {
             value={contractId}
             onChange={(e) => setContractId(e.target.value)}
           />
-          <InputLabel>แผนก1: </InputLabel>
+          <InputLabel>แผนก: </InputLabel>
           <TextField
             required
             fullWidth
@@ -104,7 +104,7 @@ const FormUpdateArchive = () => {
             value={department1}
             onChange={(e) => setDepartment1(e.target.value)}
           />
-          <InputLabel>แผนก2: </InputLabel>
+          <InputLabel>สังกัดกอง: </InputLabel>
           <TextField
             required
             fullWidth
@@ -113,7 +113,7 @@ const FormUpdateArchive = () => {
             onChange={(e) => setDepartment2(e.target.value)}
           />
 
-          <InputLabel>แผนก3: </InputLabel>
+          <InputLabel>สังกัดฝ่าย: </InputLabel>
           <TextField
             fullWidth
             margin="normal"
@@ -131,7 +131,7 @@ const FormUpdateArchive = () => {
 
           <Box sx={{ mt: "1.5rem" }}>
             <Button type="submit" variant="contained">
-              อัพเดทข้อมูลพนักงาน
+              ยืนยัน
             </Button>
             <Button
               sx={{ ml: "10px" }}

@@ -121,7 +121,7 @@ const CreateArchive = () => {
   return (
     <Box m="1.5rem 2.5rem">
       <FlexBetween>
-        <Header title="เพิ่มสัญญาจ้างลูกจ้างม" />
+        <Header title="เพิ่มสัญญาจ้าง-ลูกจ้าง" />
       </FlexBetween>
       <Box sx={{ mt: "1.5rem" }}>
         <form onSubmit={handleSubmit}>
@@ -141,21 +141,21 @@ const CreateArchive = () => {
                 getOptionLabel={(employee) => employee.name}
                 renderInput={(params) => <TextField {...params} label="Search Employee" />}
               /> */}
+              <InputLabel>ชื่อ (ลูกจ้าง)</InputLabel>
               <Select
                 fullWidth
                 margin="normal"
                 value={employee_id}
                 onChange={(event) => setEmployee_id(event.target.value)}
               >
-                {employees && employees.length > 0 ? (
-                  employees.map((employee) => (
-                    <MenuItem key={employee.id} value={employee.id}>
-                      {employee.name}
-                    </MenuItem>
-                  ))
-                ) : (
-                  <MenuItem disabled>No employees found</MenuItem>
-                )}
+                <MenuItem value="" >
+                  ----- เลือกลูกจ้าง -----
+                </MenuItem>
+                {employees.map((employee) => (
+                  <MenuItem key={employee.id} value={employee.id}>
+                    {employee.name}
+                  </MenuItem>
+                ))}
               </Select>
             </Grid>
 
@@ -191,40 +191,40 @@ const CreateArchive = () => {
             </Grid>
 
             <Grid item xs={12}>
+              <InputLabel>แผนก</InputLabel>
               <TextField
                 fullWidth
                 margin="normal"
-                label="Department 1"
                 value={department1}
                 onChange={(e) => setDepartment1(e.target.value)}
               />
             </Grid>
 
             <Grid item xs={12}>
+              <InputLabel>สังกัดกอง</InputLabel>
               <TextField
                 fullWidth
                 margin="normal"
-                label="Department 2"
                 value={department2}
                 onChange={(e) => setDepartment2(e.target.value)}
               />
             </Grid>
 
             <Grid item xs={12}>
+              <InputLabel>สังกัดฝ่าย</InputLabel>
               <TextField
                 fullWidth
                 margin="normal"
-                label="Department 3"
                 value={department3}
                 onChange={(e) => setDepartment3(e.target.value)}
               />
             </Grid>
 
             <Grid item xs={12}>
+              <InputLabel>หมายเหตุ</InputLabel>
               <TextField
                 fullWidth
                 margin="normal"
-                label="Remark"
                 value={remark}
                 onChange={(e) => setRemark(e.target.value)}
               />
@@ -233,14 +233,14 @@ const CreateArchive = () => {
 
           <Box sx={{ mt: "1.5rem" }}>
             <Button type="submit" variant="contained" onClick={handleSubmit}>
-              Create
+              ยืนยัน
             </Button>
             <Button
               sx={{ ml: "10px" }}
               variant="outlined"
               onClick={handleCanClick}
             >
-              Cancel
+              ยกเลิก
             </Button>
           </Box>
           {error && (

@@ -74,8 +74,12 @@ const Companies = () => {
 
   const columns = [
     {
+      field:"id",
+      headerName:"ลำดับที่"
+    },
+    {
       field: "name",
-      headerName: "Name",
+      headerName: "ชื่อบริษัท",
       flex: 0.5,
       renderCell: (params) => {
         return <Box sx={{ cursor: "pointer" }}>{params.value}</Box>;
@@ -83,12 +87,12 @@ const Companies = () => {
     },
     {
       field: "address",
-      headerName: "Address",
+      headerName: "ที่อยู่บริษัท",
       flex: 1,
     },
     {
       field: "telephone",
-      headerName: "Phone Number",
+      headerName: "เบอร์โทรบริษัท",
       flex: 0.5,
     },
     {

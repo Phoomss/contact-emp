@@ -40,7 +40,7 @@ const CreateCompanies = () => {
       </FlexBetween>
       <Box sx={{ mt: "1.5rem" }}>
         <form onSubmit={handleSubmit}>
-          <InputLabel>Company Name: </InputLabel>
+          <InputLabel>ชื่อบริษัท: </InputLabel>
           <TextField
             fullWidth
             margin="normal"
@@ -48,14 +48,14 @@ const CreateCompanies = () => {
             onChange={(e) => setCompanyName(e.target.value)}
             helperText=""
           />
-          <InputLabel>Company Address: </InputLabel>
+          <InputLabel>ที่อยู่บริษัท: </InputLabel>
           <TextField
             fullWidth
             margin="normal"
             value={companyAddress}
             onChange={(e) => setCompanyAddress(e.target.value)}
           />
-          <InputLabel>Company Phone: </InputLabel>
+          <InputLabel>เบอร์โทรบริษัท: </InputLabel>
           <TextField
             fullWidth
             margin="normal"
@@ -64,14 +64,14 @@ const CreateCompanies = () => {
           />
           <Box sx={{ mt: "1.5rem" }}>
             <Button type="submit" variant="contained">
-              Create
+              ยืนยัน
             </Button>
             <Button
               sx={{ ml: "10px" }}
               variant="outlined"
               onClick={handleCancleClick}
             >
-              Cancel
+              ยกเลิก
             </Button>
           </Box>
           {error && (

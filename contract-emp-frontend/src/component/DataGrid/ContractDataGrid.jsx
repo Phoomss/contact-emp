@@ -123,7 +123,7 @@ const Contracts = () => {
     },
     {
       field: "View",
-      headerName: "ดูจำนวนลูกจ้างในสัญญาจ้าง",
+      headerName: "ดูจำนวนลูกจ้าง-ในสัญญาจ้าง",
       renderCell: (params) => {
         return (
           <Box>
@@ -149,7 +149,7 @@ const Contracts = () => {
   return (
     <Box m="1.5rem 2.5rem">
       <FlexBetween>
-        <Header title="สัญญาจ้าง" />
+        <Header title="ข้อมูลสัญญาจ้าง" />
         <Box>
           <FlexBetween gap="1rem">
             <Button

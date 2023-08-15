@@ -101,7 +101,7 @@ const CreateEmployees = () => {
             mt="1.5rem"
           >
             <Grid item xs={12}>
-              <InputLabel>เลขประจำตัว*: </InputLabel>
+              <InputLabel>เลขประจำตัว (ลูกจ้าง)*: </InputLabel>
               <TextField
                 margin="normal"
                 value={autoNumber}
@@ -190,7 +190,7 @@ const CreateEmployees = () => {
           </Grid>
           <Box sx={{ mt: "1.5rem" }}>
             <Button type="submit" variant="contained" onClick={handleSubmit}>
-              เพิ่มข้อมูล
+              ยืนยัน
             </Button>
             <Button
               sx={{ ml: "10px" }}

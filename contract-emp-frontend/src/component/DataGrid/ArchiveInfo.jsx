@@ -11,6 +11,7 @@ import EmployeeService from "services/EmployeeService";
 import swal from "sweetalert";
 import FlexBetween from "component/FlexBetween";
 import Header from "component/Header";
+import EmployeeInfo from "pages/Employee/EmployeeInfo";
 
 const ArchiveInfo = () => {
   const theme = useTheme();
@@ -27,16 +28,27 @@ const ArchiveInfo = () => {
     const fetchData = async () => {
       const responseArchive = await ArchiveService.getArchiveByIdEmp(id);
       setArchives(responseArchive.data);
+
       const responseCompany = await CompanyService.getCompanies();
       setCompanies(responseCompany.data);
+
       const responseContract = await ContractService.getContracts();
       setContracts(responseContract.data);
+
       const responseEmployee = await EmployeeService.getEmployees();
       setEmployees(responseEmployee.data);
-    };
+    }
     fetchData();
-    console.log(fetchData());
   }, [id]);
+
+  // useEffect(() => {
+  //   const fetchDataEmName = async () => {
+  //     const responseEmployeeName = await EmployeeService.getEmployeeById(id)
+  //     setEmployeeName(responseEmployeeName.data)
+  //   }
+  //   fetchDataEmName()
+  //   console.log(fetchDataEmName())
+  // }, [id])
 
   // const filteredArchives = archives.filter(
   //     (archive) => archive.employee_id === employeeId
@@ -46,40 +58,6 @@ const ArchiveInfo = () => {
 
   const handleSelectionModelChange = (newSelection) => {
     setSelectionModel(newSelection);
-  };
-
-  const handleDeleteButtonClick = async () => {
-    if (selectionModel.length === 0) {
-      swal("กรุณาเลือกสัญญาอย่างน้อยหนึ่งสัญญาเพื่อลบ.", { icon: "warning" });
-      return;
-    }
-
-    swal({
-      title: "แน่ใจหรือไม่?",
-      text: "เมื่อลบแล้ว, สัญญาที่คุณเลือกไว้จะถูกลบหายไป!",
-      icon: "warning",
-      buttons: true,
-      dangerMode: true,
-    }).then(async (willDelete) => {
-      if (willDelete) {
-        await Promise.all(
-          selectionModel.map(async (id) => {
-            await ArchiveService.deleteArchive(id);
-          })
-        );
-        setArchives(
-          archives.filter((archive) => !selectionModel.includes(archive.id))
-        );
-        setSelectionModel([]);
-        swal("สัญญาที่คุณเลือกไว้ถูกลบเรียบร้อย!", {
-          icon: "success",
-        });
-      }
-    });
-  };
-
-  const createClick = () => {
-    navigate(`/createarchive`);
   };
 
   const handleEditButtonClick = (id) => {
@@ -110,33 +88,12 @@ const ArchiveInfo = () => {
 
     {
       field: "end_date",
-      headerName: "วันที่เริ่ม",
+      headerName: "วันที่สิ้นสุด",
       valueGetter: (params) => {
         const contract = contracts.find(
           (contract) => contract.id === params.row.contract_id
         );
         return contract ? contract.end_date : "";
-      },
-    },
-
-    {
-      field: "employee_name",
-      headerName: "ชื่อ",
-      valueGetter: (params) => {
-        const employee = employees.find(
-          (employee) => employee.id === params.row.employee_id
-        );
-        return employee ? employee.name : "";
-      },
-    },
-    {
-      field: "employee_surname",
-      headerName: "นามสกุล",
-      valueGetter: (params) => {
-        const employee = employees.find(
-          (employee) => employee.id === params.row.employee_id
-        );
-        return employee ? employee.surname : "";
       },
     },
     {
@@ -161,6 +118,27 @@ const ArchiveInfo = () => {
       },
       flex: .2
     },
+    {
+      field: "employee_name",
+      headerName: "ชื่อ",
+      valueGetter: (params) => {
+        const employee = employees.find(
+          (employee) => employee.id === params.row.employee_id
+        );
+        return employee ? employee.name : "";
+      },
+    },
+    {
+      field: "employee_surname",
+      headerName: "นามสกุล",
+      valueGetter: (params) => {
+        const employee = employees.find(
+          (employee) => employee.id === params.row.employee_id
+        );
+        return employee ? employee.surname : "";
+      },
+    },
+
     {
       field: "department1",
       headerName: "สังกัดกอง",
@@ -200,7 +178,8 @@ const ArchiveInfo = () => {
       <FlexBetween>
         <Header title={`ประวัติการทำงาน `} />
         <Box>
-          <FlexBetween gap="1rem">
+          {/* <EmployeeInfo/> */}
+          {/* <FlexBetween gap="1rem">
             <Button
               sx={{
                 backgroundColor: theme.palette.secondary.light,
@@ -226,7 +205,7 @@ const ArchiveInfo = () => {
             >
               <DeleteOutline />
             </Button>
-          </FlexBetween>
+          </FlexBetween> */}
         </Box>
       </FlexBetween>
       <Box height="calc(100vh - 200px)" sx={{ mt: "1.5rem" }}>

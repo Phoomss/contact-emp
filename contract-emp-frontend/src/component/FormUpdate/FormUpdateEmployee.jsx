@@ -176,7 +176,7 @@ const UpdateEmployees = () => {
           </Grid>
           <Box sx={{ mt: "1.5rem" }}>
             <Button type="submit" variant="contained" onClick={handleSubmit}>
-              อัพเดท
+              ยืนยัน
             </Button>
             <Button
               sx={{ ml: "10px" }}
