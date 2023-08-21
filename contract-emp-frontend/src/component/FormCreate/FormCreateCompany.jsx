@@ -44,6 +44,7 @@ const CreateCompanies = () => {
           <TextField
             fullWidth
             margin="normal"
+            type="text"
             value={companyName}
             onChange={(e) => setCompanyName(e.target.value)}
             helperText=""
@@ -51,6 +52,7 @@ const CreateCompanies = () => {
           <InputLabel>ที่อยู่บริษัท: </InputLabel>
           <TextField
             fullWidth
+            type="text"
             margin="normal"
             value={companyAddress}
             onChange={(e) => setCompanyAddress(e.target.value)}
@@ -58,6 +60,7 @@ const CreateCompanies = () => {
           <InputLabel>เบอร์โทรบริษัท: </InputLabel>
           <TextField
             fullWidth
+            type="text"
             margin="normal"
             value={companyPhone}
             onChange={(e) => setCompanyPhone(e.target.value)}
