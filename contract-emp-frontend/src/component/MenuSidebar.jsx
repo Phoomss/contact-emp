@@ -4,8 +4,6 @@ import {
   Divider,
   Drawer,
   IconButton,
-  ImageList,
-  ImageListItem,
   List,
   ListItem,
   ListItemButton,
@@ -23,7 +21,6 @@ import {
   PersonOutlineOutlined,
 } from "@mui/icons-material";
 import LogoutIcon from "@mui/icons-material/Logout";
-import ArchiveOutlinedIcon from '@mui/icons-material/ArchiveOutlined';
 import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
 import { useLocation, useNavigate } from "react-router-dom";
 import FlexBetween from "./FlexBetween";
@@ -51,7 +48,7 @@ const navItems = [
   },
   {
     text: "Archive",
-    thaitext: "ข้อมูลสัญญาจ้าง-ลูกจ้าง",
+    thaitext: "ข้อมูลการทำงานลูกจ้าง",
     icon: <GroupsOutlined />,
   },
   {

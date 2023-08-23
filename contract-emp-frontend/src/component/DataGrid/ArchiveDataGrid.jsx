@@ -196,7 +196,7 @@ const Archives = () => {
   return (
     <Box m="1.5rem 2.5rem">
       <FlexBetween>
-        <Header title="ข้อมูลสัญญาจ้าง-ลูกจ้าง" />
+        <Header title="ข้อมูลการทำงานลูกจ้าง" />
         <Box>
           <FlexBetween gap="1rem">
             <Button
