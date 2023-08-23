@@ -18,10 +18,12 @@ const createEmployee = async (req, res) => {
     return res.status(400).json({ message: "Please fill out the e_num field" });
   }
 
-  if (!e_IdCard) {
-    return res.status(400).json({ message: "Please fill out the e_IdCard field" });
+  if (e_IdCard && e_IdCard.length < 13) {
+    return res.status(400).json({ message: "คุณกรอกตัวเลขให้ถึง 13 หลัก" });
+  } else if (e_IdCard && e_IdCard.length > 13) {
+    return res.status(400).json({ message: "คุณกรอกตัวเลขเกิน 13 หลัก" });
   }
-
+  
   if (!telephone) {
     return res
       .status(400)
