@@ -87,16 +87,17 @@ const CompaniesComData = () => {
       renderCell: (params) => {
         return <Box sx={{ cursor: "pointer" }}>{params.value}</Box>;
       },
+      flex: .2
     },
     {
       field: "address",
       headerName: "Address",
-      flex: 1,
+      flex: .2
     },
     {
       field: "telephone",
       headerName: "Phone Number",
-      flex: 0.5,
+      flex: .2
     },
     {
       field: "Functions",
@@ -113,6 +114,7 @@ const CompaniesComData = () => {
           </Box>
         );
       },
+      flex: .2
     },
   ];
 

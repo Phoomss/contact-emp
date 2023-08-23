@@ -11,7 +11,7 @@ import EmployeeService from "services/EmployeeService";
 import swal from "sweetalert";
 import FlexBetween from "component/FlexBetween";
 import Header from "component/Header";
-import EmployeeInfo from "pages/Employee/EmployeeInfo";
+import EmployeeMaster from "component/MasterDataTeble/EmployeeMaster";
 
 const ArchiveInfo = () => {
   const theme = useTheme();
@@ -74,6 +74,7 @@ const ArchiveInfo = () => {
         );
         return contract ? contract.number : "";
       },
+      flex: .2
     },
     {
       field: "start_date",
@@ -84,6 +85,7 @@ const ArchiveInfo = () => {
         );
         return contract ? contract.start_date : "";
       },
+      flex: .2
     },
 
     {
@@ -95,6 +97,7 @@ const ArchiveInfo = () => {
         );
         return contract ? contract.end_date : "";
       },
+      flex: .2
     },
     {
       field: "company_id",
@@ -119,33 +122,14 @@ const ArchiveInfo = () => {
       flex: .2
     },
     {
-      field: "employee_name",
-      headerName: "ชื่อ",
-      valueGetter: (params) => {
-        const employee = employees.find(
-          (employee) => employee.id === params.row.employee_id
-        );
-        return employee ? employee.name : "";
-      },
-    },
-    {
-      field: "employee_surname",
-      headerName: "นามสกุล",
-      valueGetter: (params) => {
-        const employee = employees.find(
-          (employee) => employee.id === params.row.employee_id
-        );
-        return employee ? employee.surname : "";
-      },
-    },
-
-    {
       field: "department1",
       headerName: "สังกัดกอง",
+      flex: .2
     },
     {
       field: "department2",
       headerName: "สังกัดฝ่าย",
+      flex: .2
     },
 
     {
@@ -165,6 +149,7 @@ const ArchiveInfo = () => {
           </Box>
         );
       },
+      flex: .2
     },
   ];
 
@@ -175,6 +160,7 @@ const ArchiveInfo = () => {
 
   return (
     <Box m="1.5rem 2.5rem">
+      
       <FlexBetween>
         <Header title={`ประวัติการทำงาน `} />
         <Box>
@@ -209,6 +195,7 @@ const ArchiveInfo = () => {
         </Box>
       </FlexBetween>
       <Box height="calc(100vh - 200px)" sx={{ mt: "1.5rem" }}>
+      <EmployeeMaster/>
         <DataGrid
           rows={archives}
           columns={columns}

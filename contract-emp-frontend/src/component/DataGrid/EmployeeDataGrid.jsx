@@ -81,10 +81,12 @@ const Employees = () => {
       renderCell: (params) => {
         return <Box sx={{ cursor: "pointer" }}>{params.value}</Box>;
       },
+      flex: .2
     },
     {
       field: "surname",
       headerName: "นามสกุล",
+      flex: .2
     },
     {
       field: "telephone",
@@ -106,10 +108,12 @@ const Employees = () => {
     {
       field: "note",
       headerName: "หมายเหตุ",
+      flex: .2
     },
     {
       field: "createby",
       headerName: "สร้างโดย",
+      flex: .2
     },
     {
       field: "Functions",

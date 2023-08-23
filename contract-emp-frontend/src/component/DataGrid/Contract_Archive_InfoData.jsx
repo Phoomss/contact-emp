@@ -9,6 +9,7 @@ import EmployeeService from "services/EmployeeService";
 import swal from "sweetalert";
 import FlexBetween from "component/FlexBetween";
 import Header from "component/Header";
+import ContractMaster from "component/MasterDataTeble/ContractMaster";
 
 const Contract_Archive_InfoData = () => {
   const { id } = useParams();
@@ -45,38 +46,6 @@ const Contract_Archive_InfoData = () => {
 
   const columns = [
     {
-      field: "contract_id",
-      headerName: "เลขที่สัญญา",
-      valueGetter: (params) => {
-        const contract = contracts.find(
-          (contract) => contract.id === params.value
-        );
-        return contract ? contract.number : "";
-      },
-    },
-    {
-      field: "start_date",
-      headerName: "วันที่เริ่ม",
-      valueGetter: (params) => {
-        const contract = contracts.find(
-          (contract) => contract.id === params.row.contract_id
-        );
-        return contract ? contract.start_date : "";
-      },
-    },
-
-    {
-      field: "end_date",
-      headerName: "วันที่เริ่ม",
-      valueGetter: (params) => {
-        const contract = contracts.find(
-          (contract) => contract.id === params.row.contract_id
-        );
-        return contract ? contract.end_date : "";
-      },
-    },
-
-    {
       field: "employee_name",
       headerName: "ชื่อ",
       valueGetter: (params) => {
@@ -85,6 +54,7 @@ const Contract_Archive_InfoData = () => {
         );
         return employee ? employee.name : "";
       },
+      flex: .2
     },
     {
       field: "employee_surname",
@@ -95,36 +65,17 @@ const Contract_Archive_InfoData = () => {
         );
         return employee ? employee.surname : "";
       },
-    },
-    {
-      field: "company_id",
-      headerName: "ชื่อบริษัท",
-      valueGetter: (params) => {
-        const archive = archives.find(
-          (archive) => archive.id === params.row.id
-        );
-        if (archive) {
-          const contract = contracts.find(
-            (contract) => contract.id === archive.contract_id
-          );
-          if (contract) {
-            const company = companies.find(
-              (company) => company.id === contract.company_id
-            );
-            return company ? company.name : "";
-          }
-        }
-        return "";
-      },
       flex: .2
     },
     {
       field: "department1",
       headerName: "สังกัดกอง",
+      flex: .2
     },
     {
       field: "department2",
       headerName: "สังกัดฝ่าย",
+      flex: .2
     },
   ];
 
@@ -135,10 +86,9 @@ const Contract_Archive_InfoData = () => {
 
   return (
     <Box m="1.5rem 2.5rem">
-      <FlexBetween>
-        <Header title="ข้อมูลลูกจ้างที่อยู่ในสัญญา" />
-      </FlexBetween>
+       <Header title="ข้อมูลสัญญาจ้าง" />
       <Box height="calc(100vh - 200px)" sx={{ mt: "1.5rem" }}>
+      <ContractMaster/>
         <DataGrid
           rows={archives}
           columns={columns}

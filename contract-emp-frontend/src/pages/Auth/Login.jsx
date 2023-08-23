@@ -9,7 +9,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import swal from "sweetalert";
 import { Login as LoginIcon } from '@mui/icons-material';
-import Layout from "component/Layouts/Layout";
+import Layout from "component/LayoutsLogin/Layout";
 import UserService from "services/UserService";
 
 const Login = () => {

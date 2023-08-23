@@ -84,14 +84,17 @@ const Contracts = () => {
       renderCell: (params) => {
         return <Box sx={{ cursor: "pointer" }}>{params.value}</Box>;
       },
+      flex: .2
     },
     {
       field: "start_date",
       headerName: "วันที่เริ่ม",
+      flex: .2
     },
     {
       field: "end_date",
       headerName: "วันที่สิ้นสุด",
+      flex: .2
     },
     {
       field: "company_id",
@@ -119,11 +122,11 @@ const Contracts = () => {
           </Box>
         );
       },
-      flex:.1
+      flex: .2
     },
     {
       field: "View",
-      headerName: "ดูจำนวนลูกจ้าง-ในสัญญาจ้าง",
+      headerName: "จำนวนลูกจ้างในสัญญา",
       renderCell: (params) => {
         return (
           <Box>
@@ -136,7 +139,7 @@ const Contracts = () => {
           </Box>
         );
       },
-      flex:.1
+      flex: .2
     },
   ];
 

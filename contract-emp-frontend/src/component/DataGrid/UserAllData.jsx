@@ -77,23 +77,27 @@ const UserAllData = () => {
       renderCell: (params) => {
         return <Box sx={{ cursor: "pointer" }}>{params.value}</Box>;
       },
+      flex: .2
     },
     {
       field: "surname",
       headerName: "นามสกุล",
+      flex: .2
     },
     {
       field: "telephone",
       headerName: "เบอร์โทรศัพท์",
-      flex:.2
+      flex: .2
     },
     {
       field: "email",
       headerName: "อีเมล",
+      flex: .2
     },
     {
       field: "role",
       headerName: "สถานะ",
+      flex: .2
     },
     {
       field: "company",
@@ -104,10 +108,12 @@ const UserAllData = () => {
         }
         return null; // หรือจะแสดงข้อความเปล่าๆ หรือ Element อื่นๆ ตามที่ต้องการ
       },
+      flex: .2
     },
     {
       field: "username",
       headerName: "ยูสเซอร์เนม",
+      flex: .2
     },
     {
       field: "Edit",
@@ -124,7 +130,7 @@ const UserAllData = () => {
           </Box>
         );
       },
-      flex:.1
+      flex: .2
     },
   ];
 

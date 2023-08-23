@@ -74,7 +74,6 @@ const ShowDashBoard = () => {
       component="main"
       sx={{
         flexGrow: 1,
-
       }}
     >
       <Container maxWidth="xl">
@@ -82,21 +81,22 @@ const ShowDashBoard = () => {
           container
           spacing={2}
         >
+
           <Grid
             xs={12}
             sm={6}
-            lg={3}
+            lg={6}
           >
             <Item
               onClick={() => {
                 navigate("/contract");
               }}
-              sx={{ boxShadow: 3, marginRight: 2, marginLeft: 2, marginBottom: 2, borderRadius: 5, backgroundColor: "#FFCC00", color: "white" }}
+              sx={{ boxShadow: 3, marginRight: 2, marginLeft: 2, marginBottom: 2, borderRadius: 3, backgroundColor: "#FFCC00", color: "white" }}
 
             >
               <FlexBetween>
-                <Typography variant="h3">{contractCount} สัญญาจ้าง</Typography>
-                <Description sx={{ height: '100%', fontSize: '70PX', color: "gray" }} />
+                <Typography variant="h3" >{contractCount} </Typography>
+                <Description sx={{ height: '150px', fontSize: '70px', color: "gray" }} />
               </FlexBetween>
               <Typography variant="h5">ข้อมูลสัญญาจ้าง</Typography>
 
@@ -106,18 +106,18 @@ const ShowDashBoard = () => {
           <Grid
             xs={12}
             sm={6}
-            lg={3}
+            lg={6}
           >
             <Item
               onClick={() => {
                 navigate("/company");
               }}
-              sx={{ boxShadow: 3, marginRight: 2, marginLeft: 2, marginBottom: 2, borderRadius: 5, backgroundColor: "#E4032D", color: "white" }}
+              sx={{ boxShadow: 3, marginRight: 2, marginLeft: 2, marginBottom: 2, borderRadius: 3, backgroundColor: "#E4032D", color: "white" }}
 
             >
               <FlexBetween>
-                <Typography variant="h3">{companyCount} บริษัท</Typography>
-                <ApartmentIcon sx={{ height: '100%', fontSize: '70PX', color: "gray" }} />
+                <Typography variant="h3">{companyCount} </Typography>
+                <ApartmentIcon sx={{ height: '150px', fontSize: '70px', color: "gray" }} />
               </FlexBetween>
               <Typography variant="h5">ข้อมูลบริษัท</Typography>
 
@@ -127,20 +127,20 @@ const ShowDashBoard = () => {
           <Grid
             xs={12}
             sm={6}
-            lg={3}
+            lg={6}
           >
             <Item
               onClick={() => {
                 navigate("/employee");
               }}
-              sx={{ boxShadow: 3, marginRight: 2, marginLeft: 2, marginBottom: 2, borderRadius: 5, backgroundColor: "#154295", color: "white" }}
+              sx={{ boxShadow: 3, marginRight: 2, marginLeft: 2, marginBottom: 2, borderRadius: 3, backgroundColor: "#154295", color: "white" }}
 
             >
               <FlexBetween>
-                <Typography variant="h3">{employeeCount} คน</Typography>
-                <BadgeIcon sx={{ height: '100%', fontSize: '70PX', color: "gray" }} />
+                <Typography variant="h3">{employeeCount} </Typography>
+                <BadgeIcon sx={{ height: '150px', fontSize: '70PX', color: "gray" }} />
               </FlexBetween>
-              <Typography variant="h5">จำนวนพนักงาน</Typography>
+              <Typography variant="h5">จำนวนลูกจ้าง</Typography>
 
             </Item>
           </Grid>
@@ -148,18 +148,18 @@ const ShowDashBoard = () => {
           <Grid
             xs={12}
             sm={6}
-            lg={3}
+            lg={6}
           >
             <Item
               onClick={() => {
                 navigate("/userall");
               }}
-              sx={{ boxShadow: 3, marginRight: 2, marginBottom: 2, borderRadius: 5, backgroundColor: "#15952C", color: "white" }}
+              sx={{ boxShadow: 3, marginRight: 2, marginLeft: 2, marginBottom: 2, borderRadius: 3, backgroundColor: "#15952C", color: "white" }}
 
             >
               <FlexBetween>
-                <Typography variant="h3">{userCount} คน</Typography>
-                <PersonIcon sx={{ height: '100%', fontSize: '70PX', color: "gray" }} />
+                <Typography variant="h3">{userCount} </Typography>
+                <PersonIcon sx={{ height: '150px', fontSize: '70PX', color: "gray" }} />
               </FlexBetween>
               <Typography variant="h5">จำนวนผู้ใช้งาน</Typography>
 

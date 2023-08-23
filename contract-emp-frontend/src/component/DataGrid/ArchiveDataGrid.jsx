@@ -88,6 +88,7 @@ const Archives = () => {
         );
         return contract ? contract.number : "";
       },
+      flex: .2
     },
     {
       field: "start_date",
@@ -98,6 +99,7 @@ const Archives = () => {
         );
         return contract ? contract.start_date : "";
       },
+      flex: .2
     },
     {
       field: "end_date",
@@ -108,6 +110,7 @@ const Archives = () => {
         );
         return contract ? contract.end_date : "";
       },
+      flex: .2
     },
     {
       field: "company_id",
@@ -140,6 +143,7 @@ const Archives = () => {
         );
         return employee ? employee.name : "";
       },
+      flex: .2
     },
     {
       field: "employee_surname",
@@ -150,17 +154,17 @@ const Archives = () => {
         );
         return employee ? employee.surname : "";
       },
+      flex: .2
     },
-
-  
-   
     {
       field: "department1",
       headerName: "สังกัดกอง",
+      flex: .2
     },
     {
       field: "department2",
       headerName: "สังกัดฝ่าย",
+      flex: .2
     },
     {
       field: "Functions",
@@ -177,7 +181,7 @@ const Archives = () => {
           </Box>
         );
       },
-      flex: .1
+      flex: .2
     },
   ];
 

@@ -55,7 +55,7 @@ const FormCrateUser = () => {
         setUserId(responseUser.data.data.id);
         navigate("/userall");
       } else {
-        setError("ไม่สามารถสร้างข้อมูลได้");
+        swal("กรุณากรอกข้อมูลให้ครบ", "", "info");
       }
     } catch (error) {
       console.error("Error", error.responseUser);
@@ -127,7 +127,7 @@ const FormCrateUser = () => {
               />
             </Grid>
             <Grid item xs={6}>
-              <InputLabel>ชื่อผู้ใช้:</InputLabel>
+              <InputLabel>ยูสเซอร์เนม หริอ ยูสเซอร์เนมของ Egat:</InputLabel>
               <TextField
                 type="text"
                 value={username}
@@ -139,6 +139,7 @@ const FormCrateUser = () => {
               <InputLabel>รหัสผ่าน:</InputLabel>
               <TextField
                 type="password"
+                label="ถ้าเป็นพนักงานของ Egat ไม่ต้องกรอกรหัสผ่าน"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 fullWidth
@@ -175,7 +176,7 @@ const FormCrateUser = () => {
             )}
             <Grid item xs={12}>
               <Button type="submit" variant="contained">
-                ยืนยันฃ
+                ยืนยัน
               </Button>
               <Button
                 variant="outlined"
