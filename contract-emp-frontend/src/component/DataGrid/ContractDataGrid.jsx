@@ -10,6 +10,9 @@ import PageviewOutlinedIcon from '@mui/icons-material/PageviewOutlined';
 import Header from "../Header";
 import FlexBetween from "../FlexBetween";
 import swal from "sweetalert";
+import moment from "moment";
+import { format } from "date-fns";
+import { th } from "date-fns/locale";
 
 const Contracts = () => {
   const theme = useTheme();
@@ -89,11 +92,13 @@ const Contracts = () => {
     {
       field: "start_date",
       headerName: "วันที่เริ่ม",
+      valueFormatter: (params) => format(new Date(params.value), "d MMM yyyy", { locale: th }),
       flex: .2
     },
     {
       field: "end_date",
       headerName: "วันที่สิ้นสุด",
+      valueFormatter: (params) => format(new Date(params.value), "d MMM yyyy", { locale: th }),
       flex: .2
     },
     {

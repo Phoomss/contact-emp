@@ -10,6 +10,8 @@ import ContractService from "../../services/ContractService";
 import Header from "../Header";
 import FlexBetween from "../FlexBetween";
 import swal from "sweetalert";
+import { format } from "date-fns";
+import { th } from "date-fns/locale";
 
 const Archives = () => {
   const theme = useTheme();
@@ -97,9 +99,9 @@ const Archives = () => {
         const contract = contracts.find(
           (contract) => contract.id === params.row.contract_id
         );
-        return contract ? contract.start_date : "";
+        return contract ? format(new Date(contract.start_date), "d MMM yyyy", { locale: th }) : "";
       },
-      flex: .2
+      flex: 0.2
     },
     {
       field: "end_date",
@@ -108,9 +110,9 @@ const Archives = () => {
         const contract = contracts.find(
           (contract) => contract.id === params.row.contract_id
         );
-        return contract ? contract.end_date : "";
+        return contract ? format(new Date(contract.end_date), "d MMM yyyy", { locale: th }) : "";
       },
-      flex: .2
+      flex: 0.2
     },
     {
       field: "company_id",

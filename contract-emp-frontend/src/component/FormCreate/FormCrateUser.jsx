@@ -89,7 +89,7 @@ const FormCrateUser = () => {
       </FlexBetween>
       <Box>
         <form onSubmit={handleSubmit}>
-          <Grid container spacing={2}>
+          <Grid container spacing={2} mt={1}>
             <Grid item xs={6}>
               <InputLabel>ชื่อ:</InputLabel>
               <TextField
@@ -127,7 +127,7 @@ const FormCrateUser = () => {
               />
             </Grid>
             <Grid item xs={6}>
-              <InputLabel>ยูสเซอร์เนม หริอ ยูสเซอร์เนมของ Egat:</InputLabel>
+              <InputLabel>ยูสเซอร์เนม หรือ ยูสเซอร์เนมของ Egat:</InputLabel>
               <TextField
                 type="text"
                 value={username}

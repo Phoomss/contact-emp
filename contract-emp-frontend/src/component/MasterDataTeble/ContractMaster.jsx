@@ -1,15 +1,11 @@
 import { React, useState, useEffect } from "react";
-import { Box, useTheme, Button } from "@mui/material";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import { DeleteOutline, CreateOutlined } from "@mui/icons-material";
+import { Box, useTheme } from "@mui/material";
+import { DataGrid } from "@mui/x-data-grid";
 import { useNavigate } from "react-router-dom";
 import ContractService from "../../services/ContractService";
 import CompanyService from "../../services/CompanyService";
-import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
-import PageviewOutlinedIcon from '@mui/icons-material/PageviewOutlined';
-import Header from "../Header";
-import FlexBetween from "../FlexBetween";
-import swal from "sweetalert";
+import { format } from "date-fns";
+import { th } from "date-fns/locale";
 
 const ContractMaster = () => {
   const theme = useTheme();
@@ -41,12 +37,14 @@ const ContractMaster = () => {
     {
       field: "start_date",
       headerName: "วันที่เริ่ม",
-      flex:.2
+      valueFormatter: (params) => format(new Date(params.value), "d MMM yyyy", { locale: th }),
+      flex: .2
     },
     {
       field: "end_date",
       headerName: "วันที่สิ้นสุด",
-      flex:.2
+      valueFormatter: (params) => format(new Date(params.value), "d MMM yyyy", { locale: th }),
+      flex: .2
     },
     {
       field: "company_id",

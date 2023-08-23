@@ -12,6 +12,8 @@ import swal from "sweetalert";
 import FlexBetween from "component/FlexBetween";
 import Header from "component/Header";
 import EmployeeMaster from "component/MasterDataTeble/EmployeeMaster";
+import { format } from "date-fns";
+import { th } from "date-fns/locale";
 
 const ArchiveInfo = () => {
   const theme = useTheme();
@@ -83,11 +85,10 @@ const ArchiveInfo = () => {
         const contract = contracts.find(
           (contract) => contract.id === params.row.contract_id
         );
-        return contract ? contract.start_date : "";
+        return contract ? format(new Date(contract.start_date), "d MMM yyyy", { locale: th }) : "";
       },
-      flex: .2
+      flex: 0.2
     },
-
     {
       field: "end_date",
       headerName: "วันที่สิ้นสุด",
@@ -95,9 +96,9 @@ const ArchiveInfo = () => {
         const contract = contracts.find(
           (contract) => contract.id === params.row.contract_id
         );
-        return contract ? contract.end_date : "";
+        return contract ? format(new Date(contract.end_date), "d MMM yyyy", { locale: th }) : "";
       },
-      flex: .2
+      flex: 0.2
     },
     {
       field: "company_id",

@@ -191,7 +191,7 @@ const CreateArchive = () => {
             </Grid>
 
             <Grid item xs={12}>
-              <InputLabel>แผนก</InputLabel>
+              <InputLabel>สังกัดฝ่าย</InputLabel>
               <TextField
                 fullWidth
                 margin="normal"
@@ -211,7 +211,7 @@ const CreateArchive = () => {
             </Grid>
 
             <Grid item xs={12}>
-              <InputLabel>สังกัดฝ่าย</InputLabel>
+              <InputLabel>สังกัดแผนก</InputLabel>
               <TextField
                 fullWidth
                 margin="normal"

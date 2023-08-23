@@ -80,10 +80,11 @@ const FormUpdateArchive = () => {
       </FlexBetween>
       <Box sx={{ mt: "1.5rem" }}>
         <form onSubmit={handleSubmit}>
-          <InputLabel>ชื่อ: </InputLabel>
+          <InputLabel>ชื่่อลูกจ้าง: </InputLabel>
           <TextField
             required
             fullWidth
+            disabled
             margin="normal"
             value={employeeId}
             onChange={(e) => setEmployeeId(e.target.value)}
@@ -92,11 +93,12 @@ const FormUpdateArchive = () => {
           <TextField
             required
             fullWidth
+            disabled
             margin="normal"
             value={contractId}
             onChange={(e) => setContractId(e.target.value)}
           />
-          <InputLabel>แผนก: </InputLabel>
+          <InputLabel>สังกัดฝ่าย: </InputLabel>
           <TextField
             required
             fullWidth
@@ -113,7 +115,7 @@ const FormUpdateArchive = () => {
             onChange={(e) => setDepartment2(e.target.value)}
           />
 
-          <InputLabel>สังกัดฝ่าย: </InputLabel>
+          <InputLabel>สังกัดแผนก: </InputLabel>
           <TextField
             fullWidth
             margin="normal"
