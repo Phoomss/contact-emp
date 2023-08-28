@@ -43,27 +43,10 @@ const ArchiveInfo = () => {
     fetchData();
   }, [id]);
 
-  // useEffect(() => {
-  //   const fetchDataEmName = async () => {
-  //     const responseEmployeeName = await EmployeeService.getEmployeeById(id)
-  //     setEmployeeName(responseEmployeeName.data)
-  //   }
-  //   fetchDataEmName()
-  //   console.log(fetchDataEmName())
-  // }, [id])
-
-  // const filteredArchives = archives.filter(
-  //     (archive) => archive.employee_id === employeeId
-  // );
-
   const getRowId = (row) => row.id;
 
   const handleSelectionModelChange = (newSelection) => {
     setSelectionModel(newSelection);
-  };
-
-  const handleEditButtonClick = (id) => {
-    navigate(`/updatearchive/${id}`);
   };
 
   const columns = [
@@ -132,26 +115,6 @@ const ArchiveInfo = () => {
       headerName: "สังกัดฝ่าย",
       flex: .2
     },
-
-    {
-      field: "Functions",
-      headerName: "แก้ไขข้อมูล",
-      renderCell: (params) => {
-        return (
-          <Box>
-            <Button
-              variant="contained"
-              color="secondary"
-              startIcon={<CreateOutlined />}
-              onClick={() => handleEditButtonClick(params.id)}
-            >
-              แก้ไข
-            </Button>
-          </Box>
-        );
-      },
-      flex: .2
-    },
   ];
 
   const [pageSize, setPageSize] = useState(10);
@@ -159,44 +122,28 @@ const ArchiveInfo = () => {
     setPageSize(params.pageSize);
   };
 
+  const NoDataRow = () => {
+    return (
+      <div style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "100%",
+        fontSize: "18px",
+        fontWeight: "bold",
+      }}>
+        ไม่พบข้อมูลประวัติการทำงาน
+      </div>
+    );
+  };
   return (
     <Box m="1.5rem 2.5rem">
-      
+
       <FlexBetween>
         <Header title={`ประวัติการทำงาน `} />
-        <Box>
-          {/* <EmployeeInfo/> */}
-          {/* <FlexBetween gap="1rem">
-            <Button
-              sx={{
-                backgroundColor: theme.palette.secondary.light,
-                color: theme.palette.background.alt,
-                fontSize: "14px",
-                fontWeight: "bold",
-                padding: "10px 20px",
-              }}
-              onClick={createClick}
-            >
-              <AddBoxOutlinedIcon />
-            </Button>
-
-            <Button
-              sx={{
-                backgroundColor: theme.palette.secondary.light,
-                color: theme.palette.background.alt,
-                fontSize: "14px",
-                fontWeight: "bold",
-                padding: "10px 20px",
-              }}
-              onClick={handleDeleteButtonClick}
-            >
-              <DeleteOutline />
-            </Button>
-          </FlexBetween> */}
-        </Box>
       </FlexBetween>
       <Box height="calc(100vh - 200px)" sx={{ mt: "1.5rem" }}>
-      <EmployeeMaster/>
+        <EmployeeMaster />
         <DataGrid
           rows={archives}
           columns={columns}
@@ -210,7 +157,17 @@ const ArchiveInfo = () => {
           onSelectionModelChange={handleSelectionModelChange}
           components={{
             Toolbar: GridToolbar,
+            NoRowsOverlay: NoDataRow,
           }}
+          componentsProps={{
+            toolbar: {
+              csvOptions: { disableToolbarButton: true },
+              printOptions: { disableToolbarButton: true },
+              showQuickFilter: true,
+              quickFilterProps: { debounceMs: 250 },
+            },
+          }}
+          experimentalFeatures={{ newEditingApi: true }}
         />
       </Box>
     </Box>

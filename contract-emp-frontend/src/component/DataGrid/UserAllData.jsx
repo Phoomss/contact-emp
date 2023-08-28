@@ -143,7 +143,7 @@ const UserAllData = () => {
   return (
     <Box m="1.5rem 2.5rem">
       <FlexBetween>
-        <Header title="ข้อมูลผู้ใข้งาน" />
+        <Header title="ข้อมูลผู้ใช้งาน" />
         <Box>
           <FlexBetween gap="1rem">
             <Button
@@ -189,6 +189,15 @@ const UserAllData = () => {
           components={{
             Toolbar: GridToolbar,
           }}
+          componentsProps={{
+            toolbar: {
+              csvOptions: { disableToolbarButton: true },
+              printOptions: { disableToolbarButton: true },
+              showQuickFilter: true,
+              quickFilterProps: { debounceMs: 250 },
+            },
+          }}
+          experimentalFeatures={{ newEditingApi: true }}
         />
       </Box>
     </Box>

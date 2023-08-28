@@ -9,8 +9,9 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import swal from "sweetalert";
 import { Login as LoginIcon } from '@mui/icons-material';
-import Layout from "component/LayoutsLogin/Layout";
+import Layout from "../../component/LayoutsLogin/Layout";
 import UserService from "services/UserService";
+import { Grid } from "@mui/material";
 
 const Login = () => {
   const [formData, setFormData] = useState({ username: "", password: "" });
@@ -20,7 +21,7 @@ const Login = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     // เช็คว่ามีการกรอกข้อมูลครบถ้วนมั้ย
-    if(formData.username === '' || formData.password === ''){
+    if (formData.username === '' || formData.password === '') {
       setError('กรุณากรอกข้อมูล');
       swal("กรุณากรอกข้อมูลก่อนเข้าสู่ระบบ", "", "warning");
       // console.log('Error: Form fields are empty');
@@ -30,7 +31,7 @@ const Login = () => {
       .then((response) => {
         if (response.data.token) {
           localStorage.setItem("token", response.data.token);
-          swal(`ยินดีต้อนรับเข้าสู่ระบบ`,`${formData.username}`, "success");
+          swal(`ยินดีต้อนรับเข้าสู่ระบบ`, `${formData.username}`, "success");
           navigate("/employee");
         } else {
           setError("Invalid credentials");
@@ -56,20 +57,24 @@ const Login = () => {
   return (
     <ThemeProvider theme={theme}>
       <Layout>
-        <Container component="main" maxWidth="xs">
+        <Container component="main" maxWidth="xs"
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginTop: 9,
+            marginBottom: 8,
+            padding: '5px',
+            boxShadow: '0px 3px 6px rgba(0, 0, 0, 0.1)', // Add box shadow here
+            borderRadius: '8px', // Add border radius for a more rounded look
+          }}>
           <CssBaseline />
           <Box
-            sx={{
-              marginTop: 9,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              marginBottom: 8,
-            }}
           >
-            <Box sx={{ display: 'flex' }}>
-              <LoginIcon sx={{ width: 30, height: 30, marginRight: "25px" }} />
-              <Typography component="h1" variant="h5">
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              <LoginIcon sx={{ fontSize: "60px" }} />
+              <Typography variant="h4">
                 เข้าสู่ระบบ
               </Typography>
             </Box>
@@ -85,7 +90,7 @@ const Login = () => {
               required
               fullWidth
               id="username"
-              label="ชื่อผู้ใช้งาน"
+              label="ยูสเซอร์เมน หรือ อีเมล"
               name="username"
               autoComplete="username"
               autoFocus
@@ -108,10 +113,19 @@ const Login = () => {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2, backgroundColor: '#FFCC00' }}
+              sx={{ mt: 3, mb: 2, backgroundColor: '#154295' }}
             >
               เข้าสู่ระบบ
             </Button>
+            <Grid container>
+              <Grid item xs>
+                <Typography href="#" variant="body2">
+                  สำหรับเจ้าหน้าที่งานบัตรรักษาความปลอดภัย: เข้าสู่ระบบด้วยบัญชีอีเมลของ กฟผ. <br />
+                  สำหรับตัวแทนบริษัทผู้รับจ้าง: เข้าสู่ระบบด้วยชื่อผู้ใช้งานและรหัสผ่านที่ออกให้โดย กฟผ.
+                </Typography>
+              </Grid>
+
+            </Grid>
           </Box>
         </Container>
       </Layout>

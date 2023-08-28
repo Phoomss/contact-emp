@@ -93,18 +93,6 @@ const Employees = () => {
       headerName: "เบอร์โทรศัพท์",
       flex: .2
     },
-    // {
-    //   field: "department1",
-    //   headerName: "สังกัดกอง",
-    // },
-    // {
-    //   field: "department2",
-    //   headerName: "สังกัดฝ่าย",
-    // },
-    // {
-    //   field: "company",
-    //   headerName: "ชื่อบริษัท",
-    // },
     {
       field: "note",
       headerName: "หมายเหตุ",
@@ -207,6 +195,15 @@ const Employees = () => {
           components={{
             Toolbar: GridToolbar,
           }}
+          componentsProps={{
+            toolbar: {
+              csvOptions: { disableToolbarButton: true },
+              printOptions: { disableToolbarButton: true },
+              showQuickFilter: true,
+              quickFilterProps: { debounceMs: 250 },
+            },
+          }}
+          experimentalFeatures={{ newEditingApi: true }}
         />
       </Box>
     </Box>

@@ -203,6 +203,15 @@ const Contracts = () => {
           components={{
             Toolbar: GridToolbar,
           }}
+          componentsProps={{
+            toolbar: {
+              csvOptions: { disableToolbarButton: true },
+              printOptions: { disableToolbarButton: true },
+              showQuickFilter: true,
+              quickFilterProps: { debounceMs: 250 },
+            },
+          }}
+          experimentalFeatures={{ newEditingApi: true }}
         />
       </Box>
     </Box>

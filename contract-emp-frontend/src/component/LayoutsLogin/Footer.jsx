@@ -1,36 +1,44 @@
-import * as React from "react";
-import Container from "@mui/material/Container";
-import Typography from "@mui/material/Typography";
-import { Box } from "@mui/material";
+import React from 'react';
+import { Box, Container, Typography, ThemeProvider } from '@mui/material';
+import { createTheme } from '@mui/material/styles'; // Import ThemeProvider and createTheme
+
+const theme = createTheme(); // Create a theme
 
 const Footer = () => {
   return (
-    <Box
-      component="footer"
-      sx={{
-        backgroundColor: '#FFCC00',
-        p: 1,
-        marginTop: 'calc(8% + 60px)',
-        bottom: 0
-      }} 
-    >
-      <Container maxWidth="lg">
-        <Box
-          sx={{
-            flexGrow: 1,
-            justifyContent: "center",
-            display: "flex",
-          }}
-        >
-          <Typography align="left" style={{ color: '#154295' }}>
-            เจ้าของระบบ : แผนกอุปกรณ์และเทคโนโลยีรักษาความปลอดภัย (หอทป-ห.) กองปฏิบัติการรักษาความปลอดภัย (กปป-ห.) ฝ่ายความปลอดภัย (อปภ.) โทร. 64281
-            <br />
-            พัฒนาโดย กองบริหารระบบงานดิจิทัล (กบด-ห.) ฝ่ายจัดการและพัฒนาระบบดิจิทัล (อจท.) เบอร์ 6642
-          </Typography>
-        </Box>
-      </Container>
-    </Box >
+    <ThemeProvider theme={theme}>
+      <Box
+        component="footer"
+        sx={{
+          backgroundColor: '#154295',
+          p: 1,
+          bottom: 0,
+          position: 'absolute',
+          width: '100%',
+        
+        }}
+      >
+        <Container maxWidth="lg">
+          <Box
+            sx={{
+              flexGrow: 1,
+              justifyContent: 'center',
+              display: 'flex',
+            }}
+          >
+            <Typography align="left" style={{ color: '#ffff' }}>
+              เจ้าของระบบ : แผนกอุปกรณ์และเทคโนโลยีรักษาความปลอดภัย (หอทป-ห.) กองปฏิบัติการรักษาความปลอดภัย (กปป-ห.) ฝ่ายความปลอดภัย (อปภ.) โทร. 64281
+              <br />
+              พัฒนาโดย กองบริหารระบบงานดิจิทัล (กบด-ห.) ฝ่ายจัดการและพัฒนาระบบดิจิทัล (อจท.) เบอร์ 6642
+            </Typography>
+          </Box>
+        </Container>
+      </Box>
+    </ThemeProvider>
   );
 };
 
 export default Footer;
+
+
+

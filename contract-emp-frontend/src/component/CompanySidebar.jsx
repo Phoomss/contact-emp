@@ -30,11 +30,6 @@ import FlexBetween from "./FlexBetween";
 
 const navItems = [
   {
-    text: "DashboardCompany",
-    thaitext: "แดชบอร์ด",
-    icon: <DashboardIcon />,
-  },
-  {
     text: "companies-com",
     thaitext: "ข้อมูลบริษัท",
     icon: <ApartmentOutlined />,
@@ -66,11 +61,6 @@ const Sidebar = ({
   useEffect(() => {
     setActive(pathname.substring(1));
   }, [pathname]);
-
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    navigate("/");
-  };
 
   return (
     <Box component="nav">
@@ -159,27 +149,16 @@ const Sidebar = ({
             position="absolute"
             bottom="1rem"
             width="100%"
-            onClick={handleLogout}
-            sx={{ cursor: "pointer" }}
           >
             <Divider />
-            <FlexBetween textTransform="none" gap="1rem" m="1rem 2rem 0 3rem">
-              <Box textAlign="left" sx={{ display: "flex" }}>
+            <FlexBetween>
+              <Box textAlign="center" sx={{ display: "flex", m: .5, p: .5 }}>
                 <Typography
-                  fontWeight="bold"
                   fontSize="1rem"
                   sx={{ color: theme.palette.blue[100] }}
                 >
-                  ออกจากระบบ
+                  พัฒนาโดย กองบริหารระบบงานดิจิทัล (กบด-ห.) เบอร์ 64454
                 </Typography>
-                <LogoutIcon
-                  sx={{
-                    color: theme.palette.blue[300],
-                    fontSize: "1rem ",
-                    mt: .6,
-                    ml: 1
-                  }}
-                />
               </Box>
             </FlexBetween>
           </Box>

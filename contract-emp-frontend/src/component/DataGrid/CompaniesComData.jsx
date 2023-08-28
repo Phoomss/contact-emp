@@ -71,14 +71,6 @@ const CompaniesComData = () => {
     });
   };
 
-  const createClick = () => {
-    navigate(`/createcompany`);
-  };
-
-  const handleEditButtonClick = (id) => {
-    navigate(`/updatecompany/${id}`);
-  };
-
   const columns = [
     {
       field: "name",
@@ -99,23 +91,6 @@ const CompaniesComData = () => {
       headerName: "Phone Number",
       flex: .2
     },
-    {
-      field: "Functions",
-      headerName: "แก้ไขข้อมูล",
-      renderCell: (params) => {
-        return (
-          <Box>
-            <Button
-              variant="contained"
-              color="secondary"
-              startIcon={<CreateOutlined />}
-              onClick={() => handleEditButtonClick(params.id)}
-            ></Button>
-          </Box>
-        );
-      },
-      flex: .2
-    },
   ];
 
   const [pageSize, setPageSize] = useState(10);
@@ -128,34 +103,6 @@ const CompaniesComData = () => {
     <Box ml="2.5rem" mr="2.5rem">
       <FlexBetween>
         <Header title="บริษัท" />
-        <Box>
-          <FlexBetween gap="1rem">
-            <Button
-              sx={{
-                backgroundColor: theme.palette.secondary.light,
-                color: theme.palette.background.alt,
-                fontSize: "14px",
-                fontWeight: "bold",
-                padding: "10px 20px",
-              }}
-              onClick={createClick}
-            >
-              <AddBusinessIcon />
-            </Button>
-            <Button
-              sx={{
-                backgroundColor: theme.palette.secondary.light,
-                color: theme.palette.background.alt,
-                fontSize: "14px",
-                fontWeight: "bold",
-                padding: "10px 20px",
-              }}
-              onClick={handleDeleteButtonClick}
-            >
-              <DeleteOutline />
-            </Button>
-          </FlexBetween>
-        </Box>
       </FlexBetween>
       <Box height="calc(100vh - 200px)" sx={{ mt: "1.5rem" }}>
         <DataGrid
@@ -171,6 +118,15 @@ const CompaniesComData = () => {
           components={{
             Toolbar: GridToolbar,
           }}
+          componentsProps={{
+            toolbar: {
+              csvOptions: { disableToolbarButton: true },
+              printOptions: { disableToolbarButton: true },
+              showQuickFilter: true,
+              quickFilterProps: { debounceMs: 250 },
+            },
+          }}
+          experimentalFeatures={{ newEditingApi: true }}
         />
       </Box>
     </Box>

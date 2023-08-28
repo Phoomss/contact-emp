@@ -1,65 +1,40 @@
 import { React, useState, useEffect } from "react";
-import { Box, useTheme, Button } from "@mui/material";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import { useNavigate, useParams } from "react-router-dom";
+import { Box } from "@mui/material";
+import { useParams } from "react-router-dom";
 import EmployeeService from "../../services/EmployeeService";
 
 const EmployeeMaster = () => {
     const { id } = useParams()
     const [employees, setEmployees] = useState([]);
+    const [selectedEmployee, setSelectedEmployee] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
             const response = await EmployeeService.getEmployeeById(id);
             setEmployees(response.data);
+            if (response.data.length > 0) {
+                setSelectedEmployee(response.data[0]); // กำหนดให้เลือกพนักงานแรกเป็นพนักงานที่เลือก
+            }
         };
         fetchData();
     }, [id]);
 
-    const columns = [
-        {
-            field: "e_num",
-            headerName: "หมายเลขประจำตัว",
-            flex: .2
-        },
-        {
-            field: "name",
-            headerName: "ชื่อ",
-            renderCell: (params) => {
-                return <Box sx={{ cursor: "pointer" }}>{params.value}</Box>;
-            },
-            flex: .2
-        },
-        {
-            field: "surname",
-            headerName: "นามสกุล",
-            flex: .2
-        },
-        {
-            field: "telephone",
-            headerName: "เบอร์โทรศัพท์",
-            flex: .2
-        },
-    ];
-
-    const [pageSize, setPageSize] = useState(10);
-
-    const handlePageSizeChange = (params) => {
-        setPageSize(params.pageSize);
-    };
-
     return (
-        <Box m="1.5rem 2.5rem" >
-            <Box height="calc(24vh)">
-                <DataGrid
-                    rows={employees}
-                    columns={columns}
-                    pageSize={pageSize}
-                    onPageSizeChange={handlePageSizeChange}
-                />
+        <Box m="1.5rem 2.5rem">
+            <Box >
+                <h2>รายละเอียดพนักงาน</h2>
+                {selectedEmployee && (
+                    <div>
+                        <p>หมายเลขประจำตัว: {selectedEmployee.e_num}</p>
+                        <p>ชื่อ: {selectedEmployee.name}</p>
+                        <p>นามสกุล: {selectedEmployee.surname}</p>
+                        <p>เบอร์โทรศัพท์: {selectedEmployee.telephone}</p>
+                    </div>
+                )}
             </Box>
         </Box>
     );
+
 };
 
 export default EmployeeMaster;
