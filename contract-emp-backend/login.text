@@ -50,3 +50,6 @@ const loginUser = async (req, res) => {
   "username":"594623",
   "password":"engR*U063557"
 }
+
+# clone project 
+npm install --legacy-peer-deps

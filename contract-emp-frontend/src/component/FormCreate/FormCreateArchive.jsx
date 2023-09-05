@@ -17,16 +17,17 @@ import ContractService from "services/ContractService";
 import EmployeeService from "services/EmployeeService";
 import ArchiveService from "services/ArchiveService";
 import Autocomplete from "@mui/material/Autocomplete";
+import DeptService from "services/DeptService";
 
 const CreateArchive = () => {
   const navigate = useNavigate();
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false)
+
   const [contractNumber, setContractNumber] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [department1, setDepartment1] = useState("");
-  const [department2, setDepartment2] = useState("");
-  const [department3, setDepartment3] = useState("");
+  const [org_id, setOrg_Id] = useState("");
   const [remark, setRemark] = useState("");
 
   const [contractList, setContractList] = useState([]);
@@ -43,28 +44,27 @@ const CreateArchive = () => {
   const [employeeOptions, setEmployeeOptions] = useState([]);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
 
+  const [departmentName, setDepartmentName] = useState("");
+  const [departmentOptions, setDepartmentOptions] = useState([]);
+  const [selectedDepartment, setSelectedDepartment] = useState(null);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true)
     try {
-      console.log("employee_id:", employee_id);
-      console.log("contract_id:", contractId);
-      console.log("department1:", department1);
-      console.log("department2:", department2);
-      console.log("department3:", department3);
-      console.log("remark:", remark);
       const response = await ArchiveService.postArchive({
         employee_id: employee_id,
         contract_id: contractId,
-        department1: department1,
-        department2: department2,
-        department3: department3,
+        org_id: selectedDepartment,
         remark: remark,
       });
       if (response.status === 200) {
+        setIsLoading(false)
         navigate("/archive");
       }
     } catch (error) {
       console.error("Error:", error.response);
+      setIsLoading(false)
       setError(error.response.data.message);
     }
   };
@@ -88,24 +88,24 @@ const CreateArchive = () => {
     navigate("/archive");
   };
 
-  // search emp
-  const handleSearchEmployee = (event) => {
-    setSearchEmployee(event.target.value);
-    const filteredEmployees = employees.filter((employee) =>
-      employee.name.toLowerCase().includes(event.target.value.toLowerCase())
-    );
-    setEmployeeOptions(filteredEmployees);
-  };
+  // // search emp
+  // const handleSearchEmployee = (event) => {
+  //   setSearchEmployee(event.target.value);
+  //   const filteredEmployees = employees.filter((employee) =>
+  //     employee.name.toLowerCase().includes(event.target.value.toLowerCase())
+  //   );
+  //   setEmployeeOptions(filteredEmployees);
+  // };
 
-  const handleEmployeeSelect = (event, value) => {
-    setEmployee_id(value?.id || "");
-  };
+  // const handleEmployeeSelect = (event, value) => {
+  //   setEmployee_id(value?.id || "");
+  // };
 
   // search contract
   const handleSearchContract = (event) => {
     setSearchContract(event.target.value);
     const filteredContracts = contractList.filter((contract) =>
-      contract.number.toLowerCase().includes(String(event.target.value).toLowerCase())
+      contract.number.toLowerCase().includes((event.target.value).toLowerCase())
     );
     setContractOptions(filteredContracts);
   };
@@ -118,6 +118,26 @@ const CreateArchive = () => {
     setContractId(value?.id || "");
     setCompanyName(value?.company.name || "");
   };
+
+  //Search Department 
+  const handleSearchDepartment = async (event) => {
+    const value = event.target.value;
+    setDepartmentName(value);
+
+    try {
+      const response = await DeptService.getDepartments(value);
+      if (response.status === 200) {
+        setDepartmentOptions(response.data.data);
+      }
+    } catch (error) {
+      console.error("Error:", error.response);
+    }
+  };
+
+  const handleDepartmentSelect = (event, value) => {
+    setSelectedDepartment(value);
+  };
+
   return (
     <Box m="1.5rem 2.5rem">
       <FlexBetween>
@@ -160,7 +180,7 @@ const CreateArchive = () => {
             </Grid>
 
             <Grid item xs={12}>
-              <InputLabel>เลขที่สัญญา</InputLabel>
+              {/* <InputLabel>เลขที่สัญญา</InputLabel> */}
               <Autocomplete
                 fullWidth
                 margin="normal"
@@ -170,20 +190,22 @@ const CreateArchive = () => {
                 onInputChange={handleSearchContract}
                 getOptionLabel={(option) => option.number}
                 renderInput={(params) => (
-                  <TextField {...params} label="Search Contract" />
+                  <TextField {...params} label="เลขที่สัญญา" />
                 )}
               />
             </Grid>
 
+
             <Grid item xs={6}>
               <InputLabel>วันเริ่ม</InputLabel>
-              <TextField fullWidth margin="normal" value={startDate} />
+              <TextField fullWidth margin="normal" value={startDate} readOnly />
             </Grid>
 
             <Grid item xs={6}>
               <InputLabel>วันสิ้นสุด</InputLabel>
-              <TextField fullWidth margin="normal" value={endDate} />
+              <TextField fullWidth margin="normal" value={endDate} readOnly />
             </Grid>
+
 
             <Grid item xs={12}>
               <InputLabel>ชื่อบริษัท</InputLabel>
@@ -191,34 +213,18 @@ const CreateArchive = () => {
             </Grid>
 
             <Grid item xs={12}>
-              <InputLabel>สังกัดฝ่าย</InputLabel>
-              <TextField
+              <Autocomplete
                 fullWidth
                 margin="normal"
-                value={department1}
-                onChange={(e) => setDepartment1(e.target.value)}
+                options={departmentOptions}
+                value={selectedDepartment}
+                onChange={handleDepartmentSelect}
+                onInputChange={handleSearchDepartment}
+                getOptionLabel={(option) => option}
+                renderInput={(params) => <TextField {...params} label="Search Department" />}
               />
             </Grid>
 
-            <Grid item xs={12}>
-              <InputLabel>สังกัดกอง</InputLabel>
-              <TextField
-                fullWidth
-                margin="normal"
-                value={department2}
-                onChange={(e) => setDepartment2(e.target.value)}
-              />
-            </Grid>
-
-            <Grid item xs={12}>
-              <InputLabel>สังกัดแผนก</InputLabel>
-              <TextField
-                fullWidth
-                margin="normal"
-                value={department3}
-                onChange={(e) => setDepartment3(e.target.value)}
-              />
-            </Grid>
 
             <Grid item xs={12}>
               <InputLabel>หมายเหตุ</InputLabel>
@@ -232,7 +238,7 @@ const CreateArchive = () => {
           </Grid>
 
           <Box sx={{ mt: "1.5rem" }}>
-            <Button type="submit" variant="contained" onClick={handleSubmit}>
+            <Button type="submit" variant="contained" onClick={handleSubmit} disabled={isLoading}>
               ยืนยัน
             </Button>
             <Button

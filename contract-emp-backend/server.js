@@ -22,7 +22,7 @@ const contractRoute = require('./routes/contractRoute')
 const employeeRoute = require('./routes/employeeRoute')
 const userRoute = require('./routes/userRoute')
 const hrRoute = require('./routes/hr.route')
-const departmentRouter = require('./routes/departmentRoute')
+const deptRoute = require("./routes/deptRoute")
 
 app.use('/archive',(archiveRoute))
 app.use('/company',(companyRoute))
@@ -30,7 +30,8 @@ app.use('/contract',(contractRoute))
 app.use('/employee',(employeeRoute))
 app.use('/emp',hrRoute)
 app.use('/user',(userRoute))
-app.use('/department',(departmentRouter))
+app.use('/dept',deptRoute)
+
 
 const PORT = process.env.PORT || 8080
 

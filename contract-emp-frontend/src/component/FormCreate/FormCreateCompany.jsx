@@ -43,8 +43,8 @@ const CreateCompanies = () => {
           <InputLabel>ชื่อบริษัท: </InputLabel>
           <TextField
             fullWidth
-            margin="normal"
             type="text"
+            margin="normal"nm
             value={companyName}
             onChange={(e) => setCompanyName(e.target.value)}
             helperText=""

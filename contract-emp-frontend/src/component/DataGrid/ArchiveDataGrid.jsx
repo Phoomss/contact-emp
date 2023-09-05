@@ -159,15 +159,15 @@ const Archives = () => {
       flex: .2
     },
     {
-      field: "department1",
-      headerName: "สังกัดกอง",
-      flex: .2
-    },
-    {
-      field: "department2",
+      field: "org_id",
       headerName: "สังกัดฝ่าย",
       flex: .2
     },
+    // {
+    //   field: "department2",
+    //   headerName: "สังกัดฝ่าย",
+    //   flex: .2
+    // },
     {
       field: "Functions",
       headerName: "แก้ไขข้อมูล",

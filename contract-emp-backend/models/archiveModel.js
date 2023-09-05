@@ -13,18 +13,18 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        department1: {
+        org_id: {
             type: DataTypes.STRING,
             allowNull: true
         },
-        department2: {
-            type: DataTypes.STRING,
-            allowNull: true
-        },
-        department3: {
-            type: DataTypes.STRING,
-            allowNull: true
-        },
+        // department2: {
+        //     type: DataTypes.STRING,
+        //     allowNull: true
+        // },
+        // department3: {
+        //     type: DataTypes.STRING,
+        //     allowNull: true
+        // },
         remark: {
             type: DataTypes.STRING,
             allowNull: true
