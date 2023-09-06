@@ -37,7 +37,7 @@ const UpdateEmployees = () => {
           setEmployeeNumber(response.data[0].e_num);
           setEmployeePhone(response.data[0].telephone);
           setEmployeeNote(response.data[0].note);
-          setEmployeeIdCard(response.data[0].e_IdCard);
+          setEmployeeIdCard(response.data[0].e_Idcard);
         }
       } catch (error) {
         console.error("Error:", error.response);
@@ -53,8 +53,8 @@ const UpdateEmployees = () => {
       const response = await EmployeeService.updateEmployee(id, {
         name: employeeName,
         surname: employeeSurname,
-        e_num: employeeNumber,
-        e_IdCard: employeeIdCard,
+        e_number: employeeNumber,
+        e_Idcard: employeeIdCard,
         telephone: employeePhone,
         note: employeeNote,
       });

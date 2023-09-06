@@ -71,7 +71,7 @@ const Employees = () => {
   };
   const columns = [
     {
-      field: "e_num",
+      field: "e_number",
       headerName: "หมายเลขประจำตัว",
       flex: .2
     },

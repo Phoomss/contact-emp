@@ -64,8 +64,8 @@ const CreateEmployees = () => {
       const response = await EmployeeService.postEmployee({
         name: employeeName,
         surname: employeeSurname,
-        e_num: formattedEmployeeNumber,
-        e_IdCard: employeeIdCard,
+        e_number: formattedEmployeeNumber,
+        e_Idcard: employeeIdCard,
         telephone: employeePhone,
         note: employeeNote,
       });

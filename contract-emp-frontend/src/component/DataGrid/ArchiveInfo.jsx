@@ -106,13 +106,8 @@ const ArchiveInfo = () => {
       flex: .2
     },
     {
-      field: "department1",
-      headerName: "สังกัดกอง",
-      flex: .2
-    },
-    {
-      field: "department2",
-      headerName: "สังกัดฝ่าย",
+      field: "org_id",
+      headerName: "สังกัดสำนักงาน",
       flex: .2
     },
   ];

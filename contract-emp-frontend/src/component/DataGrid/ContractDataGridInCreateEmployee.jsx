@@ -99,27 +99,15 @@ const Contracts = () => {
       headerName: "วันที่สิ้นสุด",
     },
     {
-      field: "department1",
-      headerName: "สังกัดกอง",
+      field: "org_id",
+      headerName: "สังกัดสำนักงาน",
       valueGetter: (params) => {
         const archive = archives.find(
           (archive) => archive.contract_id === params.row.id
         );
-        return archive ? archive.department1 : "";
+        return archive ? archive.org_id : "";
       },
     },
-
-    {
-      field: "department2",
-      headerName: "สังกัดฝ่าย",
-      valueGetter: (params) => {
-        const archive = archives.find(
-          (archive) => archive.contract_id === params.row.id
-        );
-        return archive ? archive.department2 : "";
-      },
-    },
-
     {
       field: "company_id",
       headerName: "ชื่อบริษัท",

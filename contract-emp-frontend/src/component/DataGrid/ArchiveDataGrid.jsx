@@ -160,7 +160,7 @@ const Archives = () => {
     },
     {
       field: "org_id",
-      headerName: "สังกัดฝ่าย",
+      headerName: "สังกัดสำนักงาน",
       flex: .2
     },
     // {

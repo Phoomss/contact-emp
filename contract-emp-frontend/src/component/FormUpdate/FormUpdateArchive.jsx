@@ -12,9 +12,7 @@ const FormUpdateArchive = () => {
   const [error, setError] = useState("");
   const [employeeId, setEmployeeId] = useState("");
   const [contractId, setContractId] = useState("");
-  const [department1, setDepartment1] = useState("");
-  const [department2, setDepartment2] = useState("");
-  const [department3, setDepartment3] = useState("");
+  const [org_id, setOrg_id] = useState("");
   const [remark, setRemark] = useState("");
 
   useEffect(() => {
@@ -24,9 +22,7 @@ const FormUpdateArchive = () => {
         if (response.status === 200) {
           setEmployeeId(response.data[0].employee_id);
           setContractId(response.data[0].contract_id);
-          setDepartment1(response.data[0].department1);
-          setDepartment2(response.data[0].department2);
-          setDepartment3(response.data[0].department3);
+          setOrg_id(response.data[0].org_id);
           setRemark(response.data[0].remark);
         }
       } catch (error) {
@@ -42,9 +38,7 @@ const FormUpdateArchive = () => {
     if (
       !employeeId ||
       !contractId ||
-      !department1 ||
-      !department2 ||
-      !department3 ||
+      !org_id ||
       !remark
     ) {
       swal(`กรุณากรอกข้อมูลให้ครบถ้วน`, "", "warning");
@@ -54,9 +48,7 @@ const FormUpdateArchive = () => {
       const response = await ArchiveService.updateArchive(id, {
         employee_id: parseInt(employeeId),
         contract_id: parseInt(contractId),
-        department1,
-        department2,
-        department3,
+        org_id,
         remark,
       });
       if (response.status === 200) {
@@ -98,31 +90,14 @@ const FormUpdateArchive = () => {
             value={contractId}
             onChange={(e) => setContractId(e.target.value)}
           />
-          <InputLabel>สังกัดฝ่าย: </InputLabel>
+          <InputLabel>สังกัดสำนักงาน: </InputLabel>
           <TextField
             required
             fullWidth
             margin="normal"
-            value={department1}
-            onChange={(e) => setDepartment1(e.target.value)}
+            value={org_id}
+            onChange={(e) => setOrg_id(e.target.value)}
           />
-          <InputLabel>สังกัดกอง: </InputLabel>
-          <TextField
-            required
-            fullWidth
-            margin="normal"
-            value={department2}
-            onChange={(e) => setDepartment2(e.target.value)}
-          />
-
-          <InputLabel>สังกัดแผนก: </InputLabel>
-          <TextField
-            fullWidth
-            margin="normal"
-            value={department3}
-            onChange={(e) => setDepartment3(e.target.value)}
-          />
-
           <InputLabel>ความคิดเห็น: </InputLabel>
           <TextField
             fullWidth
