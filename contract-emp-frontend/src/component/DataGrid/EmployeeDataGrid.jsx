@@ -94,6 +94,11 @@ const Employees = () => {
       flex: .2
     },
     {
+      field: "e_Idcard",
+      headerName: "เลขบัตรประชาชน",
+      flex: .2
+    },
+    {
       field: "note",
       headerName: "หมายเหตุ",
       flex: .2
@@ -122,7 +127,7 @@ const Employees = () => {
     },
     {
       field: "Archive",
-      headerName: "ดูประวัติการทำงาน",
+      headerName: "ประวัติการทำงาน",
       renderCell: (params) => {
         return (
           <Box>
