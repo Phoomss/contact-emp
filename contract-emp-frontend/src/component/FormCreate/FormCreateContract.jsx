@@ -117,7 +117,7 @@ const CreateContracts = () => {
                 onChange={handleCompanySelect}
                 onInputChange={handleSearchCompany}
                 renderInput={(params) => (
-                  <TextField {...params} label="Search Company" />
+                  <TextField {...params}  />
                 )}
               />
               {/* <InputLabel>ชื่อบริษัท: </InputLabel>

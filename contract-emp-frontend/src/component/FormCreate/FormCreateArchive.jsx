@@ -180,7 +180,7 @@ const CreateArchive = () => {
             </Grid>
 
             <Grid item xs={12}>
-              {/* <InputLabel>เลขที่สัญญา</InputLabel> */}
+              <InputLabel>เลขที่สัญญา</InputLabel>
               <Autocomplete
                 fullWidth
                 margin="normal"
@@ -190,7 +190,7 @@ const CreateArchive = () => {
                 onInputChange={handleSearchContract}
                 getOptionLabel={(option) => option.number}
                 renderInput={(params) => (
-                  <TextField {...params} label="เลขที่สัญญา" />
+                  <TextField {...params}  />
                 )}
               />
             </Grid>
@@ -213,6 +213,7 @@ const CreateArchive = () => {
             </Grid>
 
             <Grid item xs={12}>
+            <InputLabel>สังกัดสำนักงาน</InputLabel>
               <Autocomplete
                 fullWidth
                 margin="normal"
@@ -221,7 +222,7 @@ const CreateArchive = () => {
                 onChange={handleDepartmentSelect}
                 onInputChange={handleSearchDepartment}
                 getOptionLabel={(option) => option}
-                renderInput={(params) => <TextField {...params} label="Search Department" />}
+                renderInput={(params) => <TextField {...params} />}
               />
             </Grid>
 

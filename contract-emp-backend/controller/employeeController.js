@@ -4,7 +4,7 @@ const Employee = db.employee;
 const Contract = db.contract;
 
 const createEmployee = async (req, res) => {
-  const { name, surname, e_numberber, e_Idcard, telephone, note } = req.body;
+  const { name, surname, e_number, e_Idcard, telephone, note } = req.body;
 
   if (!name) {
     return res.status(400).json({ message: "Please fill out the name field" });
