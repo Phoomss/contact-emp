@@ -9,11 +9,11 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         },
         telephone: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(10),
             allowNull: true
         },
         email: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(100),
             allowNull: true,
             unique: true
         },
@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
             unique: true
         },
         password: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(100),
             allowNull: true
         },
         company_id: {

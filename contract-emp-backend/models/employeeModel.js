@@ -8,16 +8,16 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        e_num: {
+        e_number: {
             type: DataTypes.STRING,
             allowNull: true
         },
-        e_IdCard: {
-            type: DataTypes.STRING,
+        e_Idcard: {
+            type: DataTypes.STRING(13),
             allowNull: true
         },
         telephone: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(10),
             allowNull: true
         },
         note: {
