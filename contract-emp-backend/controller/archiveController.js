@@ -1,6 +1,6 @@
 const db = require('../models')
 const axios = require('axios');
-require('dotenv').config({path: './config.env'})
+require('dotenv').config({ path: './config.env' })
 
 const Archive = db.archive
 const Employee = db.employee
@@ -21,7 +21,7 @@ const createArchives = async (req, res) => {
   }
 
   try {
-    const newArchive = new Archive({ employee_id, contract_id, org_id ,remark });
+    const newArchive = new Archive({ employee_id, contract_id, org_id, remark });
     const saveArchive = await newArchive.save();
 
     if (saveArchive) {
@@ -194,6 +194,17 @@ const updateArchive = async (req, res) => {
 
   archive.org_id = org_id || archive.org_id;
   archive.remark = remark || archive.remark;
+
+  //get hrDepart 
+  const departInfo = await getHrDepart(org_id)
+
+  if (departInfo.status_code !== 200) {
+    return res.status(departInfo.status_code).json({ message: departInfo.message });
+  }
+
+  archive.org_id = departInfo.data?.org_thai_shortname || archive.org_id;
+  archive.org_parent_id = departInfo.data?.org_thai_shortname || archive.org_parent_id;
+  archive.org_code = departInfo.data?.org_thai_shortname || archive.org_code;
 
   const updatedArchive = await archive.save();
   if (!updatedArchive) {

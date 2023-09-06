@@ -31,7 +31,7 @@ const Login = () => {
       .then((response) => {
         if (response.data.token) {
           localStorage.setItem("token", response.data.token);
-          swal(`ยินดีต้อนรับเข้าสู่ระบบ`, `${formData.username}`, "success");
+          swal("ยินดีต้อนรับเข้าสู่ระบบ", `${formData.username}`, "success");
           navigate("/employee");
         } else {
           setError("Invalid credentials");
@@ -41,7 +41,7 @@ const Login = () => {
       .catch((error) => {
         console.error("Error:", error.response);
         setError(error.response.data.message);
-        swal("Login or password is incorrect", "", "error");
+        swal("ชื่อผู้ใช้งาน หรือ รหัสผ่าน ไม่ถูกต้อง", "", "error");
       });
   };
 
@@ -113,13 +113,14 @@ const Login = () => {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2, backgroundColor: '#154295' }}
+              sx={{ mt: 3, mb: 2, backgroundColor: '#154295', color: 'white' }}
             >
               เข้าสู่ระบบ
             </Button>
+
             <Grid container>
               <Grid item xs>
-                <Typography href="#" variant="body2">
+                <Typography variant="body2">
                   สำหรับเจ้าหน้าที่งานบัตรรักษาความปลอดภัย: เข้าสู่ระบบด้วยบัญชีอีเมลของ กฟผ. <br />
                   สำหรับตัวแทนบริษัทผู้รับจ้าง: เข้าสู่ระบบด้วยชื่อผู้ใช้งานและรหัสผ่านที่ออกให้โดย กฟผ.
                 </Typography>

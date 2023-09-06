@@ -76,113 +76,83 @@ const ShowDashBoard = () => {
         flexGrow: 1,
       }}
     >
-      <Container maxWidth="xl">
-        <Grid
-          container
-          spacing={2}
-        >
+      <Container maxWidth="xl" sx={{ width: "100%" }}>
+        <Grid container spacing={2}>
 
-          <Grid
-            xs={12}
-            sm={6}
-            lg={6}
-          >
+          <Grid xs={12} sm={6} lg={6}>
             <Item
               onClick={() => {
                 navigate("/contract");
               }}
-              sx={{ boxShadow: 3, marginRight: 2, marginLeft: 2, marginBottom: 2, borderRadius: 3, backgroundColor: "#FFCC00", color: "white" }}
-
+              sx={{ boxShadow: 3, marginRight: 2, marginLeft: 2, marginBottom: 2, borderRadius: 7, backgroundColor: "#FFCC00", color: "white" }}
             >
               <FlexBetween>
-                <Typography variant="h3" >{contractCount} </Typography>
-                <Description sx={{ height: '150px', fontSize: '70px', color: "gray" }} />
+                <Typography variant="h1" sx={{paddingLeft:'12rem'}}>{contractCount} </Typography>
+                <Description sx={{ height: '150px', fontSize: '70px', color: "white" }} />
               </FlexBetween>
+              <hr style={{ color: "white" }} />
               <Typography variant="h5">ข้อมูลสัญญาจ้าง</Typography>
-
             </Item>
           </Grid>
 
-          <Grid
-            xs={12}
-            sm={6}
-            lg={6}
-          >
+          <Grid xs={12} sm={6} lg={6}>
             <Item
               onClick={() => {
                 navigate("/company");
               }}
-              sx={{ boxShadow: 3, marginRight: 2, marginLeft: 2, marginBottom: 2, borderRadius: 3, backgroundColor: "#E4032D", color: "white" }}
-
+              sx={{ boxShadow: 3, marginRight: 2, marginLeft: 2, marginBottom: 2, borderRadius: 7, backgroundColor: "#E4032D", color: "white" }}
             >
               <FlexBetween>
-                <Typography variant="h3">{companyCount} </Typography>
-                <ApartmentIcon sx={{ height: '150px', fontSize: '70px', color: "gray" }} />
+                <Typography variant="h1" sx={{paddingLeft:'12rem'}}>{companyCount} </Typography>
+                <ApartmentIcon sx={{ height: '150px', fontSize: '70px', color: "white" }} />
               </FlexBetween>
+              <hr style={{ color: "white" }} />
               <Typography variant="h5">ข้อมูลบริษัท</Typography>
-
             </Item>
           </Grid>
 
-          <Grid
-            xs={12}
-            sm={6}
-            lg={6}
-          >
+          <Grid xs={12} sm={6} lg={6}>
             <Item
               onClick={() => {
                 navigate("/employee");
               }}
-              sx={{ boxShadow: 3, marginRight: 2, marginLeft: 2, marginBottom: 2, borderRadius: 3, backgroundColor: "#154295", color: "white" }}
-
+              sx={{ boxShadow: 3, marginRight: 2, marginLeft: 2, marginBottom: 2, borderRadius: 7, backgroundColor: "#154295", color: "white" }}
             >
               <FlexBetween>
-                <Typography variant="h3">{employeeCount} </Typography>
-                <BadgeIcon sx={{ height: '150px', fontSize: '70PX', color: "gray" }} />
+                <Typography variant="h1" sx={{paddingLeft:'12rem'}}>{employeeCount} </Typography>
+                <BadgeIcon sx={{ height: '150px', fontSize: '70PX', color: "white" }} />
               </FlexBetween>
+              <hr style={{ color: "white" }} />
               <Typography variant="h5">จำนวนลูกจ้าง</Typography>
-
             </Item>
           </Grid>
 
-          <Grid
-            xs={12}
-            sm={6}
-            lg={6}
-          >
+          <Grid xs={12} sm={6} lg={6}>
             <Item
               onClick={() => {
                 navigate("/userall");
               }}
-              sx={{ boxShadow: 3, marginRight: 2, marginLeft: 2, marginBottom: 2, borderRadius: 3, backgroundColor: "#15952C", color: "white" }}
-
+              sx={{ boxShadow: 3, marginRight: 2, marginLeft: 2, marginBottom: 2, borderRadius: 7, backgroundColor: "#15952C", color: "white" }}
             >
               <FlexBetween>
-                <Typography variant="h3">{userCount} </Typography>
-                <PersonIcon sx={{ height: '150px', fontSize: '70PX', color: "gray" }} />
+                <Typography variant="h1" sx={{paddingLeft:'12rem'}}>{userCount} </Typography>
+                <PersonIcon sx={{ height: '150px', fontSize: '70PX', color: "white" }} />
               </FlexBetween>
+              <hr style={{ color: "white" }} />
               <Typography variant="h5">จำนวนผู้ใช้งาน</Typography>
-
             </Item>
           </Grid>
 
-          {/* ส่วนของ chart  */}
-          {/* <Grid container spacing={2}>
-            <Grid item xs={12} sm={12}
-              lg={12} >
-              <Card sx={{ height: '60vh', boxShadow: 3, borderRadius: 5 }}>
-                <CardContent>
-                  <BarChart />
-                </CardContent>
-              </Card>
-            </Grid>
+          {/* <Grid xs={12} sm={12} lg={12}>
+            <Card sx={{ height: '60vh', boxShadow: 3, borderRadius: 5 }}>
+              <CardContent>
+                <BarChart />
+              </CardContent>
+            </Card>
           </Grid> */}
-
-
         </Grid>
       </Container>
     </Box>
-
   );
 };
 

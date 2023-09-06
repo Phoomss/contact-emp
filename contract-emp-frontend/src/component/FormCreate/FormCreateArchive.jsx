@@ -4,7 +4,6 @@ import {
   TextField,
   Button,
   Typography,
-  InputLabel,
   Select,
   MenuItem,
   Grid,
@@ -108,6 +107,7 @@ const CreateArchive = () => {
       contract.number.toLowerCase().includes((event.target.value).toLowerCase())
     );
     setContractOptions(filteredContracts);
+    setSelectedContract(null);
   };
 
   const handleContractSelect = (event, value) => {
@@ -151,6 +151,56 @@ const CreateArchive = () => {
             columnSpacing={{ xs: 1, sm: 2, md: 3 }}
           >
             <Grid item xs={12}>
+              <Typography>เลขที่สัญญา</Typography>
+              {/* <Autocomplete
+                fullWidth
+                margin="normal"
+                options={contractOptions}
+                value={selectedContract}
+                onChange={handleContractSelect}
+                onInputChange={handleSearchContract}
+                getOptionLabel={(option) => option.number}
+                renderInput={(params) => (
+                  <TextField {...params} />
+                )}
+              /> */}
+              <Select
+                fullWidth
+                margin="normal"
+                value={contractId}
+                onChange={(event) => {
+                  const value = event.target.value;
+                  const selectedContract = contractList.find(contract => contract.id === value);
+                  handleContractSelect(null, selectedContract); // เรียกใช้งาน handleContractSelect เมื่อผู้ใช้เลือกค่าจาก Select
+                }}
+              >
+                <MenuItem value="" >
+                  ----- เลือกเลขที่สัญญา -----
+                </MenuItem>
+                {contractList.map((contract) => (
+                  <MenuItem key={contract.id} value={contract.id}>
+                    {contract.number}
+                  </MenuItem>
+                ))}
+              </Select>
+            </Grid>
+
+            <Grid item xs={12}>
+              <Typography>ชื่อบริษัท</Typography>
+              <TextField fullWidth margin="normal" value={companyName} />
+            </Grid>
+
+            <Grid item xs={6}>
+              <Typography>วันเริ่ม</Typography>
+              <TextField fullWidth margin="normal" value={startDate} readOnly />
+            </Grid>
+
+            <Grid item xs={6}>
+              <Typography>วันสิ้นสุด</Typography>
+              <TextField fullWidth margin="normal" value={endDate} readOnly />
+            </Grid>
+
+            <Grid item xs={12}>
               {/* <Autocomplete
                 fullWidth
                 margin="normal"
@@ -161,7 +211,7 @@ const CreateArchive = () => {
                 getOptionLabel={(employee) => employee.name}
                 renderInput={(params) => <TextField {...params} label="Search Employee" />}
               /> */}
-              <InputLabel>ชื่อ (ลูกจ้าง)</InputLabel>
+              <Typography>ชื่อ (ลูกจ้าง)</Typography>
               <Select
                 fullWidth
                 margin="normal"
@@ -180,40 +230,7 @@ const CreateArchive = () => {
             </Grid>
 
             <Grid item xs={12}>
-              <InputLabel>เลขที่สัญญา</InputLabel>
-              <Autocomplete
-                fullWidth
-                margin="normal"
-                options={contractOptions}
-                value={selectedContract}
-                onChange={handleContractSelect}
-                onInputChange={handleSearchContract}
-                getOptionLabel={(option) => option.number}
-                renderInput={(params) => (
-                  <TextField {...params}  />
-                )}
-              />
-            </Grid>
-
-
-            <Grid item xs={6}>
-              <InputLabel>วันเริ่ม</InputLabel>
-              <TextField fullWidth margin="normal" value={startDate} readOnly />
-            </Grid>
-
-            <Grid item xs={6}>
-              <InputLabel>วันสิ้นสุด</InputLabel>
-              <TextField fullWidth margin="normal" value={endDate} readOnly />
-            </Grid>
-
-
-            <Grid item xs={12}>
-              <InputLabel>ชื่อบริษัท</InputLabel>
-              <TextField fullWidth margin="normal" value={companyName} />
-            </Grid>
-
-            <Grid item xs={12}>
-            <InputLabel>สังกัดสำนักงาน</InputLabel>
+              <Typography>สังกัดสำนักงาน</Typography>
               <Autocomplete
                 fullWidth
                 margin="normal"
@@ -226,9 +243,8 @@ const CreateArchive = () => {
               />
             </Grid>
 
-
             <Grid item xs={12}>
-              <InputLabel>หมายเหตุ</InputLabel>
+              <Typography>หมายเหตุ</Typography>
               <TextField
                 fullWidth
                 margin="normal"

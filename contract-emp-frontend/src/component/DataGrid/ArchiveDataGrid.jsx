@@ -93,28 +93,6 @@ const Archives = () => {
       flex: .2
     },
     {
-      field: "start_date",
-      headerName: "วันที่เริ่ม",
-      valueGetter: (params) => {
-        const contract = contracts.find(
-          (contract) => contract.id === params.row.contract_id
-        );
-        return contract ? format(new Date(contract.start_date), "d MMM yyyy", { locale: th }) : "";
-      },
-      flex: 0.2
-    },
-    {
-      field: "end_date",
-      headerName: "วันที่สิ้นสุด",
-      valueGetter: (params) => {
-        const contract = contracts.find(
-          (contract) => contract.id === params.row.contract_id
-        );
-        return contract ? format(new Date(contract.end_date), "d MMM yyyy", { locale: th }) : "";
-      },
-      flex: 0.2
-    },
-    {
       field: "company_id",
       headerName: "ชื่อบริษัท",
       valueGetter: (params) => {
@@ -135,6 +113,28 @@ const Archives = () => {
         return "";
       },
       flex: .2
+    },
+    {
+      field: "start_date",
+      headerName: "วันที่เริ่ม",
+      valueGetter: (params) => {
+        const contract = contracts.find(
+          (contract) => contract.id === params.row.contract_id
+        );
+        return contract ? format(new Date(contract.start_date), "d MMM yyyy", { locale: th }) : "";
+      },
+      flex: 0.2
+    },
+    {
+      field: "end_date",
+      headerName: "วันที่สิ้นสุด",
+      valueGetter: (params) => {
+        const contract = contracts.find(
+          (contract) => contract.id === params.row.contract_id
+        );
+        return contract ? format(new Date(contract.end_date), "d MMM yyyy", { locale: th }) : "";
+      },
+      flex: 0.2
     },
     {
       field: "employee_name",
@@ -163,11 +163,6 @@ const Archives = () => {
       headerName: "สังกัดสำนักงาน",
       flex: .2
     },
-    // {
-    //   field: "department2",
-    //   headerName: "สังกัดฝ่าย",
-    //   flex: .2
-    // },
     {
       field: "Functions",
       headerName: "แก้ไขข้อมูล",

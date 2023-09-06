@@ -20,7 +20,6 @@ import {
   ApartmentOutlined,
   PersonOutlineOutlined,
 } from "@mui/icons-material";
-import LogoutIcon from "@mui/icons-material/Logout";
 import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
 import { useLocation, useNavigate } from "react-router-dom";
 import FlexBetween from "./FlexBetween";
@@ -28,7 +27,7 @@ import FlexBetween from "./FlexBetween";
 const navItems = [
   {
     text: "Dashboard",
-    thaitext: "แดชบอร์ด",
+    thaitext: "หน้าแรก",
     icon: <DashboardOutlinedIcon />,
   },
   {

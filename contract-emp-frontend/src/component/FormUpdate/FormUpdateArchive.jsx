@@ -1,9 +1,10 @@
-import { Box, Button, InputLabel, TextField, Typography } from "@mui/material";
+import { Autocomplete, Box, Button, Typography, TextField } from "@mui/material";
 import FlexBetween from "component/FlexBetween";
 import Header from "component/Header";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import ArchiveService from "services/ArchiveService";
+import DeptService from "services/DeptService";
 import swal from "sweetalert";
 
 const FormUpdateArchive = () => {
@@ -14,6 +15,10 @@ const FormUpdateArchive = () => {
   const [contractId, setContractId] = useState("");
   const [org_id, setOrg_id] = useState("");
   const [remark, setRemark] = useState("");
+
+  const [departmentName, setDepartmentName] = useState("");
+  const [departmentOptions, setDepartmentOptions] = useState([]);
+  const [selectedDepartment, setSelectedDepartment] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -52,7 +57,7 @@ const FormUpdateArchive = () => {
         remark,
       });
       if (response.status === 200) {
-        navigate("/employee");
+        navigate("/archive");
         swal(`อัพเดทข้อมูลสำเร็จ`, "", "success");
       }
     } catch (error) {
@@ -62,7 +67,27 @@ const FormUpdateArchive = () => {
   };
 
   const handleCancelClick = () => {
-    navigate("/employee");
+    navigate("/archive");
+  };
+
+  //Search Department 
+  const handleSearchDepartment = async (event) => {
+    const value = event.target.value;
+    setDepartmentName(value);
+
+    try {
+      const response = await DeptService.getDepartments(value);
+      if (response.status === 200) {
+        setDepartmentOptions(response.data.data);
+      }
+    } catch (error) {
+      console.error("Error:", error.response);
+    }
+  };
+
+  const handleDepartmentSelect = (event, value) => {
+    setSelectedDepartment(value);
+    setOrg_id(value)
   };
 
   return (
@@ -72,7 +97,7 @@ const FormUpdateArchive = () => {
       </FlexBetween>
       <Box sx={{ mt: "1.5rem" }}>
         <form onSubmit={handleSubmit}>
-          <InputLabel>ชื่่อลูกจ้าง: </InputLabel>
+          <Typography>ชื่่อลูกจ้าง: </Typography>
           <TextField
             required
             fullWidth
@@ -81,7 +106,7 @@ const FormUpdateArchive = () => {
             value={employeeId}
             onChange={(e) => setEmployeeId(e.target.value)}
           />
-          <InputLabel>บริษัท: </InputLabel>
+          <Typography>บริษัท: </Typography>
           <TextField
             required
             fullWidth
@@ -90,15 +115,20 @@ const FormUpdateArchive = () => {
             value={contractId}
             onChange={(e) => setContractId(e.target.value)}
           />
-          <InputLabel>สังกัดสำนักงาน: </InputLabel>
-          <TextField
-            required
+
+          <Typography>สังกัดสำนักงาน</Typography>
+          <Autocomplete
             fullWidth
             margin="normal"
-            value={org_id}
-            onChange={(e) => setOrg_id(e.target.value)}
+            options={departmentOptions}
+            value={selectedDepartment}
+            onChange={handleDepartmentSelect}
+            onInputChange={handleSearchDepartment}
+            getOptionLabel={(option) => option}
+            renderInput={(params) => <TextField {...params} />}
           />
-          <InputLabel>ความคิดเห็น: </InputLabel>
+
+          <Typography>ความคิดเห็น: </Typography>
           <TextField
             fullWidth
             margin="normal"
