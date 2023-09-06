@@ -55,8 +55,6 @@ const createArchives = async (req, res) => {
         employee_id,
         contract_id,
         org_id,
-        // department2, 
-        // department3,
         departInfo: modifiedDepartInfo,
       });
     }
@@ -132,7 +130,7 @@ const getArchiveWithAllParams = async (req, res) => {
     // ไม่มีการกำหนดเงื่อนไขเพิ่มเติมสำหรับบทบาท "company"
   }
 
-  const { id, employee_id, contract_id, department1, department2, department3, remark, company_id } = req.query;
+  const { id, employee_id, contract_id, org_id, remark, company_id } = req.query;
 
   if (id) {
     whereClause.id = id;
@@ -143,14 +141,8 @@ const getArchiveWithAllParams = async (req, res) => {
   if (contract_id) {
     whereClause.contract_id = contract_id;
   }
-  if (department1) {
-    whereClause.department1 = department1;
-  }
-  if (department2) {
-    whereClause.department2 = department2;
-  }
-  if (department3) {
-    whereClause.department3 = department3;
+  if (org_id) {
+    whereClause.org_id = org_id;
   }
   if (remark) {
     whereClause.remark = remark;
@@ -179,7 +171,7 @@ const updateArchive = async (req, res) => {
     return res.status(401).json({ message: "Unauthorized" });
   }
 
-  const { employee_id, contract_id, department1, department2, department3, remark } = req.body;
+  const { employee_id, contract_id, org_id, remark } = req.body;
 
   const archive = await Archive.findOne({ where: { id: req.params.id } })
 
@@ -200,9 +192,7 @@ const updateArchive = async (req, res) => {
     archive.contract_id = contract_id || archive.contract_id;
   }
 
-  archive.department1 = department1 || archive.department1;
-  archive.department2 = department2 || archive.department2;
-  archive.department3 = department3 || archive.department3;
+  archive.org_id = org_id || archive.org_id;
   archive.remark = remark || archive.remark;
 
   const updatedArchive = await archive.save();
