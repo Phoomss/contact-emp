@@ -39,38 +39,6 @@ const CompaniesComData = () => {
     setSelectionModel(newSelection);
   };
 
-  const handleDeleteButtonClick = async () => {
-    if (selectionModel.length === 0) {
-      swal("Please select at least one company to delete.", {
-        icon: "warning",
-      });
-      return;
-    }
-
-    swal({
-      title: "Are you sure?",
-      text: "Once deleted, you will not be able to recover the selected companies!",
-      icon: "warning",
-      buttons: true,
-      dangerMode: true,
-    }).then(async (willDelete) => {
-      if (willDelete) {
-        await Promise.all(
-          selectionModel.map(async (id) => {
-            await CompanyService.deleteCompany(id);
-          })
-        );
-        setCompanies(
-          companies.filter((company) => !selectionModel.includes(company.id))
-        );
-        setSelectionModel([]);
-        swal("The selected companies have been deleted successfully!", {
-          icon: "success",
-        });
-      }
-    });
-  };
-
   const columns = [
     {
       field: "name",

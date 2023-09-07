@@ -25,7 +25,7 @@ const FormUpdateArchive = () => {
       try {
         const response = await ArchiveService.getArchiveById(id);
         if (response.status === 200) {
-          setEmployeeId(response.data[0].employee_id);
+          setEmployeeId(response.data[0].employee.name);
           setContractId(response.data[0].contract_id);
           setOrg_id(response.data[0].org_id);
           setRemark(response.data[0].remark);
@@ -97,6 +97,16 @@ const FormUpdateArchive = () => {
       </FlexBetween>
       <Box sx={{ mt: "1.5rem" }}>
         <form onSubmit={handleSubmit}>
+          <Typography>เลขที่สัญญา: </Typography>
+          <TextField
+            required
+            fullWidth
+            disabled
+            margin="normal"
+            value={contractId}
+            onChange={(e) => setContractId(e.target.value)}
+          />
+
           <Typography>ชื่่อลูกจ้าง: </Typography>
           <TextField
             required
@@ -105,15 +115,6 @@ const FormUpdateArchive = () => {
             margin="normal"
             value={employeeId}
             onChange={(e) => setEmployeeId(e.target.value)}
-          />
-          <Typography>บริษัท: </Typography>
-          <TextField
-            required
-            fullWidth
-            disabled
-            margin="normal"
-            value={contractId}
-            onChange={(e) => setContractId(e.target.value)}
           />
 
           <Typography>สังกัดสำนักงาน</Typography>

@@ -34,15 +34,15 @@ const Companies = () => {
 
   const handleDeleteButtonClick = async () => {
     if (selectionModel.length === 0) {
-      swal("Please select at least one company to delete.", {
+      swal("โปรดเลือกอย่างน้อยหนึ่งบริษัทที่จะลบ", {
         icon: "warning",
       });
       return;
     }
 
     swal({
-      title: "Are you sure?",
-      text: "Once deleted, you will not be able to recover the selected companies!",
+      title: "แน่ใจหรือไม่?",
+      text: "เมื่อลบแล้ว, สัญญาที่คุณเลือกไว้จะถูกลบหายไป!",
       icon: "warning",
       buttons: true,
       dangerMode: true,

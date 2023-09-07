@@ -4,30 +4,28 @@ const Employee = db.employee;
 const Contract = db.contract;
 
 const createEmployee = async (req, res) => {
-  const { name, surname, e_number, e_Idcard, telephone, note } = req.body;
+  const { name, surname, e_num, e_Idcard, telephone, note } = req.body;
 
   if (!name) {
-    return res.status(400).json({ message: "Please fill out the name field" });
+    return res.status(400).json({ message: "กรุณากรอกชื่อ" });
   }
 
   if (!surname) {
-    return res.status(400).json({ message: "Please fill out the surname field" });
+    return res.status(400).json({ message: "กรุณากรอกนามสกุล" });
   }
 
-  if (!e_number) {
-    return res.status(400).json({ message: "Please fill out the e_number field" });
+  if (!e_num) {
+    return res.status(400).json({ message: "กรุณากรอกหมายเลขพนักงาน" });
   }
 
   if (e_Idcard && e_Idcard.length < 13) {
-    return res.status(400).json({ message: "คุณกรอกตัวเลขให้ถึง 13 หลัก" });
+    return res.status(400).json({ message: "คุณกรอกเลขบัตรประชาชนไม่ถูกต้อง ควรมี 13 หลัก" });
   } else if (e_Idcard && e_Idcard.length > 13) {
-    return res.status(400).json({ message: "คุณกรอกตัวเลขเกิน 13 หลัก" });
+    return res.status(400).json({ message: "คุณกรอกเลขบัตรประชาชนเกิน 13 หลัก" });
   }
   
   if (!telephone) {
-    return res
-      .status(400)
-      .json({ message: "Please fill out the telephone field" });
+    return res.status(400).json({ message: "กรุณากรอกหมายเลขโทรศัพท์" });
   }
 
   let createby = null;
@@ -36,39 +34,39 @@ const createEmployee = async (req, res) => {
   }
 
   if (req.user.role !== "admin" && req.user.role !== "card" && note) {
-    return res.status(401).json({ message: "Unauthorized" });
+    return res.status(401).json({ message: "ไม่มีสิทธิ์ในการทำรายการนี้" });
   }
 
   const alreadyExistsEmployee = await Employee.findOne({
-    where: { e_number },
+    where: { e_num },
   }).catch((err) => {
-    console.log("Error: ", err);
+    console.log("ผิดพลาด: ", err);
   });
 
   // if (alreadyExistsEmployee) {
   //   return res.status(402).json({ message: "Employee already exists!" });
   // }
-  if (isNaN(e_number)) {
-    return res.status(404).json({ message: "Number should be an e_number!" });
+  if (isNaN(e_num)) {
+    return res.status(404).json({ message: "หมายเลขพนักงานควรเป็นตัวเลข" });
   }
   if (isNaN(telephone)) {
     return res
       .status(405)
-      .json({ message: "Telephone number should be a number!" });
+      .json({ message: "หมายเลขโทรศัพท์ควรเป็นตัวเลข" });
   }
 
   const newEmployee = new Employee({
     name,
     surname,
-    e_number,
+    e_num,
     e_Idcard,
     telephone,
     note,
     createby,
   });
   const saveEmployee = await newEmployee.save().catch((err) => {
-    console.log("Error: ", err);
-    res.status(403).json({ error: "Cannot create employee at the moment!" });
+    console.log("ผิดพลาด: ", err);
+    res.status(403).json({ error: "ไม่สามารถสร้างพนักงานในขณะนี้ได้" });
   });
 
   if (saveEmployee) {
@@ -76,7 +74,7 @@ const createEmployee = async (req, res) => {
     return res
       .status(200)
       .json({
-        message: "Employee created successfully!",
+        message: "สร้างพนักงานเรียบร้อยแล้ว",
         data: saveEmployee.dataValues,
       });
   }
@@ -101,7 +99,7 @@ const getEmployeeWithAllParams = async (req, res) => {
     whereClause.createby = req.user.company_id;
   }
 
-  const { id, name, surname, e_number, e_Idcard, telephone, note } = req.query;
+  const { id, name, surname, e_num, e_Idcard, telephone, note } = req.query;
 
   if (id) {
     whereClause.id = id;
@@ -112,8 +110,8 @@ const getEmployeeWithAllParams = async (req, res) => {
   if (surname) {
     whereClause.surname = surname;
   }
-  if (e_number) {
-    whereClause.e_number = e_number;
+  if (e_num) {
+    whereClause.e_num = e_num;
   }
   if (e_Idcard) {
     whereClause.e_Idcard = e_Idcard;
@@ -135,38 +133,38 @@ const getEmployeeWithAllParams = async (req, res) => {
   if (employees.length === 0) {
     return res
       .status(404)
-      .json({ message: "No employees found with the given parameters" });
+      .json({ message: "ไม่พบข้อมูลพนักงานที่ตรงกับเงื่อนไขที่กำหนด" });
   }
 
   return res.status(200).send(employees);
 };
 
 const updateEmployee = async (req, res) => {
-  const { name, surname, e_number, e_Idcard, telephone, note } = req.body;
+  const { name, surname, e_num, e_Idcard, telephone, note } = req.body;
 
   const employee = await Employee.findOne({ where: { id: req.params.id } });
 
   if (!employee) {
-    return res.status(404).json({ message: "Employee not found!" });
+    return res.status(404).json({ message: "ไม่พบข้อมูลพนักงาน" });
   }
 
   if (req.user.role === "company" && employee.createby !== req.user.company_id) {
-    return res.status(401).json({ message: "Unauthorized" });
+    return res.status(401).json({ message: "ไม่มีสิทธิ์ในการทำรายการนี้" });
   }
 
   employee.name = name || employee.name;
   employee.surname = surname || employee.surname;
 
-  if (e_number) {
-    if (isNaN(e_number)) {
-      return res.status(403).json({ message: "Number should be an e_number!" });
+  if (e_num) {
+    if (isNaN(e_num)) {
+      return res.status(403).json({ message: "หมายเลขพนักงานควรเป็นตัวเลข" });
     }
-    employee.e_number = e_number || employee.e_number;
+    employee.e_num = e_num || employee.e_num;
   }
 
   if (e_Idcard) {
     if (isNaN(e_Idcard)) {
-      return res.status(403).json({ message: "Number should be an e_Idcard!" });
+      return res.status(403).json({ message: "หมายเลขบัตรประชาชนควรเป็นตัวเลข" });
     }
     employee.e_Idcard = e_Idcard || employee.e_Idcard;
   }
@@ -175,7 +173,7 @@ const updateEmployee = async (req, res) => {
     if (isNaN(telephone)) {
       return res
         .status(403)
-        .json({ message: "Telephone number should be a number!" });
+        .json({ message: "หมายเลขโทรศัพท์ควรเป็นตัวเลข" });
     }
     employee.telephone = telephone || employee.telephone;
   }
@@ -186,22 +184,22 @@ const updateEmployee = async (req, res) => {
 
   const updatedEmployee = await employee.save();
   if (!updatedEmployee) {
-    return res.status(400).json({ message: "Error updating Employee" });
+    return res.status(400).json({ message: "เกิดข้อผิดพลาดในการอัปเดตข้อมูลพนักงาน" });
   }
 
-  return res.status(200).json({ message: "Employee updated successfully!" });
+  return res.status(200).json({ message: "อัปเดตข้อมูลพนักงานเรียบร้อยแล้ว" });
 };
 
 const deleteEmployee = async (req, res) => {
   const employee = await Employee.findOne({ where: { id: req.params.id } });
 
   if (!employee) {
-    return res.status(404).json({ message: "Employee not found" });
+    return res.status(404).json({ message: "ไม่พบข้อมูลพนักงาน" });
   }
 
   await employee.destroy();
 
-  return res.status(200).json({ message: "Employee deleted successfully" });
+  return res.status(200).json({ message: "ลบข้อมูลพนักงานเรียบร้อยแล้ว" });
 };
 
 module.exports = {

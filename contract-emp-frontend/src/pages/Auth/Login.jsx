@@ -57,7 +57,7 @@ const Login = () => {
   return (
     <ThemeProvider theme={theme}>
       <Layout>
-        <Container component="main" maxWidth="xs"
+        <Container component="main" maxWidth="md"
           sx={{
             display: 'flex',
             flexDirection: 'column',
@@ -66,15 +66,13 @@ const Login = () => {
             marginTop: 9,
             marginBottom: 8,
             padding: '5px',
-            boxShadow: '0px 3px 6px rgba(0, 0, 0, 0.1)', // Add box shadow here
-            borderRadius: '8px', // Add border radius for a more rounded look
           }}>
           <CssBaseline />
           <Box
           >
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <LoginIcon sx={{ fontSize: "60px" }} />
-              <Typography variant="h4">
+              <LoginIcon sx={{ fontSize: "40px" }} />
+              <Typography variant="h5">
                 เข้าสู่ระบบ
               </Typography>
             </Box>
@@ -90,7 +88,7 @@ const Login = () => {
               required
               fullWidth
               id="username"
-              label="ยูสเซอร์เมน หรือ อีเมล"
+              label="ยูสเซอร์เมน"
               name="username"
               autoComplete="username"
               autoFocus
@@ -120,8 +118,10 @@ const Login = () => {
 
             <Grid container>
               <Grid item xs>
+                <Typography variant="body2" sx={{marginBottom:'10px'}}>
+                  สำหรับเจ้าหน้าที่งานบัตรรักษาความปลอดภัย: เข้าสู่ระบบด้วยบัญชีอีเมลของ กฟผ.
+                </Typography>
                 <Typography variant="body2">
-                  สำหรับเจ้าหน้าที่งานบัตรรักษาความปลอดภัย: เข้าสู่ระบบด้วยบัญชีอีเมลของ กฟผ. <br />
                   สำหรับตัวแทนบริษัทผู้รับจ้าง: เข้าสู่ระบบด้วยชื่อผู้ใช้งานและรหัสผ่านที่ออกให้โดย กฟผ.
                 </Typography>
               </Grid>

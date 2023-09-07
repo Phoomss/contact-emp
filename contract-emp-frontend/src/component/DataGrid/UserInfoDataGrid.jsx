@@ -26,7 +26,7 @@ const UserDataGrid = () => {
           <p>Email: {userInfo.email}</p>
           <p>Username: {userInfo.username}</p>
           <p>Role: {userInfo.role}</p>
-          <p>Company: {userInfo.company_id}</p>
+          <p>Company: {userInfo.company.name}</p>
         </div>
       ) : (
         <p>Loading...</p>

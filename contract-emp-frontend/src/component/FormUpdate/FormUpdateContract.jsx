@@ -29,7 +29,7 @@ const FormUpdateContract = () => {
           setContractNumber(response.data[0].number);
           setStart_Date(response.data[0].start_date);
           setEnd_Date(response.data[0].end_date);
-          setCompanyId(response.data[0].company_id);
+          setCompanyId(response.data[0].company.name);
         }
       } catch (error) {
         console.error("Error", error.response);

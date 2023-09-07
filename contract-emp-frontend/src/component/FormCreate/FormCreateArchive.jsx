@@ -87,18 +87,18 @@ const CreateArchive = () => {
     navigate("/archive");
   };
 
-  // // search emp
-  // const handleSearchEmployee = (event) => {
-  //   setSearchEmployee(event.target.value);
-  //   const filteredEmployees = employees.filter((employee) =>
-  //     employee.name.toLowerCase().includes(event.target.value.toLowerCase())
-  //   );
-  //   setEmployeeOptions(filteredEmployees);
-  // };
+  // search emp
+  const handleSearchEmployee = (event) => {
+    setSearchEmployee(event.target.value);
+    const filteredEmployees = employees.filter((employee) =>
+      employee.name.toLowerCase().includes(event.target.value.toLowerCase())
+    );
+    setEmployeeOptions(filteredEmployees);
+  };
 
-  // const handleEmployeeSelect = (event, value) => {
-  //   setEmployee_id(value?.id || "");
-  // };
+  const handleEmployeeSelect = (event, value) => {
+    setEmployee_id(value?.id || "");
+  };
 
   // search contract
   const handleSearchContract = (event) => {
@@ -152,7 +152,7 @@ const CreateArchive = () => {
           >
             <Grid item xs={12}>
               <Typography>เลขที่สัญญา</Typography>
-              {/* <Autocomplete
+              <Autocomplete
                 fullWidth
                 margin="normal"
                 options={contractOptions}
@@ -163,8 +163,9 @@ const CreateArchive = () => {
                 renderInput={(params) => (
                   <TextField {...params} />
                 )}
-              /> */}
-              <Select
+                clearOnBlur={false}
+              />
+              {/* <Select
                 fullWidth
                 margin="normal"
                 value={contractId}
@@ -182,7 +183,7 @@ const CreateArchive = () => {
                     {contract.number}
                   </MenuItem>
                 ))}
-              </Select>
+              </Select> */}
             </Grid>
 
             <Grid item xs={12}>
@@ -201,7 +202,8 @@ const CreateArchive = () => {
             </Grid>
 
             <Grid item xs={12}>
-              {/* <Autocomplete
+              <Typography>ชื่อ (ลูกจ้าง)</Typography>
+              <Autocomplete
                 fullWidth
                 margin="normal"
                 options={employeeOptions}
@@ -209,9 +211,10 @@ const CreateArchive = () => {
                 onChange={handleEmployeeSelect}
                 onInputChange={handleSearchEmployee}
                 getOptionLabel={(employee) => employee.name}
-                renderInput={(params) => <TextField {...params} label="Search Employee" />}
-              /> */}
-              <Typography>ชื่อ (ลูกจ้าง)</Typography>
+                renderInput={(params) => <TextField {...params} />}
+                clearOnBlur={false}
+              />
+              {/* <Typography>ชื่อ (ลูกจ้าง)</Typography>
               <Select
                 fullWidth
                 margin="normal"
@@ -226,7 +229,7 @@ const CreateArchive = () => {
                     {employee.name}
                   </MenuItem>
                 ))}
-              </Select>
+              </Select> */}
             </Grid>
 
             <Grid item xs={12}>
