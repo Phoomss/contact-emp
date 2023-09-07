@@ -75,7 +75,7 @@ const UpdateEmployees = () => {
   return (
     <Box m="1.5rem 2.5rem">
       <FlexBetween>
-        <Header title="เพิ่มข้อมูลลูกจ้าง" />
+        <Header title="แก้ไขข้อมูลลูกจ้าง" />
       </FlexBetween>
       <Box>
         <form onSubmit={handleSubmit}>

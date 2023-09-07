@@ -88,7 +88,7 @@ const Login = () => {
               required
               fullWidth
               id="username"
-              label="ยูสเซอร์เมน"
+              label="ยูสเซอร์เนม"
               name="username"
               autoComplete="username"
               autoFocus
