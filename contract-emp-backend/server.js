@@ -24,15 +24,15 @@ const userRoute = require('./routes/userRoute')
 const hrRoute = require('./routes/hr.route')
 const deptRoute = require("./routes/deptRoute")
 
-app.use('/archive',(archiveRoute))
-app.use('/company',(companyRoute))
-app.use('/contract',(contractRoute))
-app.use('/employee',(employeeRoute))
+app.use('/api/archive',(archiveRoute))
+app.use('/api/company',(companyRoute))
+app.use('/api/contract',(contractRoute))
+app.use('/api/employee',(employeeRoute))
 app.use('/emp',hrRoute)
 app.use('/api/user',(userRoute))
-app.use('/dept',deptRoute)
+app.use('/api/dept',deptRoute)
 
-app.get("/", (req, res)=>{
+app.get("/api", (req, res)=>{
   res.send("Hello from backend")
 })
 
