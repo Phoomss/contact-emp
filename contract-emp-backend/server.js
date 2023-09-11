@@ -36,7 +36,7 @@ app.get("/", (req, res)=>{
   res.send("Hello from backend")
 })
 
-app.get("/user", (req, res)=>{
+app.get("/api/user-test", (req, res)=>{
   res.send("Hello User")
 })
 
