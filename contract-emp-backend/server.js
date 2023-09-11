@@ -32,6 +32,9 @@ app.use('/emp',hrRoute)
 app.use('/user',(userRoute))
 app.use('/dept',deptRoute)
 
+app.get("/", (req, res)=>{
+  res.send("Hello from backend")
+})
 
 const PORT = process.env.PORT || 8080
 
