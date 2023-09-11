@@ -29,11 +29,15 @@ app.use('/company',(companyRoute))
 app.use('/contract',(contractRoute))
 app.use('/employee',(employeeRoute))
 app.use('/emp',hrRoute)
-app.use('/user',(userRoute))
+app.use('/api/user',(userRoute))
 app.use('/dept',deptRoute)
 
 app.get("/", (req, res)=>{
   res.send("Hello from backend")
+})
+
+app.get("/user", (req, res)=>{
+  res.send("Hello User")
 })
 
 const PORT = process.env.PORT || 8080
