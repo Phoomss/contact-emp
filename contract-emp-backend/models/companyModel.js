@@ -12,10 +12,6 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING(20),
             allowNull: false
         },
-        old_company_id:{
-          type: DataTypes.STRING(10),
-          allowNull:true
-        }
     })
 
     return Company

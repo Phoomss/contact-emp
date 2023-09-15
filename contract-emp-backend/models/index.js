@@ -51,7 +51,7 @@ db.archive.belongsTo(db.employee, { foreignKey: 'employee_id' });
 db.archive.belongsTo(db.contract, { foreignKey: 'contract_id' });
 
 
-db.sequelize.sync({force: false})
+db.sequelize.sync({alter:true})
 .then(() => {
     console.log('yes re-sync done!')
 })

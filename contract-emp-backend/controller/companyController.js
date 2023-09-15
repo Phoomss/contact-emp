@@ -8,7 +8,7 @@ const createCompany = async (req, res) => {
   if (req.user.role !== "admin" && req.user.role !== "card") {
     return res.status(401).json({ message: "Unauthorized" });
   }
-  const { name, address, telephone, old_company_id } = req.body;
+  const { name, address, telephone } = req.body;
 
   if (!name) {
     return res.status(400).json({ message: "กรุณากรอกข้อมูลในช่องชื่อ" });
@@ -20,10 +20,6 @@ const createCompany = async (req, res) => {
 
   if (!telephone) {
     return res.status(400).json({ message: "กรุณากรอกข้อมูลในช่องเบอร์โทรบริษัท" });
-  }
-
-  if (!old_company_id) {
-    return res.status(400).json({ message: "กรุณากรอกข้อมูลในช่องรหัสบริษัท" });
   }
 
   const alreadyExistsCompany = await Company.findOne({
@@ -118,7 +114,7 @@ const getCompanyWithAllParams = async (req, res) => {
 };
 
 const updateCompany = async (req, res) => {
-  const { old_company_id,name, address, telephone } = req.body;
+  const { name, address, telephone } = req.body;
 
   // If user is a company user, don't use req.params.id
   const companyId = req.user.role === "company" ? req.user.company_id : req.params.id;
@@ -140,12 +136,7 @@ const updateCompany = async (req, res) => {
   if (!company) {
     return res.status(404).json({ message: "Company not found!" });
   }
-  if (old_company_id) {
-    if (isNaN(old_company_id)) {
-      return res.status(403).json({ message: "Telephone number should be a number!" });
-    }
-    company.old_company_id = old_company_id || company.old_company_id;
-  }
+``
   company.name = name || company.name;
   company.address = address || company.address;
 

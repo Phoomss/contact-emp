@@ -21,10 +21,12 @@ const CreateEmployees = () => {
   const theme = useTheme();
   const navigate = useNavigate();
   const [error, setError] = useState("");
+  const [title, setTitle] = useState("")
   const [employeeName, setEmployeeName] = useState("");
   const [employeeSurname, setEmployeeSurname] = useState("");
   const [employeeNumber, setEmployeeNumber] = useState("");
   const [employeePhone, setEmployeePhone] = useState("");
+  const [org_telephone, setOrg_telephone] = useState("");
   const [employeeNote, setEmployeeNote] = useState("");
   const [createdEmp, setCreatedEmp] = useState({});
   const [employeeId, setEmployeeId] = useState(0);
@@ -62,11 +64,13 @@ const CreateEmployees = () => {
       const formattedEmployeeNumber = String(autoNumber + 1).padStart(5, "0");
       setEmployeeNumber(formattedEmployeeNumber);
       const response = await EmployeeService.postEmployee({
+        title: title,
         name: employeeName,
         surname: employeeSurname,
         e_num: formattedEmployeeNumber,
         e_Idcard: employeeIdCard,
         telephone: employeePhone,
+        org_telephone: org_telephone,
         note: employeeNote,
       });
       if (response.status === 200) {
@@ -111,13 +115,30 @@ const CreateEmployees = () => {
             </Grid>
           </Grid>
 
+
+
           <Grid
             container
             rowSpacing={1}
             columnSpacing={{ xs: 1, sm: 2, md: 3 }}
             mt="1.5rem"
           >
-            <Grid item xs={6}>
+            <Grid item xs={4}>
+              <InputLabel>คำนำหน้า: </InputLabel>
+              <Select
+                value={role}
+                onChange={(e) => setTitle(e.target.value)}
+                fullWidth
+              >
+                <MenuItem value="">เลือกคำนำหน้า</MenuItem>
+                <MenuItem value="นาย">นาย</MenuItem>
+                <MenuItem value="นาง">นาง</MenuItem>
+                <MenuItem value="นางสาว">นางสาว</MenuItem>
+                <MenuItem value="น.ส.">น.ส.</MenuItem>
+              </Select>
+            </Grid>
+
+            <Grid item xs={4}>
               <InputLabel>ชื่อ (ลูกจ้าง)*: </InputLabel>
               <TextField
                 margin="normal"
@@ -127,7 +148,7 @@ const CreateEmployees = () => {
               />
             </Grid>
 
-            <Grid item xs={6}>
+            <Grid item xs={4}>
               <InputLabel>นามสกุล (ลูกจ้าง)*: </InputLabel>
               <TextField
                 margin="normal"
