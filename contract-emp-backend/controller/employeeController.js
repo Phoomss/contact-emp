@@ -4,8 +4,11 @@ const Employee = db.employee;
 const Contract = db.contract;
 
 const createEmployee = async (req, res) => {
-  const { name, surname, e_num, e_Idcard, telephone, note } = req.body;
+  const {title, name, surname, e_num, e_Idcard, telephone, note } = req.body;
 
+  if(!title){
+    return res.status(400).json({message: "กรุณาเลือกคำนำหน้า"})
+  }
   if (!name) {
     return res.status(400).json({ message: "กรุณากรอกชื่อ" });
   }
@@ -56,6 +59,7 @@ const createEmployee = async (req, res) => {
   }
 
   const newEmployee = new Employee({
+    title,
     name,
     surname,
     e_num,
@@ -140,7 +144,7 @@ const getEmployeeWithAllParams = async (req, res) => {
 };
 
 const updateEmployee = async (req, res) => {
-  const { name, surname, e_num, e_Idcard, telephone, note } = req.body;
+  const {title, name, surname, e_num, e_Idcard, telephone, note } = req.body;
 
   const employee = await Employee.findOne({ where: { id: req.params.id } });
 
@@ -152,6 +156,7 @@ const updateEmployee = async (req, res) => {
     return res.status(401).json({ message: "ไม่มีสิทธิ์ในการทำรายการนี้" });
   }
 
+  employee.title = title || employee.title;
   employee.name = name || employee.name;
   employee.surname = surname || employee.surname;
 

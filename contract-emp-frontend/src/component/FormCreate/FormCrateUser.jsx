@@ -113,6 +113,7 @@ const FormCrateUser = () => {
               <TextField
                 value={telephone}
                 type="text"
+                placeholder="Ex. 088XXXXXX"
                 onChange={(e) => setTelePhone(e.target.value)}
                 fullWidth
               />
@@ -127,7 +128,7 @@ const FormCrateUser = () => {
               />
             </Grid>
             <Grid item xs={6}>
-              <InputLabel>ยูสเซอร์เนม หรือ ยูสเซอร์เนมของ Egat:</InputLabel>
+              <InputLabel>ชื่อผู้ใช้งาน หรือ รหัสพนักงาน Egat:</InputLabel>
               <TextField
                 type="text"
                 value={username}
