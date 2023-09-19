@@ -106,7 +106,7 @@ const UpdateEmployees = () => {
             columnSpacing={{ xs: 1, sm: 2, md: 3 }}
             mt="1.5rem"
           >
-            <Grid item xs={4} >
+            <Grid item xs={2} >
               <InputLabel sx={{ mb: 2 }}>คำนำหน้า*:</InputLabel>
               <Select
                 value={employeetitle}
@@ -124,7 +124,7 @@ const UpdateEmployees = () => {
               </Select>
             </Grid>
 
-            <Grid item xs={4}>
+            <Grid item xs={5}>
               <InputLabel>ชื่อ*: </InputLabel>
               <TextField
                 margin="normal"
@@ -134,7 +134,7 @@ const UpdateEmployees = () => {
               />
             </Grid>
 
-            <Grid item xs={4}>
+            <Grid item xs={5}>
               <InputLabel>นามสกุล*: </InputLabel>
               <TextField
                 margin="normal"
