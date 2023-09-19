@@ -101,7 +101,7 @@ const CreateContracts = () => {
               <TextField
                 fullWidth
                 margin="normal"
-                placeholder="Ex. 12365"
+                placeholder="Ex. xxxyy"
                 value={contractNumber}
                 onChange={(e) => setContractNumber(e.target.value)}
                 helperText=""

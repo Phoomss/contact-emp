@@ -42,6 +42,7 @@ const CreateArchive = () => {
   const [searchEmployee, setSearchEmployee] = useState("");
   const [employeeOptions, setEmployeeOptions] = useState([]);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
+  const [inputLabel, setInputLabel] = useState("Ex. ค้นหาลูกจ้างโดยใช้เฉพาะชื่อจริง ไม่ต้องมีคำนำหน้า");
 
   const [departmentName, setDepartmentName] = useState("");
   const [departmentOptions, setDepartmentOptions] = useState([]);
@@ -90,6 +91,7 @@ const CreateArchive = () => {
   // search emp
   const handleSearchEmployee = (event) => {
     setSearchEmployee(event.target.value);
+    setInputLabel("ค้นหาชื่อ");
     const filteredEmployees = employees.filter((employee) =>
       employee.name.toLowerCase().includes(event.target.value.toLowerCase())
     );
@@ -97,6 +99,7 @@ const CreateArchive = () => {
   };
 
   const handleEmployeeSelect = (event, value) => {
+    setInputLabel("ค้นหาชื่อ"); 
     setEmployee_id(value?.id || "");
   };
 
@@ -210,8 +213,8 @@ const CreateArchive = () => {
                 value={selectedEmployee}
                 onChange={handleEmployeeSelect}
                 onInputChange={handleSearchEmployee}
-                getOptionLabel={(employee) => employee.name}
-                renderInput={(params) => <TextField {...params} />}
+                getOptionLabel={(employee) => `${employee.title} ${employee.name} ${employee.surname}`}
+                renderInput={(params) =>   <TextField {...params} placeholder={inputLabel} />}
                 clearOnBlur={false}
               />
               {/* <Typography>ชื่อ (ลูกจ้าง)</Typography>

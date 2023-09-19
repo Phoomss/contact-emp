@@ -124,13 +124,13 @@ const CreateEmployees = () => {
             mt="1.5rem"
           >
             <Grid item xs={4}>
-              <InputLabel>คำนำหน้า: </InputLabel>
+              <InputLabel sx={{mb:2}}>คำนำหน้า*:</InputLabel>
               <Select
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 fullWidth
               >
-                <MenuItem value="">เลือกคำนำหน้า</MenuItem>
+                <MenuItem value="" disabled>--------------เลือกคำนำหน้า--------------</MenuItem>
                 <MenuItem value="นาย">นาย</MenuItem>
                 <MenuItem value="นาง">นาง</MenuItem>
                 <MenuItem value="นางสาว">นางสาว</MenuItem>
@@ -142,7 +142,7 @@ const CreateEmployees = () => {
             </Grid>
 
             <Grid item xs={4}>
-              <InputLabel>ชื่อ (ลูกจ้าง)*: </InputLabel>
+              <InputLabel>ชื่อ*: </InputLabel>
               <TextField
                 margin="normal"
                 value={employeeName}
@@ -152,7 +152,7 @@ const CreateEmployees = () => {
             </Grid>
 
             <Grid item xs={4}>
-              <InputLabel>นามสกุล (ลูกจ้าง)*: </InputLabel>
+              <InputLabel>นามสกุล*: </InputLabel>
               <TextField
                 margin="normal"
                 value={employeeSurname}
@@ -169,7 +169,7 @@ const CreateEmployees = () => {
             mt="1.5rem"
           >
             <Grid item xs={12}>
-              <InputLabel>เลขบัตรประชาชน (ลูกจ้าง)*: </InputLabel>
+              <InputLabel>หมายเลขบัตรประชาชน*: </InputLabel>
               <TextField
                 margin="normal"
                 placeholder="Ex. 12345xxxxxxxx"
@@ -187,7 +187,7 @@ const CreateEmployees = () => {
             mt="1.5rem"
           >
             <Grid item xs={12}>
-              <InputLabel>เบอร์โทรศัพท์ (ลูกจ้าง)*: </InputLabel>
+              <InputLabel>หมายเลขเบอร์โทรศัพท์*: </InputLabel>
               <TextField
                 margin="normal"
                 placeholder="Ex. 088XXXXXX"

@@ -36,9 +36,9 @@ const createEmployee = async (req, res) => {
     createby = req.user.company_id;
   }
 
-  if (req.user.role !== "admin" && req.user.role !== "card" && note) {
-    return res.status(401).json({ message: "ไม่มีสิทธิ์ในการทำรายการนี้" });
-  }
+  // if (req.user.role !== "admin" && req.user.role !== "card" && note) {
+  //   return res.status(401).json({ message: "ไม่มีสิทธิ์ในการทำรายการนี้" });
+  // }
 
   const alreadyExistsEmployee = await Employee.findOne({
     where: { e_num },

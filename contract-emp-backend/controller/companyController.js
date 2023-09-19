@@ -119,17 +119,17 @@ const updateCompany = async (req, res) => {
   // If user is a company user, don't use req.params.id
   const companyId = req.user.role === "company" ? req.user.company_id : req.params.id;
 
-  const alreadyExistsCompany = await Company.findOne({
-    where: { name },
-  }).catch((err) => {
-    console.log("Error: ", err);
-  });
+  // const alreadyExistsCompany = await Company.findOne({
+  //   where: { name },
+  // }).catch((err) => {
+  //   console.log("Error: ", err);
+  // });
 
-  if (alreadyExistsCompany) {
-    if (alreadyExistsCompany.id !== companyId) {
-      return res.status(402).json({ message: "Company already exists!" });
-    }
-  }
+  // if (alreadyExistsCompany) {
+  //   if (alreadyExistsCompany.id !== companyId) {
+  //     return res.status(402).json({ message: "Company already exists!" });
+  //   }
+  // }
 
   const company = await Company.findOne({ where: { id: companyId } });
 

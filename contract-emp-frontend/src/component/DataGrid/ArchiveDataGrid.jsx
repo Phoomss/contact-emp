@@ -164,6 +164,11 @@ const Archives = () => {
       flex: .2
     },
     {
+      field: "remark",
+      headerName: "หมายเหตุ",
+      flex: .2
+    },
+    {
       field: "Functions",
       headerName: "แก้ไขข้อมูล",
       renderCell: (params) => {

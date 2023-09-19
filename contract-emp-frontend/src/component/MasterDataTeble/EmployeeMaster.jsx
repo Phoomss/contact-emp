@@ -25,9 +25,9 @@ const EmployeeMaster = () => {
                 <h2>รายละเอียดพนักงาน</h2>
                 {selectedEmployee && (
                     <div>
-                        <p>หมายเลขประจำตัว: {selectedEmployee.e_number} หมายเลขบัตรประชาชน: {selectedEmployee.e_Idcard}</p>
-                        <p>ชื่อ - นามสกุล: {selectedEmployee.name} {selectedEmployee.surname}</p>
-                        <p>เบอร์โทรศัพท์: {selectedEmployee.telephone}</p>
+                        <p>หมายเลขประจำตัว: {selectedEmployee.e_num} หมายเลขบัตรประชาชน: {selectedEmployee.e_Idcard}</p>
+                        <p>ชื่อ - นามสกุล: {selectedEmployee.title}{selectedEmployee.name} {selectedEmployee.surname}</p>
+                        <p>หมายเลขเบอร์โทรศัพท์: {selectedEmployee.telephone}</p>
                     </div>
                 )}
             </Box>

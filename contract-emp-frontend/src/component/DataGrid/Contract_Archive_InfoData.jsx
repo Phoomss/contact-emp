@@ -46,6 +46,17 @@ const Contract_Archive_InfoData = () => {
 
   const columns = [
     {
+      field: "title",
+      headerName: "คำนำหน้า",
+      valueGetter: (params) => {
+        const employee = employees.find(
+          (employee) => employee.id === params.row.employee_id
+        );
+        return employee ? employee.title : "";
+      },
+      flex: .2
+    },
+    {
       field: "employee_name",
       headerName: "ชื่อ",
       valueGetter: (params) => {

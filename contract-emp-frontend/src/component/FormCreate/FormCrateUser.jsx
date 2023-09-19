@@ -32,6 +32,7 @@ const FormCrateUser = () => {
   const [createUser, setCreateUser] = useState({});
   const [userId, setUserId] = useState(0);
   const [companies, setCompanies] = useState([]);
+  const [selectedCompany, setSelectedCompany] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -48,7 +49,7 @@ const FormCrateUser = () => {
       };
 
       const responseUser = await UserService.postRegister(requestData);
-      
+
       if (responseUser.status === 201) {
         swal("เพิ่มผู้ใช้งานสำเร็จ", "", "success");
         console.log(responseUser.data);
@@ -110,7 +111,7 @@ const FormCrateUser = () => {
               />
             </Grid>
             <Grid item xs={6}>
-              <InputLabel>เบอร์โทรศัพท์:</InputLabel>
+              <InputLabel>หมายเลขเบอร์โทรศัพท์:</InputLabel>
               <TextField
                 value={telephone}
                 type="text"
@@ -142,7 +143,7 @@ const FormCrateUser = () => {
               <InputLabel>รหัสผ่าน:</InputLabel>
               <TextField
                 type="password"
-                label="ถ้าเป็นพนักงานของ Egat ไม่ต้องกรอกรหัสผ่าน"
+                placeholder="Ex. ถ้าเป็นพนักงานของ Egat ไม่ต้องกรอกรหัสผ่าน"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 fullWidth
@@ -161,26 +162,36 @@ const FormCrateUser = () => {
               </Select>
             </Grid>
             {role === "company" && (
-               <Grid item xs={6}>
-               <InputLabel>Company:</InputLabel>
-               <Autocomplete
-                 value={company_id}
-                 onChange={(event, newValue) => {
-                   setCompany_id(newValue ? newValue.id : ""); // ตั้งค่า company_id ที่ถูกเลือก
-                 }}
-                 options={companies}
-                 getOptionLabel={(option) => option.name}
-                 renderInput={(params) => (
-                   <TextField
-                     {...params}
-                     fullWidth
-                     label="เลือกบริษัท"
-                     variant="outlined"
-                   />
-                 )}
-                 clearOnBlur={false}
-               />
-             </Grid>
+              <Grid item xs={6}>
+                {/* <InputLabel>Company:</InputLabel>
+              <Select
+                value={company_id}
+                onChange={(e) => setCompany_id(e.target.value)}
+                fullWidth
+              >
+                <MenuItem value="">เลือกบริษัท</MenuItem>
+                {companies.map((company) => (
+                  <MenuItem key={company.id} value={company.id}>
+                    {company.name}
+                  </MenuItem>
+                ))}
+              </Select> */}
+
+                <InputLabel>Company:</InputLabel>
+                <Autocomplete
+                  value={selectedCompany}
+                  onChange={(event, newValue) => {
+                    setSelectedCompany(newValue); // Update selected company
+                    setCompany_id(newValue ? newValue.id : ""); // Update company_id based on selection
+                  }}
+                  options={companies}
+                  getOptionLabel={(option) => option.name} // Label to display in dropdown
+                  renderInput={(params) => <TextField {...params} fullWidth />}
+                  isOptionEqualToValue={(option, value) => option.id === value.id} // Compare options by their ID
+                  noOptionsText="No matching companies"
+                />
+
+              </Grid>
             )}
             <Grid item xs={12}>
               <Button type="submit" variant="contained">

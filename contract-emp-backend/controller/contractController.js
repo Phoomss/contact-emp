@@ -140,17 +140,17 @@ const updateContract = async (req, res) => {
 
   const { number, start_date, end_date, company_id } = req.body;
 
-  const alreadyExistsContract = await Contract.findOne({
-    where: { number },
-  }).catch((err) => {
-    console.log("Error: ", err);
-  });
+  // const alreadyExistsContract = await Contract.findOne({
+  //   where: { number },
+  // }).catch((err) => {
+  //   console.log("Error: ", err);
+  // });
 
-  if (alreadyExistsContract) {
-    if (alreadyExistsContract.id !== parseInt(req.params.id)) {
-      return res.status(402).json({ message: "Contract already exists!" });
-    }
-  }
+  // if (alreadyExistsContract) {
+  //   if (alreadyExistsContract.id !== parseInt(req.params.id)) {
+  //     return res.status(402).json({ message: "Contract already exists!" });
+  //   }
+  // }
 
   const contract = await Contract.findOne({ where: { id: req.params.id } });
 

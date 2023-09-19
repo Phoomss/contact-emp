@@ -20,25 +20,31 @@ const FormUpdateContract = () => {
   const [start_date, setStart_Date] = useState("");
   const [end_date, setEnd_Date] = useState("");
   const [companyId, setCompanyId] = useState("");
+  const [companyName, setCompanyName] = useState("");
 
   useEffect(() => {
     async function fetchData() {
       try {
         const response = await ContractService.getContractById(id);
-        if (response.status === 200) {
-          setContractNumber(response.data[0].number);
-          setStart_Date(response.data[0].start_date);
-          setEnd_Date(response.data[0].end_date);
-          setCompanyId(response.data[0].company.name);
+        if (response && response.status === 200 && response.data.length > 0) {
+          const contractData = response.data[0];
+          setContractNumber(contractData.number);
+          setStart_Date(contractData.start_date);
+          setEnd_Date(contractData.end_date);
+          const company = contractData.company;
+          setCompanyId(company.id);
+          setCompanyName(company.name); // Set the company name
+        } else {
+          setError("Contract not found.");
         }
       } catch (error) {
         console.error("Error", error.response);
-        setError(error.response.data.message);
+        setError(error.response?.data?.message || "An error occurred.");
       }
     }
     fetchData();
   }, [id]);
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!contractNumber || !start_date || !end_date || !companyId) {
@@ -92,11 +98,13 @@ const FormUpdateContract = () => {
               <TextField
                 fullWidth
                 margin="normal"
-                value={companyId}
-                onChange={(e) => setCompanyId(e.target.value)}
+                value={companyName}
+                disabled
                 helperText=""
               />
             </Grid>
+
+
             <Grid item xs={6}>
               <InputLabel>วันเริ่ม: </InputLabel>
               <TextField
@@ -104,7 +112,10 @@ const FormUpdateContract = () => {
                 margin="normal"
                 type="date"
                 value={start_date}
-                onChange={(e) => setStart_Date(new Date(e.target.value))}
+                onChange={(e) => {
+                  const selectedDate = e.target.value; // Ensure this is in "YYYY-MM-DD" format
+                  setStart_Date(selectedDate);
+                }}
               />
             </Grid>
 
@@ -115,7 +126,11 @@ const FormUpdateContract = () => {
                 margin="normal"
                 type="date"
                 value={end_date}
-                onChange={(e) => setEnd_Date(new Date(e.target.value))}
+                onChange={(e) => {
+                  const selectedDate = e.target.value;
+                  console.log("Selected End Date:", selectedDate);
+                  setEnd_Date(selectedDate);
+                }}
               />
             </Grid>
 

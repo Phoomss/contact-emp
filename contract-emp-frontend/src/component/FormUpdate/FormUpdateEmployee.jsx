@@ -20,6 +20,7 @@ const UpdateEmployees = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [error, setError] = useState("");
+  const [employeetitle, setEmployeeTitle] = useState("");
   const [employeeName, setEmployeeName] = useState("");
   const [employeeSurname, setEmployeeSurname] = useState("");
   const [employeeNumber, setEmployeeNumber] = useState("");
@@ -32,6 +33,7 @@ const UpdateEmployees = () => {
       try {
         const response = await EmployeeService.getEmployeeById(id);
         if (response.status === 200) {
+          setEmployeeTitle(response.data[0].title)
           setEmployeeName(response.data[0].name);
           setEmployeeSurname(response.data[0].surname);
           setEmployeeNumber(response.data[0].e_num);
@@ -51,6 +53,7 @@ const UpdateEmployees = () => {
     e.preventDefault();
     try {
       const response = await EmployeeService.updateEmployee(id, {
+        titel: employeetitle,
         name: employeeName,
         surname: employeeSurname,
         e_number: employeeNumber,
@@ -103,8 +106,26 @@ const UpdateEmployees = () => {
             columnSpacing={{ xs: 1, sm: 2, md: 3 }}
             mt="1.5rem"
           >
-            <Grid item xs={6}>
-              <InputLabel>ชื่อ (ลูกจ้าง)*: </InputLabel>
+            <Grid item xs={4} >
+              <InputLabel sx={{ mb: 2 }}>คำนำหน้า*:</InputLabel>
+              <Select
+                value={employeetitle}
+                onChange={(e) => setEmployeeTitle(e.target.value)}
+                fullWidth
+              >
+                <MenuItem value="" disabled>--------------เลือกคำนำหน้า--------------</MenuItem>
+                <MenuItem value="นาย">นาย</MenuItem>
+                <MenuItem value="นาง">นาง</MenuItem>
+                <MenuItem value="นางสาว">นางสาว</MenuItem>
+                <MenuItem value="น.ส.">น.ส.</MenuItem>
+                <MenuItem value="Mr.">Mr.</MenuItem>
+                <MenuItem value="Mrs.">Mrs</MenuItem>
+                <MenuItem value="Ms.">Ms</MenuItem>
+              </Select>
+            </Grid>
+
+            <Grid item xs={4}>
+              <InputLabel>ชื่อ*: </InputLabel>
               <TextField
                 margin="normal"
                 value={employeeName}
@@ -113,8 +134,8 @@ const UpdateEmployees = () => {
               />
             </Grid>
 
-            <Grid item xs={6}>
-              <InputLabel>นามสกุล (ลูกจ้าง)*: </InputLabel>
+            <Grid item xs={4}>
+              <InputLabel>นามสกุล*: </InputLabel>
               <TextField
                 margin="normal"
                 value={employeeSurname}
@@ -131,7 +152,7 @@ const UpdateEmployees = () => {
             mt="1.5rem"
           >
             <Grid item xs={12}>
-              <InputLabel>เลขบัตรประชาชน (ลูกจ้าง)*: </InputLabel>
+              <InputLabel>หมายเลขบัตรประชาชน*: </InputLabel>
               <TextField
                 margin="normal"
                 value={employeeIdCard}
@@ -148,7 +169,7 @@ const UpdateEmployees = () => {
             mt="1.5rem"
           >
             <Grid item xs={12}>
-              <InputLabel>เบอร์โทรศัพท์ (ลูกจ้าง)*: </InputLabel>
+              <InputLabel>หมายเลขเบอร์โทรศัพท์*: </InputLabel>
               <TextField
                 margin="normal"
                 value={employeePhone}

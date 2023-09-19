@@ -76,6 +76,11 @@ const Employees = () => {
       flex: .2
     },
     {
+      field: "title",
+      headerName: "คำนำหน้า",
+      flex: .2
+    },
+    {
       field: "name",
       headerName: "ชื่อ",
       renderCell: (params) => {
