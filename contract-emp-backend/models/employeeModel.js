@@ -1,7 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
     const Employee = sequelize.define("employee", {
         title:{
-            type: DataTypes.ENUM('นาย','นาง','นางสาว','น.ส.','Mr.','Mrs.','Ms.'),
+            type: DataTypes.STRING(10),
             allowNull: false
         },
         name: {
