@@ -126,7 +126,7 @@ const CreateEmployees = () => {
             <Grid item xs={4}>
               <InputLabel>คำนำหน้า: </InputLabel>
               <Select
-                value={role}
+                value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 fullWidth
               >
