@@ -135,6 +135,9 @@ const CreateEmployees = () => {
                 <MenuItem value="นาง">นาง</MenuItem>
                 <MenuItem value="นางสาว">นางสาว</MenuItem>
                 <MenuItem value="น.ส.">น.ส.</MenuItem>
+                <MenuItem value="Mr.">Mr.</MenuItem>
+                <MenuItem value="Mrs.">Mrs</MenuItem>
+                <MenuItem value="Ms.">Ms</MenuItem>
               </Select>
             </Grid>
 
@@ -169,6 +172,7 @@ const CreateEmployees = () => {
               <InputLabel>เลขบัตรประชาชน (ลูกจ้าง)*: </InputLabel>
               <TextField
                 margin="normal"
+                placeholder="Ex. 12345xxxxxxxx"
                 value={employeeIdCard}
                 onChange={(e) => setEmployeeIdCard(e.target.value)}
                 sx={{ width: "100%" }}
@@ -186,6 +190,7 @@ const CreateEmployees = () => {
               <InputLabel>เบอร์โทรศัพท์ (ลูกจ้าง)*: </InputLabel>
               <TextField
                 margin="normal"
+                placeholder="Ex. 088XXXXXX"
                 value={employeePhone}
                 onChange={(e) => setEmployeePhone(e.target.value)}
                 sx={{ width: "100%" }}

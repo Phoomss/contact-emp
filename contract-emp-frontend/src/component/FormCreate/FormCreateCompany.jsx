@@ -61,6 +61,7 @@ const CreateCompanies = () => {
           <TextField
             fullWidth
             type="text"
+            placeholder="Ex. 088XXXXXX"
             margin="normal"
             value={companyPhone}
             onChange={(e) => setCompanyPhone(e.target.value)}

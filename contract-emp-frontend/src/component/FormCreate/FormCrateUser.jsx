@@ -122,6 +122,7 @@ const FormCrateUser = () => {
               <InputLabel>อีเมล:</InputLabel>
               <TextField
                 type="email"
+                placeholder="Ex. xxxxx@gmail.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 fullWidth
@@ -153,27 +154,32 @@ const FormCrateUser = () => {
                 onChange={(e) => setRole(e.target.value)}
                 fullWidth
               >
-                <MenuItem value="">Select Role</MenuItem>
+                <MenuItem value="">เลือกสถานะ</MenuItem>
                 <MenuItem value="card">Card</MenuItem>
                 <MenuItem value="company">Company</MenuItem>
               </Select>
             </Grid>
             {role === "company" && (
-            <Grid item xs={6}>
-              <InputLabel>Company:</InputLabel>
-              <Select
-                value={company_id}
-                onChange={(e) => setCompany_id(e.target.value)}
-                fullWidth
-              >
-                <MenuItem value="">Select Company</MenuItem>
-                {companies.map((company) => (
-                  <MenuItem key={company.id} value={company.id}>
-                    {company.name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </Grid>
+               <Grid item xs={6}>
+               <InputLabel>Company:</InputLabel>
+               <Autocomplete
+                 value={company_id}
+                 onChange={(event, newValue) => {
+                   setCompany_id(newValue ? newValue.id : ""); // ตั้งค่า company_id ที่ถูกเลือก
+                 }}
+                 options={companies}
+                 getOptionLabel={(option) => option.name}
+                 renderInput={(params) => (
+                   <TextField
+                     {...params}
+                     fullWidth
+                     label="เลือกบริษัท"
+                     variant="outlined"
+                   />
+                 )}
+                 clearOnBlur={false}
+               />
+             </Grid>
             )}
             <Grid item xs={12}>
               <Button type="submit" variant="contained">
