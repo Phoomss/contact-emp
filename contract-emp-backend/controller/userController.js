@@ -352,7 +352,7 @@ const getUserWithAllParams = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-  const { name, surname, telephone, username, password } = req.body;
+  const { name, surname,email, telephone, username, password } = req.body;
   let user;
 
   if (req.user.role === "card" || req.user.role === "admin") {
@@ -380,6 +380,7 @@ const updateUser = async (req, res) => {
 
   user.name = name || user.name;
   user.surname = surname || user.surname;
+  user.email = email || user.email;
   user.telephone = telephone || user.telephone;
   user.username = username || user.username;
 

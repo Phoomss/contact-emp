@@ -17,11 +17,14 @@ const Login = () => {
   const [formData, setFormData] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const [isLoading,setIsLoading] = useState(false)
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setIsLoading(true)
     // เช็คว่ามีการกรอกข้อมูลครบถ้วนมั้ย
     if (formData.username === '' || formData.password === '') {
+      setIsLoading(false)
       setError('กรุณากรอกข้อมูล');
       swal("กรุณากรอกข้อมูลก่อนเข้าสู่ระบบ", "", "warning");
       // console.log('Error: Form fields are empty');
@@ -34,11 +37,13 @@ const Login = () => {
           swal("ยินดีต้อนรับเข้าสู่ระบบ", `${formData.username}`, "success");
           navigate("/employee");
         } else {
+          setIsLoading(false)
           setError("Invalid credentials");
           swal("ไม่พบบัญชีของคุณ", "", "error");
         }
       })
       .catch((error) => {
+        setIsLoading(false)
         console.error("Error:", error.response);
         setError(error.response.data.message);
         swal("ชื่อผู้ใช้งาน หรือ รหัสผ่าน ไม่ถูกต้อง", "", "error");
@@ -112,6 +117,7 @@ const Login = () => {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2, backgroundColor: '#154295', color: 'white' }}
+              disabled={isLoading}
             >
               เข้าสู่ระบบ
             </Button>

@@ -22,11 +22,11 @@ const UserDataGrid = () => {
       <h1>User Info</h1>
       {userInfo ? (
         <div>
-          <p>Name: {userInfo.name}</p>
-          <p>Email: {userInfo.email}</p>
-          <p>Username: {userInfo.username}</p>
-          <p>Role: {userInfo.role}</p>
-          <p>Company: {userInfo.company.name}</p>
+          <p>ชื่อ: {userInfo.name || "N/A"}</p>
+          <p>อีเมล: {userInfo.email || "N/A"}</p>
+          <p>ชื่อผู้ใช้งาน: {userInfo.username || "N/A"}</p>
+          <p>สถานะ: {userInfo.role || "N/A"}</p>
+          <p>บริษัท: {userInfo.company?.name || "N/A"}</p>
         </div>
       ) : (
         <p>Loading...</p>
