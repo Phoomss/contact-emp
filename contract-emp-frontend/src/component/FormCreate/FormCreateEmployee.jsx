@@ -5,7 +5,6 @@ import {
   Button,
   Typography,
   InputLabel,
-  useTheme,
   Select,
   MenuItem,
   Grid,
@@ -18,7 +17,6 @@ import FlexBetween from "../FlexBetween";
 import swal from "sweetalert";
 
 const CreateEmployees = () => {
-  const theme = useTheme();
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [title, setTitle] = useState("")

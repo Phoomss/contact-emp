@@ -6,8 +6,6 @@ import {
   Typography,
   InputLabel,
   Grid,
-  Select,
-  MenuItem,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import ContractService from "../../services/ContractService";
@@ -16,9 +14,6 @@ import Header from "../Header";
 import FlexBetween from "../FlexBetween";
 import "react-datepicker/dist/react-datepicker.css";
 import Autocomplete from "@mui/material/Autocomplete";
-import { format } from "date-fns";
-import { th } from "date-fns/locale";
-
 
 const CreateContracts = () => {
   const navigate = useNavigate();

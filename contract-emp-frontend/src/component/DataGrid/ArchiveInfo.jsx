@@ -1,14 +1,11 @@
 import { React, useState, useEffect } from "react";
-import { Box, useTheme, Button } from "@mui/material";
+import { Box } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import { DeleteOutline, CreateOutlined } from "@mui/icons-material";
-import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
-import { useNavigate, useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 import ArchiveService from "services/ArchiveService";
 import CompanyService from "services/CompanyService";
 import ContractService from "services/ContractService";
 import EmployeeService from "services/EmployeeService";
-import swal from "sweetalert";
 import FlexBetween from "component/FlexBetween";
 import Header from "component/Header";
 import EmployeeMaster from "component/MasterDataTeble/EmployeeMaster";
@@ -16,8 +13,6 @@ import { format } from "date-fns";
 import { th } from "date-fns/locale";
 
 const ArchiveInfo = () => {
-  const theme = useTheme();
-  const navigate = useNavigate();
   const { id } = useParams();
   const [employeeId, setEmployeeId] = useState([]);
   const [archives, setArchives] = useState([]);

@@ -3,7 +3,6 @@ import UserService from "../../services/UserService";
 import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
 import EmployeeDataGrid from "component/DataGrid/EmployeeDataGrid";
-import ArchiveDataGrid from "component/DataGrid/ArchiveDataGrid";
 
 function Employee() {
   const navigate = useNavigate();

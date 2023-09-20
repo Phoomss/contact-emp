@@ -1,20 +1,11 @@
 import { React, useState, useEffect } from "react";
-import { Box, useTheme, Button } from "@mui/material";
+import { Box } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import {
-  DeleteOutline,
-  CreateOutlined,
-} from "@mui/icons-material";
-import AddBusinessIcon from "@mui/icons-material/AddBusiness";
-import { useNavigate } from "react-router-dom";
 import CompanyService from "../../services/CompanyService";
 import Header from "../Header";
 import FlexBetween from "../FlexBetween";
-import swal from "sweetalert";
 
 const CompaniesComData = () => {
-  const theme = useTheme();
-  const navigate = useNavigate();
   const [companies, setCompanies] = useState([]);
   const [selectionModel, setSelectionModel] = useState([]);
 

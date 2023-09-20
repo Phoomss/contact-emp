@@ -1,12 +1,9 @@
 import React from "react";
 import {
-  Avatar,
   Box,
   Divider,
   Drawer,
   IconButton,
-  ImageList,
-  ImageListItem,
   List,
   ListItem,
   ListItemButton,
@@ -21,9 +18,6 @@ import {
   GroupsOutlined,
   ApartmentOutlined,
 } from "@mui/icons-material";
-import LogoutIcon from "@mui/icons-material/Logout";
-import ArchiveOutlinedIcon from '@mui/icons-material/ArchiveOutlined';
-import DashboardIcon from "@mui/icons-material/Dashboard";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import FlexBetween from "./FlexBetween";

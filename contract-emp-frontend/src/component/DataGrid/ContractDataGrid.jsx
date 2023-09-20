@@ -10,7 +10,6 @@ import PageviewOutlinedIcon from '@mui/icons-material/PageviewOutlined';
 import Header from "../Header";
 import FlexBetween from "../FlexBetween";
 import swal from "sweetalert";
-import moment from "moment";
 import { format } from "date-fns";
 import { th } from "date-fns/locale";
 
