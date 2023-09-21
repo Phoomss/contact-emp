@@ -11,7 +11,7 @@ const FormUpdateArchive = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [error, setError] = useState("");
-  const [employeeId, setEmployeeId] = useState("");
+  const [employeeData, setEmployeeData] = useState({title: "", name: "", surname: "" });
   const [contractId, setContractId] = useState("");
   const [org_id, setOrg_id] = useState("");
   const [remark, setRemark] = useState("");
@@ -25,7 +25,8 @@ const FormUpdateArchive = () => {
       try {
         const response = await ArchiveService.getArchiveById(id);
         if (response.status === 200) {
-          setEmployeeId(response.data[0].employee.name);
+          const { title ,name, surname } = response.data[0].employee;
+          setEmployeeData({title, name, surname });
           setContractId(response.data[0].contract_id);
           setOrg_id(response.data[0].org_id);
           setRemark(response.data[0].remark);
@@ -40,18 +41,13 @@ const FormUpdateArchive = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (
-      !employeeId ||
-      !contractId ||
-      !org_id ||
-      !remark
-    ) {
+    if (!employeeData.name || !contractId || !org_id || !remark) {
       swal(`กรุณากรอกข้อมูลให้ครบถ้วน`, "", "warning");
       return;
     }
     try {
       const response = await ArchiveService.updateArchive(id, {
-        employee_id: parseInt(employeeId),
+        employee_id: parseInt(employeeData.name),
         contract_id: parseInt(contractId),
         org_id,
         remark,
@@ -70,7 +66,7 @@ const FormUpdateArchive = () => {
     navigate("/archive");
   };
 
-  //Search Department 
+  // Search Department
   const handleSearchDepartment = async (event) => {
     const value = event.target.value;
     setDepartmentName(value);
@@ -87,7 +83,7 @@ const FormUpdateArchive = () => {
 
   const handleDepartmentSelect = (event, value) => {
     setSelectedDepartment(value);
-    setOrg_id(value)
+    setOrg_id(value);
   };
 
   return (
@@ -113,8 +109,10 @@ const FormUpdateArchive = () => {
             fullWidth
             disabled
             margin="normal"
-            value={employeeId}
-            onChange={(e) => setEmployeeId(e.target.value)}
+            value={`${employeeData.title}${employeeData.name} ${employeeData.surname}`}
+            onChange={(e) =>
+              setEmployeeData({ ...employeeData, name: e.target.value })
+            }
           />
 
           <Typography>สังกัดสำนักงาน</Typography>

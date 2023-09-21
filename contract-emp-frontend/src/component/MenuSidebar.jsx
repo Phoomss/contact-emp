@@ -168,7 +168,7 @@ const Sidebar = ({
                   fontSize="1rem"
                   sx={{ color: theme.palette.blue[100] }}
                 >
-                 พัฒนาโดย กองบริหารระบบงานดิจิทัล (กบด-ห.) เบอร์ 64454
+                 พัฒนาโดย กองบริหารระบบงานดิจิทัล  (กบด-ห.) เบอร์ 64454
                 </Typography>
               </Box>
             </FlexBetween>
