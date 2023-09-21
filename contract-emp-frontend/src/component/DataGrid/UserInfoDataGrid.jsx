@@ -22,7 +22,7 @@ const UserDataGrid = () => {
       <h1>User Info</h1>
       {userInfo ? (
         <div>
-          <p>ชื่อ: {userInfo.name || "N/A"}</p>
+          <p>ชื่อ: {userInfo.name || "N/A"} {userInfo.surname || "N/A"}</p>
           <p>อีเมล: {userInfo.email || "N/A"}</p>
           <p>ชื่อผู้ใช้งาน: {userInfo.username || "N/A"}</p>
           <p>สถานะ: {userInfo.role || "N/A"}</p>

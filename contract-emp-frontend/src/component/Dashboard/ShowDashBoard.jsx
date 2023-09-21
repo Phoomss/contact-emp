@@ -84,7 +84,7 @@ const ShowDashBoard = () => {
               onClick={() => {
                 navigate("/contract");
               }}
-              sx={{ boxShadow: 3, marginRight: 2, marginLeft: 2, marginBottom: 2, borderRadius: 7, backgroundColor: "#FFCC00", color: "white" }}
+              sx={{ boxShadow: 3, marginRight: 2, marginLeft: 2, marginBottom: 2, borderRadius: 7, backgroundColor: "#E5B700", color: "white"}}
             >
               <FlexBetween>
                 <Typography variant="h1" sx={{paddingLeft:'12rem'}}>{contractCount} </Typography>
