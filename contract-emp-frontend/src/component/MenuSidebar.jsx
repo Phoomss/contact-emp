@@ -45,11 +45,11 @@ const navItems = [
     thaitext: "ข้อมูลลูกจ้างจ้างเหมาบริการ",
     icon: <GroupsOutlined />,
   },
-  // {
-  //   text: "Archive",
-  //   thaitext: "ข้อมูลการทำงานลูกจ้าง",
-  //   icon: <GroupsOutlined />,
-  // },
+  {
+    text: "Archive",
+    thaitext: "ข้อมูลการทำงานลูกจ้าง",
+    icon: <GroupsOutlined />,
+  },
   {
     text: "UserAll",
     thaitext: "ข้อมูลผู้ใช้งาน",

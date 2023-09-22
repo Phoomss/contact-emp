@@ -50,9 +50,10 @@ const UpdateEmployees = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(employeetitle)
     try {
       const response = await EmployeeService.updateEmployee(id, {
-        titel: employeetitle,
+        title: employeetitle,
         name: employeeName,
         surname: employeeSurname,
         e_number: employeeNumber,

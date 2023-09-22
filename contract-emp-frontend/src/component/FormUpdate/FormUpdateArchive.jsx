@@ -53,7 +53,7 @@ const FormUpdateArchive = () => {
         remark,
       });
       if (response.status === 200) {
-        navigate("/archive");
+        navigate("/contract");
         swal(`อัพเดทข้อมูลสำเร็จ`, "", "success");
       }
     } catch (error) {
@@ -63,7 +63,7 @@ const FormUpdateArchive = () => {
   };
 
   const handleCancelClick = () => {
-    navigate("/archive");
+    navigate("/contract");
   };
 
   // Search Department
@@ -126,6 +126,7 @@ const FormUpdateArchive = () => {
             getOptionLabel={(option) => option}
             renderInput={(params) => <TextField {...params} />}
             freeSolo
+            autoSelect
           />
 
           <Typography>ความคิดเห็น: </Typography>

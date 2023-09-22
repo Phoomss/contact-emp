@@ -1,12 +1,13 @@
 import { React, useState, useEffect } from "react";
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ArchiveService from "services/ArchiveService";
 import CompanyService from "services/CompanyService";
 import ContractService from "services/ContractService";
 import EmployeeService from "services/EmployeeService";
 import ContractMaster from "component/MasterDataTeble/ContractMaster";
+import { CreateOutlined } from "@mui/icons-material";
 
 const Contract_Archive_InfoData = () => {
   const { id } = useParams();
@@ -15,7 +16,7 @@ const Contract_Archive_InfoData = () => {
   const [contracts, setContracts] = useState([]);
   const [employees, setEmployees] = useState([]);
   const [selectionModel, setSelectionModel] = useState([]);
-
+  const navigate = useNavigate();
   const [contractId, setContractId] = useState("")
 
   useEffect(() => {
@@ -41,6 +42,10 @@ const Contract_Archive_InfoData = () => {
 
   const handleSelectionModelChange = (newSelection) => {
     setSelectionModel(newSelection);
+  };
+
+  const handleEditButtonClick = (id) => {
+    navigate(`/updatearchive/${id}`);
   };
 
   const columns = [
@@ -80,6 +85,23 @@ const Contract_Archive_InfoData = () => {
     {
       field: "org_id",
       headerName: "สังกัดสำนักงาน",
+      flex: .2
+    },
+    {
+      field: "Functions",
+      headerName: "แก้ไขข้อมูล",
+      renderCell: (params) => {
+        return (
+          <Box>
+            <Button
+              variant="contained"
+              color="secondary"
+              startIcon={<CreateOutlined />}
+              onClick={() => handleEditButtonClick(params.id)}
+            ></Button>
+          </Box>
+        );
+      },
       flex: .2
     },
   ];
