@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from "react";
-import { Box} from "@mui/material";
+import { Box } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import {  useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import ArchiveService from "services/ArchiveService";
 import CompanyService from "services/CompanyService";
 import ContractService from "services/ContractService";
@@ -16,6 +16,8 @@ const Contract_Archive_InfoData = () => {
   const [contracts, setContracts] = useState([]);
   const [employees, setEmployees] = useState([]);
   const [selectionModel, setSelectionModel] = useState([]);
+
+  const [contractId, setContractId] = useState("")
 
   useEffect(() => {
     const fetchData = async () => {
@@ -90,9 +92,9 @@ const Contract_Archive_InfoData = () => {
 
   return (
     <Box m="1.5rem 2.5rem">
-       <Header title="ข้อมูลสัญญาจ้าง" />
-      <Box height="calc(100vh - 200px)" sx={{ mt: "1.5rem" }}>
-      <ContractMaster/>
+      <Header title="ข้อมูลสัญญาจ้าง" />
+      <Box height="calc(100vh - 200px)" sx={{ mt: "1.5rem" }} >
+        <ContractMaster />
         <DataGrid
           rows={archives}
           columns={columns}

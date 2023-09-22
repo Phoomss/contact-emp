@@ -8,7 +8,7 @@ import {
   // MenuItem,
   Grid,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 // import CompanyService from "../../services/CompanyService";
 import Header from "../Header";
 import FlexBetween from "../FlexBetween";
@@ -17,8 +17,10 @@ import EmployeeService from "services/EmployeeService";
 import ArchiveService from "services/ArchiveService";
 import Autocomplete from "@mui/material/Autocomplete";
 import DeptService from "services/DeptService";
+import swal from "sweetalert";
 
 const CreateArchive = () => {
+  const {id} = useParams()
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false)
@@ -48,21 +50,30 @@ const CreateArchive = () => {
   const [departmentOptions, setDepartmentOptions] = useState([]);
   const [selectedDepartment, setSelectedDepartment] = useState(null);
 
+  const [contracts, setContracts] = useState([]);
+
+  console.log(id)
   const handleSubmit = async (e) => {
     e.preventDefault();
+    let contract_id = id;
     setIsLoading(true)
     try {
-      const response = await ArchiveService.postArchive({
+      let data = {
         employee_id: employee_id,
-        contract_id: contractId,
+        contract_id: contract_id,
         org_id: selectedDepartment,
         remark: remark,
-      });
+      };
+      console.log(data)
+      const response = await ArchiveService.postArchive(data);
       if (response.status === 200) {
-        setIsLoading(false)
-        navigate("/archive");
+        swal("เพิ่มข้อมูลสำเร็จ!", "", "success");
+        // navigate("/contract/search/"+ contract_id);
+        window.location.reload();
       }
+     
     } catch (error) {
+
       console.error("Error:", error.response);
       setIsLoading(false)
       setError(error.response.data.message);
@@ -85,7 +96,7 @@ const CreateArchive = () => {
   }, []);
 
   const handleCanClick = () => {
-    navigate("/archive");
+    navigate("/contract");
   };
 
   // search emp
@@ -99,7 +110,7 @@ const CreateArchive = () => {
   };
 
   const handleEmployeeSelect = (event, value) => {
-    setInputLabel("ค้นหาชื่อ"); 
+    setInputLabel("ค้นหาชื่อ");
     setEmployee_id(value?.id || "");
   };
 
@@ -118,7 +129,7 @@ const CreateArchive = () => {
     setStartDate(value?.start_date || "");
     setEndDate(value?.end_date || "");
     setCompanyId(value?.company_id || "");
-    setContractId(value?.id || "");
+    setContracts(value?.id || "");
     setCompanyName(value?.company.name || "");
   };
 
@@ -144,7 +155,7 @@ const CreateArchive = () => {
   return (
     <Box m="1.5rem 2.5rem">
       <FlexBetween>
-        <Header title="เพิ่มการทำงานลูกจ้าง" />
+        {/* <Header title="เพิ่มการทำงานลูกจ้าง" /> */}
       </FlexBetween>
       <Box sx={{ mt: "1.5rem" }}>
         <form onSubmit={handleSubmit}>
@@ -153,7 +164,7 @@ const CreateArchive = () => {
             rowSpacing={1}
             columnSpacing={{ xs: 1, sm: 2, md: 3 }}
           >
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
               <Typography>เลขที่สัญญา</Typography>
               <Autocomplete
                 fullWidth
@@ -187,7 +198,7 @@ const CreateArchive = () => {
                   </MenuItem>
                 ))}
               </Select> */}
-            </Grid>
+            {/* </Grid>
 
             <Grid item xs={12}>
               <Typography>ชื่อบริษัท</Typography>
@@ -202,9 +213,10 @@ const CreateArchive = () => {
             <Grid item xs={6}>
               <Typography>วันสิ้นสุด</Typography>
               <TextField fullWidth margin="normal" value={endDate} readOnly />
-            </Grid>
+            </Grid> */}
 
             <Grid item xs={12}>
+              <Typography variant="h3" fontWeight="bold" mb="1rem">เพิ่มการทำงานลูกจ้าง</Typography>
               <Typography>ชื่อ (ลูกจ้าง)</Typography>
               <Autocomplete
                 fullWidth
@@ -214,7 +226,7 @@ const CreateArchive = () => {
                 onChange={handleEmployeeSelect}
                 onInputChange={handleSearchEmployee}
                 getOptionLabel={(employee) => `${employee.title} ${employee.name} ${employee.surname}`}
-                renderInput={(params) =>   <TextField {...params} placeholder={inputLabel} />}
+                renderInput={(params) => <TextField {...params} placeholder={inputLabel} />}
                 clearOnBlur={false}
               />
               {/* <Typography>ชื่อ (ลูกจ้าง)</Typography>
@@ -240,6 +252,8 @@ const CreateArchive = () => {
               <Autocomplete
                 fullWidth
                 margin="normal"
+                freeSolo
+                autoSelect
                 options={departmentOptions}
                 value={selectedDepartment}
                 onChange={handleDepartmentSelect}

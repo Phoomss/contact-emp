@@ -26,7 +26,7 @@ const ContractMaster = () => {
     <Box m="1.5rem 2.5rem">
       {contracts.map((contract) => (
         <div key={contract.id}>
-          <h2>เลขที่สัญญา: {contract.number}</h2>
+          <p>เลขที่สัญญา: {contract.number}</p>
           <p>วันที่เริ่ม: {format(new Date(contract.start_date), "d MMM yyyy", { locale: th })} || <span>วันที่สิ้นสุด: {format(new Date(contract.end_date), "d MMM yyyy", { locale: th })}</span> </p>
           <p>ชื่อบริษัท: {companies.find(company => company.id === contract.company_id)?.name || ''}</p>
           {/* ตรงนี้คุณสามารถเพิ่มข้อมูลอื่นๆ ตามต้องการ */}

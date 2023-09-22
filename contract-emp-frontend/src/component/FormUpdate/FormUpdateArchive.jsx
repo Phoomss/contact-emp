@@ -125,6 +125,7 @@ const FormUpdateArchive = () => {
             onInputChange={handleSearchDepartment}
             getOptionLabel={(option) => option}
             renderInput={(params) => <TextField {...params} />}
+            freeSolo
           />
 
           <Typography>ความคิดเห็น: </Typography>
