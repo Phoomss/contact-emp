@@ -32,11 +32,11 @@ function Contract_ArIchive_Info() {
         columnSpacing={{ xs: 1, sm: 2, md: 3 }}
       >
         <FlexBetween>
-          <Grid item lg={6} xl={6}>
+          <Grid  >
             <Contract_Archive_InfoData />
           </Grid>
 
-          <Grid item lg={6} xl={6} >
+          <Grid >
             <FormCreateArchive />
           </Grid>
         </FlexBetween>
