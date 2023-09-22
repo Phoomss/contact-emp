@@ -1,11 +1,6 @@
 import { React, useState, useEffect } from "react";
-import { Box, useTheme, Button} from "@mui/material";
+import { Box, useTheme, Button } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import {
-  DeleteOutline,
-  CreateOutlined,
-} from "@mui/icons-material";
-import AddBusinessIcon from "@mui/icons-material/AddBusiness";
 import { useNavigate } from "react-router-dom";
 import CompanyService from "../../services/CompanyService";
 import Header from "../Header";
@@ -74,13 +69,14 @@ const Companies = () => {
 
   const columns = [
     {
-      field:"id",
-      headerName:"ลำดับที่"
+      field: "id",
+      headerName: "ลำดับที่",
+      flex: 2,
     },
     {
       field: "name",
       headerName: "ชื่อบริษัท",
-      flex: 0.5,
+      flex: 2,
       renderCell: (params) => {
         return <Box sx={{ cursor: "pointer" }}>{params.value}</Box>;
       },
@@ -88,12 +84,12 @@ const Companies = () => {
     {
       field: "address",
       headerName: "ที่อยู่บริษัท",
-      flex: 1,
+      flex: 2,
     },
     {
       field: "telephone",
       headerName: "เบอร์โทรบริษัท",
-      flex: 0.5,
+      flex: 2,
     },
     {
       field: "Functions",
@@ -104,12 +100,13 @@ const Companies = () => {
             <Button
               variant="contained"
               color="secondary"
-              startIcon={<CreateOutlined />}
               onClick={() => handleEditButtonClick(params.id)}
-            ></Button>
+            >แก้ไขข้อมูล
+            </Button>
           </Box>
         );
       },
+      flex: 2,
     },
   ];
 
@@ -135,7 +132,7 @@ const Companies = () => {
               }}
               onClick={createClick}
             >
-              <AddBusinessIcon />
+              เพิ่มข้อมูล
             </Button>
             <Button
               sx={{
@@ -147,7 +144,7 @@ const Companies = () => {
               }}
               onClick={handleDeleteButtonClick}
             >
-              <DeleteOutline />
+              ลบข้อมูล
             </Button>
           </FlexBetween>
         </Box>

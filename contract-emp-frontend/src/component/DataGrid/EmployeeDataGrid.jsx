@@ -1,9 +1,6 @@
 import { React, useState, useEffect } from "react";
 import { Box, useTheme, Button } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import { DeleteOutline, CreateOutlined } from "@mui/icons-material";
-import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import { useNavigate } from "react-router-dom";
 import EmployeeService from "../../services/EmployeeService";
 import Header from "../Header";
@@ -96,12 +93,12 @@ const Employees = () => {
     {
       field: "telephone",
       headerName: "เบอร์โทรศัพท์",
-      flex: .2
+      flex: .1
     },
     {
       field: "e_Idcard",
       headerName: "เลขบัตรประชาชน",
-      flex: .2
+      flex: .1
     },
     {
       field: "note",
@@ -122,9 +119,10 @@ const Employees = () => {
             <Button
               variant="contained"
               color="secondary"
-              startIcon={<CreateOutlined />}
               onClick={() => handleEditButtonClick(params.id)}
-            ></Button>
+            >
+              แก้ไขข้อมูล
+            </Button>
           </Box>
         );
       },
@@ -139,9 +137,10 @@ const Employees = () => {
             <Button
               variant="contained"
               color="secondary"
-              startIcon={<RemoveRedEyeOutlinedIcon />}
               onClick={() => handleArchiveViewClick(params.id)}
-            ></Button>
+            >
+              ประวัติ
+            </Button>
           </Box>
         );
         
@@ -172,7 +171,7 @@ const Employees = () => {
               }}
               onClick={createClick}
             >
-              <PersonAddIcon />
+              เพิ่มข้อมูล
             </Button>
 
             <Button
@@ -185,7 +184,7 @@ const Employees = () => {
               }}
               onClick={handleDeleteButtonClick}
             >
-              <DeleteOutline />
+              ลบข้อมูล
             </Button>
           </FlexBetween>
         </Box>

@@ -1,12 +1,9 @@
 import { React, useState, useEffect } from "react";
 import { Box, useTheme, Button } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import { DeleteOutline, CreateOutlined } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import ContractService from "../../services/ContractService";
 import CompanyService from "../../services/CompanyService";
-import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
-import PageviewOutlinedIcon from '@mui/icons-material/PageviewOutlined';
 import Header from "../Header";
 import FlexBetween from "../FlexBetween";
 import swal from "sweetalert";
@@ -120,9 +117,10 @@ const Contracts = () => {
             <Button
               variant="contained"
               color="secondary"
-              startIcon={<CreateOutlined />}
               onClick={() => handleEditButtonClick(params.id)}
-            ></Button>
+            >
+              แก้ไขข้อมูล
+            </Button>
           </Box>
         );
       },
@@ -130,16 +128,17 @@ const Contracts = () => {
     },
     {
       field: "View",
-      headerName: "จำนวนลูกจ้างในสัญญา",
+      headerName: "ข้อมูลสัญญา",
       renderCell: (params) => {
         return (
           <Box>
             <Button
               variant="contained"
               color="secondary"
-              startIcon={<PageviewOutlinedIcon />}
               onClick={() => handleContractArchive(params.id)}
-            ></Button>
+            >
+              ดูข้อมูลสัญญา
+            </Button>
           </Box>
         );
       },
@@ -170,7 +169,7 @@ const Contracts = () => {
               }}
               onClick={createClick}
             >
-              <AddBoxOutlinedIcon />
+              เพิ่มข้อมูล
             </Button>
 
             <Button
@@ -183,7 +182,7 @@ const Contracts = () => {
               }}
               onClick={handleDeleteButtonClick}
             >
-              <DeleteOutline />
+             ลบข้อมูล
             </Button>
           </FlexBetween>
         </Box>

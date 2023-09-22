@@ -209,7 +209,7 @@ const Archives = () => {
               }}
               onClick={createClick}
             >
-              <CreateOutlined />
+              เพิ่มข้อมูล
             </Button>
 
             <Button
@@ -222,7 +222,7 @@ const Archives = () => {
               }}
               onClick={handleDeleteButtonClick}
             >
-              <DeleteOutline />
+              ลบข้อมูล
             </Button>
           </FlexBetween>
         </Box>

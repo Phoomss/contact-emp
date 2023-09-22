@@ -128,11 +128,10 @@ const ArchiveInfo = () => {
   };
   return (
     <Box m="1.5rem 2.5rem">
-
       <FlexBetween>
         <Header title={`ประวัติการทำงาน `} />
       </FlexBetween>
-      <Box height="calc(100vh - 200px)" sx={{ mt: "1.5rem" }}>
+      <Box height="calc(100vh - 200px)" >
         <EmployeeMaster />
         <DataGrid
           rows={archives}

@@ -6,7 +6,6 @@ import ArchiveService from "services/ArchiveService";
 import CompanyService from "services/CompanyService";
 import ContractService from "services/ContractService";
 import EmployeeService from "services/EmployeeService";
-import Header from "component/Header";
 import ContractMaster from "component/MasterDataTeble/ContractMaster";
 
 const Contract_Archive_InfoData = () => {
@@ -92,8 +91,8 @@ const Contract_Archive_InfoData = () => {
 
   return (
     <Box m="1.5rem 2.5rem">
-      <Header title="ข้อมูลสัญญาจ้าง" />
-      <Box height="calc(100vh - 200px)" sx={{ mt: "1.5rem" }} >
+      
+      <Box height="calc(100vh - 200px)" >
         <ContractMaster />
         <DataGrid
           rows={archives}

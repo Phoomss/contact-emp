@@ -20,9 +20,8 @@ const EmployeeMaster = () => {
     }, [id]);
 
     return (
-        <Box m="1.5rem 2.5rem">
+        <Box >
             <Box >
-                <h2>รายละเอียดพนักงาน</h2>
                 {selectedEmployee && (
                     <div>
                         <p>หมายเลขประจำตัว: {selectedEmployee.e_num} หมายเลขบัตรประชาชน: {selectedEmployee.e_Idcard}</p>

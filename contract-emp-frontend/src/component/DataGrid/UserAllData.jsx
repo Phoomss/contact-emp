@@ -124,9 +124,10 @@ const UserAllData = () => {
             <Button
               variant="contained"
               color="secondary"
-              startIcon={<CreateOutlined />}
               onClick={() => handleEditButtonClick(params.id)}
-            ></Button>
+            >
+              แก้ไขข้อมูล
+            </Button>
           </Box>
         );
       },
@@ -156,7 +157,7 @@ const UserAllData = () => {
               }}
               onClick={createClick}
             >
-              <PersonAddIcon />
+             เพิ่มข้อมูล
             </Button>
 
             <Button
@@ -169,7 +170,7 @@ const UserAllData = () => {
               }}
               onClick={handleDeleteButtonClick}
             >
-              <DeleteOutline />
+            ลบข้อมูล
             </Button>
           </FlexBetween>
         </Box>

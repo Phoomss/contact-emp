@@ -23,7 +23,7 @@ const ContractMaster = () => {
   }, [id]);
 
   return (
-    <Box m="1.5rem 2.5rem">
+    <Box >
       {contracts.map((contract) => (
         <div key={contract.id}>
           <p>เลขที่สัญญา: {contract.number}</p>

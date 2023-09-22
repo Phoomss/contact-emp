@@ -157,7 +157,7 @@ const CreateArchive = () => {
       <FlexBetween>
         {/* <Header title="เพิ่มการทำงานลูกจ้าง" /> */}
       </FlexBetween>
-      <Box sx={{ mt: "1.5rem" }}>
+      <Box >
         <form onSubmit={handleSubmit}>
           <Grid
             container
