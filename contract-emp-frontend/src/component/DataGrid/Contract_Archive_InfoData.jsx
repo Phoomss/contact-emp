@@ -90,7 +90,7 @@ const Contract_Archive_InfoData = () => {
   };
 
   return (
-    <Box m="1.5rem 2.5rem">
+    <Box  m="1.5rem 2.5rem">
       
       <Box height="calc(100vh - 200px)" >
         <ContractMaster />

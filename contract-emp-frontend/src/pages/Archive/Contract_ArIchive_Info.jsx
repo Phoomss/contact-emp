@@ -27,18 +27,17 @@ function Contract_ArIchive_Info() {
     <Box>
       <Header title="ข้อมูลสัญญาจ้าง" />
       <Grid
+      container
         rowSpacing={1}
-        columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+        columnSpacing={{ xs: 1, sm: 1, md: 1 }}
       >
-        <FlexBetween>
-          <Grid  >
+          <Grid item xs={6} >
             <Contract_Archive_InfoData />
           </Grid>
 
-          <Grid >
+          <Grid  item xs={6} >
             <FormCreateArchive />
           </Grid>
-        </FlexBetween>
       </Grid>
     </Box >
   );
