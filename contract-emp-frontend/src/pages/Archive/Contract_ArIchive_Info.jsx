@@ -27,7 +27,6 @@ function Contract_ArIchive_Info() {
     <Box>
       <Header title="ข้อมูลสัญญาจ้าง" />
       <Grid
-        container
         rowSpacing={1}
         columnSpacing={{ xs: 1, sm: 2, md: 3 }}
       >
